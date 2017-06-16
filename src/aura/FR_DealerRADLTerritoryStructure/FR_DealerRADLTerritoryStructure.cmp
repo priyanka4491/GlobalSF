@@ -1,0 +1,46 @@
+<aura:component controller="Frontier_SalesRepDashboardController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global">
+    <aura:handler name="init" value="{!this}" action="{!c.loadChartDetail}" access='global' />
+    <aura:attribute name="radlCoverage" type="Map" default=""  access='global' />
+    <aura:attribute name="loadChart" type="Boolean" default="false" access='global '/>
+    <aura:attribute name="message" type="String" default="Drag grpah here" access='global' />
+    <aura:attribute name="isInitialize" type="Boolean" default="false" access="global"/>
+    <div style="padding: 20px 20px 20px 20px;">        
+        <div class="{!($Browser.isPhone) ? 'slds-grid slds-wrap ':'slds-grid '}" style="background:#ffffff;padding: 20px 30px 20px 30px;">
+            <div class="slds-col slds-col--padded slds-p-horizontal--small slds-size--1-of-1 slds-small-size--12-of-12 slds-medium-size--1-of-12 slds-large-size--1-of-12" >
+                <p class="filterStyle" style="padding-top:10px"><b>Filters:</b></p>    
+            </div>            
+            <div class="slds-col slds-col--padded slds-p-horizontal--small slds-size--1-of-1 slds-small-size--12-of-12 slds-medium-size--3-of-12 slds-large-size--3-of-12" >                   
+                <div class="slds-form-element__control" style="padding-top:10px">
+                    <b class="filterStyle" >Season</b>  
+                    <ui:inputSelect aura:id="season" change="{!c.loadChartDetail}"/>
+                </div>
+            </div>
+            <div class="slds-col slds-col--padded slds-p-horizontal--small slds-size--1-of-1 slds-small-size--12-of-12 slds-medium-size--3-of-12 slds-large-size--3-of-12" >
+                <div class="slds-form-element__control" style="padding-top:10px">
+                    <b class="filterStyle" >Crop</b>  
+                    <ui:inputSelect aura:id="crop" change="{!c.loadChartDetail}"/>
+                    
+                </div>
+            </div>
+            <div class="slds-col slds-col--padded slds-p-horizontal--small slds-size--1-of-1 slds-small-size--12-of-12 slds-medium-size--5-of-12 slds-large-size--5-of-12" >
+                
+            </div>
+        </div>
+    </div>
+    <div class="bgcolor" style="background:#ccc">        
+        <div style="padding: 10px 20px 10px 20px;">  
+            <div class="slds-grid slds-wrap slds-grid--pull-padded">     
+                <div class="slds-p-horizontal--small slds-size--1-of-2 slds-medium-size--1-of-2 slds-large-size--1-of-2 " style="padding-right:10px">
+                    <div style="background-color:#ffffff">
+                        <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-1">
+                            <center><p class="titleStyle">Dealer-RADL Territory Structure</p></center>
+                        </div><br/>
+                        <aura:if isTrue="{!v.loadChart}">
+                            <c:Frontier_SalesRepTerritoryBasedRadl chartIdentifier="Partner" radlCoverage="{!v.radlCoverage}"/>
+                        </aura:if>
+                    </div>
+                </div> 
+            </div>
+        </div>
+    </div>
+</aura:component>

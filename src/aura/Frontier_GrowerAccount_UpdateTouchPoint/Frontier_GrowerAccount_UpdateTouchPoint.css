@@ -1,0 +1,131 @@
+.THIS .vAlign{
+    padding-top:10px;
+}
+.THIS .customheadingstyle{
+    font-size:large;
+}
+.THIS .lAlign{
+    text-Align:left;
+}
+.THIS .rAlign{
+    text-Align:right;
+}
+.THIS .cAlign{
+    text-Align:center;
+}
+
+.THIS .remindMe{
+    width:50%;
+}
+
+.THIS .slds-modal__content {
+    margin-top: 0%; 
+    margin-bottom: 0%; 
+}
+
+.THIS .anchordisabled {
+   pointer-events: none;
+   cursor: default;
+    color:rgb(224, 229, 238);
+}
+
+/*  CSS for Add and Subtract Icons */
+.THIS .cssCircle {
+    -webkit-border-radius: 999px;
+    -moz-border-radius: 999px;
+    border-radius: 999px;
+    width: 20px;
+    height: 20px;
+    padding: 0px;
+    background: #9a9691;
+    border: 1px solid #9a9691;
+    color: #ffffff;
+    text-align: center;
+    -webkit-transition: background 0.2s linear;
+    -moz-transition: background 0.2s linear;
+    -ms-transition: background 0.2s linear;
+    -o-transition: background 0.2s linear;
+    transition: background 0.2s linear;
+    transition: color 0.2s linear;
+	font: 19px Arial, sans-serif;
+}
+
+.THIS .cssCircle:hover {
+	background: black ;
+  	cursor: pointer;
+}
+
+.THIS .minusSign {
+	line-height: 0.8em;
+	margin-bottom: 1px;
+    display:inline-block;
+}
+
+.THIS .plusSign {
+	line-height: 0.9em;
+    display:inline-block;
+}
+
+.THIS .minusSign:hover,
+.THIS .plusSign:hover {
+	color: white;
+}
+.THIS .hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+.THIS .inputstyle{
+    width:50%;
+}
+.THIS .Search-Icon  { position: relative; }
+.THIS .Search-Icon  input { background:#ffffff; display:block; width: 100%; box-sizing: border-box }
+.THIS .Search-Icon  span { position: absolute; top: 15px; left: 5px }
+
+.THIS input {
+    width: 95%;
+    padding: 8px;
+    -webkit-appearance: none;
+    border: solid 1px #dddddd;
+    padding-left:36px;
+}
+.THIS .btncolor{
+    color:#ffffff;
+    background:#808080;
+}
+.THIS .btntopAlign{
+    padding-top:20px;
+}
+.THIS .centerPosition{
+    margin-left : 55%;    
+}
+.THIS .BoxBorder{
+    border-radius:0px;
+    width:100%;
+}
+
+.THIS .parentPlusSingn{
+    float: right;
+    position: relative;
+    left: 15%;
+    top: -20px;
+}
+
+.THIS .option:before { content: "☐ " ;}
+.THIS .option:checked:before { content: "☑ "; }
+.THIS .option:disabled:before { content: "☑ "; }
+
+@media  all and (min-width: 375px) and (max-width:667px) { 
+    
+    .THIS .parentPlusSingn{
+        float: right;
+        position: relative;
+        left: 46%;
+        top: -19px;
+    }
+
+    
+}

@@ -1,0 +1,7 @@
+<aura:documentation>
+	<aura:description>Displays Average Visits Per RADL Per Account </aura:description>
+	<aura:example name="AccountDashboard" ref="c:Frontier_AccountDashboard" label="Average Vists">
+		1.Displays average visits per RADL for Last 7 days
+        2.Displays average visits per RADL for Last 30 days
+	</aura:example>
+</aura:documentation>

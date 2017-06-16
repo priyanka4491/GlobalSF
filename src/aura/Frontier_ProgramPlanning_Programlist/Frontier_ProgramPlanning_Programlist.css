@@ -1,0 +1,15 @@
+.THIS tr:nth-child(even) {background: #CCC}
+.THIS tr:nth-child(odd) {background: #f5f5f0}
+.THIS th {background: #ffffff}
+
+.THIS .txtcolor{
+    color:green;
+}
+
+.THIS .alignCenter td{ 
+text-align:center;
+}
+
+.THIS .thalignCenter th{ 
+text-align:center;
+}

@@ -1,0 +1,246 @@
+<aura:component controller="Frontier_GrowerFarmSizeController" implements="force:appHostable" access="global" >   
+    <style>
+        .marquee {
+        width: 450px;
+        margin: 0 auto;
+        overflow: hidden;
+        white-space: nowrap;
+        box-sizing: border-box;
+        animation: marquee 10s linear infinite;
+        }
+        @media  all and (min-width: 200px) and (max-width:700px){
+        .marquee {
+        width: 250px;
+        margin: 0 auto;
+        overflow: hidden;
+        white-space: nowrap;
+        box-sizing: border-box;
+        animation: marquee 10s linear infinite;
+        }    
+        }
+        @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation:portrait) {
+        .marquee {
+        width: 300px;
+        margin: 0 auto;
+        overflow: hidden;
+        white-space: nowrap;
+        box-sizing: border-box;
+        animation: marquee 10s linear infinite;
+        }
+        }
+        
+        /* Make it move */
+        @keyframes marquee {
+        0%   { text-indent: 27.5em }
+        100% { text-indent: -30em }
+        }
+        
+        /* Make it pretty */
+        .microsoft {
+        padding-left: 1.5em;
+        position: relative;
+        font: 16px 'Segoe UI', Tahoma, Helvetica, Sans-Serif;
+        }
+        .microsoft:before, .microsoft::before {
+        z-index: 2;
+        content: '';
+        position: absolute;
+        top: -1em; left: -1em;
+        width: .2em; height: .2em;
+        
+        }
+        
+        .microsoft:after, .microsoft::after {
+        z-index: 1;
+        content: '';
+        position: absolute;
+        top: 0; left: 0;
+        width: .2em; height: .2em;    
+        
+        }
+    </style>
+    <aura:attribute name="prevID" type="string" access="global" default=""/>
+    <aura:attribute name="prevfiscalID" type="string" access="global" default=""/>
+    <aura:attribute name="seasonKey" type="String" access="global" default=""/>
+    <aura:attribute name="growerAccId" type="Id" access="global" default=""/>
+    <aura:attribute name="label" type="String[]" access="global"/>
+    <aura:attribute name="GrowerDetailResponse" type="String" access="global"/>
+    <aura:attribute name="growerAccFarm" type="String" access="global" />
+    <aura:handler event="aura:locationChange" action="{!c.update}"/>
+    <aura:attribute name="errorMsg" type="String" access="global"/>
+    <aura:attribute name="Message" type="String" access="global"/>
+
+    <aura:handler event="c:Frontier_GrowerAccountEvent" action="{!c.changeChart}"/>
+    
+    <ltng:require scripts="{!$Resource.ChartJs}" styles="{!join(',',$Resource.SLDS + '/assets/styles/salesforce-lightning-design-system.min.css')}" afterScriptsLoaded="{!c.loadFormSizeChart}"/>
+        <div class="{!($Browser.isPhone) ? 'slds-grid slds-wrap ':'slds-grid '}">
+    <div class="slds-col slds-col--padded slds-p-horizontal--small slds-size--1-of-1 slds-size--12-of-12 slds-medium-size--2-of-12 slds-large-size--2-of-12" style="padding-top:10px">
+
+    <div class="inputStyle">
+         <ui:inputSelect class="form-control inputSelect"  aura:id="FiscalYear" 
+                                change="{!c.changeChart}">&nbsp;
+                                <ui:inputSelectOption text="FY17" label="FY17"/>
+                                <ui:inputSelectOption text="FY16" label="FY16"/>
+                                <ui:inputSelectOption text="FY15" label="FY15"/>
+
+                                
+                </ui:inputSelect> 
+ </div>
+    <div class="inputStyle">
+         <ui:inputSelect class="form-control inputSelect"  aura:id="UOM" 
+                                change="{!c.changeChart}">&nbsp;
+                                <ui:inputSelectOption text="acres" label="Acres"/>
+                                <ui:inputSelectOption text="hectares" label="Hectares"/>
+                                
+                </ui:inputSelect> 
+ </div>
+    </div>
+    <div class="slds-col slds-col--padded slds-p-horizontal--small slds-size--1-of-1 slds-size--12-of-12 slds-medium-size--10-of-12 slds-large-size--10-of-12" style="padding-top:10px">
+
+    <center>
+        <br />
+        <div>
+            <p class="customHeadingColor"><strong>Farm Size</strong></p>
+        </div><br />
+      
+    
+        </center></div></div>
+
+    <div id="chartContainer" class="Container" style="position:relative">
+        <div id="chartDivDoughnut">
+            <canvas class="canvasPosition" id="myDoughnutChart" />
+        </div>
+        <div aura:id="chartLegend" id="chartLegend" class="chart-legenddough"></div>
+        
+       <div id="FYButtons" class="FYButtons">
+            
+            
+        </div>
+      <center>  
+      <div id ="message"><p class="msgfont"><b> No Farming Area Exists. </b></p></div>  </center>
+    </div>
+    <br></br>
+    <br />
+    <div class="tableHeading">
+        <p><strong> Update FY17 Area</strong></p>
+        <!-- <aura:if isTrue="{!v.growerAccFarm.displayMsg == true}">   
+        <p class="error microsoft marquee">{!$Label.c.Update_Farming_Area_Alert}</p>
+        </aura:if> -->
+    </div>
+    <div><br></br>
+        <aura:if isTrue="{!or($Browser.isDesktop,$Browser.isTablet)}">  
+            <table aura:id="tableDiv" id="tableDiv">
+                <thead>
+                    <tr aura:id="tableThTr">
+                        <th class="{!($Browser.isPhone) ? 'thTextiPhone' : 'tdText'}"> <center>Total area</center></th>
+                        <th class="tableTH">
+                            <ui:inputSelect class="tableTd tableTHTd" aura:id="selectCrop1">
+                                <ui:inputSelectOption text="--Select--" label="--Select Crop--"/>
+                                <ui:inputSelectOption text="Corn" label="Corn"/>
+                                <ui:inputSelectOption text="Soy" label="Soy"/>
+                                <ui:inputSelectOption text="Cotton" label="Cotton"/>
+                                <ui:inputSelectOption text="Other" label="Other"/>
+                            </ui:inputSelect>
+                        </th>
+                        <th class="tableTH">
+                            <ui:inputSelect class="tableTd tableTHTd" aura:id="selectCrop2">
+                                <ui:inputSelectOption text="--Select--" label="--Select Crop--"/>
+                                <ui:inputSelectOption text="Corn" label="Corn"/>
+                                <ui:inputSelectOption text="Soy" label="Soy"/>
+                                <ui:inputSelectOption text="Cotton" label="Cotton"/>
+                                <ui:inputSelectOption text="Other" label="Other"/>
+                            </ui:inputSelect>
+                        </th>
+                        <th class="tableTH">
+                            <ui:inputSelect class="tableTd tableTHTd" aura:id="selectCrop3">
+                                <ui:inputSelectOption text="--Select--" label="--Select Crop--"/>
+                                <ui:inputSelectOption text="Corn" label="Corn"/>
+                                <ui:inputSelectOption text="Soy" label="Soy"/>
+                                <ui:inputSelectOption text="Cotton" label="Cotton"/>
+                                <ui:inputSelectOption text="Other" label="Other"/>
+                            </ui:inputSelect>
+                        </th>
+                    </tr>
+                </thead><br  />
+                <tbody>
+                    <tr>
+                        <td data-tile="TOTAL ACRES" class="tableTd">
+                            <ui:inputText class="tableInputText" aura:id="totalarea"/>
+                        </td>
+                        <td class="tableTd">
+                            <ui:inputText class="tableInputText" aura:id="Crop1"/>
+                        </td>
+                        <td class="tableTd">
+                            <ui:inputText class="tableInputText" aura:id="Crop2"/>
+                        </td>
+                        <td class="tableTd">
+                            <ui:inputText class="tableInputText" aura:id="Crop3"/>
+                        </td >
+                    </tr>
+                </tbody>
+            </table>
+        </aura:if>
+        <aura:if isTrue="{!$Browser.isPhone}">
+            <br />
+            <div class="slds-grid slds-wrap slds-grid--pull-padded">
+                <div class="slds-p-horizontal--small slds-size--1-of-2 totalFont">
+                    <center>Total area</center>  
+                </div>
+                <div class="slds-p-horizontal--small slds-size--1-of-2">
+                    <ui:inputText class="tableInputText" />
+                </div>
+            </div>
+            <br />
+            
+            <div class="slds-grid slds-wrap slds-grid--pull-padded">
+                <div class="slds-p-horizontal--small slds-size--1-of-2">
+                    <ui:inputSelect class="tableTd tableTHTd">
+                        <ui:inputSelectOption text="--Select--" label="--Select Crop--"/>
+                        <ui:inputSelectOption text="Corn" label="Corn"/>
+                        <ui:inputSelectOption text="Soy" label="Soy"/>
+                        <ui:inputSelectOption text="Cotton" label="Cotton"/>
+                        <ui:inputSelectOption text="Other" label="Other"/>
+                    </ui:inputSelect>
+                </div>
+                <div class="slds-p-horizontal--small slds-size--1-of-2">
+                    <ui:inputText class="tableInputText" />
+                </div>
+            </div>
+            <br />
+            
+            <div class="slds-grid slds-wrap slds-grid--pull-padded">
+                <div class="slds-p-horizontal--small slds-size--1-of-2">
+                    <ui:inputSelect class="tableTd tableTHTd">
+                        <ui:inputSelectOption text="--Select--" label="--Select Crop--"/>
+                        <ui:inputSelectOption text="Corn" label="Corn"/>
+                        <ui:inputSelectOption text="Soy" label="Soy"/>
+                        <ui:inputSelectOption text="Cotton" label="Cotton"/>
+                        <ui:inputSelectOption text="Other" label="Other"/>
+                    </ui:inputSelect>
+                </div>
+                <div class="slds-p-horizontal--small slds-size--1-of-2">
+                    <ui:inputText class="tableInputText" />                    
+                </div>
+            </div>
+            <br />
+            
+            <div class="slds-grid slds-wrap slds-grid--pull-padded">
+                <div class="slds-p-horizontal--small slds-size--1-of-2">
+                    <ui:inputSelect class="tableTd tableTHTd">
+                        <ui:inputSelectOption text="--Select--" label="--Select Crop--"/>
+                        <ui:inputSelectOption text="Corn" label="Corn"/>
+                        <ui:inputSelectOption text="Soy" label="Soy"/>
+                        <ui:inputSelectOption text="Cotton" label="Cotton"/>
+                        <ui:inputSelectOption text="Other" label="Other"/>
+                    </ui:inputSelect>
+                </div>
+                <div class="slds-p-horizontal--small slds-size--1-of-2">
+                    <ui:inputText class="tableInputText" />
+                </div>
+            </div>
+        </aura:if>
+        <center class="updateButton">
+            <button class="slds-text-title--caps slds-button slds-button--neutral slds-selected buttonColor" onclick="{!c.updCurrentYrArea}"> Update</button>
+        </center>
+    </div>
+</aura:component>

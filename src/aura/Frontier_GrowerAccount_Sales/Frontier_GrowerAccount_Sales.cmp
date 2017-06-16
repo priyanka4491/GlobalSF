@@ -1,0 +1,36 @@
+<aura:component controller="Frontier_GrowerFarmSizeController" implements="force:appHostable" access="global">    
+    <ltng:require scripts="{!$Resource.ChartJs}" styles="{!join(',',$Resource.SLDS + '/assets/styles/salesforce-lightning-design-system.min.css')}" afterScriptsLoaded="{!c.loadChart}"/>
+    <aura:attribute name="CropData" type="string" access="global" default="General"/>
+    <aura:attribute name="GrowerDetailResponse" type="String" access="global"/>
+    <aura:attribute name="GrowerMonsantoShare" type="Object" access="global" />
+    <aura:attribute name="prevID" type="string" access="global" default=""/>
+      <aura:attribute name="growerAccId" type="Id" access="global" default=""/>
+      <aura:attribute name="growerSalesFarm" type="String" access="global" />
+               <aura:attribute name="latestCrop" type="String" />
+
+        <aura:attribute name="identifier" type="String" access="global" />    
+            <aura:attribute name="cropCYBrandSales" type="Integer" default="0" access="global" />    
+        <aura:attribute name="cropPYBrandSales" type="Integer" default="0" access="global" />    
+        <aura:attribute name="crop2PYBrandSales" type="Integer" default="0" access="global" />    
+        <aura:attribute name="cropCYNetSales" type="Integer" default="0" access="global" />    
+        <aura:attribute name="cropPYNetSales" type="Integer" default="0" access="global" />    
+        <aura:attribute name="crop2PYNetSales" type="Integer" default="0" access="global" />
+        <aura:attribute name="cropCYOpportunity" type="Integer" default="0" access="global" />    
+      <aura:attribute name="cropPYOpportunity" type="Integer" default="0" access="global" />    
+        <aura:attribute name="crop2PYOpportunity" type="Integer" default="0" access="global" />    
+
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:handler event="aura:locationChange" action="{!c.update}"/>
+    
+    <aura:attribute name="growerId" type="String" access="global" />
+    
+   <div id="chartContainer" class="Container" style="position:relative"> 
+	<div id="{!'mybudget'+v.identifier}">
+        <canvas class="{!v.identifier == v.latestCrop ? 'canvasPositionlast': 'canvasPosition'}" id="{!'myChart'+v.identifier}" />
+    </div>
+    <br></br>
+    <div aura:id="chartLegend1" id="{!'chartLegend1'+v.identifier}" class="chart-legend1"></div>
+    </div>
+   
+</aura:component>

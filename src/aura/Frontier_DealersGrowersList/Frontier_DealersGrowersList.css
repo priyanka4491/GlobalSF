@@ -1,0 +1,12 @@
+.THIS .custom-confirm-button {
+   text-align: right;
+    position: relative;
+    top: 15%;
+    right: 2%;
+}
+.THIS .toggle {
+    display: none;
+}
+.THIS .accordionChange {
+    display: none;
+}

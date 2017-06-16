@@ -1,0 +1,8 @@
+<aura:documentation>
+	<aura:description>Displays the Account Details</aura:description>
+	<aura:example name="AccountDetails" ref="c:Frontier_AccountDetails" label="Details of Account">
+		1.Displays the Account name,address and RADL class type.
+        2.Displays the total number of visits for that account
+        3.Displays the total number of opportunities for that account.
+	</aura:example>
+</aura:documentation>

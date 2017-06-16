@@ -1,0 +1,19 @@
+<aura:component controller="Frontier_GrowerAccount_ProgramController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+	<aura:attribute name="accComId" type="Id" access="global"/> 
+   	<aura:attribute name="accountId" type="Id" access="global"/> 
+	<aura:attribute name="accountCommList" type="List" access="global"/>
+  	<aura:attribute name="acctDetails" type="List" access="global"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    <div class="headingstyle">
+        <span class="headingName">
+            {!v.acctDetails[0].Name}
+        </span>
+        <aura:if isTrue="{! !empty(v.accountCommList)}">
+            <span>
+                <span>&nbsp;-&nbsp;</span>
+                {!v.accountCommList[0].Street_Addr__c}{!v.accountCommList[0].City_Name__c}{!v.accountCommList[0].State_Name__c}{!v.accountCommList[0].Country_Name__c}
+            </span>
+        </aura:if>
+    </div>
+</aura:component>

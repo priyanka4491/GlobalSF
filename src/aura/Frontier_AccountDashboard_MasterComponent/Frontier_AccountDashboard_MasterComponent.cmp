@@ -1,0 +1,85 @@
+<aura:component controller="Frontier_ProgramController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <div class="bgcolor" style="background:#ccc">
+        <div class="headingStyle">
+            <strong> <center><div class="slds-text-heading--large">Account Planning</div></center></strong>
+        </div>
+        <div style="padding-left:70px;padding-right:70px;">
+            
+            <div class="{!($Browser.isPhone) ? 'slds-grid slds-wrap ':'slds-grid '}" style="background:#ffffff;padding:20px 50px 20px 50px;">
+                <div class="slds-col slds-col--padded slds-p-horizontal--small slds-size--1-of-1 slds-small-size--12-of-12 slds-medium-size--1-of-12 slds-large-size--1-of-12" >
+                    <p class="filterStyle" style="padding-top:10px"><b>Filters:</b></p>    
+                </div>
+                
+                <div class="slds-col slds-col--padded slds-p-horizontal--small slds-size--1-of-1 slds-small-size--12-of-12 slds-medium-size--3-of-12 slds-large-size--3-of-12" >                   
+                    <div class="slds-form-element__control" style="padding-top:10px">
+                        <b class="filterStyle" style="padding-right:10px">Account</b>  <ui:inputSelect class="inputStyle" aura:id="accType" change="{!c.changeseasonCrop}" />
+                    </div>
+                </div>
+                <div class="slds-col slds-col--padded slds-p-horizontal--small slds-size--1-of-1 slds-small-size--12-of-12 slds-medium-size--3-of-12 slds-large-size--3-of-12" >                   
+                    <div class="slds-form-element__control" style="padding-top:10px">
+                        <b class="filterStyle" style="padding-right:10px">Season</b>  <ui:inputSelect class="inputStyle" aura:id="sellingSeason" change="{!c.changeseasonCrop}" disabled="true"/>
+                    </div>
+                </div>
+               
+                <div class="slds-col slds-col--padded slds-p-horizontal--small slds-size--1-of-1 slds-small-size--12-of-12 slds-medium-size--5-of-12 slds-large-size--5-of-12" >
+                    
+                </div>
+            </div>
+        </div>
+        
+        
+        <div class="valign" style="padding:10px 80px 10px 80px;">
+            <div class="slds-grid slds-wrap slds-grid--pull-padded" style="background-color:#FFFFFF">     
+                <div class="slds-p-horizontal--small slds-size--1-of-2 slds-medium-size--1-of-2 slds-large-size--2-of-3 " style="padding-right:10px">
+                    <div style="background-color:#ffffff" >
+                        <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-1">
+                            <center><p class="titleStyle">Account Coverage bY RADL</p></center>
+                        </div><br/>
+                        <div aura:id="accountRADL" style="padding-left:11%">
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-p-horizontal--small slds-size--1-of-2 slds-medium-size--1-of-2 slds-large-size--1-of-3 " style="padding-left:10px">
+                    <div style="background-color:#ffffff" >
+                        <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-1">
+                            <center><p class="titleStyle">RADL Coverage</p></center>
+                        </div><br/>
+                        <div aura:id="accountRADLCoverage" style="padding-left:50px;padding-right:50px">
+                        </div>
+                    </div>  
+                </div>
+            </div>
+        </div>
+        
+       <div class="valign" style="padding:10px 70px 10px 70px;">
+            <div class="slds-grid--vertical" style="background-color:#FFFFFF;">
+                <div class="slds-size--1-of-1" style="padding-left:10px;padding-right:10px;">
+                    <div aura:id ="touchpointByMonthChart"/>
+                </div>
+                
+            </div>
+        </div> 
+        <div class="valign" style="padding:10px 70px 10px 70px;">
+            
+            
+            <div class="slds-grid--vertical" style="background-color:#FFFFFF;">
+                <div>
+                    <center> <p class="titleStyle">Completed Touchpoints by RADL</p></center>
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-p-horizontal--small slds-size--1-of-12 slds-medium-size--1-of-12 slds-large-size--1-of-12 rotatetext" style="padding-left:5%;padding-top:13%;font-size:large;" >
+                        #Touchpoints
+                    </div>
+                    <div class="slds-p-horizontal--small slds-size--11-of-12 slds-medium-size--1-of-12 slds-large-size--11-of-12 " style="padding-right:5%">
+                        <div aura:id="touchpointByTypeChart" >
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+       
+        
+    </div>
+</aura:component>

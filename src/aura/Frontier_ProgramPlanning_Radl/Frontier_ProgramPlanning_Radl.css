@@ -1,0 +1,37 @@
+.THIS tr.border_bottom td {
+  border-bottom:1pt solid black;
+}
+
+.THIS tr.border_right td {
+  border-left:1pt solid black;
+}
+
+.THIS tr td:nth-child(3) { 
+    border-left:1pt solid black; 
+}
+
+.THIS .radlstyle{
+    width: 100px;
+    border-left:1px solid black;
+    
+}
+.THIS .verticalAlign{
+    width: 77px;
+    border-left:1px solid black;
+}
+
+.THIS .arrowcolor{
+    fill:grey;
+
+}
+
+.THIS .cSvgIcon svg.arrowPos1{
+    padding-left:85px;
+    top:88px;
+    position:absolute;
+}
+.THIS .arrowPos2{
+    position:absolute;
+    right:76px;
+    top:85px;
+}

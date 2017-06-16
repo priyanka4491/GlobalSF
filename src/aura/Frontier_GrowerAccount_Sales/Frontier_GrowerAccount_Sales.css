@@ -1,0 +1,105 @@
+.THIS .chart{
+    background:#ffffff;
+    border:#ffffff;
+    /*margin-left:40px;*/
+}
+
+/*.THIS .chart-legend1 {
+        float:left;
+        margin-top: 13%;
+        margin-left: 8px;
+        margin-right: 4%;
+    	width: 47%;
+        padding-top:15%;
+        font-size:10px;
+    }*/
+
+.THIS .canvasPositionlast{
+    position:absolute;
+    width:100% !important;
+    height:229px !important;
+}
+
+.THIS .canvasPosition{
+    position:absolute;
+    width:100% !important;
+    height:207px !important; 
+}
+    
+.THIS .chart-legend1 li span{
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    margin-right: 5px;    
+}
+
+.THIS #chartContainer {
+  position: relative;
+}
+
+.THIS #chartContainer canvas {
+  position: relative;
+}
+
+.THIS .chart-legend1 {
+    float:left;
+    padding-top:25%;
+    margin-top: 28%;
+    margin-left: 8%;
+}
+
+/*
+.THIS ul li {
+    display:inline;
+    padding-left : 5%;
+} */
+.THIS .sizeLarge{
+    font-size: x-large;
+    font-weight:700;
+}
+
+.THIS .sizeMedium{
+   font-size: medium;
+   font-weight:700;
+}
+
+.THIS .customHeadingColor{
+     color:#B8B8B8;
+}
+
+.THIS .buttonColor{
+    background-color:#000000;
+    color:#ffffff;
+}
+
+.THIS .buttonToggle{
+   background-color:#ffffff; 
+    color:#0000FF;
+}
+.THIS .FYButtons button {
+    display:block;
+    margin-top:9px;
+}
+
+.THIS .FYButton1 {
+    margin-left:5px;
+}
+
+.THIS .FYButtons {
+    padding-top: 20%;
+    padding-left: 7%;
+}
+.THIS .Container{
+    width:50px;
+    height:50px;
+}
+@media  all and (min-width: 320px) and (max-width:700px){
+     .THIS .FYButtons button {
+        display:inline;
+    }
+    
+    .THIS .FYButtons {
+        padding-top: 52%;
+    }
+	
+}

@@ -1,0 +1,25 @@
+.THIS .even{
+  background-color: #d8dde6; 
+}
+
+.THIS .odd{
+   background-color: #F2F2F2;  
+}
+
+.THIS table.slds-table--product > thead > tr:first-child {
+    color:#000000;
+}
+
+.THIS table.bodyfont > tbody > tr{
+   color:#808080; 
+    
+}
+
+.THIS .growerTopProducts{
+    background-color:#ffffff;
+}
+
+.THIS .sizeMedium {
+    font-size: medium;
+    font-weight: 700;
+}

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Account To Territory</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Accounts to Territories</value>
+    </caseValues>
+    <fields>
+        <help><!-- This is used to reference the appropriate business role to which the territory is assigned to --></help>
+        <label><!-- Account Business Role --></label>
+        <name>Account_Business_Role_SFID__c</name>
+        <relationshipLabel><!-- Accounts to Territories --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- This field is to associate the record with an account --></help>
+        <label><!-- Account --></label>
+        <name>Account_SFID__c</name>
+        <relationshipLabel><!-- Accounts to Territories --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Territory2Manual --></help>
+        <label><!-- AssociationCause --></label>
+        <name>AssociationCause__c</name>
+    </fields>
+    <fields>
+        <help><!-- This field is for the temporary storage of an external id for the Heroku Connect Integration. It will be used as necessary for parent-child relationships. Further integrations will be via the Salesforce Record ID. --></help>
+        <label><!-- Heroku Connect Integration Key --></label>
+        <name>HC_Integration_Key__c</name>
+    </fields>
+    <fields>
+        <help><!-- Territories are loaded into this field(THIS OBJECT IS TEMPORARY) --></help>
+        <label><!-- Territory --></label>
+        <name>Territory__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

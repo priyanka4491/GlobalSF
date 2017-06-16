@@ -1,0 +1,60 @@
+<aura:component controller="Frontier_Gen_AccountSales_Controller" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:attribute name="recordId" type="String"/>
+    <aura:attribute name="value" type="String" />
+    <aura:attribute name="accountSalesDetails" type="Object" access="global"/>
+    <aura:attribute name="ServerError" type="String" access="global" />
+    <aura:attribute name="isCallBackError" type="boolean" access="global" default="true"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <!--<aura:handler name="change" value="{!v.value}" />    -->
+    
+    <div class="{!($Browser.isPhone) ? 'slds-grid slds-wrap':'slds-grid'}">
+        <div class="slds-col slds-col--padded slds-p-horizontal--small slds-size--1-of-1 slds-size--12-of-12 slds-medium-size--4-of-12 slds-large-size--1-of-2 bgMidSection ">
+            <div class="slds-grid">
+                <div class="slds-size--1-of-2">
+                    <div class="slds-grid">
+                        <div class="slds-p-around--medium slds-size--1-of-4">
+                            <p class="fontStyle"><b>2PY (Units)</b></p>
+                            <span style="{!equals(v.accountSalesDetails.twoPYSales,'') ? 'display:none' : 'visibility : visible'}">
+                                <p>{!v.accountSalesDetails.twoPYSales}</p>
+                            </span>
+                        </div>
+                        <div class="slds-p-around--medium slds-size--1-of-4">
+                            <p class="fontStyle"><b>PY (Units)</b></p>
+                            <span style="{!equals(v.accountSalesDetails.PYSales,'') ? 'display:none' : 'visibility : visible'}">
+                                <p>{!v.accountSalesDetails.PYSales}</p>
+                            </span>
+                        </div>                
+                        <div class="slds-p-around--medium slds-size--1-of-4">
+                            <span style="{!equals(v.accountSalesDetails.CYSales,'') ? 'display:none' : 'visibility : visible'}">
+                                <p><b><lightning:input type="text" aura:id="CYTargetValue" name="CYTarget" value="{!v.value}" label="CYTarget (Units)" onblur="{!c.callupdateCYTarget}" /></b></p>
+                            </span>
+                        </div>                
+                        <div class="slds-p-around--medium slds-size--1-of-4">
+                            <p class="fontStyle"><b>Account Status</b></p>
+                            <p>{!v.accountSalesDetails.AccountStatus}</p>
+                        </div>                          
+                         <div class="slds-p-around--medium slds-size--1-of-4">
+                            <p class="fontStyle"><b>RADL</b></p>
+                            <p>Retain</p>
+                        </div>  
+                        <div class="slds-p-around--medium slds-size--1-of-4">
+                            <p class="fontStyle"><b>NPS</b></p>
+                            <p>10</p>
+                        </div> 
+                        <div class="slds-p-around--medium slds-size--1-of-4">
+                            <p class="fontStyle"><b>RFM</b></p>
+                            <p>10%</p>
+                        </div> 
+                    </div>
+                </div>
+                <div class="slds-size--1-of-2">
+                    <div class="custom-confirm-button">
+                        <button class="slds-button slds-button_neutral slds-theme--default">Confirm Program Assignments</button>                        
+                    </div>
+                </div>
+            </div>   
+            
+        </div>   
+    </div>
+</aura:component>

@@ -1,0 +1,78 @@
+<aura:component controller="AccountController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="Global" >
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:attribute name="touchpoints" type="Event[]" access="Global"/> 
+    <aura:attribute name="today" type="Date" default="" access="global"/>  
+    <aura:attribute name="accId" type="String" access="global"/>
+        <aura:handler event="c:Frontier_TouchPointCount"  action="{!c.handleTouchPoints}"/>
+        <aura:dependency resource="markup://force:navigateToURL" type="EVENT"/>
+
+
+    
+    <aura:attribute name="newTouchpoint" type="Event"
+                    default="{ 'sobjectType': 'Event',
+                             'ActivityDateTime': '',
+                             'EndDateTime' : '',
+                             'Description': '',
+                             'Type': '',                  		 
+                             }" access="global"/>		
+    <ltng:require styles="{!$Resource.SLDS + '/assets/styles/salesforce-lightning-design-system.css'}"/>
+    <!-- Input Form using components -->
+    <style>
+        .slds-form-element__label {
+        display: inline-block;
+        color: #ffffff;
+        font-size: .75rem;
+        line-height: 1.5;
+        margin-right: .75rem;
+        margin-bottom: .25rem;
+        }
+        .forms {
+        height:360px;
+        /*padding-top:50px;*/
+        }
+    </style>
+    <div class="recentTouchPointRecordForm">  
+        <legend class="slds-text-heading--small">
+            <h4 style="color:#b4bdcd;">Recent Visits</h4>
+        </legend>
+        <br></br>
+        <form class="slds-form--stacked forms">
+            <table class="slds-table slds-m-bottom--xx-large slds-has-divider--bottom">
+                <thead class="slds-has-divider--bottom">
+                    <tr class="slds-text-heading--label">
+                        <th scope="col">
+                            <span>Date</span>
+                        </th>
+                        <th scope="col" class="slds-cell-wrap">
+                            <span class="slds-cell-wrap">Reason</span>
+                        </th>
+                        <th scope="col" class="slds-cell-wrap">
+                            <span class="slds-cell-wrap">Visit Type</span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <aura:iteration items="{!v.touchpoints}" var="tpList"> 
+                        <tr class="slds-hint-parent">                 
+                            <td class="slds-size--3-of-12">				  
+                                {!tpList.ActivityDate}
+                            </td>
+                            <td class="slds-cell-wrap">
+                                {!tpList.Subject}
+                            </td>
+                            <td class="slds-size--3-of-12 slds-cell-wrap">                    
+                                {!tpList.Type}
+                            </td>
+                        </tr>
+                    </aura:iteration>
+                </tbody>
+            </table> 
+            <div class="slds-form-element">
+                <ui:button label="View All Activities"                       
+                           labelClass="label"
+                           press="{!c.showModal}" class="slds-button slds-button--brand"/>
+                <div class="slds-backdrop slds-backdrop--open" id="backGroundSecId" style="display:none;"></div>
+            </div>
+        </form>
+    </div>
+</aura:component>

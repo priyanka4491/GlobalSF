@@ -1,0 +1,56 @@
+<aura:component controller="Frontier_GetAccountDetails_CMP360" implements="force:appHostable,flexipage:availableForAllPageTypes" access="global" >    <aura:handler name="init" value="{!this}" action="{!c.doinit}"></aura:handler>
+    <aura:attribute name="growerCount" type="Integer" access="global" />
+    <aura:attribute name="growerAcc" type="Id" access="global" />
+    
+        <div class="slds-grid navbar-default slds-hide">
+            <div class="slds-col">
+                <section class="slds-clearfix">
+                    <div class="slds-float--left">
+                        <div><img alt="Brand" src="{!$Resource.Logo}"  style="padding: 12px"/></div>
+                    </div>
+                </section>
+            </div>
+            <div class="slds-col">
+                <section class="slds-clearfix">
+                    <div class="slds-float--left" style="padding-top:30px;">
+                        <strong> <div class="slds-text-heading--large">Dealer Profile</div></strong>
+                    </div>
+                </section>
+            </div>
+        </div> 
+        <div aura:id="growerList">
+            <div class="slds-container dealerrootcontainer">
+                
+                <div class="dealer-container">
+                    <div class="slds-grid slds-wrap  slds-grid--pull-padded">
+                        <div class="slds-p-horizontal--small slds-size--1-of-1">
+                            <div aura:id="DealerProfileSection"></div>
+                            <!--<div class="growerStyle" style="padding-left:47%;padding-bottom:2%;">
+                                <aura:if isTrue="false">
+                                    Grower Count: <a href="javascript:void(0);" onclick="{!c.groweraccNavigation}" > {!v.growerCount}</a>
+                                    
+                                    <aura:set attribute="else">
+                                        Grower Count: 0
+                                    </aura:set> 
+								</aura:if> 
+                            </div>  -->   
+                            
+                        </div>
+                    </div>
+                    <div class="slds-grid slds-grid--vertical-stretch">
+                        <div class="slds-p-horizontal--small slds-size--1-of-1">
+                            
+                            <div aura:id="chartSection" class="slds-grid slds-grid--pull-padded">
+                                <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--6-of-12 dealer-grid">
+                                    <c:Frontier_DealerDetail_SalesTrend dealerAccId="{!v.growerAcc}" />
+                                </div>
+                                <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--6-of-12 dealer-grid">
+                                    <c:Frontier_DealerAccount_Sales_Master dealerid="{!v.growerAcc}"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</aura:component>

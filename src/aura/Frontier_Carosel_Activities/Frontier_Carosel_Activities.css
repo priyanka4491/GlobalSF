@@ -1,0 +1,53 @@
+.THIS .uiButton .label {
+    display: block;
+    font-size: 15px;
+} 
+
+.THIS .slds-button--neutral {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    text-align: center;
+    vertical-align: middle;
+    border: none;
+    background-color: white;
+}
+
+.THIS .commentPopup{
+    right:1%
+}
+
+.THIS .slashClass{
+    position:relative;
+    margin:2%;
+    right:6%;
+}
+
+.THIS .cus-textarea-save-link{
+    text-align: right;
+}
+
+.THIS .headSection{
+	font-family: 'Arial-BoldMT', 'Arial Bold', 'Arial';
+    font-weight: 700;
+    display:inherit;
+    font-size:19px;
+}
+
+.THIS .headSection-noraml{
+    font-family: 'Arial-BoldMT', 'Arial Bold', 'Arial';
+    display:inherit;
+    font-size:20px;
+}
+
+.THIS .uiButton .label {
+    display: block;
+    font-size: 15px;
+    right: 12px;
+    position: relative;
+}
+
+.THIS .custom-comp-cancel {
+    display:inherit;
+    position:relative;
+    top:-5px;
+}

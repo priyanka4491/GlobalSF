@@ -1,0 +1,89 @@
+.THIS .xc-hidden {
+    display:none;
+} 
+.THIS  .scoped__nav {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    background-color: #f2f2f2;
+    border: 1px solid #f2f2f2;
+    border-style: groove;
+    border-radius: .25rem .25rem 0 0;
+}
+
+.THIS .li-seperation{
+    border-right-style: outset;
+    border-right-color: white;
+    border-left-style: outset;
+    border-left-color: white;
+}
+
+.THIS .active{
+    background-color: #999999;
+}
+
+
+
+.THIS .activeFont{
+    color: #ffffff;
+    font-size: medium;
+}
+
+.THIS .inactiveFont{
+    font-size: medium;
+    color: black;
+}
+
+.THIS .slds-tabs__link {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: block;
+    text-decoration: none;
+    cursor: pointer;
+    height: 2.5rem;
+    line-height: 2.5rem;
+    padding: 0 1rem;
+    background-clip: padding-box;
+    border-left: 1px solid transparent;
+    border-right: 1px solid transparent;
+}
+
+@media  all and (min-width: 320px) and (max-width:750px){
+    .THIS .slds-tabs__link {
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: normal;
+        display: block;
+        text-decoration: none;
+        cursor: pointer;
+        height: 2.5rem;
+        line-height: 2.5rem;
+        padding: 0 1rem;
+        background-clip: padding-box;
+        border-left: 1px solid transparent;
+        border-right: 1px solid transparent;
+    }
+}
+
+@media  all and (min-width: 768px) and (max-width:1024px){
+    .THIS .slds-tabs__link {
+         max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: normal;
+        display: block;
+        text-decoration: none;
+        cursor: pointer;
+        height: 2.5rem;
+        line-height: 2.5rem;
+        padding: 0 1rem;
+        background-clip: padding-box;
+        border-left: 1px solid transparent;
+        border-right: 1px solid transparent;
+    }
+    
+}

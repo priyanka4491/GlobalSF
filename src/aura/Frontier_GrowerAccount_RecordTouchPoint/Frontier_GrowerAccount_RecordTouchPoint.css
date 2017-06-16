@@ -1,0 +1,20 @@
+.THIS .growerRecordTouchPoint{
+    background-color:#ffffff;
+}
+
+.THIS .previousTouch-form-element{
+    padding:1px 1px 13px 100px;
+}
+
+.THIS .slds-button--brand {
+    
+    text-align: center;
+    vertical-align: middle;
+    background-color: #0070d2;
+    border: 1px solid #0070d2;
+    color: #fff;
+}
+
+.THIS .form-element-sizing{
+    padding-top:33px;
+}

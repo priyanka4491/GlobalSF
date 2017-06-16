@@ -1,0 +1,126 @@
+<aura:component controller="Frontier_GrowerAccount_ProgramController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes"  access="global">
+    <ltng:require styles="{!$Resource.SLDS +
+                          '/assets/styles/salesforce-lightning-design-system.css'}"/>
+    <aura:attribute name="accountId" type="Id" default="" access="global"/>
+    <aura:attribute name="programList" type="sObject[]" access="Global" />
+    <aura:attribute name="page" type="integer" default="1" access="global"/>
+    <aura:attribute name="pages" type="integer" default="10" access="global"/>
+    <aura:attribute name="total" type="integer" default="200" access="global"/>
+    <aura:attribute name="pageSize" type="String" default="2" access="global"/>
+    <aura:attribute name="usersInitialLoad" type="Boolean" default="false" access="global"/>
+    <aura:attribute name="programId" type="Id" access="global"/>
+
+    <aura:attribute name="SortByName" type="String" default="" access="global"/>
+    <aura:attribute name="SortByProgramName" type="String" default="onMouseOut" access="global"/> 
+    <aura:attribute name="SortByPlanning" type="String" default="onMouseOut" access="global"/>
+    <aura:attribute name="SortByExecution" type="String" default="onMouseOut" access="global"/>
+    <aura:attribute name="triggeredField" type="String" default="" access="global"/>
+    <aura:attribute name="prevId" type="String" default="" access="global"/>
+    <aura:attribute name="SortByField" type="Frontier_SortDirection" default="" access="global"/>
+    <aura:attribute name="growerAcc" type="Id" access="Global" />
+    <aura:attribute name="role" type="string" access="Global" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler event="c:PageChange" action="{!c.programPageChange}"/>
+    <aura:handler event="c:Frontier_RefreshProgram" action="{!c.refreshProgramList}"/>
+    
+    <div aura:id="allowpop"></div>
+    
+    <div aura:id="notallowpop"></div>
+    
+    <div aura:id="ProgramDetail">
+    <div> 
+        <div aura:id="profileDetails">           
+        </div> 
+        <br> </br>        
+        <div style="background-color:#ffffff;padding-top:10px;padding-left:10px;padding-botton:10px;padding-right:10px;">
+            
+            <ui:scrollerWrapper class="sWrap" >
+                <br></br>
+                <table class="slds-table  slds-no-row-hover slds-table--product">
+                    <thead style="padding-left:10px;">
+                        <tr style="padding-top:10px">
+                            <th scope="col" class="slds-is-sortable slds-cell-wrap lAlign" id="ProgramName"  onclick="{!c.sortDirection}"><b>Program Name</b>
+                                <c:Frontier_SvgIcon_Sorting SortOrder="{!v.SortByField.ProgramName == 'Name-ASC'?'ASC':'DESC'}" eventType="{!v.SortByProgramName}"/>   
+                            </th>
+                            
+                            <th scope="col" class="slds-is-sortable slds-cell-wrap lAlign" id="Planning" onclick="{!c.sortDirection}"> <b>Planning Status</b>
+                                <c:Frontier_SvgIcon_Sorting SortOrder="{!v.SortByField.Planning == 'Planning_Status__c-ASC'?'ASC':'DESC'}" eventType="{!v.SortByPlanning}"/>    
+                            </th>
+                            
+                            <th scope="col" class="slds-is-sortable slds-cell-wrap lAlign" id="Execution" onclick="{!c.sortDirection}"><b>Execution Status</b>
+                                <c:Frontier_SvgIcon_Sorting SortOrder="{!v.SortByField.Execution == 'Execution_Status__c-ASC'?'ASC':'DESC'}" eventType="{!v.SortByExecution}"/>    
+                            </th>
+                            <th scope="col" class="slds-is-sortable slds-cell-wrap lAlign" id="Product" onclick="{!c.sortDirection}"><b>Selected Products</b>
+                                
+                            </th>
+                            <th  scope="col" class="slds-is-sortable slds-cell-wrap lAlign" id="Actions" onclick="{!c.sortDirection}"><b>Actions</b>
+                                
+                            </th>
+                            <th>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="pgmdata"> 
+                        <aura:iteration items="{!v.programList}" var="pgmList" indexVar="idx">
+                            <tr class="{!mod(idx,2) == 0 ?'odd':'even'}">  
+                                <td class="slds-cell-wrap">
+                                    <a href="javascript:void(0);" onclick="{!c.pgmEventNavigation}" id="{!pgmList.Program_SFID__r.Id +'/' + pgmList.Account_SFID__r.Id}">{!pgmList.Program_SFID__r.Name}</a>
+                                </td>
+                                <td class="slds-cell-wrap">
+                                    <div class="slds-cell-wrap" >{!pgmList.Planning_Status__c}</div>
+                                </td>
+                                <td><div class="slds-cell-wrap" > {!pgmList.Execution_Status__c}</div>         
+                                </td >
+                                <td class="slds-cell-wrap">
+                                    <div class="slds-cell-wrap">Product 1, Product 2,Product 3</div> 
+                                </td>
+                                <td class="slds-cell-wrap">
+                                    <span style="{! or(or(equals(pgmList.Execution_Status__c, 'Cancelled'),equals(pgmList.Submitted__c,false)),equals(pgmList.Execution_Status__c, 'Completed')) ? 'Display:none' : 'visibility : visible'}">
+                                        <a href = "javascript:void(0);" onclick="{!c.cancelProgram}" id="{!pgmList.Id + '/' + 'Cancelled'}">Cancel Program</a>
+                                    </span> 
+                                </td >
+                                <td class="slds-cell-wrap"> 
+                                <span style="{! or(or(equals(pgmList.Execution_Status__c, 'Cancelled'),equals(pgmList.Submitted__c,false)),equals(pgmList.Execution_Status__c, 'Completed')) ? 'Display:none' : 'visibility : visible'}">
+                                    <a href = "javascript:void(0);" onclick="{!c.completePgm}" id="{!pgmList.Id + '/' + 'Completed'}">Complete Program</a>
+                                    </span></td>
+                            </tr>
+                        </aura:iteration>
+                    </tbody>
+                </table>
+            </ui:scrollerWrapper>
+            <div style="padding-top:2%;">
+                <center>
+                    <c:Paginator page="{!v.page}" pages="{!v.pages}" total="{!v.total}" compName='Programs'/>
+                </center>
+            </div>            
+        </div>
+    </div>
+    </div>
+    
+     <div aria-hidden="false" id="newCancel" role="dialog" class="slds-modal slds-modal--large slds-fade-in-open modalPosition" style="display:none;position:absolute;">
+        <div class="slds-modal__container cancelPop" >
+            <div class="slds-modal__header">
+                
+                <h4 class="slds-text-heading--medium " style="padding-left:50px;"><b>Cancel Program</b></h4>
+                <button class="slds-button slds-button--icon-inverse slds-modal__close" onclick="{!c.showModalBox}">                    
+                    <c:svgIcon svgPath="{!$Resource.SLDS + '/assets/icons/action-sprite/svg/symbols.svg#close'}" category="action" size="medium"  name="close" />
+                    
+                    <span class="slds-assistive-text">Close</span>
+                </button>
+            </div>
+            <div class = "slds-modal__content">
+                <div style="padding-left:10%;padding-right:10%;">
+				 <ui:inputTextArea aura:id="comments" label="" placeholder="Please provide a reason for cancellation" rows="5"/>
+                    </div>
+            <div style="padding-top:10px;padding-bottom:20px;padding-right:10%;">
+                    <ui:button class="btn slds-float--right btncolor BoxBorder"  label="Cancel Program" press="{!c.cancelPgmReason}"/>  
+                </div>
+                
+                
+            </div>
+        </div>
+    </div>
+    
+    <div class="slds-backdrop slds-backdrop--open" id="cancelbackgrnd" style="display:none;"></div>   
+</aura:component>

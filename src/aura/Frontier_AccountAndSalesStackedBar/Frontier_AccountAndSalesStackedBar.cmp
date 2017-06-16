@@ -1,0 +1,90 @@
+<aura:component controller="Frontier_SalesRepDashboardController" implements="force:appHostable" access="global">
+    <aura:handler name="init" value="{!this}" action="{!c.loadChartDetail}"/>
+    <aura:attribute name="radlCoverage" type="Map" default="" />
+    <aura:attribute name="loadChart" type="Boolean" default="false" />
+    <aura:attribute name="Crop" type="String" default="All Crops" />
+    <aura:attribute name="isInitialize" type="Boolean" default="false" access="global"/>
+  <div class="bgcolor" style="background:#ccc">
+
+      
+      
+      
+        <div style="padding: 20px 20px 20px 20px;">
+        
+        <div class="{!($Browser.isPhone) ? 'slds-grid slds-wrap ':'slds-grid '}" style="background:#ffffff;padding: 20px 30px 20px 30px;">
+            <div class="slds-col slds-col--padded slds-p-horizontal--small slds-size--1-of-1 slds-small-size--12-of-12 slds-medium-size--3-of-12 slds-large-size--3-of-12 slds-hide"  aura:id="salesRepDiv" >
+                <div class="slds-form-element__control" style="padding-top:10px">
+                    <b class="filterStyle">My Team </b> &nbsp; 
+                    <ui:inputSelect aura:id="salesrep" change="{!c.loadChartDetail}" class="inputStyle"/>
+                </div>
+            </div>
+            <div class="slds-col slds-col--padded slds-p-horizontal--small slds-size--1-of-1 slds-small-size--12-of-12 slds-medium-size--3-of-12 slds-large-size--3-of-12" >                   
+                <div class="slds-form-element__control" style="padding-top:10px">
+                    <b class="filterStyle" >Season</b> &nbsp; 
+                    <ui:inputSelect aura:id="season" change="{!c.loadChartDetail}" disabled="true" class="inputStyle"/>
+                </div>
+            </div>
+            <div class="slds-col slds-col--padded slds-p-horizontal--small slds-size--1-of-1 slds-small-size--12-of-12 slds-medium-size--3-of-12 slds-large-size--3-of-12" >
+                <div class="slds-form-element__control" style="padding-top:10px">
+                    <b class="filterStyle" >Crop</b> &nbsp; 
+                    <ui:inputSelect aura:id="crop" change="{!c.loadChartDetail}" class="inputStyle"/>
+   
+                </div>
+            </div>
+            <div class="slds-col slds-col--padded slds-p-horizontal--small slds-size--1-of-1 slds-small-size--12-of-12 slds-medium-size--5-of-12 slds-large-size--5-of-12" >
+                
+            </div>
+        </div>
+    </div>
+      
+  <div style="padding: 10px 20px 10px 20px;">  
+ <div class="slds-grid slds-wrap slds-grid--pull-padded">     
+  <div class="slds-p-horizontal--small slds-size--1-of-2 slds-medium-size--1-of-2 slds-large-size--1-of-2 " style="padding-right:10px">
+  <div style="background-color:#ffffff" >
+      <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-1">
+          <center><p class="titleStyle">Dealer-RADL Territory Structure</p></center>
+          <center>{!v.Crop}</center>
+      </div><br/>
+      <div aura:id="Partner">
+      </div>
+      </div>
+  </div>
+  <div class="slds-p-horizontal--small slds-size--1-of-2 slds-medium-size--1-of-2 slds-large-size--1-of-2 " style="padding-left:10px">
+     <div style="background-color:#ffffff" >
+      <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-1">
+          <center><p class="titleStyle">Grower-RADL Territory Structure</p></center>
+          <center>{!v.Crop}</center>
+      </div><br/>
+         <div aura:id="Customer"></div>
+      </div>
+    </div>  
+</div>
+      </div>
+    
+      
+      <div style="padding: 10px 30px 10px 30px;">  
+         
+ <div class="slds-grid slds-wrap slds-grid--pull-padded" style="background-color:#ffffff">     
+  <div class="slds-size--6-of-6 slds-medium-size--6-of-6 slds-large-size--6-of-6 ">
+  <div style="background-color:#ffffff" >
+      <div class="slds-grid slds-wrap slds-grid--pull-padded">
+      <div class="slds-size--3-of-8 slds-medium-size--3-of-8 slds-large-size--3-of-8 programStyle">
+                    <ui:inputSelect aura:id="programPlanned" change="{!c.loadProgram}" class="inputPickStyle"/>
+       </div>
+      <div class="slds-size--5-of-8 slds-medium-size--5-of-8 slds-large-size--5-of-8">
+          <p class="headerStyle">Program Allocation by RADL</p>
+          <p style="padding-left:10%">All Crops</p>
+      </div>
+      </div>
+     
+      <div aura:id="AllAccountsWithProgram">
+      </div>
+      </div>
+  </div>
+
+</div>
+      </div>
+      
+      
+    </div>
+</aura:component>

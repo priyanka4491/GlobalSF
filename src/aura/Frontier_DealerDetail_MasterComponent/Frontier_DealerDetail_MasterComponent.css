@@ -1,0 +1,119 @@
+.THIS .dealerrootcontainer{
+    background-color:rgba(228, 228, 228, 1);
+    margin:2%;
+    padding:10px;
+}
+
+.THIS .dealer-container{
+    background-color:rgba(215, 215, 215, 1);
+    margin:1%;
+}
+
+.THIS .dealer-grid{
+    background-color:#ffffff;
+    margin:15px 2px 2px 2px;
+    padding-bottom:4%;
+}
+
+.THIS .slds-box {
+    padding: 1rem;
+    border-radius: .25rem;
+    background-clip: padding-box;
+    border: 1px solid #d8dde6;
+}
+
+
+/** Monsanta Design Style Sheet **/
+.THIS h1{
+	font-family: "Museo Sans 300" ;
+	font-size: 54pt ;
+	line-height: 3.875 EM ;
+}
+.THIS h2{
+	font-family: "Museo Sans 300" ;
+	font-size: 48pt ;
+	line-height: 3.5 EM ;
+}
+.THIS h3{
+	font-family: "Museo Sans 300" ;
+	font-size: 36pt ;
+	line-height: 2.625 EM ;
+    word-wrap: break-word;
+}
+.THIS h4{
+	font-family: "Museo Sans 700" ;
+	font-size: 22pt ;
+	line-height: 2.625 EM ;
+    word-wrap: break-word;
+}
+.THIS h5{
+	font-family: "Museo Sans 700" ;
+	font-size: 16pt ;
+	line-height: 1.375 EM ;
+    word-wrap: break-word;
+    
+}
+.THIS h6{
+	font-family: "Museo Sans 500" ;
+	font-size: 14pt ;
+	text-transform: uppercase ;
+	line-height: 1.125 EM ;
+    word-wrap: break-word;
+}
+.THIS p {
+	font-family: "Museo Sans 500" ;
+	/*font-size: 14pt ;
+	line-height: 1.125 EM ;*/
+}
+
+.THIS p > span {
+	font-family: "Museo Sans 500" ;
+	font-size: 14pt ;
+	line-height: 1.125 EM ;
+}
+.THIS p > strong {
+	font-family: "Museo Sans 700" ;
+	font-size: 14pt ;
+	line-height: 1.125 EM ;
+}
+.THIS a {
+	font-family: "Museo Sans 500" ;
+	font-size: 14pt ;
+	line-height: 1.125 EM ;
+}
+.THIS a:hover {
+	font-family: "Museo Sans 500" ;
+	font-size: 14pt ;
+}
+.THIS button {
+	font-family: "Museo Sans 500" ;
+	/*font-size: 16pt ;*/
+}
+.THIS label {
+	font-family: "Museo Sans 500" ;
+	font-size: 12pt ;
+}
+
+.THIS .tableHeading {
+    margin-top: 22%;
+}
+.THIS .growerStyle{
+    font-size:medium;
+}
+
+
+/*** Phone **/
+
+@media  all and (min-width: 320px) and (max-width:700px){
+    
+    .THIS .cFrontier_GrowerAccount_RecordTouchPoint .previousTouch-form-element{
+        padding:1px 1px 1px 30px;
+        margin:3%
+    }
+    
+    .THIS .cFrontier_GrowerAccount_PreviousTouchPoints .previousTouch-form-element{
+        padding:1px 1px 1px 10px;
+    }
+    
+    
+}

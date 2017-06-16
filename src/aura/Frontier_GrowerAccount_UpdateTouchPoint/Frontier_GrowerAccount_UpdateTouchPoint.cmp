@@ -1,0 +1,637 @@
+<aura:component controller="Frontier_GrowerAccount_ProgramController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    
+        <ltng:require scripts="{!join(',',$Resource.GlobalSalesStaticResources + '/resources/Jquery3.1.0.js',
+                               $Resource.GlobalSalesStaticResources + '/resources/jquery.datetimepicker.full.js')}" 
+                  styles="{!join(',',$Resource.SLDS + '/assets/styles/salesforce-lightning-design-system.min.css',$Resource.GlobalSalesStaticResources + '/resources/jquery.datetimepicker.css')}"
+                  afterScriptsLoaded="{!c.loadStaticResources}"/>
+    <aura:attribute name="deletedActivityList" type="List" access="global" default="null"/>
+    <aura:attribute name="deletedNonActivityList" type="List" access="global" default="null"/>
+    <aura:attribute name="deletedProgramList"  type="List" access="global" default="null" />
+    <aura:attribute name="deletedNonProgramList"  type="List" access="global" default="null" />
+    <aura:attribute name="nonProgramActivitiesList"  type="Program_Activity__c[]" access="global" default="null" />
+    <aura:attribute name="nonProgramList"  type="Program__c[]" access="global" default="null" />
+    <aura:attribute name="selectedNonProgramList"  type="Program__c[]" access="global" default="null" />
+    <aura:attribute name="selectedNonProgramActivitiesList"  type="Program_Activity__c[]" access="global" default="null" />
+    <aura:attribute name="currentDateId" type="Id" default="" access="global"/>
+    <aura:attribute name="programIdActivityMap" type="Map" access="global" />
+    <aura:attribute name="newUpdateStatus" type="string" default="New" access="global" />
+    <aura:attribute name="RecordNumber" type="String" default="" access="global"/>
+    <aura:attribute name="touchPointList" type="Object" default="" access="global"/>
+    <aura:attribute name="programList" type="Account_Program__c" default="" access="global"/>
+    <!--<aura:attribute name="growerAcc" type="String" default="a0w2C000000DjEqQAK,a0w2C000000DfZxQAK/0012C00000AsKGzQAN,,a0g2C000000UynxQAC/a0x2C000000AR0tQAG,a0x2C000000APxRQAW,a0x2C000000AQ3eQAG" access="global"/>-->
+    <!--<aura:attribute name="growerAcc" type="String" default="/0012C00000AsKGzQAN,,a0g2C000000UynxQAC/" access="global"/>-->
+    <aura:attribute name="growerAcc" type="String" default="a0w2C000000DfZxQAK,a0w2C000000DjEqQAK/0012C00000AsKGzQAN,,a0g2C000000UynxQAC/a0x2C000000APxRQAW,a0x2C000000AR4bQAG" access="global"/>
+    <aura:attribute name="currentDate" type="String" default="" access="global"/>
+    <aura:attribute name="accountId" type="Id" default="" access="global"/>
+    <aura:attribute name="EventId" type="Id" default="" access="global"/>
+    <aura:attribute name="programDependentActivities" type="Program_Activity__c[]" access="global" />
+    <aura:attribute name="programDependentsActivities" type="Task[]" access="global" />
+    <aura:attribute name="nonProgramDependentActivities" type="Program_Activity__c[]" access="global" />
+    <aura:attribute name="selectedProgramAndActivitiesIds" type="Map" access="global" />
+    <aura:attribute name="selectedProgramList" type="Program__c" default="" access="global"/>
+    <aura:attribute name="selectedProgramsList" type="Program__c[]" default="" access="global"/>
+    <aura:attribute name="selectedActivitiesList" type="Program_Activity__c[]" access="global"/>
+    <aura:attribute name="selectedActivitiesFromActivityListArray" type="string[]" access="global"/>
+    <aura:attribute name="selectedNonActivitiesFromActivityListArray" type="string[]" access="global"/>
+    <aura:attribute name="savedProgramActivityMap" type="Map" access="global" />
+    <aura:attribute name="savedProgramDivNameAndProgramIdMap" type="Map" access="global" />
+    <aura:attribute name="savedNonProgramDivNameAndNonProgramIdMap" type="Map" access="global" />
+    <aura:attribute name="savedNonProgramDivNameAndNonProgramNameMap" type="Map" access="global" />
+    <aura:attribute name="savedProgramDivNameAndProgramNameMap" type="Map" access="global" />
+    <aura:attribute name="savedNonProgramActivityMap" type="Map" access="global" />
+    <aura:attribute name="activitiesFlag" type="Boolean" access="global" default="true"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="isGrowerList" type="boolean" access="global" default="false"/>
+    <aura:attribute name="isDealerList" type="boolean" access="global" default="false"/>
+    <aura:attribute name="isFromCalendar" type="boolean" access="global" default="false"/>
+    <aura:attribute name="isSchedule" type="boolean" access="global" default="false"/>
+    <aura:attribute name="isReadOnly" type="boolean" access="global" default="false"/>
+    <aura:attribute name="dealerId" type="Id" access="global"/>
+    <aura:attribute name="clickdate" type="String" access="global"/>
+    <aura:attribute name="clickDateTime" type="DateTime" access="global" />
+    <aura:attribute name="sampledate" type="Date" access="global"/>
+    <!--<aura:registerEvent name="redirectToGrowerList" type="c:Frontier_NavigateToGrowerList_Event"/>-->
+    <aura:registerEvent name="redirectToDelaerList" type="c:Frontier_NavigateToGrowerList_Event"/>
+    <aura:registerEvent name="redirectToDealerDetail" type="c:Frontier_GrowerAccountComponentEvent"/>
+    <aura:registerEvent name="redirectToDealerGrower" type="c:Frontier_GrowerAccountComponentEvent"/>
+	<aura:attribute name="accountsId" type="String" default="null" access="global"/>
+	<aura:attribute name="contactsId" type="String" default="" access="global"/>
+    <aura:attribute name="touchPointStatus" type="String" default="" access="global"/>
+    <aura:attribute name="contactList"  type="Contact[]" access="global" default="" />
+    <aura:attribute name="activityType"  type="String" access="global" default="" />
+    <aura:attribute name="popUpHeader"  type="String" access="global" default="" />
+	<aura:attribute name="popUpContent"  type="String" access="global" default="" />
+	<aura:attribute name="isdealersGrower"  type="Boolean" access="global" default="false" />
+    <aura:attribute name="isGrowerDealer"  type="Boolean" access="global" default="false" />
+    <aura:attribute name="isTouchpoint"  type="Boolean" access="global" default="false" />
+   	<aura:attribute name="isLoaded"  type="Boolean" access="global" default="false" />
+
+
+    
+
+	<aura:handler name="change" value="{!v.accountsId}" action="{!c.doInit}"/>    
+    <div aura:id="dynamicBinding">
+    <div style="background-color:#ffffff;">
+        <div class="slds-grid vAlign" style="padding-top:10px" >
+            <div class="slds-p-horizontal--small slds-size--4-of-12  slds-small-size--4-of-12 slds-medium-size--4-of-12 slds-large-size--4-of-12">
+                <aura:if isTrue="{!v.isGrowerList}">
+                    <a id="{!v.dealerId}" onclick="{!c.cancel}"> Back to Grower List</a>
+                </aura:if>
+                <aura:if isTrue="{!v.isDealerList}">
+                    <a id="" onclick="{!c.cancel}"> Back to Dealer List</a>
+                </aura:if>
+                <aura:if isTrue="{!v.isFromCalendar}">
+                    <a id="" onclick="{!c.loadCalendar}">Back to Calendar</a>
+                    
+                </aura:if>
+                <aura:if isTrue="{!v.isSchedule}">
+                    	<a  onclick="{!c.cancel}">Cancel</a>
+                </aura:if>               
+            </div>  
+            <div class="slds-p-horizontal--small slds-size--4-of-12  slds-small-size--4-of-12 slds-medium-size--4-of-12 slds-large-size--4-of-12" style="text-align:center;">
+                <!--<p class="customheadingstyle"><b>Update TouchPoint # {!v.RecordNumber}</b></p>-->
+                <aura:if isTrue="{!and(v.newUpdateStatus == 'update',not(v.isReadOnly)) ? true : false}">
+                    <p class="customheadingstyle"><b>Update Touchpoint</b></p>
+                    <p class="customheadingstyle">{!v.currentDate}</p>
+                </aura:if>
+                <aura:if isTrue="{!v.newUpdateStatus == 'New' ? true : false}">
+                    <p class="customheadingstyle"><b>New Touchpoint</b></p>
+                </aura:if>
+                <aura:if isTrue="{!v.isReadOnly}">
+                    <p class="customheadingstyle"><b>View Touchpoint</b></p>
+                    <p class="customheadingstyle">{!v.currentDate}</p>
+                </aura:if>
+            </div>      
+            <div class="slds-p-horizontal--small slds-size--4-of-12  slds-small-size--4-of-12 slds-medium-size--4-of-12 slds-large-size--4-of-12 rAlign">
+               
+            </div>
+        </div>
+        <div class="slds-grid vAlign" style="padding-top:10px" >
+            <div class="slds-p-horizontal--small slds-size--1-of-12  slds-small-size--1-of-12 slds-medium-size--2-of-12 slds-large-size--2-of-12">
+            </div >  
+            <div class="slds-p-horizontal--small slds-size--10-of-12  slds-small-size--10-of-12 slds-medium-size--8-of-12 slds-large-size--8-of-12" Style="margin:3%">
+                <aura:if isTrue="{! !and(v.isFromCalendar,equals(v.newUpdateStatus,'New'))}">
+                    <div class="slds-grid vAlign">
+                        <div class="slds-p-horizontal--small slds-size--6-of-12  slds-small-size--6-of-12 slds-medium-size--6-of-12 slds-large-size--6-of-12">
+                            <p><b>Account</b></p>
+                            <p>{!v.touchPointList.accountName}</p>
+                            <p>{!v.touchPointList.streetaddress},{!v.touchPointList.cityName}</p>  
+                            <p>{!v.touchPointList.stateName},{!v.touchPointList.CountryName}</p>
+                        </div>
+                        <div class="slds-p-horizontal--small slds-size--6-of-12  slds-small-size--6-of-12 slds-medium-size--6-of-12 slds-large-size--6-of-12">
+                            <p><b>Contact</b></p>
+                            <p>{!v.touchPointList.firstName}{!v.touchPointList.lastName} -{!v.touchPointList.contactPhone}</p>
+                        </div>  
+                    </div>
+                </aura:if>
+                <aura:if isTrue="{! and(v.isFromCalendar,equals(v.newUpdateStatus,'New'))}">
+                    <div class="slds-grid vAlign">
+                        <div class="slds-p-horizontal--small slds-size--6-of-12  slds-small-size--6-of-12 slds-medium-size--6-of-12 slds-large-size--6-of-12">
+                            <p><b>Account</b></p><br />
+                            <c:Frontier_ContactLookUp type="Account" value="{!v.accountsId}" className="TextBox" condition="" placeholder="Search Account" isCustomQuery="true" customQueryWhere="Both" style="padding:0px;padding-left: 11px;"/>
+                        </div>
+                        <div class="slds-p-horizontal--small slds-size--6-of-12  slds-small-size--6-of-12 slds-medium-size--6-of-12 slds-large-size--6-of-12">
+                            <p><b>Contact</b></p><br />
+                            <!--<c:Frontier_ContactLookUp type="Contact" value="{!v.contactsId}" className="TextBox" condition="{!'Where AccountId ='+'\''+v.accountsId+'\''}"/>-->
+                            <select id='contactSelect' style="padding: 7px;width: 95%;">
+                            	<option value="SelectContact">Select Contact</option>
+                                <aura:iteration items="{!v.contactList}" var="con">
+                                	<option value="{!con.Id}">{!con.Name}</option>
+                                </aura:iteration>
+                            </select>
+                        </div>  
+                    </div>
+                </aura:if>
+                <div class="hr"></div>
+                <div class="slds-grid">
+                    <div class="slds-p-horizontal--small slds-size--6-of-12  slds-small-size--6-of-12 slds-medium-size--6-of-12 slds-large-size--6-of-12">
+                        <p><b>Program</b></p>
+                    </div>
+                    <div class="slds-p-horizontal--small slds-size--6-of-12  slds-small-size--6-of-12 slds-medium-size--6-of-12 slds-large-size--6-of-12">
+                        <p><b>Activities</b></p>
+                    </div>
+                </div>
+                <aura:if isTrue="{!v.selectedProgramsList.length != 0 ? true : false}">
+                    <aura:iteration items="{!v.selectedProgramsList}" var="prg" indexVar="prgIndex">
+                        <div id="{!'programActivity'+(prgIndex+1)}" class="programActivityGrid">
+                            <div class="slds-grid programActivitySelectGrid slds-hide">
+                                <div class="slds-p-horizontal--small slds-size--6-of-12  slds-small-size--6-of-12 slds-medium-size--6-of-12 slds-large-size--6-of-12">
+                                    <p class="vAlign"> 
+                                        <select id="{!'program_'+(prgIndex+1)}" onchange="{!c.dependentActivate}" >
+                                            <option value="SelectProgram">Select Program</option>
+                                            <aura:iteration items="{!v.programList}" var="program" indexVar="idxsi">
+                                                <aura:if isTrue="{!program.Program_SFID__c == prg.Id}">
+                                                    <option class="option" value="{!program.Program_SFID__c}" selected="true">{!program.Program_SFID__r.Name}</option>
+                                                    <aura:set attribute="else">
+                                                        <option class="option" value="{!program.Program_SFID__c}">{!program.Program_SFID__r.Name}</option>
+                                                    </aura:set>
+                                                </aura:if>
+                                            </aura:iteration>
+                                        </select>
+                                    </p>        
+                                </div>
+                                <div class="slds-p-horizontal--small slds-size--6-of-12  slds-small-size--6-of-12 slds-medium-size--6-of-12 slds-large-size--6-of-12">
+                                    <p class="vAlign"> 
+                                        <aura:if isTrue="{!v.newUpdateStatus=='New' ?  true : false}">
+                                            <select id="{!'programActivites_'+(prgIndex+1)}" multiple="true" size="3">
+                                                <option value="SelectActivity">Select Activity</option>
+                                                <aura:if isTrue="{!v.activitiesFlag}">
+                                                    <aura:iteration items="{!v.selectedActivitiesList}" var="activities" indexVar="idxsi">
+                                                        <aura:if isTrue="{!activities.Program_SFID__c == prg.Id}">
+                                                            <aura:iteration items="{!v.selectedActivitiesFromActivityListArray}" var="activits" indexVar="idxss">
+                                                                <aura:if isTrue="{!activities.Id == activits}">
+                                                                    {!activits}
+                                                                    <option id="{!'activityOption'+idxss}" class="option" value="{!activities.Id}" selected="true" onclick="{!c.selectActivitiesByType}" >{!activities.Name}</option>
+                                                                </aura:if>
+                                                                
+                                                                
+                                                            </aura:iteration>
+                                                        </aura:if>
+                                                    </aura:iteration>
+                                                </aura:if>
+                                            </select>
+                                            <aura:set attribute="else">
+                                                <select id="{!'programActivites_'+(prgIndex+1)}" multiple="true" size="3">
+                                                    <option value="SelectActivity">Select Activity</option>
+                                                    <aura:if isTrue="{!v.activitiesFlag}">
+                                                        <aura:iteration items="{!v.selectedActivitiesList}" var="activities" indexVar="idxs">
+                                                            	<aura:if isTrue="{!activities.Program_SFID__c == prg.Id}">
+                                                            <option id="{!'activityOption'+idxs}" class="option" value="{!activities.Id}" selected="true" disabled="true" onclick="{!c.selectActivitiesByType}">{!activities.Name}</option>
+                                                            </aura:if>
+                                                            </aura:iteration>
+                                                    </aura:if>
+                                                </select>
+                                            </aura:set>
+                                        </aura:if>
+                                    </p>
+                                </div>  
+                            </div>
+                            <div id="{!'programAndActivities'+(prgIndex+1)}" >
+                                <div class="slds-grid">
+                                    
+                                    <div class="slds-p-horizontal--small slds-size--6-of-12  slds-small-size--6-of-12 slds-medium-size--6-of-12 slds-large-size--6-of-12">
+                                        <div class="" >
+                                            <div class="">
+                                                <div class="">
+                                                    <div class="slds-size--1-of-1 slds-small-size--12-of-12 slds-medium-size--12-of-12 slds-large-size--9-of-12">
+                                                        <br />
+                                                        <span>
+                                                            {!prg.Name} &nbsp;
+                                                        </span>
+                                                        <span class="slds-float--right">
+                                                        	<span style="display:inline"><div class="{!v.isReadOnly ? 'slds-hide':'slds-show cssCircle minusSign'}" style="padding-top:00px" onclick="{!c.deleteProgram}" id="{!'programRemove_'+(prgIndex+1)+'_'+prg.Id}">-</div></span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="slds-p-horizontal--small slds-size--6-of-12  slds-small-size--6-of-12 slds-medium-size--6-of-12 slds-large-size--6-of-12">
+									<aura:if isTrue="{!v.newUpdateStatus=='New' ?  true : false}">
+                                        <div class="" >
+                                            <div class="">
+                                                <div class="">
+                                                <aura:iteration items="{!v.selectedActivitiesList}" var="act" indexVar="actIndex">
+                                                    <aura:if isTrue="{!act.Program_SFID__c == prg.Id}">
+                                                        <aura:iteration items="{!v.selectedActivitiesFromActivityListArray}" var="activits" indexVar="idxss">
+                                                            <aura:if isTrue="{!act.Id == activits}">
+                                                              
+                                                                <div class="slds-size--1-of-1 slds-small-size--12-of-12 slds-medium-size--12-of-12 slds-large-size--9-of-12" id="{!'activity_'+act.Id}">
+                                                                    <br />
+                                                                    <span>
+                                                                        {!act.Name} &nbsp;
+                                                                    </span>
+                                                                    <span class="slds-float--right">
+                                                                        <span id="{!'activity_'+(prgIndex+1)+'_'+act.Id}" class="{!v.isReadOnly ? 'slds-hide':'slds-show cssCircle minusSign'}" style="padding-top:00px" onclick="{!c.selecActivityDelete}">-</span>
+                                                                    </span>
+                                                                 </div>
+                                                            </aura:if> 
+                                                        </aura:iteration>
+                                                    </aura:if>
+                                                </aura:iteration>
+                                                
+                                                <div class="parentPlusSingn">
+                                                    <span class="{!v.isReadOnly ? 'slds-hide':'slds-show cssCircle plusSign'}" onclick="{!c.editProgramActivity}" id="{!'activityAdd_'+(prgIndex+1)}"> +</span>
+                                                </div>
+                                                </div>
+                                            </div>
+                                        </div>
+										<aura:set attribute="else">
+                                            <div class="" >
+                                                <div class="">
+                                                    <div class="">
+                                                        <aura:iteration items="{!v.selectedActivitiesList}" var="act" indexVar="actIndex">
+                                                            <aura:if isTrue="{!act.Program_SFID__c == prg.Id}">
+                                                                <div class="slds-size--1-of-1 slds-small-size--12-of-12 slds-medium-size--12-of-12 slds-large-size--9-of-12" id="{!'activity_'+act.Id}">
+                                                                    <br />
+                                                                    <span class="vAlign"> 
+                                                                        {!act.Name} &nbsp;
+                                                                    </span>
+                                                                    <span class="slds-float--right">
+                                                                        <span style="display:inline;"><div id="{!'activity_'+(prgIndex+1)+'_'+act.Id}" class="{!v.isReadOnly ? 'slds-hide':'slds-show cssCircle minusSign'}" style="padding-top:00px" onclick="{!c.selecActivityDelete}">-</div></span>
+                                                                    </span>
+                                                                </div>
+                                                            </aura:if>
+                                                        </aura:iteration>
+                                                        <div class="parentPlusSingn">
+                                                            <span class="{!v.isReadOnly ? 'slds-hide':'slds-show cssCircle plusSign'}" onclick="{!c.editProgramActivity}" id="{!'activityAdd_'+(prgIndex+1)}"> +</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+										</aura:set>
+										
+									</aura:if>
+                                    
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <aura:if isTrue="{!v.selectedProgramsList.length == (prgIndex+1) ? true : false}">
+                            <div id="{!'programActivity'+(prgIndex+2)}" class="programActivityGrid"></div>
+                        </aura:if>                           
+                        
+                        
+                    </aura:iteration>
+                    
+                    <aura:set attribute="else">
+                        
+                        <div id="programActivity1" class="{!v.isReadOnly ? 'slds-hide':'programActivityGrid slds-show'}">
+                            <div class="slds-grid programActivitySelectGrid">
+                                <div class="slds-p-horizontal--small slds-size--6-of-12  slds-small-size--6-of-12 slds-medium-size--6-of-12 slds-large-size--6-of-12">
+                                    <p class="vAlign"> 
+                                        <select id="program_1" onchange="{!c.dependentActivate}" >
+                                            <option value="SelectProgram">Select Program</option>
+                                            <aura:iteration items="{!v.programList}" var="program" indexVar="idx">
+                                                <option class="option" value="{!program.Program_SFID__c}">{!program.Program_SFID__r.Name}</option>
+                                            </aura:iteration>
+                                        </select>
+                                    </p>
+                                    
+                                </div>
+                                
+                                <div class="slds-p-horizontal--small slds-size--6-of-12  slds-small-size--6-of-12 slds-medium-size--6-of-12 slds-large-size--6-of-12">
+                                    <p class="vAlign"> 
+                                        <select id="programActivites_1" onclick="{!c.setMultipleAttributeToSelectdyanamically}"  disabled="true">
+                                            <option value="SelectActivity">Select Activity</option>
+                                            <aura:if isTrue="{!v.activitiesFlag}">
+                                                <aura:iteration items="{!v.programDependentActivities}" var="activities" indexVar="idxs">
+                                                    <option id="{!'activityOption'+idxs}" class="option" value="{!activities.Id}" onclick="{!c.selectActivitiesByType}">{!activities.Name}</option>
+                                                </aura:iteration>
+                                            </aura:if>
+                                        </select>
+                                    </p>
+                                </div>  
+                            </div>
+                            <div id="programAndActivities1" >
+                                <div class="slds-grid slds-hide">
+                                    <div class="slds-p-horizontal--small slds-size--6-of-12  slds-small-size--6-of-12 slds-medium-size--6-of-12 slds-large-size--6-of-12">
+                                        <p class="vAlign"> 
+                                            Side-x-Side &nbsp;
+                                            <span style="display:inline"><div class="{!v.isReadOnly ? 'slds-hide':'slds-show cssCircle minusSign'}" style="padding-top:00px">&#8211;</div></span>
+                                        </p>
+                                    </div>
+                                    <div class="slds-p-horizontal--small slds-size--6-of-12  slds-small-size--6-of-12 slds-medium-size--6-of-12 slds-large-size--6-of-12">
+                                        <p class="vAlign"> 
+                                            Proposal &nbsp;<span style="display:inline"><div class="{!v.isReadOnly ? 'slds-hide':'slds-show cssCircle minusSign'}" style="padding-top:00px">&#8211;</div></span>
+                                            &nbsp;<div class="{!v.isReadOnly ? 'slds-hide':'slds-show cssCircle plusSign'}"> &#43;</div>
+                                        </p>
+                                    </div> 
+                                </div>
+                            </div>
+                        </div>
+                        <div id="programActivity2" class="programActivityGrid"></div>
+						
+                        
+                    </aura:set>
+                </aura:if>
+				<div class="slds-grid" style="margin-top:20px">
+					<div class="slds-p-horizontal--small slds-size--12-of-12">
+						<p style="float:left;"><a class="{!v.isReadOnly ? 'anchordisabled':''}" onclick="{!c.addProgramActivities}" >+ Add Program Activities</a></p>
+					</div>
+				</div>
+				<div class="hr"></div>
+                <aura:if isTrue="{!v.selectedNonProgramList.length != 0 ? true : false}">
+                    <aura:iteration items="{!v.selectedNonProgramList}" var="prg" indexVar="prgIndex">
+							<div id="{!'nonprogramActivity'+(prgIndex+1)}" class="nonprogramActivityGrid">
+								<div class="slds-grid nonprogramActivitySelectGrid slds-hide">
+									<div class="slds-p-horizontal--small slds-size--6-of-12  slds-small-size--6-of-12 slds-medium-size--6-of-12 slds-large-size--6-of-12">
+										<p class="vAlign" > 
+											<select id="{!'nonprogram_'+(prgIndex+1)}" onchange="{!c.dependentActivate}" multiple="true" size="3">
+												<!--<option value="SelectProgram">Select Program</option>-->
+												<aura:iteration items="{!v.nonProgramList}" var="program" indexVar="idxsi">
+													<aura:if isTrue="{!program.Id == prg.Id}">
+														<option class="option" value="{!program.Id}" selected="true">{!program.Name}</option>
+														<aura:set attribute="else">
+															<option class="option" value="{!program.Id}">{!program.Name}</option>
+														</aura:set>
+													</aura:if>
+												</aura:iteration>
+											</select>
+										</p>
+										
+									</div>
+									
+									<div class="slds-p-horizontal--small slds-size--6-of-12  slds-small-size--6-of-12 slds-medium-size--6-of-12 slds-large-size--6-of-12">
+										<p class="vAlign"> 
+											<aura:if isTrue="{!v.newUpdateStatus=='New' ?  true : false}">
+												<select disabled="{!v.isReadOnly}" id="{!'nonprogramActivites_'+(prgIndex+1)}" multiple="true" size="3">
+													<option value="SelectActivity">Select Activity</option>
+													<aura:if isTrue="{!v.activitiesFlag}">
+														<aura:iteration items="{!v.selectedNonProgramActivitiesList}" var="activities" indexVar="idxsi">
+															<aura:if isTrue="{!activities.Program_SFID__c == prg.Id}">
+																<aura:iteration items="{!v.selectedActivitiesFromActivityListArray}" var="activits" indexVar="idxss">
+																	<aura:if isTrue="{!activities.Id == activits}">
+																		{!activits}
+																		<option id="{!'nonactivityOption'+idxss}" class="option" value="{!activities.Id}" selected="true" onclick="{!c.selectNonActivitiesByType}">{!activities.Name}</option>
+																	</aura:if>
+																	
+																	
+																</aura:iteration>
+															</aura:if>
+														</aura:iteration>
+													</aura:if>
+												</select>
+												<aura:set attribute="else">
+													<select disabled="{!v.isReadOnly}" id="{!'nonprogramActivites_'+(prgIndex+1)}" onclick="{!c.setMultipleAttributeToSelectdyanamically}">
+														<option value="SelectActivity">Select Activity</option>
+														<aura:if isTrue="{!v.activitiesFlag}">
+															<aura:iteration items="{!v.selectedNonProgramActivitiesList}" var="activities" indexVar="idxs">
+																
+																<option id="{!'nonactivityOption'+idxs}" class="option" value="{!activities.Id}" onclick="{!c.selectNonActivitiesByType}" selected="true">{!activities.Name}</option>
+															</aura:iteration>
+														</aura:if>
+													</select>
+												</aura:set>
+											</aura:if>
+										</p>
+									</div>  
+								</div>
+								<div id="{!'nonprogramAndActivities'+(prgIndex+1)}" >
+									<div class="slds-grid">
+										<div class="slds-p-horizontal--small slds-size--6-of-12  slds-small-size--6-of-12 slds-medium-size--6-of-12 slds-large-size--6-of-12">
+                                            <div class="" >
+                                                <div class="">
+                                                    <div class="">
+                                                        <div class="slds-size--1-of-1 slds-small-size--12-of-12 slds-medium-size--12-of-12 slds-large-size--9-of-12">
+                                                            <br />
+                                                            <span>
+                                                                {!prg.Name} &nbsp;
+                                                            </span>
+                                                            <span class="slds-float--right">
+																<span style="display:inline"><div class="{!v.isReadOnly ? 'slds-hide':'slds-show cssCircle minusSign'}" style="padding-top:00px" onclick="{!c.deleteNonProgram}" id="{!'nonprogramRemove_'+(prgIndex+1)+'_'+prg.Id}">-</div></span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+										<div class="slds-p-horizontal--small slds-size--6-of-12  slds-small-size--6-of-12 slds-medium-size--6-of-12 slds-large-size--6-of-12">
+											<aura:if isTrue="{!v.newUpdateStatus=='New' ?  true : false}">
+												<div class="" >
+                                                    <div class="">
+                                                        <div class="">
+                                                        <aura:iteration items="{!v.selectedNonProgramActivitiesList}" var="act" indexVar="actIndex">
+                                                            <aura:if isTrue="{!act.Program_SFID__c == prg.Id}">
+                                                                <aura:iteration items="{!v.selectedActivitiesFromActivityListArray}" var="activits" indexVar="idxss">
+                                                                    <aura:if isTrue="{!act.Id == activits}">
+                                                                      
+                                                                        <div class="slds-size--1-of-1 slds-small-size--12-of-12 slds-medium-size--12-of-12 slds-large-size--9-of-12" id="{!'nonactivity_'+act.Id}">
+                                                                            <br />
+                                                                            <span>
+                                                                                {!act.Name} &nbsp;
+                                                                            </span>
+                                                                            <span class="slds-float--right">
+                                                                                <span id="{!'nonactivity_'+(prgIndex+1)+'_'+act.Id}" class="{!v.isReadOnly ? 'slds-hide':'slds-show cssCircle minusSign'}" style="padding-top:00px" onclick="{!c.selectNonActivityDelete}">-</span>
+                                                                            </span>
+                                                                         </div>
+                                                                    </aura:if> 
+                                                                </aura:iteration>
+                                                            </aura:if>
+                                                        </aura:iteration>
+                                                        
+                                                        <div class="parentPlusSingn">
+                                                            <span class="{!v.isReadOnly ? 'slds-hide':'slds-show cssCircle plusSign'}" onclick="{!c.editNonProgramActivity}" id="{!'nonactivityAdd_'+(prgIndex+1)}"> +</span>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+												<aura:set attribute="else">
+													<div class="" >
+                                                        <div class="">
+                                                            <div class="">
+                                                                <aura:iteration items="{!v.selectedNonProgramActivitiesList}" var="act" indexVar="actIndex">
+                                                                    <aura:if isTrue="{!act.Program_SFID__c == prg.Id}">
+                                                                        <div class="slds-size--1-of-1 slds-small-size--12-of-12 slds-medium-size--12-of-12 slds-large-size--9-of-12" id="{!'nonactivity_'+act.Id}">
+                                                                            <br />
+                                                                            <span class="vAlign"> 
+                                                                                {!act.Name} &nbsp;
+                                                                            </span>
+                                                                            <span class="slds-float--right">
+                                                                                <span style="display:inline;"><div id="{!'nonactivity_'+(prgIndex+1)+'_'+act.Id}" class="{!v.isReadOnly ? 'slds-hide':'slds-show cssCircle minusSign'}" style="padding-top:00px" onclick="{!c.selectNonActivityDelete}">-</div></span>
+                                                                            </span>
+                                                                        </div>
+                                                                    </aura:if>
+                                                                </aura:iteration>
+                                                                <div class="parentPlusSingn">
+                                                                    <span class="{!v.isReadOnly ? 'slds-hide':'slds-show cssCircle plusSign'}" onclick="{!c.editNonProgramActivity}" id="{!'nonactivityAdd_'+(prgIndex+1)}"> +</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </aura:set>
+											</aura:if>
+										</div> 
+									</div>
+								</div>
+							</div>
+							<aura:if isTrue="{!v.selectedNonProgramList.length == (prgIndex+1) ? true : false}">
+								<div id="{!'nonprogramActivity'+(prgIndex+2)}" class="nonprogramActivityGrid"></div>
+							</aura:if>     
+						</aura:iteration>                      
+                    <aura:set attribute="else">
+                        <div id="nonprogramActivity1" class="{!v.isReadOnly ? 'slds-hide':'nonprogramActivityGrid slds-show'}">
+                            <div class="slds-grid nonprogramActivitySelectGrid">
+                                <div class="slds-p-horizontal--small slds-size--6-of-12  slds-small-size--6-of-12 slds-medium-size--6-of-12 slds-large-size--6-of-12">
+                                    <p class="vAlign"> 
+                                        <select id="nonprogram_1" onchange="{!c.nonProgramdependentActivate}" >
+                                            <!--<option value="SelectProgram">Select Program</option>-->
+                                            <aura:iteration items="{!v.nonProgramList}" var="program" indexVar="idx">
+                                                <option class="option" value="{!program.Id}">{!program.Name}</option>
+                                            </aura:iteration>
+                                        </select>
+                                    </p>
+                                    
+                                </div>
+                                
+                                <div class="slds-p-horizontal--small slds-size--6-of-12  slds-small-size--6-of-12 slds-medium-size--6-of-12 slds-large-size--6-of-12">
+                                    <p class="vAlign"> 
+                                        <select id="nonprogramActivites_1" onclick="{!c.setMultipleAttributeToSelectdyanamically}">
+                                            <option value="SelectActivity">Select Activity</option>
+                                            <aura:if isTrue="{!v.activitiesFlag}">
+                                                <aura:iteration items="{!v.nonProgramDependentActivities}" var="activities" indexVar="idxs">
+                                                    <option id="{!'nonactivityOption'+idxs}" class="option" value="{!activities.Id}" onclick="{!c.selectNonActivitiesByType}">{!activities.Name}</option>
+                                                </aura:iteration>
+                                            </aura:if>
+                                        </select>
+                                    </p>
+                                </div>  
+                            </div>
+                            <div id="nonprogramAndActivities1" >
+                                <div class="slds-grid slds-hide">
+                                    <div class="slds-p-horizontal--small slds-size--6-of-12  slds-small-size--6-of-12 slds-medium-size--6-of-12 slds-large-size--6-of-12">
+                                        <p class="vAlign"> 
+                                            Side-x-Side &nbsp;
+                                            <span style="display:inline"><div class="cssCircle minusSign" style="padding-top:00px">&#8211;</div></span>
+                                        </p>
+                                    </div>
+                                    <div class="slds-p-horizontal--small slds-size--6-of-12  slds-small-size--6-of-12 slds-medium-size--6-of-12 slds-large-size--6-of-12">
+                                        <p class="vAlign"> 
+                                            Proposal &nbsp;<span style="display:inline"><div class="cssCircle minusSign" style="padding-top:00px">&#8211;</div></span>
+                                            &nbsp;<div class="cssCircle plusSign"> &#43;</div>
+                                        </p>
+                                    </div> 
+                                </div>
+                            </div>
+                        </div>
+                        <div id="nonprogramActivity2" class="nonprogramActivityGrid"></div>
+                    </aura:set>
+                </aura:if>
+                <div class="slds-grid" style="margin-top:20px">
+                    <div class="slds-p-horizontal--small slds-size--12-of-12 slds-hide">
+                        <p style="float:left;"><a class= "{!v.isReadOnly ? 'anchordisabled' : ''}" onclick="{!c.addNonProgramActivities}" >+ Add Non-Program Activities</a></p>
+                    </div>
+                </div>
+                
+                <div class="hr"></div>
+                <div style="padding-left:5px">
+                    <div><p><b>Touchpoint Type</b></p>
+                        <p class=""><ui:inputSelect disabled="{!v.isReadOnly}" class="form-control inputstyle" aura:id="touchPointType">&nbsp; 
+                            
+                            <ui:inputSelectOption text="Phone Call" label="Phone Call"/>
+                            <ui:inputSelectOption text="EMail" label="eMail"/>
+                            <ui:inputSelectOption text="Visit" label="Visit"/>
+                            <ui:inputSelectOption text="Event" label="Event"/>
+                            </ui:inputSelect> </p>
+                    </div>
+                    <div class="vAlign">
+                        <p><b>Touchpoint Date</b></p>
+                        <p class="remindMe" >
+                            <!--<ui:inputDate disabled="{!v.isReadOnly}" aura:id="touchpointDate" class="" value="" displayDatePicker="true" />-->
+                            <ui:inputDateTime disabled="{!v.isReadOnly}" aura:id="touchpointDate" value="" displayDatePicker="true" />
+                        </p>
+                    </div>
+                    <div class="vAlign">
+                        <p><b>Remind Me</b></p>
+                        <p>
+                            <ui:inputSelect disabled="{!v.isReadOnly}" class="form-control inputstyle" aura:id="remindMe">&nbsp; 
+                                <ui:inputSelectOption text="2 Days" label="2 Days"/>
+                            </ui:inputSelect>
+                        </p>
+                    </div>
+                    <div class="{!v.isReadOnly ? 'slds-hide':'slds-show'}">
+                    <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon--right Search-Icon vAlign inputstyle">
+                        <p><input  disabled="{!v.isReadOnly}" id="icon" type="text" class="form-control"
+                                  placeholder="Invite Others ..." />
+                            <c:svgIcon class="iconfill slds-icon slds-icon--x-small slds-icon-text-default searchIcon"  svgPath="{!$Resource.SLDS + '/assets/icons/utility-sprite/svg/symbols.svg#search'}" category="utility" size="x-small"  name="search" />
+                        </p>
+                    </div>
+                    </div>
+                </div>
+                <aura:if isTrue="{! and(not(v.touchPointStatus=='Completed'),not(v.touchPointStatus=='Cancelled'))}">
+                    <aura:if isTrue="{! and(equals(v.newUpdateStatus,'update'),not(v.isReadOnly))}">
+                        <div class="slds-grid">
+                            <div class="slds-p-horizontal--small slds-size--4-of-12  slds-small-size--4-of-12 slds-medium-size--4-of-12 slds-large-size--4-of-12 btntopAlign">
+                                <button class="slds-button btncolor" style="padding: 4px;background-color:rgba(255, 0, 0, 0.498039215686275);width: 100%;font-size:16px;" aura:id="" onclick="{!c.cancelTouchpoint}"><b>Cancel Touchpoint</b></button>
+                                
+                            </div>
+                            <div class="slds-p-horizontal--small slds-size--4-of-12  slds-small-size--4-of-12 slds-medium-size--4-of-12 slds-large-size--4-of-12 btntopAlign">
+                                <button class="slds-button btncolor" style="padding: 4px;background-color:#66ccff;width: 100%;font-size:16px;" aura:id="" onclick="{!c.scheduleTouchPoint}"><b>Reschedule/Update Touchpoint</b></button>
+                                
+                            </div>  
+                            <div class="slds-p-horizontal--small slds-size--4-of-12  slds-small-size--4-of-12 slds-medium-size--4-of-12 slds-large-size--4-of-12 btntopAlign">
+                                <button class="slds-button btncolor" style="padding: 4px;background-color:#00ff00;width: 100%;font-size:16px;"  aura:id="accnt2" onclick="{!c.completeTouchpoint}"><b>Complete Touchpoint</b></button>
+                            </div> 
+                        </div> 
+                        <aura:set attribute="else">
+                            <aura:if isTrue="{!not(v.isReadOnly)}">
+                                <aura:if isTrue="{!or(v.nonProgramList.length != 0 ? true : false,v.programList.length != 0 ? true : false)}">
+                                    <br />
+                                    <center>
+                                        <button class="slds-button btncolor BoxBorder"  style="width:50%;font-size:16px;" aura:id="" onclick="{!c.scheduleTouchPoint}"><b>Save and Schedule Touchpoint</b></button>
+                                    </center>
+                                </aura:if>
+                            </aura:if>
+                        </aura:set>
+                    </aura:if>
+                </aura:if>
+            </div>
+            <div class="slds-p-horizontal--small slds-size--1-of-12  slds-small-size--1-of-12 slds-medium-size--2-of-12 slds-large-size--2-of-12 rAlign">
+            </div>
+        </div>
+    </div>
+    
+	<div role="dialog" tabindex="-1" aria-labelledby="header43" class="slds-modal slds-fade-in-close" aura:id="showCancelOrCompleteTouchpointPopUp" style="position:absolute">
+		<div class="slds-modal__container">
+			<div class="slds-modal__header">
+				<button class="slds-button slds-modal__close slds-button--icon-inverse" onclick="{!c.closePopUp}" >
+					<span class="slds-icon_container slds-icon-standard-account" >
+						<c:svgIcon svgPath="{!$Resource.SLDS + '/assets/icons/utility-sprite/svg/symbols.svg#close'}" category="utility" size="medium"  name="close" />
+						<span class="slds-assistive-text">close</span>
+					</span>
+					<span class="slds-assistive-text">Close</span>
+				</button>
+			   
+				<h6 id="header43" class="slds-text-heading--medium">{!v.popUpHeader}</h6>
+			</div>
+			<div class="slds-modal__content slds-p-around--medium" style="white-space: pre;margin-top: 0%;margin-bottom: 0%">
+				{!v.popUpContent}
+			</div>
+			<div class="slds-modal__footer">
+				<button class="slds-button slds-button--neutral"  onclick="{!c.cancelORCompleteTouchpoint}">{!v.popUpHeader}</button>
+			</div>
+		</div>            
+	</div>
+	<div class="slds-backdrop slds-backdrop--close" aura:id="cancelORCompleteTouchpointBackGround"></div>
+    </div>
+</aura:component>

@@ -1,0 +1,222 @@
+<aura:component controller="Frontier_GrowerProfileController" implements="force:appHostable" access="global" >   
+<style>
+    .marquee {
+    width: 450px;
+    margin: 0 auto;
+    overflow: hidden;
+    white-space: nowrap;
+    box-sizing: border-box;
+    animation: marquee 10s linear infinite;
+}
+@media  all and (min-width: 200px) and (max-width:700px){
+      .marquee {
+    width: 250px;
+    margin: 0 auto;
+    overflow: hidden;
+    white-space: nowrap;
+    box-sizing: border-box;
+    animation: marquee 10s linear infinite;
+}    
+         }
+ @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation:portrait) {
+          .marquee {
+    width: 300px;
+    margin: 0 auto;
+    overflow: hidden;
+    white-space: nowrap;
+    box-sizing: border-box;
+    animation: marquee 10s linear infinite;
+         }
+         }
+
+/* Make it move */
+@keyframes marquee {
+    0%   { text-indent: 27.5em }
+    100% { text-indent: -30em }
+}
+
+/* Make it pretty */
+.microsoft {
+    padding-left: 1.5em;
+    position: relative;
+    font: 16px 'Segoe UI', Tahoma, Helvetica, Sans-Serif;
+}
+ .microsoft:before, .microsoft::before {
+    z-index: 2;
+    content: '';
+    position: absolute;
+    top: -1em; left: -1em;
+    width: .2em; height: .2em;
+   
+}
+
+.microsoft:after, .microsoft::after {
+    z-index: 1;
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: .2em; height: .2em;    
+    
+}
+</style>
+    <aura:attribute name="prevID" type="string" access="global" default=""/>
+    <aura:attribute name="prevfiscalID" type="string" access="global" default=""/>
+    <aura:attribute name="GrowerDetailResponse" type="String" access="global"/>
+    <aura:attribute name="growerAccFarm" type="String" access="global" />
+    <aura:handler event="aura:locationChange" action="{!c.update}"/>
+     <aura:attribute name="errorMsg" type="String" access="global"/>
+
+    
+    <ltng:require scripts="{!$Resource.ChartJs}" styles="{!join(',',$Resource.SLDS + '/assets/styles/salesforce-lightning-design-system.min.css')}" afterScriptsLoaded="{!c.loadFormSizeChart}"/>
+    <center>
+        <br />
+        <div>
+            <p class="customHeadingColor"><strong>Total farm area</strong></p>
+        </div><br />
+        <div  id="headerButtons" class="headerButtons">
+            <button class="slds-button slds-button--neutral slds-selected slds-text-title--caps buttonColor " id="acres" onclick="{!c.changeChart}" >Acres</button>
+            <button class="slds-button slds-button--neutral slds-not-selected slds-text-title--caps " id="hectares" onclick="{!c.changeChart}">Hectares</button>
+        </div> 
+    </center>
+    <div id="chartContainer" class="Container" style="position:relative">
+        <div id="chartDivDoughnut">
+            <canvas class="myChartLarge canvasPosition" aura:id="bChart" id="myDoughnutChart" />
+        </div>
+        <div aura:id="chartLegend" id="chartLegend" class="chart-legend"></div>
+        
+        <div id="FYButtons" class="FYButtons">
+            <button class="slds-button slds-button--neutral slds-selected FYButton1 buttonColor" id="FY16" onclick="{!c.changeChart}">FY16</button>
+            <button class="slds-button slds-button--neutral slds-not-selected FYButton2" id="FY15" onclick="{!c.changeChart}">FY17</button>
+        </div>
+        
+        
+    </div>
+    <br />
+    <div class="tableHeading">
+        <p><strong>Update FY16 Area</strong></p>
+         
+          <div class="slds-box bgErrorColor">
+             <p><c:svgIcon class="fillicon" svgPath="{!$Resource.SLDS + '/assets/icons/utility-sprite/svg/symbols.svg#warning'}" category="utility" size="small"  name="warning"/>Please update Total Area for Current FY</p>
+             
+             </div>
+        
+         
+    </div>
+    <div>
+        <aura:if isTrue="{!or($Browser.isDesktop,$Browser.isTablet)}">  
+            <table aura:id="tableDiv" id="tableDiv">
+                <thead>
+                    <tr aura:id="tableThTr">
+                        <th class="{!($Browser.isPhone) ? 'thTextiPhone' : 'tdText'}"> <center>Total area</center></th>
+                        <th class="tableTH">
+                            <ui:inputSelect class="tableTd tableTHTd">
+                                <ui:inputSelectOption text="--Select--" label="--Select Crop--"/>
+                                <ui:inputSelectOption text="Corn" label="Corn"/>
+                                <ui:inputSelectOption text="Soy" label="Soy"/>
+                                <ui:inputSelectOption text="Cotton" label="Cotton"/>
+                                <ui:inputSelectOption text="Other" label="Other"/>
+                            </ui:inputSelect>
+                        </th>
+                        <th class="tableTH">
+                            <ui:inputSelect class="tableTd tableTHTd">
+                                <ui:inputSelectOption text="--Select--" label="--Select Crop--"/>
+                                <ui:inputSelectOption text="Corn" label="Corn"/>
+                                <ui:inputSelectOption text="Soy" label="Soy"/>
+                                <ui:inputSelectOption text="Cotton" label="Cotton"/>
+                                <ui:inputSelectOption text="Other" label="Other"/>
+                            </ui:inputSelect>
+                        </th>
+                        <th class="tableTH">
+                            <ui:inputSelect class="tableTd tableTHTd">
+                                <ui:inputSelectOption text="--Select--" label="--Select Crop--"/>
+                                <ui:inputSelectOption text="Corn" label="Corn"/>
+                                <ui:inputSelectOption text="Soy" label="Soy"/>
+                                <ui:inputSelectOption text="Cotton" label="Cotton"/>
+                                <ui:inputSelectOption text="Other" label="Other"/>
+                            </ui:inputSelect>
+                        </th>
+                    </tr>
+                </thead><br  />
+                <tbody>
+                    <tr>
+                        <td data-tile="TOTAL ACRES" class="tableTd">
+                            <ui:inputText class="tableInputText" />
+                        </td>
+                        <td class="tableTd">
+                            <ui:inputText class="tableInputText"/>
+                        </td>
+                        <td class="tableTd">
+                            <ui:inputText class="tableInputText" />
+                        </td>
+                        <td class="tableTd">
+                            <ui:inputText class="tableInputText" />
+                        </td >
+                    </tr>
+                </tbody>
+            </table>
+        </aura:if>
+        <aura:if isTrue="{!$Browser.isPhone}">
+            <br />
+            <div class="slds-grid slds-wrap slds-grid--pull-padded">
+                <div class="slds-p-horizontal--small slds-size--1-of-2 totalFont">
+                  <center>Total area</center>  
+                </div>
+                <div class="slds-p-horizontal--small slds-size--1-of-2">
+                    <ui:inputText class="tableInputText" />
+                </div>
+            </div>
+            <br />
+            
+            <div class="slds-grid slds-wrap slds-grid--pull-padded">
+                <div class="slds-p-horizontal--small slds-size--1-of-2">
+                    <ui:inputSelect class="tableTd tableTHTd">
+                        <ui:inputSelectOption text="--Select--" label="--Select Crop--"/>
+                        <ui:inputSelectOption text="Corn" label="Corn"/>
+                        <ui:inputSelectOption text="Soy" label="Soy"/>
+                        <ui:inputSelectOption text="Cotton" label="Cotton"/>
+                        <ui:inputSelectOption text="Other" label="Other"/>
+                    </ui:inputSelect>
+                </div>
+                <div class="slds-p-horizontal--small slds-size--1-of-2">
+                    <ui:inputText class="tableInputText" />
+                </div>
+            </div>
+            <br />
+            
+            <div class="slds-grid slds-wrap slds-grid--pull-padded">
+                <div class="slds-p-horizontal--small slds-size--1-of-2">
+                    <ui:inputSelect class="tableTd tableTHTd">
+                        <ui:inputSelectOption text="--Select--" label="--Select Crop--"/>
+                        <ui:inputSelectOption text="Corn" label="Corn"/>
+                        <ui:inputSelectOption text="Soy" label="Soy"/>
+                        <ui:inputSelectOption text="Cotton" label="Cotton"/>
+                        <ui:inputSelectOption text="Other" label="Other"/>
+                    </ui:inputSelect>
+                </div>
+                <div class="slds-p-horizontal--small slds-size--1-of-2">
+                    <ui:inputText class="tableInputText" />
+                    
+                </div>
+            </div>
+            <br />
+            
+            <div class="slds-grid slds-wrap slds-grid--pull-padded">
+                <div class="slds-p-horizontal--small slds-size--1-of-2">
+                    <ui:inputSelect class="tableTd tableTHTd">
+                        <ui:inputSelectOption text="--Select--" label="--Select Crop--"/>
+                        <ui:inputSelectOption text="Corn" label="Corn"/>
+                        <ui:inputSelectOption text="Soy" label="Soy"/>
+                        <ui:inputSelectOption text="Cotton" label="Cotton"/>
+                        <ui:inputSelectOption text="Other" label="Other"/>
+                    </ui:inputSelect>
+                </div>
+                <div class="slds-p-horizontal--small slds-size--1-of-2">
+                    <ui:inputText class="tableInputText" />
+                </div>
+            </div>
+        </aura:if>
+        <center class="updateButton">
+            <button class="slds-text-title--caps slds-button slds-button--neutral slds-selected buttonColor">Update</button>
+        </center>
+    </div>
+</aura:component>

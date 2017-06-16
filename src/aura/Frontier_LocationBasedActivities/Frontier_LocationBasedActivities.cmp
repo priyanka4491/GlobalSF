@@ -1,0 +1,27 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes" access="global" controller="Frontier_LocationActivities">
+    <aura:attribute name="comLat" type="string" />
+    <aura:attribute name="comLong" type="string" />
+    <aura:attribute name="responseRecord" type="Task" />
+    <aura:attribute name="TaskRecords" type="Task" />
+    <aura:handler name="init" value="{!this}" action="{!c.doinit}" />
+    <aura:handler name="change" value="{!v.comLong}" action="{!c.handleValueChange}"/>  
+    <ltng:require styles="{!join(',',
+                          $Resource.SLDS + '/assets/styles/salesforce-lightning-design-system.min.css'
+                          )}" />
+    <!-- Mobile View -->
+    <!-- Laptop,Desktop and Ipad View -->
+    <div class="slds">
+        <div class="slds-grid slds-grid--vertical-align-center">
+            <button style="padding:12px; margin:11px;" class="slds-button slds-button--brand" onclick="{!c.toggleCard}">
+                Click here to see the Location Based Activities
+            </button>
+        </div>
+        <div aura:id="geoCard" class="slds-hide">
+            
+            <div class="slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                <div aura:id="map"></div>
+            </div>
+        </div>
+    </div>
+    
+</aura:component>

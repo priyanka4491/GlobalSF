@@ -1,0 +1,25 @@
+<aura:component implements="force:appHostable" access="global">
+    <div class="slds-grid slds-wrap slds-grid--pull-padded bodyContent" style="background-color:#ffffff;">
+        
+        <div class="slds-p-horizontal--small slds-size--6-of-12 slds-size--12-of-12 slds-medium-size--12-of-12 slds-large-size--6-of-12" >
+            <div style="background-color:#ffffff">
+                <c:Frontier_SalesRep_KPI_Chart identifier="1"/>
+            </div> 
+        </div>
+         <div class="slds-p-horizontal--small slds-size--6-of-12 slds-size--12-of-12 slds-medium-size--12-of-12 slds-large-size--6-of-12">
+            <div style="background-color:#ffffff">
+                <c:Frontier_SalesRep_KPI_Chart identifier="2"/>
+            </div> 
+        </div>
+        <div class="slds-p-horizontal--small slds-size--6-of-12 slds-size--12-of-12 slds-medium-size--12-of-12 slds-large-size--6-of-12" style="padding-top:2%">
+            <div style="background-color:#ffffff">
+                <c:Frontier_SalesRep_KPI_Chart identifier="3"/>
+            </div> 
+        </div>
+        <div class="slds-p-horizontal--small slds-size--6-of-12 slds-size--12-of-12 slds-medium-size--12-of-12 slds-large-size--6-of-12" style="padding-top:2%">
+            <div style="background-color:#ffffff">
+                <c:Frontier_SalesRep_KPI_Chart identifier="4"/>
+            </div> 
+        </div>
+    </div>
+</aura:component>

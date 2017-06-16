@@ -1,0 +1,33 @@
+<aura:component access="global">  
+    <aura:attribute name="accPgmId" type="Id" access="global"/>
+     <aura:handler event="c:Frontier_CancelEvent" action="{!c.handlecancel}"/>
+    
+    
+    <div aria-hidden="false" id="newCancel" role="dialog" class="slds-modal slds-modal--large slds-fade-in-open modalPosition" style="display:none;position:absolute;">
+        <div class="slds-modal__container activitesListPopUp" >
+            <div class="slds-modal__header">
+                
+                <h4 class="slds-text-heading--medium">Cancel Program</h4>
+                <button class="slds-button slds-button--icon-inverse slds-modal__close" onclick="{!c.showModalBox}">                    
+                    <c:svgIcon svgPath="{!$Resource.SLDS + '/assets/icons/action-sprite/svg/symbols.svg#close'}" category="action" size="medium"  name="close" />
+                    
+                    <span class="slds-assistive-text">Close</span>
+                </button>
+            </div>
+            <div class = "slds-modal__content">
+                <div>
+				 <ui:inputTextArea aura:id="comments" label="Comments" rows="5"/>
+                    <ui:button class="btn" label="Cancel Prpgram" press="{!c.cancelProgram}"/>  
+                </div>
+                
+                <div class="slds-modal__footer">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="slds-backdrop slds-backdrop--open" id="cancelbackgrnd" style="display:none;"></div>   
+    
+    
+</aura:component>

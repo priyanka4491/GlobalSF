@@ -1,0 +1,5 @@
+<!--c:FR_SalesRep_DashboardHeaderEvent-->
+<aura:event type="COMPONENT">
+    <aura:attribute name="season" type="String"/>
+    <aura:attribute name="crop" type="String"/>
+</aura:event>

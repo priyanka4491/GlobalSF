@@ -1,0 +1,104 @@
+<aura:component controller="Frontier_ProgramPlanningController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    <ltng:require styles="{!$Resource.SLDS +
+                          '/assets/styles/salesforce-lightning-design-system.css'}"/>
+    <aura:attribute name="programId" type="Id" default="" access="global" />
+    <aura:attribute name="accounts" type="Object[]" access="global"/>
+    <aura:attribute name="PageNumbers" type="Integer[]" access="global"/>
+    <aura:attribute name="showhideAccounts" type="String" default="Hide Account List" access="global"/>
+        <aura:attribute name="associatedProducts" type="Frontier_ProgramPlanningController.AccountProductWrapper[]" default="" access="global"/>
+    <aura:attribute name="selectedProducts" type="Frontier_ProgramPlanningController.AccountProductWrapper[]" default="" access="global"/>
+
+    <aura:attribute name="loadAccounts" type="Boolean" access="global" default="false"/>  
+    <aura:attribute name="page" type="integer" default="1" access="global"/>
+    <aura:attribute name="pages" type="integer" default="10" access="global"/>
+    <aura:attribute name="total" type="integer" access="global"/>
+    <aura:attribute name="pageSize" type="String" default="5" access="global"/>
+    <aura:handler event="c:PageChange" action="{!c.pageChange}"/>
+    
+    <aura:attribute name="SortByAccName" type="String" default="onMouseOut" access="global"/>
+    <aura:attribute name="SortByAddress" type="String" default="onMouseOut" access="global"/> 
+    <aura:attribute name="SortByAccRADL" type="String" default="onMouseOut" access="global"/>
+    <aura:attribute name="prevId" type="String" default="" access="global"/>
+
+    
+    <aura:attribute name="triggeredField" type="String" default="" access="global"/>
+    <aura:attribute name="SortByField" type="Frontier_SortDirection" default="" access="global"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    
+    <div class="{!($Browser.isPhone) ? 'slds-grid slds-wrap vAlign':'slds-grid vAlign bgMidSection'}">
+        <div class="slds-p-horizontal--small slds-size--12-of-12 slds-size--12-of-12 slds-medium-size--12-of-12 slds-large-size--`12-of-12 " style="padding-top:60px;">
+            <p class="fontStyle" style="padding-left:30px">Account(s) : <a href=""  id="{!v.programId +'-'+ 'lesseventId'}" onclick="{!c.toggleEvent}"> {!v.showhideAccounts}</a></p>
+            <div id="{!v.programId}">
+                <div class="slds-scrollable " style="padding-left:20px" >
+                    <ui:scrollerWrapper >
+                        <table class="slds-table  slds-no-row-hover slds-table--product VisitTable slds-table--fixed-layout"  >
+                            <thead>
+                                <tr>
+                                    <th class="slds-cell-wrap slds-is-sortable lAlign" id="AccName"  onclick="{!c.sortDirection}">
+                                        <div class="fontStyle"  title="Acct Name">Acct Name<c:Frontier_SvgIcon_Sorting SortOrder="{!v.SortByField.AccName == 'Account_SFID__r.Name-ASC'?'ASC':'DESC'}" eventType="{!v.SortByAccName}"/></div>
+                                    </th>
+                                    <th class="slds-cell-wrap slds-is-sortable lAlign" id="Address"  onclick="{!c.sortDirection}">
+                                        <div class="fontStyle" title="Address">Address<c:Frontier_SvgIcon_Sorting SortOrder="{!v.SortByField.Address == 'Account.City-ASC'?'ASC':'DESC'}" eventType="{!v.SortByAddress}"/></div>
+                                    </th>
+                                    <th class="slds-cell-wrap slds-is-sortable lAlign" id="AccRADL"  onclick="{!c.sortDirection}">
+                                        <div class="fontStyle" title="RADL">RADL<c:Frontier_SvgIcon_Sorting SortOrder="{!v.SortByField.AccRADL == 'Service_Level_Class_Descr__c-ASC'?'ASC':'DESC'}" eventType="{!v.SortByAccRADL}"/></div>
+                                    </th>
+                                    <th>
+                                        <div class="fontStyle" title="Products">Products</div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <aura:iteration items="{!v.accounts}" var="account" indexVar="idx">
+                                    
+                                    <tr class="tablerowodd">
+                                        <td>
+                                            {!account.Name}
+                                        </td>
+                                        <td>
+                                           {!account.streetAddress} {!account.cityName} {!account.stateName}{!account.countryName}
+                                        </td>
+                                        <td>
+                                            {!account.serviceLevelDesc != null ? account.serviceLevelDesc : 'UnKnown'}
+                                        </td>
+                                        <td>
+                                           <aura:if isTrue="{!v.associatedProducts.length > 0}">
+                                                            <aura:iteration items="{!v.associatedProducts}" var="associatedProd">
+                                                                <aura:if isTrue="{!associatedProd.accountId == account.accId}">
+                                                                    <p class="removeUnderline">{!associatedProd.ProductCode},{!associatedProd.price},
+                                                                    {!associatedProd.Qty} Bags</p>
+                                                                </aura:if>
+                                                            </aura:iteration>
+											</aura:if>
+                                            <aura:if isTrue="{!!empty(v.selectedProducts)}">                                            
+                                 <aura:iteration items="{!v.selectedProducts}" var="selectedProduct" indexVar="idx">
+        							<span>
+         								<aura:if isTrue="{!selectedProduct.accountId == account.accId? true :false}">
+                  						 <p class="removeUnderline">{!selectedProduct.ProductCode},{!selectedProduct.chargeType},
+                    						{!selectedProduct.Qty} Bags</p>            
+        								 </aura:if> 
+        							 </span>
+        						 </aura:iteration>
+                                            
+                                            
+                                            </aura:if>
+                                        </td>
+                                    </tr>
+                                </aura:iteration> 
+                            </tbody>
+                        </table>
+                    </ui:scrollerWrapper>
+                </div>
+                <br></br>
+                <center>
+                    <c:Paginator page="{!v.page}" pages="{!v.pages}" total="{!v.total}" compName='ReviewAccountList'/>
+                </center>
+            </div></div>
+        <br></br>
+    </div>
+    
+    
+    
+</aura:component>

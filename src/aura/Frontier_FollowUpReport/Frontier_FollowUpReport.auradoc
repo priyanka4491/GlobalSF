@@ -1,0 +1,8 @@
+<aura:documentation>
+	<aura:description>
+        <p>Displays FollowUp Details</p>
+    </aura:description>
+	<aura:example name="FollowUpReport" ref="c:Frontier_FollowUpReport" label="detail view of the FollowUp">
+		Displays the  FollowUp details   
+</aura:example>
+</aura:documentation>

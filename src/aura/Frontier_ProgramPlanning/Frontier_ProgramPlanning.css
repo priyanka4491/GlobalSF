@@ -1,0 +1,223 @@
+.THIS .xc-hidden {
+    display:none;
+} 
+
+.THIS .headerWrap {
+    background-color: #D3D3D3;
+}
+.THIS .vAlign{
+    padding-top: 10px;
+}
+.THIS .fontStyle{
+    font-weight : bold;
+}
+.THIS .chart-lgnd1 {
+    color: #000000;
+    float: right;
+    padding-top: 70px;
+    padding-right: 20%;
+}
+.THIS .fontposition{
+    padding-right:10%;
+}
+.THIS .bgSection{
+    background-color:#D3D3D3;
+}
+.THIS .bgMidSection{
+    background-color:White;
+}
+.THIS .removeUnderline:hover {
+    text-decoration: none;
+}
+.THIS .btmSpace{
+    padding-bottom:10px;
+}
+.THIS .Hspace{
+    padding-right:10px;
+}
+.THIS .btnStyle{
+    background:white;
+    border : 0px;
+    color:inherit;
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+.THIS .fillicon{
+    fill:Black;
+    padding-left:30%;
+}
+.THIS .HLspace{
+    padding-left:10px;
+}
+.THIS .searchInput {
+    padding: 8px;
+    -webkit-appearance: none;
+    border: solid 1px #dddddd;
+    padding-left:36px;
+}
+
+.THIS .checkboxStyle{
+   /* width: 5%;
+    float: right;
+    padding: 10px 10px 10px 10px;*/
+    
+}
+.THIS .checkboxSelectAll {
+    padding: 7% 10% 20% 21%;
+    color: black;
+    background: white;
+    border-color: darkslategrey;
+    border-width: thin;
+    position:relative;
+    left:12%;
+}
+.THIS .underlinelink:hover{
+    color:inherit;
+}
+.THIS .underlinelink{
+    color:inherit;    
+}
+.THIS .VisitTable >tr >td{
+    word-wrap:break-word;
+}
+.THIS .BoxBorder{
+    border-radius:0px;
+}
+.THIS .fillicon{
+    fill:#000000; 
+}
+.THIS .searchIcon{
+    right: -20em;
+}
+
+
+.THIS .customHeight{
+   height:2.3rem !important;
+}
+.THIS .Search-Icon  { position: relative; }
+.THIS .Search-Icon  input { background:#ffffff; display:block; width: 100%; box-sizing: border-box; padding-left:10%; }
+.THIS .Search-Icon  span { position: absolute; top: 9px; margin-left:1%}
+
+.THIS .roundicon{
+    border-radius:50%;
+    background-color:#A9A9A9;
+    display:inline-block;
+    color:white;
+    width: 2em;
+    height: 2em;
+}
+.THIS .table{
+    Padding-top:20px;
+}
+.THIS .tableroweven{
+    background-color:#D4D4D4;
+}
+.THIS .tablerowodd{
+    background-color:#f5f5f0;
+}
+.THIS .btncolor{
+    background-color:#444444;
+    color:white;
+    padding-left:10px;
+    padding-right:10px;
+}
+.THIS .btncolorMobile{
+    background-color:#444444;
+    color:white;
+    padding-left:5px;
+    padding-right:5px;
+}
+/*.THIS tr:nth-child(even) {background: #CCC}
+.THIS tr:nth-child(odd) {background: #f5f5f0} 
+.THIS th {background: #ffffff}*/
+.THIS .VisitTable{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.THIS.btnAlign{
+    Padding-left:20px;
+    Padding-bottom:10px;
+}
+.THIS .cellStyle{
+    border-bottom-style:ridge;
+    border-bottom-width:thin;
+    border-top-style:ridge;
+    border-top-width:thin;
+}
+.THIS .slds-modal__content{
+    margin-top: 25%;
+    margin-bottom: 25%;
+}
+.THIS .tablePosition{
+   Padding-right:30%;
+    Padding-left:30%;
+}
+
+
+
+.THIS .tableStyle{
+    width:50%;
+    background-color:#F0F0F0;
+}
+.THIS.btnpos{
+    Padding-left:30%;
+}
+.THIS .btniPad{
+    background-color:#808080;
+    color:white;
+    width:40%;
+    height:auto;
+}
+
+.THIS .btncolor{
+    background-color:#808080;
+    color:white;
+    height:auto;
+}
+
+.THIS .centerPosition{
+    margin-left : 40%;    
+}
+
+.THIS .hide{
+    display: none;
+}
+/*.THIS .uiInputCheckbox  {
+    width:45%;
+}*/
+.THIS .btnClrPosition{
+    margin-right:40px;
+}
+
+.THIS .btnDonePosition{
+    margin-right:30px;
+}
+.THIS .fontposition{
+    text-align:center;
+    padding-left:10%;
+}
+.THIS .rightAlign{
+    float:right;
+   width:5%;
+    
+}
+.THIS .customAddProduct{
+  width:92%;
+  min-height: calc(1.125rem + 2px);
+}
+.THIS .addProductComp{
+     margin:4%;
+}
+/*.THIS .changeMe{
+    background: #D3D3D3;
+    width:100%;
+    text-align: initial;
+}*/
+
+.THIS .tblPop tbody tr .defaultCell {
+     border-bottom:1px solid #D3D3D3;
+}
+.THIS .accountTable tbody tr:nth-child(even) {background: #CCC}
+.THIS .accountTable tbody tr:nth-child(odd) {background: #f5f5f0}
+.THIS th {background: #ffffff}

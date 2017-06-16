@@ -1,0 +1,249 @@
+<aura:component controller="Frontier_GrowerProfileController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    <style>
+        .accordion {
+        background-color: #eee;
+        color: #444;
+        cursor: pointer;
+        padding: 18px;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 15px;
+        transition: 0.4s;
+        }
+        
+        .panel {
+        padding: 0 18px;
+        background-color: white;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.2s ease-out;
+        }        
+        
+    </style>
+    <aura:registerEvent name="redirectToDealerDetail" type="c:Frontier_GrowerAccountComponentEvent"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:attribute name="GrowerProfileDetails" type="Object" access="global"/>
+    <aura:attribute name="GrowerDetailResponse" type="String" access="global"/>
+    <aura:attribute name="growerId" type="String" access="global"/>
+    <aura:attribute name="accCommId" type="String" access="global"/>
+    <aura:attribute name="isProgramView" type="String" default="false" access="global" />
+    <aura:attribute name="ServerError" type="String" access="global" />
+    <aura:attribute name="isCallBackError" type="boolean" access="global" default="true"/>
+    <aura:registerEvent name="redirectToDelaerList" type="c:Frontier_NavigateToGrowerList_Event"/>
+    <aura:If isTrue="{!v.isCallBackError}">
+    <aura:If isTrue="{!v.ServerError != null}" >
+    <ui:message title="Error:" severity="info" closable="true">
+   		{!v.ServerError}
+ 	</ui:message>
+	</aura:If>
+    <div aura:id="GrowerDetail">        
+        <div>
+            <div class="headingStyle">
+                <strong >Mon RADL : {!v.GrowerProfileDetails.growerAccountRADL}</strong></div>
+            <aura:if isTrue="{!or($Browser.isDesktop,$Browser.isTablet)}">
+                <div class="slds-grid slds-wrap growermiddlegrid">
+                    <div class="slds-size--1-of-8 slds-medium-size--1-of-5  slds-large-size--1-of-5"> 
+                        <strong>Crops</strong><br />
+                        
+                        
+                    </div>
+                    <div class="slds-size--2-of-8 slds-medium-size--1-of-5  slds-large-size--1-of-5">
+                        <strong class="textSize">RADL</strong><br></br><br />
+                        
+                        
+                    </div>
+                    
+                    <div class="slds-size--1-of-8 slds-medium-size--1-of-5  slds-large-size--1-of-5">
+                        <strong class="textSize">NPS</strong><br></br><br />
+                        
+                    </div>
+                    
+                    
+                    <div class="slds-size--2-of-8 slds-medium-size--1-of-5  slds-large-size--1-of-5">
+                        <strong class="textSize">RFM Score</strong><br></br>
+                        
+                        
+                    </div>
+                    <div class="slds-size--1-of-8 slds-medium-size--1-of-5  slds-large-size--1-of-5">
+                        <strong class="textSize">Probability of Purchase</strong><br></br><br />
+                        
+                    </div>
+                </div>
+                <aura:iteration items="{!v.GrowerProfileDetails.growerCropWrapperList }" var="profile">
+                    <div class="slds-grid slds-wrap growermiddlegrid" style="margin-top:-34px">	
+                        <div class="slds-size--1-of-8 slds-medium-size--1-of-5  slds-large-size--1-of-5"> 
+                            <p>{!profile.cropName}</p><br />
+                        </div>
+                        <div class="slds-size--2-of-8 slds-medium-size--1-of-5  slds-large-size--1-of-5">
+                            <p> 
+                                <!-- {!v.GrowerProfileDetails.growerCornRADL == 'R'? 'Retain' :(v.GrowerProfileDetails.growerCornRADL == 'L'?'Light Touch':(v.GrowerProfileDetails.growerCornRADL == 'A'?'Acquire':'Develop')) } -->
+                                {!profile.cropRADL}
+                            </p><br />
+                        </div>
+                        <div class="slds-size--1-of-8 slds-medium-size--1-of-5  slds-large-size--1-of-5">
+                            <p>{!profile.cropNPS}</p> <br />
+                            
+                        </div>
+                        <div class="slds-size--2-of-8 slds-medium-size--1-of-5  slds-large-size--1-of-5">
+                            <p>{!profile.cropRFM}</p><br />
+                        </div>
+                        <div class="slds-size--1-of-8 slds-medium-size--1-of-5  slds-large-size--1-of-5">
+                            <p>{!profile.cropPOP}</p><br />
+                        </div>
+                    </div>
+                </aura:iteration>
+            </aura:if>
+            <aura:if isTrue="{!$Browser.isPhone}"> 
+                <aura:iteration items="{!v.GrowerProfileDetails.growerCropWrapperList }" var="profile">
+                    
+                    <div>
+                        <button  class="slds-grid  slds-size--1-of-1 accordion" onclick="{!c.toggleCrops}"  id="{!profile.cropName}">
+                            
+                            <span style="position:relative;right:8px;" aura:id="{!'slidedown'+profile.cropName}" class="slds-show"><c:svgIcon class="fillicon" svgPath="{!$Resource.SLDS + '/assets/icons/utility-sprite/svg/symbols.svg#chevrondown'}" category="utility" size="small"  name="call"/></span>
+                            <span style="position:relative;right:8px;" aura:id="{!'slideup'+profile.cropName}" class="slds-hide"><c:svgIcon class="fillicon" svgPath="{!$Resource.SLDS + '/assets/icons/utility-sprite/svg/symbols.svg#chevronup'}" category="utility" size="small"  name="call"/></span>
+                            
+                            <strong>{!profile.cropName}</strong></button>
+                        <div class="slds-size--1-of-1 panel slds-hide panel" id="{!'panel-'+profile.cropName}" style="background-color: white;">
+                            <div id="{!'paneldiv-'+profile.cropName}">
+                                <div class="slds-grid slds-wrap slds-grid--pull-padded">
+                                    <div class="slds-p-horizontal--small slds-size--1-of-2">
+                                        <strong>RADL</strong>
+                                    </div>
+                                    <div class="slds-p-horizontal--small slds-size--1-of-2">
+                                        <!--{!v.GrowerProfileDetails.growerCornRADL == 'R'? 'Retain' :(v.GrowerProfileDetails.growerCornRADL == 'L'?'Light Touch':(v.GrowerProfileDetails.growerCornRADL == 'A'?'Acquire':'Develop')) } -->
+                                        {!profile.cropRADL}
+                                    </div>
+                                </div>
+                                <div class="slds-grid slds-wrap slds-grid--pull-padded">
+                                    <div class="slds-p-horizontal--small slds-size--1-of-2">
+                                        <strong>NPS</strong>
+                                    </div>
+                                    <div class="slds-p-horizontal--small slds-size--1-of-2">
+                                        {!profile.cropNPS} 
+                                    </div>
+                                </div>
+                                <div class="slds-grid slds-wrap slds-grid--pull-padded">
+                                    <div class="slds-p-horizontal--small slds-size--1-of-2">
+                                        <strong>RFM Score</strong>
+                                    </div>
+                                    <div class="slds-p-horizontal--small slds-size--1-of-2">
+                                        {!profile.cropRFM}
+                                    </div>
+                                </div>
+                                <div class="slds-grid slds-wrap slds-grid--pull-padded">
+                                    <div class="slds-p-horizontal--small slds-size--1-of-2">
+                                        <strong>Probability of Purchase</strong>
+                                    </div>
+                                    <div class="slds-p-horizontal--small slds-size--1-of-2">
+                                        {!profile.cropPOP}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </aura:iteration>
+                
+            </aura:if>
+        </div>
+        <div class="alignAvator"></div>
+        <div class="growerseasongrid">
+            <div class="slds-grid slds-wrap  slds-grid--pull-padded">
+                <div class="slds-p-horizontal--small slds-size--3-of-12 slds-large-size--1-of-12">
+                    <div class="slds-text-align--right slds-m-around--x-small" style="margin-top: 15PX;">
+                        <strong class="textSize">Season</strong>
+                    </div>
+                </div>
+                <div class="slds-p-horizontal--small slds-size--8-of-12 slds-large-size--3-of-12">
+                    <div class="slds-m-around--x-small">
+                        <ui:inputSelect class="form-control inputSelect select" aura:id="selectedSeason" 
+                                        change="{!c.fetchSeasonData}" disabled="True">
+                            <ui:inputSelectOption text="SUMMER"/>                           
+                        </ui:inputSelect>
+                    </div>
+                </div>
+                <div class="slds-p-horizontal--small slds-size--8-of-12 slds-large-size--8-of-12">
+                     <div class="slds-m-around--x-small">
+                         <aura:if isTrue="{!v.isProgramView}">
+                             <div class="headingstyle">
+                                 <span>
+                                     <strong>{!v.GrowerProfileDetails.growerAccountName}</strong>
+                                 </span>
+                                 <span style="{!equals(v.GrowerProfileDetails.growerAddressLine,'') ? 'display:none' : 'visibility : visible'}">
+                                    &nbsp; - &nbsp;{!v.GrowerProfileDetails.growerAddressLine}
+                                 </span>
+                             </div>
+                         </aura:if>
+                     </div>
+                 </div>
+            </div>
+        </div>
+        <aura:if isTrue="{! !equals(v.isProgramView,true)}">
+        <div class="slds-grid slds-wrap">
+            <!--<div class="growerAvatar">Photo</div>-->
+            
+            	<div class="slds-size--1-of-1 growerseasongrid" >
+                	<div class="growerAvatar slds-hide">Photo</div>
+            	</div>
+                
+                <div class="slds-size--1-of-1">
+                <div class="slds-text-align--center profileInfo">
+                    <span class="slds-custom-heading"><b>{!v.GrowerProfileDetails.growerAccountName}</b></span>                 
+                </div>
+                </div>
+                <div class="slds-size--1-of-1">
+                <div class="slds-text-align--center">
+                    <div style="{!equals(v.GrowerProfileDetails.growerAddressLine,'') ? 'display:none' : 'visibility : visible'}">
+                            <c:svgIcon class="fillicon" svgPath="{!$Resource.SLDS + '/assets/icons/utility-sprite/svg/symbols.svg#checkin'}" category="utility" size="small"  name="checkin"> </c:svgIcon>
+                            <span class="slds-custom-add-section">{!v.GrowerProfileDetails.growerAddressLine}</span>
+                    </div>
+                    <div class="profileDetail" style="{!equals(v.GrowerProfileDetails.phone,'') ? 'display:none' : 'visibility : visible'}">
+                        <c:svgIcon class="fillicon" svgPath="{!$Resource.SLDS + '/assets/icons/utility-sprite/svg/symbols.svg#call'}" category="utility" size="small"  name="call"/>
+                        <span class="slds-custom-phone-section">{!v.GrowerProfileDetails.phone != null ? (v.GrowerProfileDetails.phone) : ''}</span>
+                        
+                    </div>
+                    <!--<span class="profileDetail profileDetailFlex">
+                        <c:svgIcon class="iconcolor" svgPath="{!$Resource.SLDS + '/assets/icons/utility-sprite/svg/symbols.svg#email'}" category="utility" size="small"  name="email"/>
+                        <span class="slds-custom-email-section">{!v.GrowerProfileDetails.email != null ? (v.GrowerProfileDetails.email) : ''}</span>
+                    </span><br />-->
+                </div>
+                </div>
+                
+            <div class="slds-size--1-of-1">
+                <div class="slds-text-align--center">
+                    <div class="slds-custom-heading"
+                    style="{!and(equals(v.GrowerProfileDetails.growerPrimaryContactFirstName,''),equals(v.GrowerProfileDetails.growerPrimaryContactLastName,''))  ? 'display:none' : 'visibility : visible'}">
+                        <span><b>Primary Contact:</b></span>
+                        <span class="primaryContact">{!v.GrowerProfileDetails.growerPrimaryContactFirstName + ' ' + v.GrowerProfileDetails.growerPrimaryContactLastName}</span>
+                        
+                    </div>
+                    <div class="profileDetail" style="{!equals(v.GrowerProfileDetails.growerPrimaryContactPhone,'') ? 'display:none' : 'visibility : visible'}">
+                        <c:svgIcon class="fillicon" svgPath="{!$Resource.SLDS + '/assets/icons/utility-sprite/svg/symbols.svg#call'}" category="utility" size="small"  name="call"/>
+                        <span class="slds-custom-phone-section">{!v.GrowerProfileDetails.growerPrimaryContactPhone}</span>
+                    </div>
+                    <div class="profileDetail" style="{!equals(v.GrowerProfileDetails.growerPrimaryContactEmail,'') ? 'display:none' : 'visibility : visible'}">
+                        <c:svgIcon class="iconcolor" svgPath="{!$Resource.SLDS + '/assets/icons/utility-sprite/svg/symbols.svg#email'}" category="utility" size="small"  name="email"/>
+                        <span class="slds-custom-email-section">{!v.GrowerProfileDetails.growerPrimaryContactEmail}</span>                    
+                    </div>
+                    <div class="profileDetail">
+                        <aura:if isTrue="{!v.GrowerProfileDetails.dealerCount != 0}">
+                            <a class="primaryContact" id="{!v.GrowerProfileDetails.dealerId+','+v.GrowerProfileDetails.sapId+','+v.GrowerProfileDetails.accCommunicationId}" onclick="{!c.navigateToDealerList}">Dealer : {!v.GrowerProfileDetails.dealerCount}</a>
+                            
+                            <aura:set attribute="else">
+                                <b>Dealers : 0 </b>
+                            </aura:set>
+                        </aura:if>
+                    </div>
+                </div>
+            </div>
+                <div class="slds-text-align--center growerEmailMargin slds-hide">
+                    <span>
+                        <button type="button" class="slds-button slds-button--neutral slds-not-selected customButton">View Credit Limit</button> 
+                    </span>
+                </div>
+        </div>
+        </aura:if>
+    </div>
+   </aura:If>
+</aura:component>

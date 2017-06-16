@@ -1,0 +1,24 @@
+.THIS .custom-name-section{
+    font-family: 'Helvetica';
+    font-weight: 400;
+    font-style: normal;
+    font-size: 32px;
+    color: #5876A3;
+    text-align: left;
+    line-height: 40px;
+}
+
+.THIS .custom-heading{
+    float:left;
+    position: relative;
+}
+
+.THIS .custom-heading--body{
+    position:relative;
+    left:15px;
+}
+
+.THIS .custom-heading-addrss{
+    position:relative;
+    left:19%;
+}

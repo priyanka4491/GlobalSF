@@ -1,0 +1,256 @@
+<aura:component controller="Frontier_DealerDetailsController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    <style>
+        .accordion {
+        background-color: #eee;
+        color: #444;
+        cursor: pointer;
+        padding: 18px;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 15px;
+        transition: 0.4s;
+        }
+        
+        .panel {
+        padding: 0 18px;
+        background-color: white;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.2s ease-out;
+        }
+                
+    </style>
+    
+    <aura:attribute name="dealerProfileDetails" type="Object" access="global"/>
+    <aura:attribute name="dealerDetailResponse" type="String" access="global"/>
+    <aura:attribute name="dealerId" type="String" access="global" />
+    <aura:attribute name="accCommId" type="String" access="global" />
+    <aura:attribute name="isProgramView" type="String" default="false" access="global" />
+    <aura:attribute name="isCallBackError" type="boolean" access="global" default="true" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:registerEvent name="redirectToGrowerList" type="c:Frontier_NavigateToGrowerList_Event"/>
+    <aura:if isTrue="{!v.isCallBackError}">
+     <div aura:id="GrowerDetail">        
+        <div>
+            <div class="headingStyle">
+                <strong >Mon RADL : {!v.dealerProfileDetails.dealerAccountRADL}</strong></div>
+            <aura:if isTrue="{!or($Browser.isDesktop,$Browser.isTablet)}">
+                <div class="slds-grid slds-wrap dealermiddlegrid">
+                    <div class="slds-size--1-of-8 slds-medium-size--1-of-5  slds-large-size--1-of-5"> 
+                        <strong>Crops</strong><br />
+                        
+                        
+                    </div>
+                    <div class="slds-size--2-of-8 slds-medium-size--1-of-5  slds-large-size--1-of-5">
+                        <strong class="textSize">RADL</strong><br></br><br />
+                        
+                        
+                    </div>
+                    
+                    <div class="slds-size--1-of-8 slds-medium-size--1-of-5  slds-large-size--1-of-5">
+                        <strong class="textSize">NPS</strong><br></br><br />
+                        
+                    </div>
+                    
+                    
+                    <div class="slds-size--2-of-8 slds-medium-size--1-of-5  slds-large-size--1-of-5">
+                        <strong class="textSize">RFM Score</strong><br></br>
+                        
+                        
+                    </div>
+                    <div class="slds-size--1-of-8 slds-medium-size--1-of-5  slds-large-size--1-of-5">
+                        <strong class="textSize">Probability of Purchase</strong><br></br><br />
+                        
+                    </div>
+                </div>
+                <aura:iteration items="{!v.dealerProfileDetails.dealerCropWrapperList }" var="profile">
+                    <div class="slds-grid slds-wrap dealermiddlegrid" style="margin-top:-34px">	
+                        <div class="slds-size--1-of-8 slds-medium-size--1-of-5  slds-large-size--1-of-5"> 
+                            <p>{!profile.cropName}</p><br />
+                        </div>
+                        <div class="slds-size--2-of-8 slds-medium-size--1-of-5  slds-large-size--1-of-5">
+                            <p> 
+                                <!-- {!v.dealerProfileDetails.dealerCornRADL == 'R'? 'Retain' :(v.dealerProfileDetails.dealerCornRADL == 'L'?'Light Touch':(v.dealerProfileDetails.dealerCornRADL == 'A'?'Acquire':'Develop')) } -->
+                                {!profile.cropRADL}
+                            </p><br />
+                        </div>
+                        <div class="slds-size--1-of-8 slds-medium-size--1-of-5  slds-large-size--1-of-5">
+                            <p>{!profile.cropNPS}</p> <br />
+                            
+                        </div>
+                        <div class="slds-size--2-of-8 slds-medium-size--1-of-5  slds-large-size--1-of-5">
+                            <p>{!profile.cropRFM}</p><br />
+                        </div>
+                        <div class="slds-size--1-of-8 slds-medium-size--1-of-5  slds-large-size--1-of-5">
+                            <p>{!profile.cropPOP}</p><br />
+                        </div>
+                    </div>
+                </aura:iteration>
+            </aura:if>
+            <aura:if isTrue="{!$Browser.isPhone}"> 
+                <aura:iteration items="{!v.dealerProfileDetails.dealerCropWrapperList }" var="profile">
+                    
+                    <div>
+                        <button  class="slds-grid  slds-size--1-of-1 accordion" onclick="{!c.toggleCrops}"  id="{!profile.cropName}">
+                            
+                            <span style="position:relative;right:8px;" aura:id="{!'slidedown'+profile.cropName}" class="slds-show"><c:svgIcon class="fillicon" svgPath="{!$Resource.SLDS + '/assets/icons/utility-sprite/svg/symbols.svg#chevrondown'}" category="utility" size="small"  name="call"/></span>
+                            <span style="position:relative;right:8px;" aura:id="{!'slideup'+profile.cropName}" class="slds-hide"><c:svgIcon class="fillicon" svgPath="{!$Resource.SLDS + '/assets/icons/utility-sprite/svg/symbols.svg#chevronup'}" category="utility" size="small"  name="call"/></span>
+                            
+                            <strong>{!profile.cropName}</strong></button>
+                        <div class="slds-size--1-of-1 panel slds-hide panel" id="{!'panel-'+profile.cropName}" style="background-color: white;">
+                            <div id="{!'paneldiv-'+profile.cropName}">
+                                <div class="slds-grid slds-wrap slds-grid--pull-padded">
+                                    <div class="slds-p-horizontal--small slds-size--1-of-2">
+                                        <strong>RADL</strong>
+                                    </div>
+                                    <div class="slds-p-horizontal--small slds-size--1-of-2">
+                                        <!--{!v.dealerProfileDetails.dealerCornRADL == 'R'? 'Retain' :(v.dealerProfileDetails.dealerCornRADL == 'L'?'Light Touch':(v.dealerProfileDetails.dealerCornRADL == 'A'?'Acquire':'Develop')) } -->
+                                        {!profile.cropRADL}
+                                    </div>
+                                </div>
+                                <div class="slds-grid slds-wrap slds-grid--pull-padded">
+                                    <div class="slds-p-horizontal--small slds-size--1-of-2">
+                                        <strong>NPS</strong>
+                                    </div>
+                                    <div class="slds-p-horizontal--small slds-size--1-of-2">
+                                        {!profile.cropNPS} 
+                                    </div>
+                                </div>
+                                <div class="slds-grid slds-wrap slds-grid--pull-padded">
+                                    <div class="slds-p-horizontal--small slds-size--1-of-2">
+                                        <strong>RFM Score</strong>
+                                    </div>
+                                    <div class="slds-p-horizontal--small slds-size--1-of-2">
+                                        {!profile.cropRFM}
+                                    </div>
+                                </div>
+                                <div class="slds-grid slds-wrap slds-grid--pull-padded">
+                                    <div class="slds-p-horizontal--small slds-size--1-of-2">
+                                        <strong>Probability of Purchase</strong>
+                                    </div>
+                                    <div class="slds-p-horizontal--small slds-size--1-of-2">
+                                        {!profile.cropPOP}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </aura:iteration>
+                
+            </aura:if>
+        </div>
+        <div class="alignAvator"></div>
+         <div class="dealerseasongrid">
+             <div class="slds-grid slds-wrap  slds-grid--pull-padded">
+                 <div class="slds-p-horizontal--small slds-size--3-of-12 slds-large-size--1-of-12">
+                     <div class="slds-text-align--right slds-m-around--x-small" style="margin-top: 15PX;">
+                         <strong class="textSize">Season</strong>
+                     </div>
+                 </div>
+                 <div class="slds-p-horizontal--small slds-size--8-of-12 slds-large-size--3-of-12">
+                     <div class="slds-m-around--x-small">
+                         <ui:inputSelect class="form-control inputSelect select" aura:id="selectedSeason" 
+                                         change="{!c.fetchSeasonData}" disabled="true" >                            
+                             <ui:inputSelectOption text="SUMMER"/>                                                 
+                         </ui:inputSelect>
+                     </div>
+                 </div>
+                 
+                 <div class="slds-p-horizontal--small slds-size--8-of-12 slds-large-size--8-of-12">
+                     <div class="slds-m-around--x-small">
+                         <aura:if isTrue="{!v.isProgramView}">
+                             <div class="headingstyle">
+                                 <span>
+                                     <strong>{!v.dealerProfileDetails.dealerAccountName}</strong>
+                                 </span>
+                                 <span style="{!equals(v.dealerProfileDetails.dealerAddressLine,'') ? 'display:none' : 'visibility : visible'}">
+                                    &nbsp; - &nbsp;{!v.dealerProfileDetails.dealerAddressLine}
+                                 </span>
+                             </div>
+                         </aura:if>
+                     </div>
+                 </div> 
+             </div>
+             
+         </div>
+         <aura:if isTrue="{! !equals(v.isProgramView,true)}">
+             <div class="slds-grid slds-wrap">
+                 <!--<div class="dealerAvatar">Photo</div>-->
+                 
+                 <div class="slds-size--1-of-1 dealerseasongrid" >
+                     <div class="dealerAvatar slds-hide">Photo</div>
+                 </div>
+                 
+                 <div class="slds-size--1-of-1">
+                     <div class="slds-text-align--center profileInfo">
+                         <span class="slds-custom-heading"><b>{!v.dealerProfileDetails.dealerAccountName}</b></span>                 
+                     </div>
+                 </div>
+                 <div class="slds-size--1-of-1">
+                     <div class="slds-text-align--center">
+                         <div style="{!equals(v.dealerProfileDetails.dealerAddressLine,'') ? 'display:none' : 'visibility : visible'}">
+                             <c:svgIcon class="fillicon" svgPath="{!$Resource.SLDS + '/assets/icons/utility-sprite/svg/symbols.svg#checkin'}" category="utility" size="small"  name="checkin"> </c:svgIcon>
+                             <span class="slds-custom-add-section">{!v.dealerProfileDetails.dealerAddressLine}</span>
+                         </div>
+                         <div class="profileDetail" style="{!equals(v.dealerProfileDetails.phone,'') ? 'display:none' : 'visibility : visible'}">
+                             <c:svgIcon class="fillicon" svgPath="{!$Resource.SLDS + '/assets/icons/utility-sprite/svg/symbols.svg#call'}" category="utility" size="small"  name="call"/>
+                             <span class="slds-custom-phone-section">{!v.dealerProfileDetails.phone != null ? (v.dealerProfileDetails.phone) : ''}</span>
+                         </div>
+                         <!--<span class="profileDetail profileDetailFlex">
+                        <c:svgIcon class="iconcolor" svgPath="{!$Resource.SLDS + '/assets/icons/utility-sprite/svg/symbols.svg#email'}" category="utility" size="small"  name="email"/>
+                        <span class="slds-custom-email-section">{!v.dealerProfileDetails.email != null ? (v.dealerProfileDetails.email) : ''}</span>
+                    </span><br />-->
+                     </div>
+                 </div>
+                 
+                 <div class="slds-size--1-of-1">
+                     <div class="slds-text-align--center">
+                         <div class="slds-custom-heading" style="{!and(equals(v.dealerProfileDetails.dealerPrimaryContactFirstName,''),equals(v.dealerProfileDetails.dealerPrimaryContactLastName,''))  ? 'display:none' : 'visibility : visible'}">
+                             <span><b>Primary Contact:</b></span>
+                             <span class="primaryContact">{!v.dealerProfileDetails.dealerPrimaryContactFirstName + ' ' + v.dealerProfileDetails.dealerPrimaryContactLastName}</span>
+                             
+                         </div>
+                         <div class="profileDetail" style="{!equals(v.dealerProfileDetails.dealerPrimaryContactPhone,'') ? 'display:none' : 'visibility : visible'}">
+                             <c:svgIcon class="fillicon" svgPath="{!$Resource.SLDS + '/assets/icons/utility-sprite/svg/symbols.svg#call'}" category="utility" size="small"  name="call"/>
+                             <span class="slds-custom-phone-section">{!v.dealerProfileDetails.dealerPrimaryContactPhone}</span>
+                         </div>
+                         <div class="profileDetail" style="{!equals(v.dealerProfileDetails.dealerPrimaryContactEmail,'') ? 'display:none' : 'visibility : visible'}">
+                             <c:svgIcon class="iconcolor" svgPath="{!$Resource.SLDS + '/assets/icons/utility-sprite/svg/symbols.svg#email'}" category="utility" size="small"  name="email"/>
+                             <span class="slds-custom-email-section">{!v.dealerProfileDetails.dealerPrimaryContactEmail}</span>
+                         </div>
+                         <div class="profileDetail">
+                             <aura:if isTrue="{!v.dealerProfileDetails.growerCount > 0}">
+                                 <a href="javascript:void(0);" onclick="{!c.navigateToGrowerList}" id="{!v.dealerId+','+v.dealerProfileDetails.sapId+','+v.dealerProfileDetails.accCommunicationId}" > Growers: {!v.dealerProfileDetails.growerCount}</a>
+                                 
+                                 <aura:set attribute="else">
+                                     Growers: 0
+                                 </aura:set> 
+                             </aura:if>
+                         </div>
+                     </div>
+                     <div style="position: relative;left: 13%;">
+                         <ui:button label="Find" labelClass="assistiveText" class="img" press="{!c.navigateToProgramPlanning}">Create Grower Program Plan</ui:button> 
+                     </div>
+                 </div>
+                 <div class="slds-size--1-of-1 dealerMargin slds-hide">
+                     <div class="slds-text-align--center">
+                         <span>
+                             <span class="slds-custom-heading"><b>Dealer:</b></span>
+                             <a class="primaryContact" id="{!v.dealerProfileDetails.dealerId+','+v.dealerProfileDetails.sapId+','+v.dealerProfileDetails.accCommunicationId}" onclick="{!c.navigateToDealerAccount}">{!v.dealerProfileDetails.dealer}</a>
+                             <!--<span class="leadPartner"><a onclick="javascript:void(0)">View all</a></span>-->
+                         </span>
+                     </div>
+                 </div>
+                 <div class="slds-text-align--center dealerEmailMargin slds-hide">
+                     <span>
+                         <button type="button" class="slds-button slds-button--neutral slds-not-selected customButton">View Credit Limit</button> 
+                     </span>
+                 </div>
+             </div>
+         </aura:if>
+    </div>
+  </aura:if>
+   
+</aura:component>

@@ -1,0 +1,3 @@
+<design:component label="DealerRADLTerritoryStructure">
+	<design:attribute name="message" label="Message"/>
+</design:component>

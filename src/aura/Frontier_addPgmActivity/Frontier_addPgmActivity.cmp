@@ -1,0 +1,90 @@
+<aura:component controller="Frontier_TouchpointPlanning" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="Global">
+    <aura:attribute name="picValue" type="String" access="global" />
+    <aura:attribute name="depntPicValue" type="String" access="global" />
+    <aura:attribute name="selectedCntrlValue" type="String" access="global" />
+    <aura:attribute name="highlghtDepValue" type="String" access="global" />
+    
+    
+    <div class="slds-text-heading--small touchStyle">
+        <a href="javascript:void(0);" onclick="{!c.addPgm}" id="pgm">
+            <c:svgIcon class="slds-icon slds-icon--x-small slds-icon-text-default" svgPath="{!$Resource.SLDS + '/assets/icons/utility-sprite/svg/symbols.svg#new'}" category="utility" size="x-small"  name="new" />
+        </a>
+        Add Program Activity                   
+    </div> 
+    <div aria-hidden="false" id="newSectionId" role="dialog" class="slds-modal slds-modal--large slds-fade-in-open" style="display:none ;">
+        
+        <div class="slds-modal__content " style="background-color:#F0F0F0;">
+            <div class="{!($Browser.isPhone) ? 'slds-grid slds-wrap ':'slds-grid '}">
+                <div class="slds-p-horizontal--small slds-size--12-of-12 slds-medium-size--8-of-12 slds-large-size--10-of-12">
+                    <p class="vAlign fontStyle">Add Program Activity</p>
+                </div>
+                
+                <div class="slds-p-horizontal--small slds-size--12-of-12 slds-medium-size--4-of-12 slds-large-size--4-of-12 vAlign">
+                    
+                    <ui:button class="slds-float--right" label="Done" press="{!c.getDone}"/>
+                    <ui:button class="slds-float--right" label="Clear" press="{!c.addPgm}"/>
+                    
+                </div>
+            </div>
+            <div class="{!($Browser.isPhone) ? 'slds-grid slds-wrap ':'slds-grid '}">
+                
+                <div class="slds-p-horizontal--small slds-size--8-of-12 slds-medium-size--8-of-12 slds-large-size--6-of-6">  
+                    <div class="table-container slds-float--right">
+                        <table class="slds-table slds-no-row-hover tableStyle">
+                            <thead>
+                                
+                            </thead>
+                            <tbody>
+                                <aura:iteration items="{!v.picValue}" var="value" indexVar="i"> 
+                                        <tr class="{!v.selectedCntrlValue == value? 'cellhightlight' : 'cellFontStyle'}">
+                                            <td>
+                                                <a class="linkStyle" href="javascript:void(0);" id="{!value}" onclick="{!c.selectChangeHandler}"> {!value} </a>
+                                            </td>
+                                        </tr>
+                                </aura:iteration>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="slds-p-horizontal--small slds-size--4-of-12 slds-medium-size--4-of-12 slds-large-size--6-of-6">  
+                    <div class="table-container tablePosition">
+                        <table class="slds-table slds-no-row-hover tableStyle">
+                            <thead>
+                                
+                            </thead>
+                            <tbody>
+                                <aura:if isTrue="{!v.depntPicValue == 'None'}">  
+                                    <tr>
+                                        <td>
+                                            <span><ui:outputText value="None" /></span>
+                                        </td>
+                                    </tr>
+                                    <aura:set attribute="else">
+                                        <aura:iteration items="{!v.depntPicValue}" var="depValue" indexVar="i"> 
+                                                <tr class="{!v.highlghtDepValue == depValue? 'cellhightlight' : 'cellFontStyle'}">
+                                                    <td>
+                                                        <a class="linkStyle" href="javascript:void(0);" id="{!depValue}" onclick="{!c.selectDependent}"> {!depValue} </a>
+                                                        
+                                                    </td>
+                                                </tr>
+                                        </aura:iteration>
+                                    </aura:set>
+                                </aura:if>      
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="{!($Browser.isPhone) ? 'slds-grid slds-wrap ':'slds-grid '}">
+                
+                <div class="slds-p-horizontal--small slds-size--10-of-12 slds-medium-size--10-of-12 slds-large-size--1-of-2"/>
+                
+                <div class="slds-p-horizontal--small slds-size--2-of-12 slds-medium-size--2-of-12 slds-large-size--1-of-2 btmspace">
+                    
+                    <ui:button class="slds-float--right " label="+ Add" press="{!c.addPgmActivity}"/></div>
+            </div>
+        </div>
+    </div>
+    <div class="slds-backdrop slds-backdrop--open" id="backSectionId" style="display:none;"/>
+</aura:component>

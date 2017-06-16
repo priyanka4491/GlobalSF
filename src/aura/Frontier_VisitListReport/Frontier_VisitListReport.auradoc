@@ -1,0 +1,8 @@
+<aura:documentation>
+	<aura:description>
+        <p>Displays the Visit details</p>
+    </aura:description>
+	<aura:example name="VisitListReport" ref="c:Frontier_VisitListReport" label="detail view of the Visits">
+		Displays  visits detail along with Account Name,Account Id,SAP Id RADL,Territory details  
+	</aura:example>
+</aura:documentation>

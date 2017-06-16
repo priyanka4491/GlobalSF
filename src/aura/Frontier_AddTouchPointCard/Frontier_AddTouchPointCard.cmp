@@ -1,0 +1,15 @@
+<aura:component implements="force:appHostable" >
+   	<aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="selectedDate" type="String" access="Global" />
+	<div>
+        <div id="{!'touchBtn'+selectedDate}" class="addTouchPoint slds-hide">
+            <div class="slds-popover slds-nubbin--bottom-left slds-theme--info" role="dialog">
+                <div class="slds-popover__body">
+                    <button type="button" class="addTouchPointBtn" id="{!'addBtn'+selectedDate}" onclick="{!c.openTouchPoint}">
+                        <strong>Add Touchpoint</strong>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</aura:component>

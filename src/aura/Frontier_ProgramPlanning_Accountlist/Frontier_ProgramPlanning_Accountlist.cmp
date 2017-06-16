@@ -1,0 +1,29 @@
+<aura:component controller="Frontier_ProgramPlanningController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+       <aura:attribute name="account" type="Object" access="global"/>
+    <aura:attribute name="accountList" type="Object" access="global"/>
+     <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+<aura:attribute name="radlKey" type="String" default="" access="global"/>
+    <aura:attribute name="filteredAccountList" type="Object[]" access="global"/>
+    <aura:attribute name="isAllSelected" type="Boolean" access="global"/>
+    <aura:attribute name="searchKey" type="String" default="" access="global"/>
+        <!--<aura:handler event="c:Frontier_SelectAllEvent"  action="{!c.selectAllAccounts}"/>-->
+
+    <div class="{!($Browser.isPhone) ? 'slds-grid slds-wrap':'slds-grid'}">
+                            <div class="slds-col slds-col--padded slds-p-horizontal--small slds-size--10-of-12 slds-size--10-of-12 slds-medium-size--10-of-12 slds-large-size--10-of-12">  
+                              
+                                    <p class="vAlign">{!v.account.Name}</p>
+                                
+                                <p>{!v.account.streetAddress} {!v.account.cityName} {!v.account.stateName}{!v.account.countryName}
+                                </p> 
+                               
+                                    <p>RADL:{!v.account.serviceLevelDesc != null ? v.account.serviceLevelDesc : 'UnKnown'}</p>
+                                
+
+                            </div> 
+                               <div class="slds-col slds-col--padded slds-p-horizontal--small slds-size--2-of-12 slds-size--2-of-12 slds-medium-size--2-of-12 slds-large-size--2-of-12">  
+                                       
+                                 <ui:inputCheckbox aura:id="TheCheckBox" label="" click="{!c.onCheck}" class="checkboxClass" value="{!v.account.isSelected}"/>
+                                </div>
+</div>
+    
+</aura:component>

@@ -1,0 +1,49 @@
+.THIS .bgcolor{
+    background: #CCC;
+    padding-left:10px;
+    padding-right:10px;
+}
+.THIS .bgtablecolor{
+    background:#ffffff;
+}
+.THIS .cSvgIcon svg{
+    fill:white;
+}
+.THIS .headingstyle{
+    color:white;
+    font-size:large;
+    padding-left:30px;
+    padding-top:10px;
+}
+.THIS .topAlign{
+    padding-top:40px;
+    color:white;
+}
+.THIS .tableClass tbody tr.border_bottom td {
+  border-bottom:1pt solid white;
+}
+.THIS .tableClass tr td:nth-child(3) { 
+    border-left:1pt solid white; 
+}
+
+.THIS .tableClass tbody tr.border_bottom .radlstyle{
+    width: 77px;
+    border-left:1px solid white;
+    
+}
+.THIS .tableClass tbody tr.verticalAlign{
+    width: 77px;
+    border-left:1px solid white;
+}
+.THIS .sellingStyle{
+    width:20%;
+}
+.THIS .filterStyle{
+    padding-left:30px;
+    padding-top:10px;
+    font-size:large;
+}
+.THIS .inputStyle{
+    width:50%;
+    
+}

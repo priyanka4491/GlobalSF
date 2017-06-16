@@ -1,0 +1,71 @@
+<aura:component access="global">
+    
+    <ltng:require styles="{!$Resource.SLDS +
+                          '/assets/styles/salesforce-lightning-design-system.css'}"/>
+    <ltng:require scripts="{!$Resource.ChartJs}" afterScriptsLoaded="{!c.loadChart}"/>
+    
+    <!-- Add the "scoping" element to activate SLDS on components
+         that we add inside it. -->
+    <aura:attribute name="CropData" type="String" default="General" access="global"/>
+    <aura:attribute name="SalesOrder" type="Object" access="global"/>
+    
+    
+    <div class="slds-col--padded salesCrop" >
+        <div class="bggrey slds-box--small slds-theme--shade slds-text-align--center white">
+            <div class="slds-grid slds-wrap slds-grid--pull-padded ShowingData" >                
+                <div class="slds-col--padded slds-size--1-of-1 slds-p-bottom--large">
+                    
+                    <div class="slds-box slds-box--small slds-theme--shade slds-text-align--center slds-text-heading--small white" ><h5>Showing data for: {!v.CropData == 'General'?'Corn':v.CropData}</h5></div>
+                </div>
+            </div>    
+            <div class="slds-grid slds-grid--pull-padded SalesData">
+                
+                <div class="slds-col--padded">
+                    <p class="slds-box slds-box--small slds-theme--shade slds-text-align--center white">
+                        <strong>2PY Sales</strong> <br/>
+                        <p>{!v.SalesOrder.PrevYearsSales}</p>
+                        
+                    </p>
+                </div>
+                <div class="slds-col--padded">
+                    <p class="slds-box slds-box--small slds-theme--shade slds-text-align--center white">
+                        <strong>PY Sales</strong> <br/>
+                        <p>{!v.SalesOrder.PrevYearSales}</p>
+                    </p>
+                </div>
+            </div>
+            <br/>
+            <div class="slds-grid slds-grid--pull-padded SalesData">  
+                <div class="slds-col--padded">
+                    <p class="slds-box slds-box--small slds-theme--shade slds-text-align--center white">
+                        <strong>CY Orders</strong> <br/>
+                        <p>{!v.SalesOrder.CYOrders}</p>
+                        
+                    </p>
+                </div>
+                <div class="slds-col--padded">
+                    <p class="slds-box slds-box--small slds-theme--shade slds-text-align--center white">
+                        <strong>CY Sales</strong> <br/>
+                       <p> {!v.SalesOrder.CYSales}</p>
+                    </p>
+                </div>
+            </div>
+            <br/>
+            <div class="slds-grid slds-grid--pull-padded SalesData">  
+                <div class="slds-col--padded">
+                    <p class="slds-box slds-box--small slds-theme--shade slds-text-align--center white">
+                        <strong>Monsanto Area</strong> <br/>
+                        <p>{!v.SalesOrder.MonsantoAcres}</p>
+                        
+                    </p>
+                </div>
+                <div class="slds-col--padded">
+                    <p class="slds-box slds-box--small slds-theme--shade slds-text-align--center white">
+                        <strong>Monsanto Share (%)</strong><br/>
+                        <p>{!v.SalesOrder.MonsantoShare}</p>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</aura:component>

@@ -1,0 +1,50 @@
+<aura:component implements="force:appHostable" access="global" >
+    <style>
+        .chart-legend li span{
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        margin-right: 5px;
+        
+        }
+        
+        .chart-legend {
+        float:right;
+        padding-right: 24%;
+        padding-top: 3%;
+        }
+        
+        @media  all and (min-width: 320px) and (max-width:700px){
+        #chartDivDoughnut{
+        left: -53px;
+        }
+        }        
+    </style>    
+    <aura:attribute name="allocated" type="Integer"  access="global"/>
+    <aura:attribute name="available" type="String"  access="global"/>
+    <aura:attribute name="cancelled" type="Integer"  access="global"/>
+    <aura:attribute name="completed" type="Integer"  access="global"/>
+    <aura:attribute name="consumed" type="Integer" access="global" />
+    <aura:attribute name="notStarted" type="Integer"  access="global"/>
+    <aura:attribute name="product1" type="Integer" access="global" default="10"/>
+    <aura:attribute name="product2" type="Integer" access="global" default="20"/>
+    <aura:attribute name="product3" type="Integer" access="global" default="30"/>
+        <aura:attribute name="programId" type="Id" access="global" />
+
+    <aura:attribute name="inExecution" type="Integer"  access="global"/>
+    <aura:attribute name="planned" type="Integer"  access="global"/>
+    <aura:attribute name="postPlanned" type="Integer"  access="global"/>    
+    <aura:attribute name="identifier" type="Integer" access="global" />    
+    <aura:attribute name="comp" type="String" access="global" />
+
+    <ltng:require scripts="{!$Resource.ChartJs}" styles="{!join(',',$Resource.SLDS + '/assets/styles/salesforce-lightning-design-system.min.css')}" afterScriptsLoaded="{!c.loadPgmBudget}"/>
+    <div id="{!v.comp =='Review Program'? 'contain'+v.identifier+v.programId:''+v.identifier}" class="Container" style="position:relative;">
+        <div id="{!v.comp =='Review Program'? 'mybudget'+v.identifier+v.programId:'mybudget'+v.identifier}" >
+            <canvas id="{!v.comp =='Review Program'? 'myChart'+v.identifier+v.programId:'myChart'+v.identifier}" class="{!v.comp == 'PgmDetails' ? 'canvasPosDetail' : (v.comp == 'Review Program' ? 'canvasPosRev' : 'canvasPos')}"/>
+        </div>   
+       <!-- <div id="{!v.comp =='Review Program'? 'chartLegend1'+v.identifier+v.programId:'chartLegend1'+v.identifier}" class="{!v.comp =='Review Program' ?chart-lgnd:chart-lgnd}"></div> -->
+       <!-- <div id ="{!v.comp =='Review Program'? 'chartLegend1'+v.identifier+v.programId:'chartLegend1'+v.identifier}" class= "{!v.comp == 'Review Program' ? 'chart-lgnd1' : 'chart-lgnd'}"/> -->
+        <div id ="{!v.comp =='Review Program'? 'chartLegend1'+v.identifier+v.programId:'chartLegend1'+v.identifier}" class= "{!v.comp == 'PgmDetails' ? 'chart-lgndpgm' : (v.comp == 'Review Program' ? 'chart-lgnd1' : 'chart-lgnd')}"/>
+        
+    </div>
+</aura:component>

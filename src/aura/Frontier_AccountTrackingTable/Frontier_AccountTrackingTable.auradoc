@@ -1,0 +1,7 @@
+<aura:documentation>
+	<aura:description>Displays chart for Account Dashboard</aura:description>
+	<aura:example name="AccountTrackingTable" ref="c:Frontier_AccountTrackingTable" label="Account Dashboard Chart">
+		1.Displays chart for Opportunity Tracking Ordered Quantity vs. CY Sales (units) for corn
+        2.Displays chart for Opportunity Tracking Ordered Quantity vs. CY Sales (units) for soy
+	</aura:example>
+</aura:documentation>

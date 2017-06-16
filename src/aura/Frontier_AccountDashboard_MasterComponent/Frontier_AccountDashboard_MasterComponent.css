@@ -1,0 +1,26 @@
+.THIS .inputStyle{
+    width:60%;
+}
+.THIS .bgcolor{
+    background:grey;
+}
+.THIS .headingStyle{
+    padding-top:10px;
+    padding-bottom:10px;
+}
+.THIS .titleStyle{
+    padding-top:20px;
+    padding-bottom:10px;
+    font-weight:bold;
+    font-size:large;
+}
+.THIS.valign{
+    padding-left:40px;
+    padding-right:40px
+}
+.THIS .rotatetext{
+    -ms-transform: rotate(-90deg); /* IE 9 */
+    -webkit-transform: rotate(-90deg); /* Safari */
+    transform: rotate(-90deg); /* Standard syntax */
+    font-weight:bold;
+}

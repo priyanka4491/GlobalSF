@@ -1,0 +1,80 @@
+<aura:component controller="Frontier_GrowerAccount_ProgramController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:attribute name="touchpointsList" type="Map" access="global"/>
+    <aura:attribute name="accountId" type="Id" default="" access="global"/> 
+    <aura:attribute name="growerAcc" type="Id" access="Global" />
+    <aura:attribute name="accComId" type="Id" access="Global" />
+
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler event="c:PageChange" action="{!c.pageChange}"/>
+    <aura:handler name="navigateToTouchpointList" event="c:Frontier_NavigateToGrowerList_Event" action="{!c.navigateToTouchpointList}"/>
+    <aura:attribute name="page" type="integer" default="1" access="global"/>
+    <aura:attribute name="pages" type="integer" default="10" access="global"/>
+    <aura:attribute name="total" type="integer" default="200" access="global"/>
+    <aura:attribute name="pageSize" type="String" default="10" access="global"/> 
+    <aura:attribute name="SortByName" type="String" default="" access="global"/>
+    <aura:attribute name="SortByActivityDate" type="String" default="onMouseOut" access="global"/> 
+    <aura:attribute name="SortByStatus" type="String" default="onMouseOut" access="global"/> 
+    <aura:attribute name="SortByPhase" type="String" default="onMouseOut" access="global"/> 
+    <aura:attribute name="triggeredField" type="String" default="" access="global"/>
+       <aura:attribute name="prevID" type="string" access="global" default=""/>
+    <aura:attribute name="prevfiscalID" type="string" access="global" default=""/>
+        <aura:attribute name="touchpointKeys" type="List"  access="global"/>
+
+    <div aura:id="viewTouchpoint">
+        <div style="background-color:#808080">                 
+            <div class="slds-grid">
+                <div class="slds-size--6-of-12">
+                    <p class="headingstyle">Account Touchpoints</p>
+                </div>
+                <div class="slds-size--6-of-12" aura:id="addrssInfo">
+                    
+                </div>
+            </div> 
+        </div>
+    <br></br><br></br>
+    <div id="Touchpoints Filters">
+        <button class="slds-button slds-button--neutral btncolorchange"  id="Upcoming" onclick="{!c.handleClick}">Upcoming</button>
+        <button  class="slds-button slds-button--neutral" id="Previous" onclick="{!c.handleClick}">Previous</button>
+        <button class="slds-button slds-button--neutral" id="Cancelled" onclick="{!c.handleClick}">Cancelled</button>
+    </div>
+    <br></br><br></br>
+    <div class="slds-grid vAlign bgdcolor">
+        <div class="slds-scrollable table" style="{!($Browser.isPhone) ? 'padding-top:10px;padding-left:10px;':'padding-top:10px;padding-left:10px;'}">
+            <ui:scrollerWrapper >
+                <table class="slds-table  slds-no-row-hover slds-table--product VisitTable slds-table--fixed-layout">
+                    <thead>
+                        <tr>
+                            <th class="slds-cell-wrap">
+                                <div title="Touchpoint Date"><b>Touchpoint Date</b></div>
+                            </th>
+                            <th>
+                                <div title="Program Name"><b>Program Name</b></div>
+                            </th>
+                            <th>
+                                <div title="Activity Name"><b>Activity Name</b></div>
+                            </th>
+                            <th>
+                                <div title="Type"><b>Type</b></div>
+                            </th>
+                            <th>
+                                <div title="Status"><b>Status</b></div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="data">
+                        
+                        <aura:iteration items="{!v.touchpointKeys}" var="key" indexVar="idx">
+                            <c:Frontier_TouchpointChild taskMap="{!v.touchpointsList}" key="{!key}" growerAcc="{!v.growerAcc}" index="{!idx}"/>
+                        </aura:iteration>
+                    </tbody>                    
+                </table>
+            </ui:scrollerWrapper>
+        </div>                        
+    </div>    
+    <br></br><br></br>
+	<center>
+            <c:Paginator page="{!v.page}" pages="{!v.pages}" total="{!v.total}" compName='TouchPoints'/>
+    </center>
+    </div>
+</aura:component>

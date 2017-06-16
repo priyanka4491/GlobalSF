@@ -1,0 +1,132 @@
+<aura:component controller="Frontier_ProgramPlanningController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    <ltng:require styles="{!$Resource.SLDS +
+                          '/assets/styles/salesforce-lightning-design-system.css'}"/> 
+    <aura:attribute name="clear" type="Boolean" access="global" default="true"/>
+    <aura:attribute name="loadProgramId" type="Id" access="global" default=""/>  
+
+    <aura:attribute name="programId" type="Id" access="global" />
+    <aura:attribute name="programIdSet" type="Id[]" access="global" />
+    <aura:attribute name="associatedProducts" type="Frontier_ProgramPlanningController.AccountProductWrapper[]" default="" access="global"/>
+    <aura:attribute name="selectedProducts" type="Frontier_ProgramPlanningController.AccountProductWrapper[]" default="" access="global"/>
+    
+    <aura:attribute name="programName" type="String" access="global" />
+    <aura:attribute name="btnCurrent" type="String" access="global" default="Side by Side Trial"/>
+    <aura:attribute name="btnPrevious" type="String" access="global" default="Side by Side Trial"/>
+    <aura:attribute name="programDetails" type="Object[]" access="Global" />
+    <aura:attribute name="page" type="integer" default="1" access="global"/>
+    <aura:attribute name="pages" type="integer" default="10" access="global"/>
+    <aura:attribute name="total" type="integer"  access="global"/>
+    <aura:attribute name="pageSize" type="String" default="2" access="global"/>
+    <aura:attribute name="program1" type="integer" default="10" access="global"/>
+    <aura:attribute name="program2" type="integer" default="20" access="global"/>
+    <aura:attribute name="program3" type="integer" default="15" access="global"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="accounts" type="SObject[]" access="global"/>
+    <aura:attribute name="progId" type="String" default="" access="global"/>
+    <aura:attribute name="isSubmitted" type="Boolean" default="false" access="global"/>
+     <aura:attribute name="dealerId" type="String" default="" access="global"/>
+<!--<aura:handler event="c:Frontier_PopUpCloseEvent" action="{!c.handleSubmitAction}"/>-->
+    
+    <aura:handler event="c:PageChange" action="{!c.reviewPageChange}"/>
+    <div aura:id="userpopup"></div>
+    <div aura:id="programDetail">
+        <div class="navbar-defaults" style="background-color: rgba(241, 241, 241, 1);border-color: rgba(241, 241, 241, 1);">
+            <div class="slds-grid" >
+                <div class="slds-col">
+                    <section class="slds-clearfix">                    </section>
+                </div>
+                <div class="slds-col">
+                    <section class="slds-clearfix">
+                        <div class="slds-float--left" style="padding-top:30px;">
+                            <strong> <div class="slds-text-heading--large">Program Planning Review</div></strong>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div> 
+        <div style="padding-top:2%;">
+            <center>
+                <c:Paginator page="{!v.page}" pages="{!v.pages}" total="{!v.total}"  compName='PgmPlngReview'/>
+            </center>
+        </div> 
+        <aura:iteration items="{!v.programDetails}" var="pgmList" indexVar="idx">
+           
+            <div class="bgSection">
+                
+                <div class="slds-p-horizontal--small slds-size--1-of-1 slds-size--12-of-12 slds-medium-size--12-of-12 slds-large-size--12-of-12 padStyle " style="height:100%">
+                    <div class="{!($Browser.isPhone) ? 'slds-grid slds-wrap vAlign bgMidSection':'slds-grid vAlign bgMidSection'}">
+                        <div class="slds-p-horizontal--small slds-small-size--12-of-12 slds-size--12-of-12 slds-medium-size--5-of-12 slds-large-size--5-of-12">
+                            
+                            <div class="{!($Browser.isPhone) ? 'slds-grid slds-wrap vAlign bgMidSection':'slds-grid vAlign bgMidSection'}" style="padding-left:20px">
+                                
+                                <div class="slds-p-horizontal--small slds-small-size--12-of-12 slds-size--12-of-12 slds-medium-size--12-of-12 slds-large-size--12-of-12" >
+                                    <p class="vAlign  fontStyle ">Program:</p> 
+                                    <p>{!pgmList.ProgramName}</p>
+                                </div>  
+                            </div>
+                            <div class="{!($Browser.isPhone) ? 'slds-grid slds-wrap vAlign':'slds-grid vAlign'}" style="padding-left:20px">
+                                
+                                <div class="slds-p-horizontal--small slds-size--4-of-12 slds-medium-size--2-of-12 slds-large-size--2-of-12">
+                                    <p class="vAlign  fontStyle">Available</p>
+                                    <p>{!pgmList.Available}</p>
+                                    
+                                </div>
+                                <div class="slds-p-horizontal--small slds-size--4-of-12 slds-medium-size--2-of-12 slds-large-size--2-of-12">
+                                    <p class="vAlign  fontStyle">Allocated</p>
+                                    <p>{!pgmList.Allocated}</p>
+                                </div>
+                                <div class="slds-p-horizontal--small slds-size--5-of-12 slds-medium-size--2-of-12 slds-large-size--2-of-12">
+                                    <p class="vAlign  fontStyle">Volume Growth</p>
+                                    <p style="word-break:break-all;">{!pgmList.VolumeGrowth}</p>
+                                    
+                                </div>
+                                <div class="slds-p-horizontal--small slds-size--3-of-12 slds-medium-size--2-of-12 slds-large-size--2-of-12">
+                                    <p class="vAlign  fontStyle">Growth</p>
+                                    <p>{!pgmList.Growth}</p>
+                                </div>
+                                <div class="slds-p-horizontal--small slds-size--4-of-12 slds-medium-size--2-of-12 slds-large-size--2-of-12">
+                                    <p class="vAlign  fontStyle">CS Growth</p>
+                                    <p>{!pgmList.CSGrowth}</p>
+                                </div>
+                                <div class="slds-p-horizontal--small slds-size--4-of-12 slds-medium-size--2-of-12 slds-large-size--2-of-12">
+                                    <p class="vAlign  fontStyle">Program Coverage</p>
+                                    <p>{!pgmList.ProgramCoverage}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-col slds-col--padded slds-p-horizontal--small slds-size--1-of-1 slds-size--12-of-12 slds-medium-size--4-of-12 slds-large-size--4-of-12">
+                            <div class="{!($Browser.isPhone) ? 'slds-grid slds-wrap ':'slds-grid '}">
+                                <div class="slds-col slds-col--padded slds-p-horizontal--small slds-size--1-of-1 slds-size--12-of-12 slds-medium-size--12-of-12 slds-large-size--12-of-12">
+                                    
+                                   <!-- <c:Frontier_Pgm_Planning_BudgetChart programId="{!pgmList.Id}" product1="20" product2="15" product3="10" identifier='5' comp="Review Program"/>-->
+                                </div>    
+                            </div>
+                        </div>
+                        <div class="slds-col slds-col--padded slds-p-horizontal--small slds-size--1-of-1 slds-size--12-of-12 slds-medium-size--3-of-12 slds-large-size--3-of-12">
+                            <div  style="padding-top:10px;">
+                                <c:Frontier_ProgramPlanning_Radl dcount="{!pgmList.DevelopCount}" acqcount="{!pgmList.AquireCount}" rcount="{!pgmList.RetainCount}" lcount="{!pgmList.LtCount}"/>
+                 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="padStyle">
+                    <c:Frontier_Pgm_Plang_Review_AccountList programId="{!pgmList.Id}" selectedProducts="{!v.selectedProducts}" associatedProducts="{!v.associatedProducts}"/>
+                        <br></br>
+                </div>
+            </div>
+            <br> </br>
+               
+        </aura:iteration>
+        <div class="slds-form-element" style="padding-top:20px" >
+            <div class="{!($Browser.isPhone) ? 'slds-grid slds-wrap headerWrap':'slds-grid headerWrap'}">
+                <div class="slds-p-horizontal--small slds-size--1-of-1 slds-size--12-of-12 slds-medium-size--12-of-12 slds-large-size--12-of-12 ">
+                    <center class="vAlign btmspace btnAlign" style="Padding-bottom:10px">
+                        <button class="slds-button btncolor"   aura:id="accnt2" onclick="{!c.backToProgramPlanning}">Back To Planning</button>
+                        <button class="slds-button btncolor"   aura:id="accnt3" onclick="{!c.submitProgramPlanning}">Submit Program Plan</button>
+                    </center>
+                </div>
+            </div>     
+        </div>
+    </div>
+</aura:component>

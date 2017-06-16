@@ -1,0 +1,35 @@
+.THIS {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+
+    background: #FFFFFF;
+
+    height: 100%;
+
+}
+
+.THIS.BUTTON{
+    margin-right: 20px;
+}
+.THIS .error{
+    color:red;
+}
+.THIS p span {
+    display:block;
+}
+
+.THIS pagiNation {
+    margin :0 auto;
+}
+
+.THIS .capitalize {
+    text-transform: capitalize !important;    
+}
+.THIS .datepicker .uiInput .uiLabel {
+    color:white;
+}
+.THIS .datepickervalue .uiInput .input{
+    color:white;
+    border-width: 1px;
+}

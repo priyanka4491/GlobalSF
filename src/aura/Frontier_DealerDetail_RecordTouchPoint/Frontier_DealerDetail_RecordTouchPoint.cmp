@@ -1,0 +1,91 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes" access="global" >
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:attribute name="touchpoints" type="Event[]" access="Global"/> 
+    <aura:attribute name="today" type="Date" default="" access="global"/>  
+    <aura:attribute name="accId" type="String" access="global"/>
+    <aura:attribute name="comments" type="String" access="global"/>
+    <aura:attribute name="duedate" type="Date" access="global"/> 
+    <aura:attribute name="message" type="Boolean" access="global" default="false"/>
+    <aura:attribute name="message1" type="Boolean" access="global" default="false"/>
+    <aura:handler name="change" value="{!v.duedate}" action="{!c.createTask}"/>
+    <aura:registerEvent name="appEvent" type="c:Frontier_TouchPointCount"/>
+    <aura:attribute name="newTouchpoint" type="Event"
+                    default="{ 'sobjectType': 'Event',
+                             'ActivityDateTime': '',
+                             'EndDateTime' : '',
+                             'Description': '',
+                             'Type': '',                  		 
+                             }" access="global"/>		
+    <div>
+        <div class="growerRecordTouchPoint"> 
+            <div class="slds-text-heading--medium" style="color:#808080; padding-top:10px;">
+                <b>Record touchpoints</b>
+            </div>
+            <div class="slds-grid slds-wrap slds-grid--pull-padded touchFollow">
+                <div class="slds-col--padded slds-small--size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 inputFollowGrid">       
+                </div> 
+            </div>
+            <br></br>
+            <form class="slds-form--stacked" style="margin:8%">
+                <div class="slds-form-element slds-is-required" >
+                    <label class="slds-form-element__label" for="contactType">Contact</label>
+                    <div class="slds-form-element__control">
+                        <ui:inputSelect aura:id="contactList">
+                            <ui:inputSelectOption text="Select contact"/>
+                        </ui:inputSelect>
+                    </div>
+                </div>
+                <div class="slds-form-element slds-is-required form-element-sizing">
+                    <label class="slds-form-element__label" for="date">Date</label>
+                    <div class="slds-form-element__control">
+                        <ui:inputDate aura:id="date" displayDatePicker="true" value="{!v.today}" />
+                    </div>
+                </div>
+                <div class="slds-form-element slds-is-required form-element-sizing" >
+                    <label class="slds-form-element__label" for="date">Follow up  Date</label>
+                    <div class="slds-form-element__control">
+                        <ui:inputDate aura:id="date" displayDatePicker="true" value="{!v.today}" />
+                    </div>
+                </div>
+                <div class="slds-form-element slds-is-required form-element-sizing">
+                    <label class="slds-form-element__label" for="Season">Season</label>
+                    <div class="slds-form-element__control">
+                        <ui:inputSelect aura:id="Season"/>
+                    </div>
+                </div>
+                <div class="slds-form-element slds-is-required form-element-sizing">
+                    <label class="slds-form-element__label" for="touchPointType">TouchpointType</label>
+                    <div class="slds-form-element__control">
+                        <ui:inputSelect aura:id="touchPointType"/>
+                    </div>
+                </div>
+                
+                <div class="slds-form-element slds-is-required" style="padding-top:10px" >
+                    <label class="slds-form-element__label" for="notes">Notes</label>
+                    <div class="slds-form-element__control">
+                        <ui:inputTextArea aura:id="notes" class="inputStyle" labelClass="slds-form-element__label" placeholder="Start typing notes..." value="" rows="5" resizable="true" maxlength="1000"/>
+                    </div>
+                </div>
+                                
+                <div class="slds-form-element form-element-sizing">
+                    <div class="slds-grid slds-wrap slds-grid--pull-padded">
+                        <div class="slds-col--padded slds-size--1-of-1">
+                            <center>
+                                <div class="">
+                                    <ui:button label="Record touchpoint"                       
+                                               labelClass="label"
+                                               press="{!c.createRecord}" class="slds-button slds-button--brand"/>
+                                </div>
+                            </center>
+                        </div>
+                        
+                        <!--<label class="slds-form-element__label" for="dueDateId">Schedule a Follow Up</label>-->
+                        <div class="slds-col--padded slds-col--padded slds-size--1-of-1"> 
+                            <div aura:id="visitpopup">  </div> 
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>	
+</aura:component>

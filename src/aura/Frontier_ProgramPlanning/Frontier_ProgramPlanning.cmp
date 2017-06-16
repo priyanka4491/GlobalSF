@@ -1,0 +1,407 @@
+<aura:component controller="Frontier_ProgramPlanningController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    <style>
+        .slds-context-bar__item.slds-is-active {
+        border-left: 1px solid rgb(216, 221, 230);
+        border-right: 1px solid rgb(216, 221, 230);
+        border-bottom-color: rgb(247, 249, 251);
+        color: black;
+        font-weight: bold;
+        }
+    </style>
+    
+    <aura:attribute name="btnCurrent" type="String" access="global" default="Side by Side Trial"/>
+    <aura:attribute name="btnPrevious" type="String" default="" access="global"/>
+    <aura:attribute name="currentId" type="String" default="" access="global"/>
+    <aura:attribute name="isProgramChange" type="String" default="false" access="global"/>
+    <aura:attribute name="dealerId" type="Id" default="" access="global"/>
+    <aura:attribute name="notProgramSaved" type="Boolean" default="false" access="global"/>
+    <aura:attribute name="selectedAccountCount" type="Integer" default="0" access="global"/>
+    <aura:attribute name="loadprograms" type="Boolean" default="false" access="global"/>
+<aura:attribute name="triggeredAccountId" type="String" default="" access="global"/>
+    <aura:attribute name="programList" type="Object[]" access="global"/>
+    <aura:attribute name="programDetail" type="Frontier_ProgramDetailWrapper" access="global"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="PageNumbers" type="Integer[]" access="global"/>
+    <aura:attribute name="page" type="integer" default="1" access="global"/>
+    <aura:attribute name="pages" type="integer" default="10" access="global"/>
+    <aura:attribute name="total" type="integer" access="global"/>
+    <aura:attribute name="pageSize" type="String" default="5" access="global"/>
+    <aura:attribute name="isReviewed" type="Boolean" default="false" access="global"/>
+    <aura:attribute name="isAllSelected" type="Boolean" default="false" access="global"/>
+    <aura:attribute name="searchText" type="String" default="" access="global"/>
+    
+    <aura:attribute name="currentPage" type="integer" default="1" access="global"/>
+    <aura:attribute name="Noofpages" type="integer" default="10" access="global"/>
+    <aura:attribute name="totalRecords" type="integer" default="0" access="global"/>
+    <aura:attribute name="tablePageSize" type="String" default="5" access="global"/>
+    <aura:attribute name="filteredAccountList" type="Object[]" access="global"/>
+    <aura:attribute name="productQty" type="Integer" access="global"/>
+    <aura:attribute name="tempAccountSelectedList" type="List" access="global"/>
+    <aura:attribute name="tempAccountList" type="List" access="global"/>
+
+    
+    
+    <aura:attribute name="deletedAccountIds" type="Id[]" default="" access="global"/>
+    <aura:attribute name="accountIdsToDelete" type="Id[]" default="" access="global"/>
+    <aura:attribute name="progId" type="Id" default="" access="global"/>
+   <aura:attribute name="prevProgId" type="Id" default="" access="global"/>
+
+    <aura:attribute name="associatedProducts" type="Frontier_ProgramPlanningController.AccountProductWrapper[]" default="" access="global"/>
+    <aura:attribute name="AccountProductWrapper" type="Frontier_ProgramPlanningController.AccountProductWrapper" access="global"/>
+    <aura:attribute name="ProductWrapper" type="Frontier_ProgramPlanningController.AccountProductWrapper" access="global"/>
+
+    <aura:attribute name="addedProducts" type="Frontier_ProgramPlanningController.AccountProductWrapper[]" default="" access="global"/>
+    <aura:handler event="c:Frontier_SelectedProgramEvent"  action="{!c.changeprogram}"/>
+    <aura:attribute name="prevRadl" type="String" default="Develop" access="global"/>
+    <aura:attribute name="addRadl" type="Boolean" default="false" access="global"/>
+    <aura:attribute name="selectedProducts" type="Object[]" default="" access="global"/>
+    <aura:attribute name="paginatedAccounts" type="Object[]" default="" access="global"/>
+    <aura:attribute name="prevSelectedAccount" type="String" default="" access="global"/>
+    
+    <aura:attribute name="accounts" type="SObject[]" access="global"/>
+    <aura:attribute name="accountProgramWrapper" type="SObject[]" access="global"/>
+    <aura:attribute name="accountSelectedList" type="List" default="" />
+    <aura:attribute name="productList" type="Frontier_ProgramPlanningController.AccountProductWrapper[]" default="" />
+    <aura:attribute name="availableProductList" type="Object[]" default="" />
+    <aura:handler event="c:Frontier_ProgramPlanning_Event"  action="{!c.onCheck}"/>
+    <aura:attribute name="direction" type="String" access="global" default=""/>
+    <aura:attribute name="searchString" type="String" default="" access="global"/>
+    <aura:attribute name="isProductSelected" type="Boolean" default="false" access="global"/>
+    <aura:attribute name="radlKey" type="String" default="None" access="global"/>    
+    <aura:handler event="c:PageChange" action="{!c.pageChange}"/>
+    <aura:handler event="c:PageChange" action="{!c.tableChange}"/>
+    <aura:handler event="c:Frontier_AccountSearchkey" action="{!c.searchKeyChange}"/>
+   <aura:handler event="c:Frontier_AccountSortkey" action="{!c.searchKeyChange}"/>
+    <aura:registerEvent name="appEvent" type="c:Frontier_ProgramPlanningSelectProduct"/>
+   <aura:handler event="c:Frontier_ProgramPlanningSelectProduct" action="{!c.assignProductToAccount}"/>
+    <aura:attribute name="productAccountId" type="Id" default="" />
+        <aura:handler name="change" value="{!v.isAllSelected}" default="false" action="{!c.selectAllAccounts}"/>
+<aura:handler event="c:Frontier_PopUpCloseEvent" action="{!c.handleSubmitAction}"/>
+<aura:handler event="c:Frontier_ProgramPlanningEvent" action="{!c.showProgramScreen}"/>
+    
+    <div aura:id="programBlock">     
+        <div class="bgSection"  >
+            <div class="{!($Browser.isPhone) ? 'slds-grid slds-wrap headerWrap':'slds-grid headerWrap'}">
+                <div class="slds-col slds-col--padded slds-p-horizontal--small slds-size--1-of-1 slds-size--12-of-12 slds-medium-size--12-of-12 slds-large-size--12-of-12"><center class="vAlign"></center></div>
+            </div>
+            <div class="{!($Browser.isPhone) ? 'slds-grid slds-wrap headerWrap HLSpace':'slds-grid headerWrap HLspace'}">
+                <div class="slds-col slds-col--padded slds-p-horizontal--small slds-size--1-of-1 slds-size--12-of-12 slds-medium-size--4-of-12 slds-large-size--4-of-12 bgMidSection ">
+                    <div class="slds-col slds-col--padded slds-size--1-of-1 slds-size--12-of-12 slds-medium-size--12-of-12 slds-large-size--12-of-12 " style="height:100%">
+                        <div class="slds-grid vAlign btmSpace">
+                            <div class="slds-p-horizontal--small slds-size--4-of-12 slds-medium-size--4-of-12 slds-large-size--4-of-12 roundicon btmSpace">
+                                <center style="padding-top:2px">1</center></div>
+                            <div class="slds-p-horizontal--small slds-size--8-of-12 slds-medium-size--8-of-12 slds-large-size--8-of-12 HLspace">
+                                <p class="vAlign fontStyle" style="padding-top:2px"> Select A Program</p>
+                            </div>
+                        </div>
+                        <div class="slds-box slds-box--small BoxBorder" > 
+                            
+                            <!-- <aura:iteration items="{!v.programList}" var="program" indexVar="idx">  
+                           
+                            <div class="btnStyle"  id="{!program.Id}" label="{!program.Name}" onclick="{!c.changeprogram}">{!program.Name}</div><br/>
+                           
+                            </aura:iteration>-->
+                             <aura:if isTrue="{!v.loadprograms}">
+
+                            <c:Frontier_SelectedProgramList programList="{!v.programList}" isReviewed="{!v.isReviewed}" progId="{!v.progId}"/>
+                            </aura:if>
+                            </div> 
+                        <div class="slds-grid vAlign btmSpace">
+                            <div class="slds-p-horizontal--small slds-size--4-of-12 slds-medium-size--4-of-12 slds-large-size--4-of-12 roundicon btmSpace">
+                                <center style="padding-top:2px">2</center></div>
+                            <div class="slds-p-horizontal--small slds-size--8-of-12 slds-medium-size--8-of-12 slds-large-size--8-of-12 HLspace">
+                                
+                                <p class="vAlign fontStyle" style="padding-top:2px"> Select Account(s)</p>
+                            </div>
+                        </div>
+                        <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon--right Search-Icon btmSpace">
+                            <div class="slds-grid">
+                                <div class="slds-size--1-of-2 slds-p-horizontal--small">
+                                    <ui:inputSelect class="customHeight" aura:id="searchByRADL" change="{!c.sortKey}">
+                                       <ui:inputSelectOption text="None" label="None" value="true"/>
+                                        <ui:inputSelectOption text="Retain" label="Retain"/>
+                                        <ui:inputSelectOption text="Acquire" label="Acquire"/>
+                                        <ui:inputSelectOption text="Develop" label="Develop"/>
+                                        <ui:inputSelectOption text="Light Touch" label="Light Touch"/>
+                                       <ui:inputSelectOption text="UnKnown" label="UnKnown"/>
+
+                                    </ui:inputSelect>
+                                </div>
+                                <div class="slds-size--1-of-2 slds-p-horizontal--small">
+                                    <input id="icon" type="text" class="form-control searchInput"
+                        onkeyup="{!c.searchKey}" placeholder="Start typing to search..." value="{!v.searchText}"/>
+                                    <c:svgIcon class="iconfill slds-icon slds-icon--x-small slds-icon-text-default searchIcon"  svgPath="{!$Resource.SLDS + '/assets/icons/utility-sprite/svg/symbols.svg#search'}" category="utility" size="x-small"  name="search" />
+                                </div>                                
+                            </div>
+                        </div>
+                        <div class="slds-grid slds-p-around--small">
+                            <div class="slds-size--6-of-12">
+                            </div>
+                            <div class="slds-size--5-of-12 slds-text-align--right">
+                                <label>Select All</label>
+                            </div>
+                            <div class="slds-size--2-of-12">
+                              <ui:inputCheckbox disabled="{!empty(v.accounts)?true:false}" aura:id="SelectAll" class="checkboxSelectAll" value="{!v.isAllSelected}"/>
+                            </div>
+                        </div>
+                        <div class="slds-box slds-box--small BoxBorder vAlign">
+                            <aura:if isTrue="{!!empty(v.accounts)}">
+                                <span>
+                                    <aura:iteration items="{!v.accounts}" var="account" indexVar="idx">
+                                        <span>                                        
+                                            <aura:if isTrue="{!lessthan(idx,v.pageSize)?true:false}">
+                                                <span>                                                
+                                                    <c:Frontier_ProgramPlanning_Accountlist account="{!account}" accountList="{!v.accountSelectedList}" radlKey="{!v.radlKey}" searchKey="{!v.searchString}" isAllSelected="{!v.isAllSelected}" filteredAccountList="{!v.filteredAccountList}"/>
+                                                </span>
+                                                <aura:set attribute="else">
+                                                    <aura:if isTrue="{!!v.isAllSelected}"> 
+                                                        <span>
+                                                            <c:Frontier_ProgramPlanning_Accountlist account="{!account}" accountList="{!v.accountSelectedList}" radlKey="{!v.radlKey}" searchKey="{!v.searchString}" isAllSelected="{!v.isAllSelected}" filteredAccountList="{!v.filteredAccountList}"/>
+                                                        </span>
+                                                    </aura:if>
+                                                </aura:set>
+                                                
+                                            </aura:if>
+                                        </span>
+                                    </aura:iteration>
+                                </span>
+                            </aura:if>
+                        </div>
+                        <br></br>
+                        <center>
+                            <c:Paginator page="{!v.page}" pages="{!v.pages}" total="{!v.total}" compName="ProgramplanAccountList"/>
+                        </center>                    
+                    </div>
+                </div>
+                <div class="slds-col slds-col--padded slds-p-horizontal--small slds-size--1-of-1 slds-size--12-of-12 slds-medium-size--8-of-12 slds-large-size--8-of-12 bgSection ">
+                    <div class="slds-col slds-col--padded slds-p-horizontal--small slds-size--1-of-1 slds-size--12-of-12 slds-medium-size--12-of-12 slds-large-size--12-of-12 bgMidSection" style="height:100%">
+                        <div class="{!($Browser.isPhone) ? 'slds-grid slds-wrap':'slds-grid'}">
+                            <div class="slds-col slds-col--padded slds-p-horizontal--small slds-size--1-of-1 slds-size--12-of-12 slds-medium-size--4-of-12 slds-large-size--1-of-2 bgMidSection ">
+                                <div class="slds-grid">
+                                <div class="slds-p-around--medium slds-size--1-of-2">
+                                    <p class="fontStyle">Program:</p>
+                                    <p>{!v.programDetail.ProgramName}</p>
+                                </div>
+                                <div class="slds-p-around--medium slds-size--1-of-2">
+                                    <p class="fontStyle">Brand Name:</p>
+                                    <p>{!v.programDetail.BrandFamily}</p>
+                                </div>
+                                </div>
+                                
+                                <div class="slds-grid">
+                                    <div class="slds-p-around--medium slds-size--4-of-12 slds-medium-size--4-of-12 slds-large-size--4-of-12 slds-hide" >
+                                        <p class="fontStyle">Budget</p>
+                                        <p class="">{!v.programDetail.Budget == 'NA'?'NA':v.programDetail.Budget}</p>                                        
+                                    </div>
+                                    <div class="slds-p-around--medium slds-size--4-of-12 slds-medium-size--4-of-12 slds-large-size--4-of-12" >
+                                        <p class="fontStyle">Available</p>
+                                        <p class="">{!v.programDetail.Budget == 'NA'?'NA':v.programDetail.Available}</p>
+                            
+                                    </div>
+                                    <div class="slds-p-around--medium slds-size--4-of-12 slds-medium-size--4-of-12 slds-large-size--4-of-12">
+                                        <p class="fontStyle">Allocated</p>
+                                        <p class="">{!v.programDetail.Allocated}</p>
+                                    </div>
+                                    <div class="slds-p-around--medium slds-size--4-of-12 slds-medium-size--4-of-12 slds-large-size--4-of-12 slds-hide">
+                                        <p class="fontStyle">Consumed</p>
+                                        <p class="">{!v.programDetail.Consumed}</p>
+                                    </div>
+                                </div>
+                                <div class="slds-grid">
+                                    <div class="slds-p-around--medium slds-size--5-of-12 slds-medium-size--4-of-12 slds-large-size--4-of-12">
+                                        <p class="fontStyle">Volume Growth</p>
+                                        <p class="">{!v.programDetail.VolumeGrowth}</p>
+                                    </div>
+                                    <div class="slds-p-around--medium slds-size--4-of-12 slds-medium-size--4-of-12 slds-large-size--4-of-12">
+                                        <p class="fontStyle">Growth</p>
+                                        <p class="">{!v.programDetail.Growth}</p>
+                                    </div>
+                                    <div class="slds-p-around--medium slds-size--4-of-12 slds-medium-size--4-of-12 slds-large-size--4-of-12">
+                                        <p class="fontStyle">CS Growth</p>
+                                        <p class="">{!v.programDetail.CSGrowth}</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        
+                            <div class="slds-col slds-col--padded slds-p-horizontal--small slds-size--1-of-2 slds-size--12-of-12 slds-medium-size--6-of-12 slds-large-size--1-of-2 bgMidSection">
+                                <div class="vAlign" aura:id="radlDivCount" style="padding-top:22px;"/>                             
+                            </div>
+                            
+                        </div>
+                        <aura:if isTrue="{!!empty(v.accountSelectedList)}">
+                            
+                            <div class="slds-scrollable table" style="{!($Browser.isPhone) ? 'padding-top:50%;':'padding-top:10%;'}">
+                                <center>
+                                <c:Paginator page="{!v.currentPage}" pages="{!v.Noofpages}" total="{!v.totalRecords}" compName="ProgramAccount"/>
+                                </center>
+                                <ui:scrollerWrapper >
+                                    <table class="slds-table  slds-no-row-hover slds-table--product VisitTable slds-table--fixed-layout accountTable">
+                                        <thead>
+                                            <tr>
+                                                <th class="slds-cell-wrap" style="width:16%;text-align:center;">
+                                                    <div class="fontStyle HLspace" title="Acct Name">Acct Name</div>
+                                                </th>
+                                                <th style="{!($Browser.isPhone) ? 'width:auto':'width:16%;text-align:center;'}">
+                                                    <div class="fontStyle HLspace" title="Address">Address</div>
+                                                </th>
+                                                <th style="{!($Browser.isPhone) ? 'width:auto':'width:16%;text-align:center;'}">
+                                                    <div class="fontStyle HLspace" title="RADL">RADL</div>
+                                                </th>
+                                               <th style="width:33%;text-align:center;">
+                                                    <div class="fontStyle HLspace" title="Products">Products</div>
+                                                </th>
+                                                <th>
+                                                    <div class="fontStyle HLspace" title="Actions" style="text-align:center;">Actions</div>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <aura:iteration items="{!v.paginatedAccounts}" var="account">
+                                                <tr class="tablerowodd">
+                                                    <td class="slds-cell-wrap" style="text-align:center;">
+                                                        {!account.Name}
+                                                    </td>
+                                                    <td class="slds-cell-wrap" style="text-align:center;"> 
+                                                        {!account.streetAddress} {!account.cityName} {!account.stateName}{!account.countryName}
+                                                    </td>
+                                                    <td class="slds-cell-wrap" style="text-align:center;">
+                                                        {!account.serviceLevelDesc != null ? account.serviceLevelDesc : 'UnKnown'}
+                                                    </td>
+                                                    <td>
+                                                    <center>
+                                                        <a href="javascript:void(0);" class="underlinelink" id="{!account.accId}" onclick="{!c.addProduct}">+ Add Products</a>
+                                                        <aura:if isTrue="{!!empty(v.associatedProducts)}">
+                                                            <aura:iteration items="{!v.associatedProducts}" var="associatedProd">
+                                                                <aura:if isTrue="{!associatedProd.accountId == account.accId}">
+                                                                    <p class="removeUnderline">{!associatedProd.ProductCode},{!associatedProd.price},
+                                                                    {!associatedProd.Qty} Bags</p>
+                                                                </aura:if>
+                                                            </aura:iteration>
+                                                        </aura:if>
+                                                   
+                                                   <!-- <aura:if isTrue="{!v.triggeredAccountId == account.accId ? true :false}">
+                                                    <p class="removeUnderline">{!v.ProductWrapper.ProductCode},{!v.ProductWrapper.price},
+                        										{!v.ProductWrapper.Qty} Bags</p>
+                                                    </aura:if>-->
+                                                   
+                                                   <aura:if isTrue="{!!empty(v.selectedProducts)}">
+                                                    <c:Frontier_AssociatedProducts accountId="{!account.accId}" ProductWrapper="{!v.ProductWrapper}" selectedProducts="{!v.selectedProducts}" triggeredAccountId="{!v.triggeredAccountId}"/>
+                                                   </aura:if>
+                                                     </center>
+                                                    </td>
+                                                    <td class="slds-cell-wrap" style="text-align:center;">
+                                                        <a href="javascript:void(0);" class="underlinelink" id="{!account.accId}" onclick="{!c.removeAccount}">Remove Account</a>
+                                                    </td>
+                                                </tr>
+                                            </aura:iteration>
+                                        </tbody>
+                                    </table>
+                                </ui:scrollerWrapper>
+                                <br/> </div>
+                        </aura:if>
+                                 <div class="{!($Browser.isPhone) ? 'slds-grid slds-wrap ':'slds-grid '}" >
+                <div class="slds-p-horizontal--small slds-size--1-of-1">                
+                    <aura:if isTrue="{!($Browser.isPhone)}">
+                        <center class="vAlign btmspace btnAlign" style="Padding-bottom:10px;width:100%;">
+                            <button class="slds-button btncolorMobile BoxBorder" id="accnt2" onclick="{!c.assignProgramToAccount}">Save Plan</button>
+                            <button class="slds-button btncolorMobile BoxBorder Hspace" id="accnt3" onclick="{!c.reviewProgram}" disabled="{!v.notProgramSaved}">Review Plan</button>
+                        </center>
+                        <aura:set attribute="else">
+                            <center>
+                                <div style="padding-top:5%;">
+                                    <button class="slds-button btncolor BoxBorder"  id="accnt2" onclick="{!c.assignProgramToAccount}">Save Plan</button>
+                                    <button class="slds-button btncolor BoxBorder" id="{!v.progId}" onclick="{!c.reviewProgram}" disabled="{!v.notProgramSaved}">Review Plan</button>
+                                </div>
+                            </center>
+                        </aura:set>
+                        
+                    </aura:if>
+                </div>
+            </div> 
+                        <br></br>
+                    </div>
+                </div>
+            </div>
+        </div> 
+        
+        <!-- Hybrids -->
+        <div aria-hidden="false" id="{!v.dealerId == '' ? 'newProgramSectionId1' : v.dealerId+'_newProgramSectionId1'}"   role="dialog" class="slds-modal slds-modal--large slds-fade-in-open" style="{!($Browser.isPhone ? 'display:none;padding: 30% 20% 30% 20%;' : 'padding: 20% 20% 20% 20%;display:none;position: absolute;')}">
+            <div class="slds-modal__content " style="background-color:#F0F0F0;">
+                
+                <div class="{!($Browser.isPhone) ? 'slds-grid slds-wrap ':'slds-grid '}">
+                    <aura:if isTrue="{!v.productList != null ? (v.productList.length > 0 ?true:false) : false}">   
+                        <div class="slds-p-horizontal--small slds-size--12-of-12 slds-medium-size--12-of-12 slds-large-size--12-of-12">
+                            <p class="vAlign fontStyle fontposition">Add Hybrids and Amount</p><br/>
+                            <p class="slds-x-small-buttons--horizontal" style="float:right">
+                                <button class="slds-button slds-button--neutral" onclick="{!c.productSelection}" >OK</button>
+                                <button class="slds-button slds-button--neutral" onclick="{!c.clearSelection}" >Clear</button>
+                            </p>
+                            <center>
+                                <table>
+                                    <tbody>
+                                        <tr> 
+                                            <td>
+                                                <div class="addProductComp">
+                                                    <ui:inputSelect aura:id="productCode" label="Select Product">
+                                                        <aura:iteration items="{!v.productList}" var="productWrap" indexVar="idx">                                                    
+                                                            <aura:if isTrue="{!idx == 0}">
+                                                                <ui:inputSelectOption text="None" label="--None--"/>
+                                                                <ui:inputSelectOption text="{!productWrap.ProductCode+':'+productWrap.productId}" label="{!productWrap.ProductCode}"/>
+                                                                <aura:set attribute="else">
+                                                                    <ui:inputSelectOption text="{!productWrap.ProductCode+':'+productWrap.productId}" label="{!productWrap.ProductCode}"/>
+                                                                </aura:set>
+                                                            </aura:if>                                                
+                                                        </aura:iteration>
+                                                    </ui:inputSelect>
+                                                </div>
+                                            </td>
+                                             <td>
+                                                 <div class="addProductComp slds-hide">
+                                                     <ui:inputSelect aura:id="Price" label="Select Price">
+                                                         <aura:iteration items="{!v.productList}" var="productWrap" indexVar="idx">
+                                                             <aura:if isTrue="{!idx == 0}">
+                                                                 <ui:inputSelectOption text="None" label="--None--"/>
+                                                                 <ui:inputSelectOption text="{!productWrap.price+':'+idx}"  label="{!productWrap.price}"/>
+                                                                 <aura:set attribute="else">
+                                                                     <ui:inputSelectOption text="{!productWrap.price+':'+idx}" label="{!productWrap.price}"/>                                                                
+                                                                 </aura:set>
+                                                             </aura:if>
+                                                         </aura:iteration>
+                                                     </ui:inputSelect>
+                                                 </div>
+                                                </td>
+                                               <td>
+                                                   <div class="addProductComp">
+                                                       <ui:inputSelect aura:id="ChargeType" label="Select Charge Type">
+                                                           <ui:inputSelectOption text="None" label="--None--"/>
+                                                           <ui:inputSelectOption text="FOC"  label="FOC"/>
+                                                           <ui:inputSelectOption text="Partial Charge" label="Partial Charge"/> 
+                                                           <ui:inputSelectOption text="Full Charge" label="Full Charge"/> 
+                                                       </ui:inputSelect>
+                                                   </div>
+                                                </td>
+                                                 <td>
+                                                     <ui:inputNumber aura:id="Qty" label="Qty" value="{!v.productQty}" class="customAddProduct"/>
+                                                </td>                                            
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </center>
+                        </div>
+                        <aura:set attribute="else">
+                            No Products Found
+                        </aura:set>
+                    </aura:if>
+                </div>
+                <div class="{!($Browser.isPhone) ? 'slds-grid slds-wrap ':'slds-grid '}">                    
+                    <div class="slds-p-horizontal--small slds-size--10-of-12 slds-medium-size--8-of-12 slds-large-size--10-of-12 btmspace"/>
+                    <div class="slds-p-horizontal--small slds-size--2-of-12 slds-medium-size--2-of-12 slds-large-size--2-of-12 btmspace btnpos vAlign" style="padding-bottom:10px">
+                       <center class="slds-hide">  <ui:button class="slds-float--right Hspace btmspace" label="+ Add" /></center> </div>
+                </div>
+            </div>            
+        </div>
+      	<div class="slds-backdrop slds-backdrop--open slds-hide" id="{!v.dealerId == '' ? 'backGroundSectionId1' : v.dealerId+'_backGroundSectionId1'}" style="display:none;"/> 
+    </div>
+    <div aura:id="userpopup"></div>
+</aura:component>

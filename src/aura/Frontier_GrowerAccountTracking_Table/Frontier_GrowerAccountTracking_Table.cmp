@@ -1,0 +1,50 @@
+<aura:component controller="sObjectRecordController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global">    
+    <aura:attribute name="object" type="String" default="Account" access="global"/>
+    
+    <!--<aura:attribute name="fields" type="String[]" default="Name,RADL_Class__c, CY_Sales__c,Monsanto_Acres__c,Monsanto_Share__c,PY_Sales_Units__c,CY_Orders_Units__c,Total_Opportunity__c, Touch_Points__c" />-->
+    <aura:attribute name="fields" type="String[]" default="Id, Name" access="global"/>
+    <aura:attribute name="page" type="integer" default="1" access="global"/>
+    <aura:attribute name="pages" type="integer" default="10" access="global"/>
+    <aura:attribute name="total" type="integer" default="200" access="global"/>
+    <aura:attribute name="accountrec" type="SObject[]" access="global" />
+    <aura:attribute name="pageSize" type="String" default="5" access="global"/>  
+    <aura:attribute name="childProductId" type="String" access="global"/>
+    <aura:attribute name="Trackingtabledetails" type="String" access="global"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler event="c:PageChange" action="{!c.pageChange}"/>
+    
+    <aura:registerEvent name="AccountNavigationEvent" type="c:Frontier_Account_Navigation_Event"/>
+    
+    <div class="slds-scrollable">
+        
+        <table class="slds-table slds-table--bordered slds-no-row-hover slds-table--product">
+            <thead>
+                <tr class="slds-text-heading--label slds-text-custom--label" style="backgroundcolor: #333333;">
+                    <th class="slds-is-sortable" scope="col">
+                       Account
+                    </th>
+                   
+                    <th scope="col">
+                        <div class="" title="oppheader">
+                           <img src="/resource/Oppheader" height="20" width="200"/>
+                        </div>
+                    </th>
+                    <th scope="col">
+                        <div class="" title="chartheader">
+                        <img src="/resource/Chartheader" height="20" width="200"/>
+                        </div>
+                    </th>
+                    
+                </tr>
+            </thead>
+            <tbody >
+                <aura:iteration items="{!v.accountrec}" var="acc">
+                    <tr>
+                        <td><a style="font-size: 15px !important;text-decoration:none">{!acc.Name}</a></td>
+                          <td><c:Frontier_GrowerTable_AcresChart accId="{!acc.Id}" /></td>	
+                    </tr>
+                </aura:iteration>
+            </tbody>
+        </table>
+    </div>
+</aura:component>

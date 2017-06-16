@@ -1,0 +1,9 @@
+.THIS .chart{
+    background:#ffffff;
+    border:#ffffff;
+    /*margin-left:40px;*/
+}
+.THIS ul li {
+    display:inline;
+    padding-left : 5%;
+}

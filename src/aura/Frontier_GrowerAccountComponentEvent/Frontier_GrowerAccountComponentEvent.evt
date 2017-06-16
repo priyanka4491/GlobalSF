@@ -1,0 +1,6 @@
+<aura:event type="COMPONENT">
+    <aura:attribute name="accIdSapIdAccCommId" type="String"/>
+    <aura:attribute name="tabScopeNo" type="String" access="global" />
+    <aura:attribute name="businessRole" type="String" access="global" />
+    <aura:attribute name="componentName" type="String" access="global" />
+</aura:event>

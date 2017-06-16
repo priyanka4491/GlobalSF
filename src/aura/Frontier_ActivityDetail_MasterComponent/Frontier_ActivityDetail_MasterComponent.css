@@ -1,0 +1,30 @@
+@media  all and (min-width: 1200px) { 
+    .THIS .divWidth {
+        width:66%
+    }
+}
+
+@media  all and (min-width: 769px) and (max-width:1024px) { 
+	.THIS .divWidth {
+        width:66%
+    }
+}
+
+.THIS.navbar-defaults {
+    background-color: rgba(241, 241, 241, 1);
+    border-color: rgba(241, 241, 241, 1);
+}
+
+.THIS.bodyContent{
+    background-color: #e4e4e4;
+}
+.THIS .BoxBorder{
+    border-radius:0px;
+}
+.THIS .btncolor{
+    background-color:#808080;
+    color:white;
+    width:200px;
+    height:45px;
+    
+}

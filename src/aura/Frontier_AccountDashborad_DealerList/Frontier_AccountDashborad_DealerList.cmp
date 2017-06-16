@@ -1,0 +1,68 @@
+<aura:component controller="Frontier_DealerDashboardController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    <aura:handler event="c:PageChange" action="{!c.PageChange}"/>
+    <aura:attribute name="page" type="integer" default="1" access="global"/>
+    <aura:attribute name="pages" type="integer" default="10" access="global"/>
+    <aura:attribute name="total" type="integer" default="200" access="global"/>
+    <aura:attribute name="pageSize" type="String" default="5" access="global"/> 
+    <aura:attribute name="crop" type="String" access="global"/>
+    <aura:attribute name="season" type="String" access="global"/>
+    <aura:attribute name="accType" type="String" access="global" />
+   <aura:attribute name="accountsList" type="Frontier_DealerDashboardController.DealerWrapper[]" access="global"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+        <div class="slds-grid">
+        <div class="slds-col"> 
+            <p class="headingstyle">Dealers</p>
+        </div>	
+        <div class="slds-col">
+            <div class="slds-text-align--right"> 
+                  <ui:inputSelect class="form-control inputSelect" aura:id="visit" 
+                                change="{!c.visitSelectChange}">&nbsp;
+                    <ui:inputSelectOption text="7" label="Visited in Last 7 Days"/>
+		    <ui:inputSelectOption text="30" label="Over 1 Month Since Last Visit"/>	
+                </ui:inputSelect>
+            </div>
+</div>
+    </div>
+    <div class="slds-scrollable table" style="{!($Browser.isPhone) ? 'padding-top:10px;padding-left:10px;':'padding-top:10px;padding-left:10px;'}">
+            <ui:scrollerWrapper >
+                <table class="slds-table slds-no-row-hover slds-table--product slds-table--fixed-layout">
+                    <thead>
+                        <tr>
+                            <th class="slds-cell-wrap slds-is-sortable lAlign theadStyle" id="DealerName" >
+                                <div title="Dealer Name"><b>Dealer Name</b></div>
+                            </th>
+                            <th class="slds-cell-wrap slds-is-sortable lAlign theadStyle" id="LastVisited" >
+                                <div title="Last Visited"><b>Last Visited</b></div>
+                            </th>
+                            <th class="slds-is-sortable lAlign theadStyle" id="Visits">
+                                <div title="2017 Visits"><b>Visits</b></div>
+                            </th>  
+                            <th class="slds-is-sortable lAlign theadStyle" id="RADL">
+                                <div title="RADL"><b>RADL</b></div>
+                            </th>                                        
+                            
+                        </tr>
+                    </thead>
+                    <tbody id="data">
+                        <aura:iteration items="{!v.accountsList}" var="account" indexVar="idx">
+                            <tr class="{!mod(idx,2) == 0 ?'even':'odd'}">
+                                
+                                <td class="slds-cell-wrap">{!account.accountName}</td>
+                                <td class="slds-cell-wrap">{!account.accTouchpointDate}</td>
+                                <td class="slds-cell-wrap">{!account.accTouchpointCount}</td>
+                                <td class="slds-cell-wrap">{!account.accountRADL}</td>
+                                
+                            </tr>
+                        </aura:iteration>
+                        
+                    </tbody>
+                </table>
+            </ui:scrollerWrapper>
+        </div>
+    <br></br>
+    <center>
+            <c:Paginator page="{!v.page}" pages="{!v.pages}" total="{!v.total}" compName='DealerDashboardList'/>
+        </center>
+	
+</aura:component>

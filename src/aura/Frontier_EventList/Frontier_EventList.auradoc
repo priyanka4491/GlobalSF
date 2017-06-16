@@ -1,0 +1,8 @@
+<aura:documentation>
+	<aura:description>
+    This component displays the list of visits based on the date when the visits gets captured in GME
+    </aura:description>
+	<aura:example name="sorting" ref="c:Frontier_SvgIcon_Sorting" label="Label">
+		This component is used to render the sorting icon based on the sort order
+	</aura:example>
+</aura:documentation>

@@ -1,0 +1,43 @@
+<aura:component controller="Frontier_AccountController" access="Global">    
+   
+    <!-- Add the "scoping" element to activate SLDS on components
+         that we add inside it. -->
+    <aura:attribute name="CropData" type="String" default="General" access="global"/>
+    <aura:attribute name="accId" type="Id" access="global"/>
+    <aura:attribute name="SalesOrder" type="Object" access="global"/>
+    <aura:attribute name="SalesDetailResponse" type="String" access="global"/>
+    <ltng:require scripts="{!$Resource.ChartJs}" styles="{!join(',',$Resource.SLDS + '/assets/styles/salesforce-lightning-design-system.min.css')}" afterScriptsLoaded="{!c.loadChart}"/>
+    
+    
+    <div class="slds">        
+        <div style="" role="banner">
+            <div class="slds-grid slds-wrap slds-grid--pull-padded ">                    
+                <div class="slds-col--padded chartAlignment slds-small--size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2" >
+                    
+                    <div class="slds-box slds-text-align--center white chart">
+                        <div class="slds-text-heading--medium" style="background:white;padding-bottom: 14px;"><center style="padding-top:5%;"><H5>Sales by Crop (Units)</H5></center>
+                        </div>
+                        <ul>
+                            <li><button type="button" class="slds-button slds-button--neutral slds-is-selected" onclick="{!c.getCropDetails}" id="Corn" >Corn</button> 
+                            </li>
+                            <li>
+                                <button type="button" class="slds-button slds-button--neutral slds-is-selected" onclick="{!c.getCropDetails}" id="Soy" >Soy</button> 
+                            </li>
+                        </ul>
+                        <div style="height:20px;"></div>
+                        <div id="chartDiv">
+                            <canvas aura:id="largeChart" id="myChart" class="myChartLarge" />
+                            <div class="SalesUsOrderCropBottomHeight"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-col--padded slds-small--size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 " >
+                    <div class="slds-x-small-show-only"><div style="height:16px"></div></div>
+                    <div class="bggrey slds-text-align--center white background">
+                        <c:Frontier_SalesOrderbyCrop CropData="{!v.CropData}" SalesOrder="{!v.SalesOrder}"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+</aura:component>

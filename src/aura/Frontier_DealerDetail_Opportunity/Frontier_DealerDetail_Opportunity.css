@@ -1,0 +1,15 @@
+.THIS .heading {
+	margin-left: 50px;
+    color:#666666;
+}
+.THIS .canvasPositionlast{
+    position:absolute;
+    width:100% !important;
+    height:229px !important;
+}
+
+.THIS .canvasPosition{
+    position:absolute;
+    width:100% !important;
+    height:207px !important; 
+}

@@ -1,0 +1,11 @@
+<aura:component implements="force:appHostable" access="GLOBAL">
+    <aura:attribute name="containerId" type="String" />
+    <aura:attribute name="containerValue" type="String" />
+    <aura:attribute name="toggleValue" type="String" default="Show More"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <div id="{!'container'+containerId}" class="text-content short-text">
+    <ui:outputText value="{!v.containerId}"/> 
+    <ui:outputText value="{!v.containerValue}"/> 
+    </div>
+	<ui:outputText aura:id="{!containerId}" value="{!v.toggleValue}" click="{!c.toggleEvent}"/>
+</aura:component>

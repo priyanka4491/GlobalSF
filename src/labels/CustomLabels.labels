@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>Bayer_s_Demo_User</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Bayer&apos;s Demo User</shortDescription>
+        <value>0052C000000KnV6QAK</value>
+    </labels>
+    <labels>
+        <fullName>External_Data_CROP_Quantity_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>External Data CROP Quantity Error</shortDescription>
+        <value>Sorry!  Your Entered Customer 360 Crop Quantity exceeds the available Total Quantity</value>
+    </labels>
+    <labels>
+        <fullName>GME_CROP_Quantity_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>GME CROP Quantity Error</shortDescription>
+        <value>Sorry! Your Entered Crop Quantity exceeds the available Total Quantity</value>
+    </labels>
+    <labels>
+        <fullName>SalesRep_Data_CROP_Quantity_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SalesRep Data CROP Quantity Error</shortDescription>
+        <value>Sorry!  Your Entered SFDC Crop Quantity exceeds the available Total Quantity</value>
+    </labels>
+    <labels>
+        <fullName>TaskReportUrl</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>TaskReportUrl</shortDescription>
+        <value>/00O2C000000JQsg</value>
+    </labels>
+    <labels>
+        <fullName>Update_Farming_Area_Alert</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Update Farming Area Alert</shortDescription>
+        <value>Please update Total Area for Current FY</value>
+    </labels>
+    <labels>
+        <fullName>VisitReportUrl</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>VisitReportUrl</shortDescription>
+        <value>/00O2C000000VCSg</value>
+    </labels>
+</CustomLabels>

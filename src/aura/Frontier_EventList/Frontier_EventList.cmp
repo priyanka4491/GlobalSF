@@ -1,0 +1,278 @@
+<aura:component controller="Frontier_EventListController" implements="force:appHostable" access="global">    
+    <style>
+        .slds-context-bar__item.slds-is-active {
+        border-left: 1px solid rgb(216, 221, 230);
+        border-right: 1px solid rgb(216, 221, 230);
+        border-bottom-color: rgb(247, 249, 251);
+        color: black;
+        font-weight: bold;
+        }
+    </style>
+    <ltng:require styles="{!$Resource.SLDS +
+                          '/assets/styles/salesforce-lightning-design-system.css'}"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="VisitDataList" type="Object[]" access="global"/>
+    
+    <aura:handler event="c:PageChange" action="{!c.pageChange}"/>
+    <aura:attribute name="page" type="integer" default="1" access="global"/>
+    <aura:attribute name="pages" type="integer" default="10" access="global"/>
+    <aura:attribute name="total" type="integer" default="200" access="global"/>
+    <aura:attribute name="pageSize" type="String" default="10" access="global"/> 
+    <aura:attribute name="SortByName" type="String" default="" access="global"/>
+    <aura:attribute name="SortByActivityDate" type="String" default="onMouseOut" access="global"/> 
+    <aura:attribute name="SortByType" type="String" default="onMouseOut" access="global"/> 
+    <aura:attribute name="SortByAccountName" type="String" default="onMouseOut" access="global"/> 
+    <aura:attribute name="SortByCreatedBy" type="String" default="onMouseOut" access="global"/> 
+    <aura:attribute name="SortByRadl" type="String" default="onMouseOut" access="global"/>
+    <aura:attribute name="SortByTerritoryName" type="String" default="onMouseOut" access="global"/> 
+    <aura:attribute name="SortByTeam" type="String" default="onMouseOut" access="global"/> 
+    <aura:attribute name="SortByComment" type="String" default="onMouseOut" access="global"/>
+    <aura:attribute name="createdByUserIds" type="String" default="onMouseOut" access="global"/> 
+    <aura:attribute name="index" type="String" access="GLOBAL"/>
+    <aura:attribute name="toggleShowMore" type="boolean" access="GLOBAL" default="true" />
+    <aura:attribute name="toggleShowLess" type="boolean" access="GLOBAL" default="false" />
+    <aura:attribute name="PrevIndex" type="String" default="" access="GLOBAL"/>
+    <aura:attribute name="isMobileDevice" type="boolean" default="false" access="GLOBAL"/>
+    <aura:attribute name="identifyEvtList" type="boolean" default="" access="GLOBAL" />
+    
+    
+    
+    
+    
+    <aura:attribute name="triggeredField" type="String" default="" access="global"/>
+    <aura:attribute name="prevId" type="String" default="" access="global"/>
+    <aura:attribute name="isExport" type="Boolean" default="false" access="global"/>
+    <aura:attribute name="userId" type="String" default="" access="global"/>
+    <aura:attribute name="territoryId" type="String" default="" access="global"/>
+    <aura:attribute name="usersInitialLoad" type="Boolean" default="false" access="global"/>
+    
+    
+    <aura:attribute name="SortByField" type="Frontier_SortDirection" default="" access="global"/>
+    <aura:attribute name="ActivityDate" type="Boolean" default="false" access="global"/>
+    <aura:attribute name="Type" type="Boolean" default="false" access="global"/>
+    
+    <center><h4 class="slds-text-heading--large" style="Padding-top:10px"><b>Visit List</b></h4></center>
+    
+    <div class="slds-grid"  style="margin-top:10px;float:right">
+        <div class="slds-col slds-col--padded slds-small--size--1-of-2 slds-medium-size--1-of-3 slds-large-size--1-of-5 slds-align-middle" style="Padding-bottom:5px;">
+            <center>
+                <span>
+                    <ui:button aura:id="button" buttonTitle="Click here to download" class="button slds-button--brand" label="Send Email" press="{!c.exportData}" />
+                </span>
+            </center>
+        </div>
+        <div class="slds-col--padded slds-size--1-of-1 slds-small--size--1-of-2 slds-medium-size--1-of-3 slds-large-size--1-of-5">
+            <button class="slds-button slds-button--brand" onclick="{!c.clearSearchValues}">Clear</button>
+        </div>
+        <div aura:id="userpopup"></div>
+    </div>
+    <aura:if isTrue="{!($Browser.formFactor) != 'PHONE'}">
+        <div class="{!($Browser.isPhone) ? 'slds-grid slds-wrap':'slds-grid'}" style="margin-top:50px">
+            <div class="slds-col slds-col--padded slds-size--1-of-1 slds-small--size--1-of-1 slds-medium-size--1-of-8 slds-large-size--1-of-8" style="Padding-bottom:10px"> 
+                <div class="slds-text-heading--medium customHeading">Total Records</div>
+                <h6>{!v.total}</h6>
+            </div>
+            <div class="slds-col slds-col--padded slds-size--1-of-1 slds-small--size--1-of-1 slds-large-size--1-of-3 slds-medium-size--1-of-6" style="Padding-bottom:10px"> 
+                <ui:inputSelect multiple="true" class="form-control multiple multiSelect" label="Filter By Team" aura:id="TeamSort" change="{!c.filerByTeam}" />
+            </div>
+            <div class="slds-col slds-col--padded slds-size--1-of-1 slds-small--size--1-of-1 slds-large-size--1-of-3 slds-medium-size--1-of-3" style="Padding-bottom:10px"> 
+                <ui:inputSelect multiple="true" class="form-control multiple multiSelect" label="Filter By Month " aura:id="MonthSort" change="{!c.VisitFilterList}">&nbsp;   
+                    <ui:inputSelectOption text="1" label="Jan"/>    
+                    <ui:inputSelectOption text="2" label="Feb"/>  
+                    <ui:inputSelectOption text="3" label="Mar"/>
+                    <ui:inputSelectOption text="4" label="Apr"/>
+                    <ui:inputSelectOption text="5" label="May"/>
+                    <ui:inputSelectOption text="6" label="Jun"/>
+                    <ui:inputSelectOption text="7" label="Jul"/>
+                    <ui:inputSelectOption text="8" label="Aug"/>
+                    <ui:inputSelectOption text="9" label="Sep"/>
+                    <ui:inputSelectOption text="10" label="Oct"/>
+                    <ui:inputSelectOption text="11" label="Nov"/>
+                    <ui:inputSelectOption text="12" label="Dec"/>
+                </ui:inputSelect>
+            </div>
+            
+            
+            <div class="slds-col slds-col--padded slds-size--1-of-1 slds-small--size--1-of-1 slds-large-size--1-of-3 slds-medium-size--1-of-4" style="Padding-bottom:10px"> 
+                <center style="Padding-top:10px">
+                    <c:Paginator page="{!v.page}" pages="{!v.pages}" total="{!v.total}"/>
+                </center>
+            </div>
+            <div  class="slds-col slds-col--padded slds-size--1-of-1 slds-small--size--1-of-1 slds-large-size--1-of-6" style="Padding-bottom:5px"> 
+                <ui:inputSelect class="form-control inputSelect" label="Sort By RADL " aura:id="sortByRADLList" 
+                                change="{!c.VisitFilterList}">&nbsp;
+                    <ui:inputSelectOption text="None" label="-- All --"/>
+                    <ui:inputSelectOption text="Acquire" label="Acquire"/>
+                    <ui:inputSelectOption text="Develop" label="Develop"/>
+                    <ui:inputSelectOption text="Retain" label="Retain"/>
+                    <ui:inputSelectOption text="Light Touch" label="Light Touch"/>
+                    <ui:inputSelectOption text="Unknown" label="Unknown"/> 
+                    <ui:inputSelectOption text="Other" label="Other"/>
+                </ui:inputSelect>                
+            </div>
+            
+            <div class="slds-col slds-col--padded slds-size--1-of-1 slds-small--size--1-of-1 slds-large-size--1-of-3 slds-medium-size--1-of-6" style="Padding-bottom:10px"> 
+                <ui:inputSelect multiple="true" class="form-control multiple multiSelect" label="Filter By User" aura:id="createdUser" change="{!c.filerByCreatedUser}" />
+            </div>
+            
+            
+            
+            <div class="slds-x-small-show-only"> <div style="height:48px;"></div></div>                 
+            
+        </div>
+    </aura:if>
+    <aura:if isTrue="{!($Browser.formFactor) == 'PHONE'}">
+        <div class="{!($Browser.isPhone) ? 'slds-grid slds-wrap':'slds-grid'}" style="margin-top:50px">
+            <div class="slds-col slds-col--padded slds-size--1-of-2 slds-medium-size--1-of-3" style="Padding-bottom:10px"> 
+                <div class="slds-text-heading--medium">Total Records</div> 
+                <h6>{!v.total}</h6>
+            </div>
+            <div class="slds-col slds-col--padded slds-size--1-of-1 slds-small--size--1-of-1 slds-large-size--1-of-3 slds-medium-size--1-of-6" style="Padding-bottom:10px"> 
+                <ui:inputSelect multiple="true" class="form-control multiple multiSelect" label="Sort By Team" aura:id="TeamSort" change="{!c.filerByTeam}" />
+            </div>
+            <div class="slds-col slds-col--padded slds-size--1-of-1 slds-small--size--1-of-1 slds-medium-size--1-of-3 slds-large-size--1-of-5" style="Padding-bottom:10px"> 
+                <ui:inputSelect multiple="true" class="form-control multiple multiSelect" label="Sort By Month " aura:id="MonthSort" change="{!c.VisitFilterList}">&nbsp;   
+                    <ui:inputSelectOption text="1" label="Jan"/>    
+                    <ui:inputSelectOption text="2" label="Feb"/>  
+                    <ui:inputSelectOption text="3" label="Mar"/>
+                    <ui:inputSelectOption text="4" label="Apr"/>
+                    <ui:inputSelectOption text="5" label="May"/>
+                    <ui:inputSelectOption text="6" label="Jun"/>
+                    <ui:inputSelectOption text="7" label="Jul"/>
+                    <ui:inputSelectOption text="8" label="Aug"/>
+                    <ui:inputSelectOption text="9" label="Sep"/>
+                    <ui:inputSelectOption text="10" label="Oct"/>
+                    <ui:inputSelectOption text="11" label="Nov"/>
+                    <ui:inputSelectOption text="12" label="Dec"/>
+                </ui:inputSelect>
+            </div>
+            
+            <div class="slds-col slds-col--padded slds-size--1-of-1 slds-small--size--1-of-1 slds-large-size--1-of-3 slds-medium-size--1-of-6" style="Padding-bottom:10px"> 
+                <ui:inputSelect multiple="true" class="form-control multiple multiSelect" label="Sort By User" aura:id="createdUser" change="{!c.filerByCreatedUser}" />
+            </div>
+            
+            
+            <div class="slds-col slds-col--padded slds-size--1-of-1 slds-small--size--1-of-1 slds-medium-size--1-of-3 slds-large-size--1-of-6" style="Padding-bottom:10px"> 
+                <center style="Padding-top:10px">
+                    <c:Paginator page="{!v.page}" pages="{!v.pages}" total="{!v.total}"/>
+                </center>
+            </div>  
+            <div  class="slds-col slds-col--padded slds-size--1-of-1 slds-small--size--1-of-1 slds-large-size--1-of-6" style="Padding-bottom:5px"> 
+                <ui:inputSelect class="form-control inputSelect" label="Sort By RADL " aura:id="sortByRADLList" 
+                                change="{!c.VisitFilterList}">&nbsp;
+                    <ui:inputSelectOption text="None" label="-- All --"/>
+                    <ui:inputSelectOption text="Acquire" label="Acquire"/>
+                    <ui:inputSelectOption text="Develop" label="Develop"/>
+                    <ui:inputSelectOption text="Retain" label="Retain"/>
+                    <ui:inputSelectOption text="Light Touch" label="Light Touch"/>
+                    <ui:inputSelectOption text="Unknown" label="Unknown"/> 
+                    <ui:inputSelectOption text="Other" label="Other"/>
+                </ui:inputSelect>                
+            </div>
+            
+        </div>
+    </aura:if>
+    <div >
+        
+        <ui:scrollerWrapper class="sWrap">
+            <table class="slds-table slds-table--bordered slds-table--cell-buffer slds-table--product VisitTable">
+                <thead>
+                    <tr class="slds-text-title--caps">
+                        <th scope="col" class="slds-is-sortable" id="AccountName"  onclick="{!c.sortDirection}">CUSTOMER/ACCOUNT
+                            <c:Frontier_SvgIcon_Sorting SortOrder="{!v.SortByField.AccountName == 'What.Name-ASC'?'ASC':'DESC'}" eventType="{!v.SortByAccountName}"/>
+                        </th>
+                        
+                        <th scope="col" class="slds-is-sortable" id="Type" onclick="{!c.sortDirection}">ACTIVITY TYPE
+                            <c:Frontier_SvgIcon_Sorting SortOrder="{!v.SortByField.Type == 'Type-ASC'?'ASC':'DESC'}" eventType="{!v.SortByType}"/>
+                        </th>
+                        
+                        <th scope="col" class="slds-is-sortable" id="CreatedBy" onclick="{!c.sortDirection}">CREATED BY
+                            <c:Frontier_SvgIcon_Sorting SortOrder="{!v.SortByField.CreatedBy == 'CreatedBy.Name-ASC'?'ASC':'DESC'}" eventType="{!v.SortByCreatedBy}"/>
+                        </th>
+                        <th scope="col" class="slds-is-sortable" id="ActivityDate" onclick="{!c.sortDirection}">DATE
+                            <c:Frontier_SvgIcon_Sorting SortOrder="{!v.SortByField.ActivityDate == 'ActivityDate-ASC'?'ASC':'DESC'}"  eventType="{!v.SortByActivityDate}"/>
+                        </th>
+                        <th  scope="col" class="slds-is-sortable" id="Comment" onclick="{!c.sortDirection}">COMMENTS
+                            <c:Frontier_SvgIcon_Sorting SortOrder="{!v.SortByField.Comment == 'Comment-ASC'?'ASC':'DESC'}" eventType="{!v.SortByComment}"/>
+                        </th>
+                        <th  scope="col" class="slds-is-sortable" id="Radl" onclick="{!c.sortDirection}">RADL
+                            <c:Frontier_SvgIcon_Sorting SortOrder="{!v.SortByField.Radl == 'Service_Level_Class_Descr__c-ASC'?'ASC':'DESC'}" eventType="{!v.SortByRadl}"/>
+                        </th>
+                        <th  scope="col" class="slds-is-sortable" id="TerritoryName" onclick="{!c.sortDirection}">TERRITORY NAME
+                            <c:Frontier_SvgIcon_Sorting SortOrder="{!v.SortByField.TerritoryName == 'Name-ASC'?'ASC':'DESC'}" eventType="{!v.SortByTerritoryName}"/>
+                        </th>
+                        <th  scope="col" class="slds-is-sortable" id="Team" onclick="{!c.sortDirection}">TEAM
+                            <c:Frontier_SvgIcon_Sorting SortOrder="{!v.SortByField.Team == 'Team-ASC'?'ASC':'DESC'}" eventType="{!v.SortByTeam}"/>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="data"> 
+                    <aura:iteration items="{!v.VisitDataList}" var="visitData">
+                        <tr>                                  
+                            <td>
+                                <div class="slds-truncate" title="{!visitData.What.Name}">{!visitData.CompanyName}</div>
+                            </td>
+                            <td>
+                                <div class="slds-truncate" title="{!visitData.Type}">{!visitData.Type}</div>
+                                
+                                
+                            </td>
+                            <td><div class="slds-truncate" title="{!visitData.CreatedBy.Name}">{!visitData.CreatedBy}</div>
+                                
+                                
+                            </td>
+                            <td>
+                                <div class="slds-truncate" title="{!visitData.ActivityDate}">{!visitData.ActivityDate}</div>
+                                
+                            </td>
+                            <td>
+                               <aura:if isTrue="{!(($Browser.formFactor) == 'PHONE' || ($Browser.formFactor) == 'TABLET' )}">
+                                    <aura:if isTrue="{!visitData.Description.length >= 10}">
+                                        <div id="{!'showmore'+visitData.eventId}" class="slds-show">
+                                            <span class="truncateText slds-cell-wrap"><c:Frontier_Truncatetext truncateLength="10" inputText="{!visitData.Description}" identifyEvtList="frmEvntList"></c:Frontier_Truncatetext></span>
+                                            <span class="truncateText">...&nbsp;</span>
+                                            <span class="showMoreLink" id="{!visitData.eventId + 'showeventId'}" onclick="{!c.toggleShowLess}">Show More</span>
+                                        </div>
+                                        <div id="{!'showless'+visitData.eventId}" class="slds-hide">
+                                            <span class="slds-cell-wrap">{!visitData.Description}</span><br></br>
+                                            <span class="showMoreLink" id="{!visitData.eventId + 'lesseventId'}" onclick="{!c.toggleShowLess}">Show More</span>
+                                        </div>
+                                        <aura:set attribute="else">
+                                            <ui:outputTextArea value="{!visitData.Description}"/>
+                                        </aura:set>
+                                    </aura:if>   
+                                   <aura:set attribute="else">
+                                       <aura:if isTrue="{!visitData.Description.length >= 40}">
+                                        <div id="{!'showmore'+visitData.eventId}" class="slds-show">
+                                            <span class="truncateText"><c:Frontier_Truncatetext truncateLength="40" inputText="{!visitData.Description}" identifyEvtList="frmEvntList"></c:Frontier_Truncatetext></span>
+                                            <span class="truncateText">.....&nbsp;</span>
+                                            <span class="showMoreLink" id="{!visitData.eventId + 'showeventId'}" onclick="{!c.toggleShowLess}">Show More</span>
+                                        </div>
+                                        <div id="{!'showless'+visitData.eventId}" class="slds-hide">
+                                            <span class="slds-cell-wrap">{!visitData.Description}</span><br></br>
+                                            <span class="showMoreLink" id="{!visitData.eventId + 'lesseventId'}" onclick="{!c.toggleShowLess}">Show More</span>
+                                        </div>
+                                        <aura:set attribute="else">
+                                            <ui:outputTextArea value="{!visitData.Description}"/>
+                                        </aura:set>
+                                    </aura:if> 
+                                   </aura:set>
+                                </aura:if>
+                            </td>
+                            <td>
+                                <div class="slds-truncate" title="{!visitData.RADL_Class}">{!visitData.RADL_Class}</div>
+                            </td>
+                            <td>
+                                <div class="slds-truncate" title="{!visitData.TerritoryName}">{!visitData.TerritoryName}</div>
+                            </td>
+                            
+                            <td>
+                                <div class="slds-truncate" title="{!visitData.Team}">{!visitData.Team}</div>
+                            </td>
+                        </tr>
+                    </aura:iteration>
+                </tbody>
+            </table>
+        </ui:scrollerWrapper>
+    </div>
+</aura:component>

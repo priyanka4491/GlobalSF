@@ -1,0 +1,5 @@
+<aura:documentation>
+	<aura:description>
+    		This component is used to render the sorting icon based on the sort order.
+    </aura:description>	
+</aura:documentation>

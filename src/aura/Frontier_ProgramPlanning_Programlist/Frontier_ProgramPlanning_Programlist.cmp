@@ -1,0 +1,96 @@
+<aura:component controller="Frontier_ProgramController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    <ltng:require styles="{!$Resource.SLDS +
+                          '/assets/styles/salesforce-lightning-design-system.css'}"/> 
+    <aura:attribute name="programList" type="Frontier_ProgramController.ProgramWrapper[]" access="Global" />
+    <aura:attribute name="dealerId" type="Id" default="" access="global"/>
+    
+    <aura:handler event="c:PageChange" action="{!c.pageChange}"/>
+    <aura:attribute name="page" type="String" default="1" access="global"/>
+    <aura:attribute name="pages" type="String" default="10" access="global"/>
+    <aura:attribute name="total" type="integer" default="200" access="global"/>
+    <aura:attribute name="pageSize" type="String" default="10" access="global"/> 
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <div class="{!($Browser.isPhone) ? 'slds-grid slds-wrap vAlign':'slds-grid vAlign'}">
+        <div class="slds-p-horizontal--small slds-size--12-of-12 slds-size--12-of-12 slds-medium-size--12-of-12 slds-large-size--`12-of-12 " style="padding-top:10px;">
+            
+            <div class="slds-scrollable " style="padding:20px 20px 20px 20px;background-color:#FFFFFF;" >
+                <ui:scrollerWrapper >
+                    <table class="slds-table  slds-no-row-hover slds-table--product VisitTable slds-table--fixed-layout alignCenter thalignCenter"  >
+                        <thead>
+                            <tr>
+                                <th>
+                                    <div class="fontStyle"  title="Program Name"><b>Program Name</b></div>
+                                </th>
+                                <th>
+                                    <div class="fontStyle" title="Budget Status"><b>Budget Status</b></div>
+                                </th>
+                                <th>
+                                    <div class="fontStyle" title="Execution Status"><b>Execution Status</b></div>
+                                </th>
+                                <th>
+                                    <div class="fontStyle" title="Planning Status"><b>Planning Status</b></div>
+                                </th>
+                                <th>
+                                    <div class="fontStyle" title="RADL"><b>RADL</b></div>
+                                </th>
+                                <th>
+                                    <div class="fontStyle" title="Volume Growth"><b>Volume Growth</b></div>
+                                </th>
+                                <th>
+                                    <div class="fontStyle" title="% Growth"><b>%Growth</b></div>
+                                </th>
+                                <th>
+                                    <div class="fontStyle" title="% CS Growth"><b>% CS Growth</b></div>
+                                </th>
+                                <th>
+                                    <div class="fontStyle" title="Program Coverage"><b>Program Coverage</b></div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <aura:if isTrue="{!v.programList.length > 0}">
+                            <aura:iteration items="{!v.programList}" var="program" indexVar="idx">
+                                 <tr class="tablerowodd" > 
+                                  <center>  <td>
+                                      <a href="javascript:void(0);" onclick="{!c.programNavigation}" id="{!program.progId +','+v.dealerId +','+ program.acctTarget}"><p class="slds-text-wrap">{!program.progName}</p></a>
+                                    </td> </center>
+                                    <td>
+                                        <p class="txtcolor">Available:{!program.available}</p>
+                                        <p>Allocated:{!program.allocated}</p>
+                                        <p>Consumed:{!program.consumed}</p>
+                                    </td> 
+                                    <td>
+                                        <p>Not Started:{!program.notstarted}</p>
+                                        <p>In Execution:{!program.inExec}</p>
+                                        <p>Completed:{!program.completed}</p>
+                                        <p>Cancelled:{!program.cancelled}</p>
+                                    </td>
+                                    <td><p>Planned:{!program.planned}</p>
+                                        <p>Post-Plan:{!program.postplan}</p>
+                                    </td>
+                                    <td><p>R:{!program.retaincount}</p>
+                                        <p>A:{!program.acquirecount}</p>
+                                        <p>D:{!program.developcount}</p>
+                                        <p>L:{!program.ltcount}</p>
+                                    </td>
+                                    <td>{!program.volumegrowth}</td>
+                                    <td>{!program.growthPer != null ? program.growthPer  +'' +'%':''}</td>
+                                    <td>{!program.CSGrowth != null ? program.CSGrowth +''+ '%':''} </td>
+                                    <td>{!program.programcov}</td>
+                                    </tr>
+                            </aura:iteration> 
+                                </aura:if>
+                        </tbody>
+                    </table>
+                </ui:scrollerWrapper>
+            </div>
+            <br></br>
+            <center>
+                <c:Paginator page="{!v.page}" pages="{!v.pages}" total="{!v.total}" compName='ProgramsList'/>
+            </center>
+        </div></div>
+    
+    
+    <br></br>
+</aura:component>

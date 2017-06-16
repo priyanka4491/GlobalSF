@@ -1,0 +1,456 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Business Roles associated with an Account in which additional Business Role specific attributes need to be captured.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Account_SFID__c</fullName>
+        <description>Account related to the Business Role</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Account related to the Business Role</inlineHelpText>
+        <label>Account</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Account Business Roles</relationshipLabel>
+        <relationshipName>Business_Roles</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Archive_Date__c</fullName>
+        <description>Holds the date when the record was last marked for Archival.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Date Archive Indicator was set to &quot;Y&quot;.</inlineHelpText>
+        <label>Archive Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Archive_Ind__c</fullName>
+        <defaultValue>&quot;N&quot;</defaultValue>
+        <description>&quot;Y&quot; Indicates that the record is ready for archival.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>&quot;Y&quot; indicates record is ready for archival.</inlineHelpText>
+        <label>Archive Indicator</label>
+        <length>1</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Business_Unit_Descr__c</fullName>
+        <description>Busines Unit/Line of Business associated with the Role.  Not all areas will have need to call out a specific line of business.  Example: &quot;Ag Chem&quot;, &quot;National&quot;, &quot;Channel&quot;, etc.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Busines Unit/Line of Business associated with the Role.</inlineHelpText>
+        <label>Business Unit</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>National</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Seed and Traits</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Agroceres</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Customer</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>HC_Integration_Key__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <description>This field is for the temporary storage of an external id for the Heroku Connect Integration.  It will be used as necessary for parent-child relationships.  Further integrations will be via the Salesforce Record ID.</description>
+        <externalId>true</externalId>
+        <inlineHelpText>This field is for the temporary storage of an external id for the Heroku Connect Integration.  It will be used as necessary for parent-child relationships.  Further integrations will be via the Salesforce Record ID.</inlineHelpText>
+        <label>Heroku Connect Integration Key</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>Parent_SFID__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Business Unit/Business Role etc. related to Account Business Role</description>
+        <externalId>false</externalId>
+        <label>Parent Account Business Role</label>
+        <referenceTo>Account_Business_Role__c</referenceTo>
+        <relationshipLabel>Account Business Roles</relationshipLabel>
+        <relationshipName>Account_Business_Roles</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Role_Category_Descr__c</fullName>
+        <description>Company level description of an Account&apos;s relationship to Monsanto.  Terminiology to be determined by Monsanto Global business.  For example, they may use the term &quot;Partner&quot; to represent an account that is the intermediary between Monsanto and the end consumer regardless of the specific business model.
+
+Per discussion with Tony Rizzo, recommend to stick with ACS terminology of &quot;Partner&quot; and &quot;Customer&quot;.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Company high level description of an Account&apos;s relationship to Monsanto.</inlineHelpText>
+        <label>Business Role Category</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>--None--</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Intermediary</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Consumer</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Role_Descr__c</fullName>
+        <description>Finer role definition of Account&apos;s relationship to Monsanto.  Terminology to be determined.  For example, &quot;Partner&quot; at the company level may be refered to within the region as a &quot;Agent&quot;, &quot;Dealer&quot;, &quot;Retailer&quot;, &quot;Distributer&quot;, etc.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Company description of an Account&apos;s relationship to Monsanto.</inlineHelpText>
+        <label>Business Role</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Partner</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Customer</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>SAP_ID__c</fullName>
+        <description>TEMPORARY ONLY - Long term solution is to use an Account Identifier object since the same account may have multiple SAP ID&apos;s associated with it.</description>
+        <externalId>true</externalId>
+        <inlineHelpText>TEMPORARY ONLY - Long term solution is to use an Account Identifier object since the same account may have multiple SAP ID&apos;s associated with it.</inlineHelpText>
+        <label>SAP ID</label>
+        <length>20</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Service_Level_Class_Descr__c</fullName>
+        <description>&quot;Retain&quot;, &quot;Aquire&quot;, &quot;Develop&quot;, or &quot;Light Touch&quot; Sales and Marketing Service Level Classification assigned to the Account Business Role.  This is used to help the user determine the level of service requirements for the specific account.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>&quot;Retain&quot;, &quot;Aquire&quot;, &quot;Develop&quot;, or &quot;Light Touch&quot; Sales and Marketing Service Level Classification assigned to the Account Business Role</inlineHelpText>
+        <label>RADL</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Acquire</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Develop</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Light Touch</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Other</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Retain</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Unknown</fullName>
+                    <default>true</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <label>Account Business Role</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>RECORDTYPE</columns>
+        <columns>Account_SFID__c</columns>
+        <columns>Role_Category_Descr__c</columns>
+        <columns>Role_Descr__c</columns>
+        <columns>Business_Unit_Descr__c</columns>
+        <columns>SAP_ID__c</columns>
+        <columns>Service_Level_Class_Descr__c</columns>
+        <columns>LAST_UPDATE</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <displayFormat>ABR-{0}</displayFormat>
+        <label>Business Role Identifier</label>
+        <trackHistory>false</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Account Business Roles</pluralLabel>
+    <recordTypeTrackHistory>false</recordTypeTrackHistory>
+    <recordTypes>
+        <fullName>Account_Business_Role_Customer</fullName>
+        <active>true</active>
+        <description>This record type is for Customer Business Role</description>
+        <label>Customer</label>
+        <picklistValues>
+            <picklist>Business_Unit_Descr__c</picklist>
+            <values>
+                <fullName>Agroceres</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Customer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>National</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Seed and Traits</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Role_Category_Descr__c</picklist>
+            <values>
+                <fullName>--None--</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Consumer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Intermediary</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Role_Descr__c</picklist>
+            <values>
+                <fullName>Customer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Partner</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Service_Level_Class_Descr__c</picklist>
+            <values>
+                <fullName>Acquire</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Develop</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Light Touch</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Retain</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Unknown</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Account_Business_Role_Default</fullName>
+        <active>true</active>
+        <description>Default Record Type</description>
+        <label>Account Business Role</label>
+        <picklistValues>
+            <picklist>Business_Unit_Descr__c</picklist>
+            <values>
+                <fullName>Agroceres</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Customer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>National</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Seed and Traits</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Role_Category_Descr__c</picklist>
+            <values>
+                <fullName>--None--</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Consumer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Intermediary</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Role_Descr__c</picklist>
+            <values>
+                <fullName>Customer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Partner</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Service_Level_Class_Descr__c</picklist>
+            <values>
+                <fullName>Acquire</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Develop</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Light Touch</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Retain</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Unknown</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+    <validationRules>
+        <fullName>Account_Business_Role_Exist_Validation</fullName>
+        <active>false</active>
+        <errorConditionFormula>OR(AND(ISPICKVAL(Role_Descr__c, &apos;Partner&apos;),
+   Account_SFID__r.Has_Dealer_Business_Role__c = True),
+AND(ISPICKVAL(Role_Descr__c, &apos;Customer&apos;),
+      Account_SFID__r.Has_Grower_Business_Role__c = True)
+)</errorConditionFormula>
+        <errorMessage>Grower or Dealer Account Business Role already exist.</errorMessage>
+    </validationRules>
+</CustomObject>

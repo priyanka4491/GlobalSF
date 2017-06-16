@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>AccountAccessLevel</fullName>
+    </fields>
+    <fields>
+        <fullName>Archive_Date__c</fullName>
+        <description>Holds the date when the record was last marked for Archival.</description>
+        <externalId>false</externalId>
+        <label>Archive Date</label>
+        <required>false</required>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Archive_Ind__c</fullName>
+        <defaultValue>&quot;N&quot;</defaultValue>
+        <description>&quot;Y&quot; Indicates that the record is ready for archival.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>&quot;Y&quot; Indicates that the record is ready for archival.</inlineHelpText>
+        <label>Archive Indicator</label>
+        <length>1</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CaseAccessLevel</fullName>
+    </fields>
+    <fields>
+        <fullName>ContactAccessLevel</fullName>
+    </fields>
+    <fields>
+        <fullName>Description</fullName>
+    </fields>
+    <fields>
+        <fullName>DeveloperName</fullName>
+    </fields>
+    <fields>
+        <fullName>Division__c</fullName>
+        <externalId>false</externalId>
+        <label>Division</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Vegetables</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Seed and Traits</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Crop Protection</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>National</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Regional</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Channel</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Kruger</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>XX</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>WestBred</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>HC_Integration_Key__c</fullName>
+        <caseSensitive>true</caseSensitive>
+        <description>This field is for the temporary storage of an external id for the Heroku Connect Integration. It will be used as necessary for parent-child relationships. Further integrations will be via the Salesforce Record ID.</description>
+        <externalId>true</externalId>
+        <inlineHelpText>This field is for the temporary storage of an external id for the Heroku Connect Integration. It will be used as necessary for parent-child relationships. Further integrations will be via the Salesforce Record ID.</inlineHelpText>
+        <label>Heroku Connect Integration Key</label>
+        <length>255</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>Name</fullName>
+    </fields>
+    <fields>
+        <fullName>OpportunityAccessLevel</fullName>
+    </fields>
+    <fields>
+        <fullName>ParentTerritory2Id</fullName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Territory2ModelId</fullName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Territory2TypeId</fullName>
+        <type>Lookup</type>
+    </fields>
+</CustomObject>

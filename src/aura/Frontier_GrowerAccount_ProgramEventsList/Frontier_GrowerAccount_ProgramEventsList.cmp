@@ -1,0 +1,118 @@
+<aura:component controller="Frontier_GrowerAccount_ProgramController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    <aura:attribute name="programEventList" type="Object[]" access="global"/>
+    <aura:attribute name="programId" type="Id" default="" access="global"/>
+    <aura:attribute name="accountId" type="Id" default="" access="global"/>
+    <aura:attribute name="growerAcc" type="Id" access="Global" />
+    <aura:attribute name="accComId" type="Id" access="Global" />
+
+    
+    
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler event="c:PageChange" action="{!c.pageChange}"/>
+    <aura:attribute name="page" type="integer" default="1" access="global"/>
+    <aura:attribute name="pages" type="integer" default="10" access="global"/>
+    <aura:attribute name="total" type="integer" default="200" access="global"/>
+    <aura:attribute name="pageSize" type="String" default="3" access="global"/> 
+    <aura:attribute name="SortByProgramEventName" type="String" default="onMouseOut" access="global"/>
+    <aura:attribute name="SortByEventActivityDate" type="String" default="onMouseOut" access="global"/> 
+    <aura:attribute name="SortByStatus" type="String" default="onMouseOut" access="global"/> 
+    <aura:attribute name="SortByPhase" type="String" default="onMouseOut" access="global"/> 
+    <aura:attribute name="triggeredField" type="String" default="" access="global"/>
+    <aura:attribute name="SortByField" type="Frontier_SortDirection" default="" access="global"/>
+    <aura:attribute name="usersInitialLoad" type="Boolean" default="false" access="global"/>
+    <aura:attribute name="prevId" type="String" default="" access="global"/>
+    <aura:attribute name="programActivityList" type="Program_Activity__c[]" default="" access="global"/>
+    <aura:registerEvent name="redirectToDealerDetail" type="c:Frontier_GrowerAccountComponentEvent"/>
+    <div aura:id="AccountDetail">
+        <div style="background-color:#808080">
+            <div class="slds-grid">
+                <div class="slds-size--6-of-12">
+                    <p class="headingstyle">Program:{!v.programEventList[0].Program_SFID__r.Name} </p>
+                </div>
+                <div class="slds-size--6-of-12" aura:id="addrssInfo">
+                    
+                </div>
+            </div>            
+        </div>
+        <div style="background-color:#ffffff">
+            <div class="slds-grid vAlign" >
+                <div class="slds-p-horizontal--small slds-size--6-of-12  slds-small-size--6-of-12 slds-medium-size--6-of-12 slds-large-size--6-of-12">
+                    <p class="tAlign fontStyle lAlign"><b>Activities ({!v.total})</b></p>
+                </div>  
+                <div class="slds-p-horizontal--small slds-size--6-of-12  slds-small-size--6-of-12 slds-medium-size--6-of-12 slds-large-size--6-of-12">
+                    <p class="rAlign tAlign"><c:svgIcon class="slds-icon slds-icon--x-small slds-icon-text-default" svgPath="{!$Resource.SLDS + '/assets/icons/utility-sprite/svg/symbols.svg#new'}" category="utility" size="x-small"  name="new" />
+                        Add New Activitiy</p>
+                </div> 
+            </div>
+            
+            <div class="slds-scrollable table" style="{!($Browser.isPhone) ? 'padding-top:10px;padding-left:10px;':'padding-top:10px;padding-left:10px;'}">
+                <ui:scrollerWrapper >
+                    <table class="slds-table  slds-no-row-hover slds-table--product">
+                        <thead>
+                            <tr>
+                                <th class="slds-cell-wrap slds-is-sortable lAlign" id="ProgramEventName"  onclick="{!c.sortDirection}">
+                                    <div title="Activity Name"><b>Activity Name<c:Frontier_SvgIcon_Sorting SortOrder="{!v.SortByField.ProgramEventName == 'Subject-ASC'?'ASC':'DESC'}" eventType="{!v.SortByProgramEventName}"/></b></div>
+                                </th>
+                                <th class="slds-is-sortable lAlign" id="Status"  onclick="{!c.sortDirection}">
+                                    <div title="Status"><b>Status <c:Frontier_SvgIcon_Sorting SortOrder="{!v.SortByField.Status == 'Status-ASC'?'ASC':'DESC'}" eventType="{!v.SortByStatus}"/></b></div>
+                                </th>
+                                <th class="slds-is-sortable lAlign" id="EventActivityDate"  onclick="{!c.sortDirection}">
+                                    <div title="Date"><b>Date <c:Frontier_SvgIcon_Sorting SortOrder="{!v.SortByField.EventActivityDate == 'TouchPoint_SFID__r.Date__c-ASC'?'ASC':'DESC'}" eventType="{!v.SortByEventActivityDate}"/></b></div>
+                                </th>
+                                <th class="slds-is-sortable lAlign" id="Phase"  onclick="{!c.sortDirection}">
+                                    <div title="Phase"><b>Phase <c:Frontier_SvgIcon_Sorting SortOrder="{!v.SortByField.Phase == 'Phase__c-ASC'?'ASC':'DESC'}" eventType="{!v.SortByPhase}"/></b></div>
+                                </th>
+                                <th class="lAlign">
+                                    <div title="Actions"><b>Actions</b></div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="data">
+                            <aura:iteration items="{!v.programEventList}" var="programEvent" indexVar="idx">
+                                <tr class="{!mod(idx,2) == 0 ?'even':'odd'}">
+                                    <td class="slds-cell-wrap">
+                                        <a href="javascript:void();" id="{!programEvent.Id +','+ programEvent.Touchpoint_SFID__c}" onclick="{!c.navigateToTouchPoints}">{!programEvent.Subject}</a>
+                                    </td>
+                                    <td class="slds-cell-wrap">
+                                        {!programEvent.Status}
+                                    </td >
+                                    <td class="slds-cell-wrap">
+                                        <span style="{(!programEvent.TouchPoint__r.Date__c != null ? 'visibility : visible' :'Display:none'}">
+											<!--<aura:if isTrue="{!or(programEvent.Status == 'Cancelled',programEvent.Status == 'Completed')}" > 
+                                                {!programEvent.TouchPoint__r.Date__c}
+                                            	<aura:set attribute="else">-->
+                                            <a href="javascript:void(0);" onclick="{!c.updateTouchPointNavigation}" id="{!programEvent.Program_SFID__c+'/'+v.growerAcc+'/'+programEvent.Program_Activity_SFID__c+'/'+programEvent.TouchPoint_SFID__c+'/'+programEvent.TouchPoint_SFID__r.Date__c+'/'+'c:Frontier_GrowerAccount_Program'}">
+                                                <ui:outputDateTime value="{!programEvent.TouchPoint_SFID__r.Date__c}" format="yyyy.MM.dd hh:mm a"/>
+                                            </a>
+                                                <!--</aura:set>
+                                                </aura:if>-->
+                                            </span>
+                                    </td>
+                                    <td class="slds-cell-wrap">
+                                        {!programEvent.Phase__c}
+                                    </td>
+                                    <td class="slds-cell-wrap">
+                                        <span style="{!or(programEvent.Status == 'Cancelled',programEvent.Status == 'Completed') ? 'Display:none':(programEvent.Status == 'Not Scheduled'?'Display:none':'visibility : visible' )}">
+                                            <c:svgIcon class="slds-icon slds-icon--x-small slds-icon-text-default" svgPath="{!$Resource.SLDS + '/assets/icons/utility-sprite/svg/symbols.svg#error'}" category="utility" size="x-small"  name="error" />                                     
+                                            <a href = "javascript:void(0);" id="{!programEvent.Id + '/' + programEvent.Program_SFID__c + '/' + programEvent.WhatId}" onclick="{!c.cancelActivity}"> Cancel Activity </a>
+                                        </span>
+                                        <span style="{!programEvent.Status == 'Not Scheduled' ? 'visibility : visible' :'Display:none'}">
+                                            <c:svgIcon class="slds-icon slds-icon--x-small slds-icon-text-default" svgPath="{!$Resource.SLDS + '/assets/icons/utility-sprite/svg/symbols.svg#new'}" category="utility" size="x-small"  name="new" />                                     
+                                            <a href = "javascript:void(0);" id="{!programEvent.Program_SFID__c+'/'+v.growerAcc+'/'+programEvent.Program_Activity_SFID__c+'/'+programEvent.TouchPoint_SFID__c+'/'+programEvent.TouchPoint_SFID__r.Date__c+'/'+'c:Frontier_GrowerAccount_Program'}" onclick="{!c.scheduleTouchpoint}"> Schedule Touchpoint </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                            </aura:iteration>                            
+                        </tbody>
+                        
+                    </table>
+                </ui:scrollerWrapper>
+            </div>
+            <br></br>
+            <center>
+                <c:Paginator page="{!v.page}" pages="{!v.pages}" total="{!v.total}" compName="PgmActivityList"/>
+            </center>
+        </div>
+    </div>            
+</aura:component>

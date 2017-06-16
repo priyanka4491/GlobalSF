@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>This object is to relate different accounts in the org irrespective of Dealer or Grower</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Archive_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Archive Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Archive_Ind__c</fullName>
+        <defaultValue>&quot;N&quot;</defaultValue>
+        <externalId>false</externalId>
+        <label>Archive Indicator</label>
+        <length>1</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Child_Account_SFID__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Child Party</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Account Org Relationships (Child Party)</relationshipLabel>
+        <relationshipName>Account_Org_Relationships1</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Child_Acct_Bus_Role_SFID__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Child Party Relationship</label>
+        <referenceTo>Account_Business_Role__c</referenceTo>
+        <relationshipLabel>Account Org Relationships (Child Party Relationship)</relationshipLabel>
+        <relationshipName>Account_Org_Relationships1</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>HC_Integration_Key__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <description>This field is for the temporary storage of an external id for the Heroku Connect Integration. It will be used as necessary for parent-child relationships. Further integrations will be via the Salesforce Record ID.</description>
+        <externalId>true</externalId>
+        <inlineHelpText>This field is for the temporary storage of an external id for the Heroku Connect Integration. It will be used as necessary for parent-child relationships. Further integrations will be via the Salesforce Record ID.</inlineHelpText>
+        <label>Heroku Connect Integration Key</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>Parent_Account_SFID__c</fullName>
+        <externalId>false</externalId>
+        <label>Parent Party</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Account Org Relationships</relationshipLabel>
+        <relationshipName>Account_Org_Relationships</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Parent_Acct_Bus_Role_SFID__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Parent Party Relationship</label>
+        <lookupFilter>
+            <active>true</active>
+            <filterItems>
+                <field>Account_Business_Role__c.Account_SFID__c</field>
+                <operation>equals</operation>
+                <valueField>$Source.Parent_Account_SFID__c</valueField>
+            </filterItems>
+            <isOptional>false</isOptional>
+        </lookupFilter>
+        <referenceTo>Account_Business_Role__c</referenceTo>
+        <relationshipLabel>Account Org Relationships</relationshipLabel>
+        <relationshipName>Account_Org_Relationships</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <label>Account Org Relationship</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>Child_Account_SFID__c</columns>
+        <columns>Child_Acct_Bus_Role_SFID__c</columns>
+        <columns>Parent_Account_SFID__c</columns>
+        <columns>Parent_Acct_Bus_Role_SFID__c</columns>
+        <columns>NAME</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <displayFormat>AOR-{0000}</displayFormat>
+        <label>Account Org Relationship Name</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Account Org Relationships</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+</CustomObject>

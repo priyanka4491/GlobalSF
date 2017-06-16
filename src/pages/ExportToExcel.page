@@ -1,0 +1,24 @@
+<apex:page standardController="Account" extensions="myControllerExtension">
+   <apex:form >
+   
+   <apex:pageBlock title="Visits">
+       <apex:pageBlockButtons location="top">
+              <apex:commandButton value="Export To Excel" action="/apex/ExportDemo" />  
+
+       </apex:pageBlockButtons>
+      <apex:pageBlockTable value="{!eventList}" var="event">
+
+         <apex:column value="{!event.Type}"/>
+         <apex:column value="{!event.ActivityDate}"/>
+         <apex:column value="{!event.CreatedBy.Name}"/>
+         <apex:column value="{!event.WhatId}"/>
+         <apex:column value="{!event.What.Name}"/>
+
+      </apex:pageBlockTable>
+      
+   </apex:pageBlock>
+    </apex:form>
+    
+    
+    
+</apex:page>

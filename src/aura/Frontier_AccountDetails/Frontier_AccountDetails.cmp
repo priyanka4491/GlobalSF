@@ -1,0 +1,69 @@
+<aura:component controller="AccountController" access="Global">
+    <ltng:require styles="{!$Resource.SLDS +
+                          '/assets/styles/salesforce-lightning-design-system.css'}"/>
+    <aura:attribute name="accounts" type="Account" access="global"/>
+    <aura:attribute name="account" type="Object" access="global"/>
+    <aura:attribute name="accountDetailResponse" type="string" access="global"/>
+    <aura:attribute name="accountDetail" type="Object" access="global"/>
+    
+    <aura:attribute name="accId" type="Id" access="global"/>
+    <aura:attribute name="accCommunicationId" type="Id" access="global"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>   
+    <aura:handler event="c:Frontier_TouchPointCount"  action="{!c.handleTouchPoints}"/> 
+    <style>
+    	.accountDetail {
+        	height:auto;
+        //padding-top:9px;
+        }
+        .slds-media__figure {
+    		padding-top:11px;
+        }
+        
+        .segmentAlign{
+        	padding-top:19px;
+        	padding-bottom:19px;
+        	background-color:#ffffff;
+        }
+    </style>
+    
+    <!--<div style="background-color:#DCDDDE;">-->
+        <div style="background-color:#e3e3e3; margin-left: -12px;
+    margin-right: -12px;" class="accountDetail slds-media--responsive">
+            <div class="slds-media slds-media--top slds-no-space slds-grow media">
+                <div class="slds-media__figure" style="background-color:#ffffff">                    
+                    <img src="/resource/AccountImg1" class="slds-avatar--large" style="margin:11px"/>
+                </div>
+                <div class="slds-media__body">
+                    <center style="padding-top:14px;">
+                        <strong>{!v.account.Name}</strong>
+                        <p><strong>{!v.account.Business_Role}</strong></p>
+                        
+                            <h6 style="padding-top:7px;">Address</h6>
+                        <p> {!v.account.Street_Address}</p>
+                        <p> {!v.account.City_Name}</p>
+                        <p> {!v.account.State_Name}</p>
+                        <p> {!v.account.Country_Name}</p>
+                    </center>
+                </div>
+       		 </div>       
+            <br />
+            <div class="accountDetail segmentAlign">
+            <center style="padding-top:8px;padding-bottom:8px;"> <h6>RADL Class </h6>
+                <li> {!v.account.RADL_Class != null ? v.account.RADL_Class : 'UnKnown'}</li>
+            </center>
+        </div> 
+            <br />
+        <div class="accountDetail segmentAlign">
+            <center style="padding-top:8px;padding-bottom:8px;"> <h6>Visits </h6> 
+                <li><a href="javascript:void(0);" onclick="{!c.showModal}" accountId = "{!v.accId}" >{!v.account.No_Of_TouchPoints}</a></li></center>
+        	<c:Frontier_Activities_List childProductId="{!v.accId}" />
+            </div>
+            <br /> 
+        <div class="accountDetail segmentAlign">
+            <center style="padding-top:8px;padding-bottom:8px;"><h6>Total Opportunity </h6> 
+                <li>{!v.account.accountGMEResponseWrapper}</li></center>
+        </div>
+    </div>
+   <!--</div>-->
+</aura:component>

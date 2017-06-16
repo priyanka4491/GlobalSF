@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <block>
+        <blockInfo>
+            <blockId>B1</blockId>
+            <joinTable>u</joinTable>
+        </blockInfo>
+        <columns>
+            <field>USERNAME</field>
+        </columns>
+        <columns>
+            <field>ROLE</field>
+        </columns>
+        <columns>
+            <field>LOGIN_DATETIME</field>
+        </columns>
+        <columns>
+            <field>BROWSER_TYPE</field>
+        </columns>
+        <columns>
+            <field>LOGIN_URL</field>
+        </columns>
+        <columns>
+            <field>ADDRESS_STATE</field>
+        </columns>
+        <filter>
+            <criteriaItems>
+                <column>ROLE</column>
+                <isUnlocked>true</isUnlocked>
+                <operator>equals</operator>
+                <value>Account Manager</value>
+            </criteriaItems>
+        </filter>
+        <format>Summary</format>
+        <name>Users block 1</name>
+        <params>
+            <name>active</name>
+            <value>active</value>
+        </params>
+        <params>
+            <name>co</name>
+            <value>1</value>
+        </params>
+        <reportType>User</reportType>
+        <timeFrameFilter>
+            <dateColumn>LAST_LOGIN</dateColumn>
+            <interval>INTERVAL_CUSTOM</interval>
+        </timeFrameFilter>
+    </block>
+    <block>
+        <blockInfo>
+            <blockId>B0</blockId>
+            <joinTable>User</joinTable>
+        </blockInfo>
+        <columns>
+            <field>User.UserTerritory2Associations$DeveloperName</field>
+        </columns>
+        <columns>
+            <field>User.UserTerritory2Associations$ParentTerritory2</field>
+        </columns>
+        <format>Summary</format>
+        <name>User Login History block 2</name>
+        <params>
+            <name>co</name>
+            <value>1</value>
+        </params>
+        <reportType>User_Login_History__c</reportType>
+        <scope>organization</scope>
+        <timeFrameFilter>
+            <dateColumn>User$LastModifiedDate</dateColumn>
+            <endDate>2016-12-31</endDate>
+            <interval>INTERVAL_CUSTOM</interval>
+            <startDate>2016-07-01</startDate>
+        </timeFrameFilter>
+    </block>
+    <blockInfo>
+        <blockId xsi:nil="true"/>
+        <joinTable>u</joinTable>
+    </blockInfo>
+    <description>Login History with the User&apos;s Territory Details</description>
+    <format>MultiBlock</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>FULL_NAME</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Login History</name>
+    <reportType>User</reportType>
+    <showDetails>true</showDetails>
+</Report>

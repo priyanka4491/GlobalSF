@@ -1,0 +1,117 @@
+<aura:component controller="Frontier_LookUpController">
+    <style>        
+        .TextBox {
+        background-color: rgb(255, 255, 255); 
+        color: rgb(22, 50, 92); 
+        border: 1px solid rgb(216, 221, 230); 
+        border-radius: .25rem;
+        width: 100%;
+        -webkit-transition: border .1s linear,background-color .1s linear;
+        transition: border .1s linear,background-color .1s linear;
+        display: inline-block;
+        padding: 0 1rem 0 .75rem;
+        line-height: 1.875rem;
+        min-height: calc(2.125rem + 2px);
+        }
+        
+        .twitter-typeahead{
+        width: 100%;
+        }
+        .tt-input{
+        width: 100% ;
+        }
+        
+        
+        .typeahead,
+        .tt-query,
+        .tt-hint {
+        width: 100%;
+        height: 30px;
+        padding: 8px 12px;
+        
+        line-height: 30px;
+        border: 2px solid #ccc;
+        border-radius: 8px;
+        outline: none;
+        }
+        
+        .typeahead {
+        background-color: #fff;
+        }
+        
+        .typeahead:focus {
+        border: 2px solid #0097cf;
+        }
+        
+        .tt-query {
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        }
+        
+        .tt-hint {
+        color: #999
+        }
+        
+        .tt-dropdown-menu {
+        width: 100%;
+        margin-top: 12px;
+        padding: 8px 0;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
+        box-shadow: 0 5px 10px rgba(0,0,0,.2);
+        }
+        
+        .tt-suggestion {
+        padding: 3px 20px;
+        font-size: 18px;
+        line-height: 24px;
+        }
+        
+        .tt-suggestion .tt-cursor {
+        color: #fff;
+        background-color: #0097cf;
+        
+        }
+        
+        .tt-suggestion:hover {
+        cursor: pointer;
+        color: #fff;
+        background-color: #0097cf;
+        }
+        
+        .tt-suggestion p {
+        margin: 0;
+        }
+        
+        
+        
+    </style>
+    <ltng:require scripts="{!join(',',
+                           $Resource.GlobalSalesStaticResources + '/resources/Jquery3.1.0.js',
+                           $Resource.GlobalSalesStaticResources + '/resources/typeahead.js')}"
+                  styles="{!$Resource.SLDS + '/assets/styles/salesforce-lightning-design-system.min.css'}"
+                  afterScriptsLoaded="{!c.initTypeahead}" />
+    
+    <aura:registerEvent name="inputLookupEvent" type="c:Frontier_LookUpEvent" />
+    <aura:handler name="inputLookupEvent" action="{!c.handleInputLookupEvt}"/>
+    
+    
+    <aura:attribute name="type" type="String" description="Sobject Type" required="true"/>
+    <aura:attribute name="value" type="String" description="Source / Destination value" />
+    <aura:attribute name="className" type="String" description="class name of the input object" />
+    <aura:attribute name="condition" type="String" description="condition for search"  default=""/>
+    <aura:attribute name="isCustomQuery" type="boolean" description="check isCustomQuery or not"/>
+    <aura:attribute name="customQueryWhere" type="String" description="condition for where condition"/>
+    <aura:attribute name="placeholder" type="String" description="condition for search"  default=""/>
+    <aura:attribute name="style" type="String" description="condition for search"  default=""/>
+    <!-- PRIVATE ATTRS -->
+    <aura:attribute name="nameValue" type="String" description="Name of the current lookup 'name' field: loaded by controller" 
+                    access="PUBLIC"/>
+    <aura:attribute name="isLoading" type="Boolean" description="Loading component" default="true"
+                    access="PRIVATE"/>
+    
+    <input id="{!globalId+'_typeahead'}" type="text" class="{!v.className}" style="{!v.style}" readonly="{!v.isLoading}" placeholder="{!v.placeholder}"/>
+    <!--  slds-form-element__label -->
+    
+</aura:component>

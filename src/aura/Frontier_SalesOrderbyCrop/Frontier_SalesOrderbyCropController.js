@@ -1,0 +1,5 @@
+({
+    loadChart: function() {
+        
+    }
+});

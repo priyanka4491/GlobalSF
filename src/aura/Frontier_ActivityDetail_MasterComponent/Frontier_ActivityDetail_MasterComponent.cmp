@@ -1,0 +1,53 @@
+<aura:component implements="force:appHostable" access="global">
+    
+    <style>
+        .slds-context-bar__item.slds-is-active {
+        border-left: 1px solid rgb(216, 221, 230);
+        border-right: 1px solid rgb(216, 221, 230);
+        border-bottom-color: rgb(247, 249, 251);
+        color: black;
+        font-weight: bold;
+        }
+    </style>
+    
+    <div class="navbar-defaults" style="background-color: rgba(241, 241, 241, 1);border-color: rgba(241, 241, 241, 1);">
+        <div class="slds-grid" >
+            <div class="slds-col">
+                <section class="slds-clearfix">
+                    <div class="slds-float--left">
+                        <div><img alt="Brand" src="{!$Resource.Logo}"  style="padding: 12px"/></div>
+                    </div>
+                </section>
+            </div>
+            <div class="slds-col">
+                <section class="slds-clearfix">
+                    <div class="slds-float--left" style="padding-top:30px;">
+                        <strong> <div class="slds-text-heading--large"><strong>Activities Detail</strong></div></strong>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div> 
+    
+    
+    <div class="slds-grid slds-wrap slds-grid--pull-padded bodyContent" style="background-color: #e4e4e4;">
+        <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-3" style="padding-left:2%;padding-top:2%;padding-bottom:2%;">            
+            <c:Frontier_ActivityDetail_EditTouchPoint />
+        </div>
+        <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-2 divWidth" style="padding-top:2%;padding-bottom:2%;">
+            <div style="background-color:#ffffff">
+                <c:Frontier_ActivitityDetails programName="Side by Side Trial" Activity="Field Check : Scheduled" programBudget="Allocated" />
+            </div>
+            <br></br>
+            
+            <div style="background-color:#ffffff">
+                <c:Frontier_ActivitityDetails programName="Program 2" Activity="Proposal : Scheduled" programBudget="Consumed" />
+            </div>
+           <div class="slds-form-element" style="padding-top:20px" >
+            <center><ui:button class="btncolor" label="Back"/></center>
+        </div>
+            
+        </div>
+    </div>
+    
+</aura:component>

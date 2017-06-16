@@ -1,0 +1,164 @@
+.THIS .headerWrap {
+    background-color: #D3D3D3;
+}
+.THIS .vAlign{
+    padding-top: 10px;
+}
+.THIS .padStyle{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.THIS .padingStyle{
+    padding-left: 30px;
+    
+}
+.THIS .fontStyle{
+    font-weight : bold;
+}
+.THIS .bgSection{
+    background-color:#D3D3D3;
+}
+.THIS .bgMidSection{
+    background-color:White
+}
+.THIS .btmSpace{
+    padding-bottom:10px;
+}
+.THIS .Hspace{
+    padding-right:10px;
+}
+.THIS .btnStyle{
+    background:white;
+    border : 0px;
+    color:inherit;
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+.THIS .fillicon{
+    fill:Black;
+    padding-left:30%;
+}
+.THIS .HLspace{
+    padding-left:10px;
+}
+
+.THIS .underlinelink:hover{
+    color:inherit;
+}
+.THIS .underlinelink{
+    color:inherit; 
+}
+.THIS .BoxBorder{
+    border-radius:0px;
+}
+.THIS .fillicon{
+    fill:#000000; 
+}
+
+
+.THIS .roundicon{
+    border-radius:50%;
+    background-color:#A9A9A9;
+    display:inline-block;
+    color:white;
+    width: 2em;
+    height: 2em;
+}
+.THIS .table{
+    Padding-top:20px;
+}
+.THIS .tableroweven{
+    background-color:#D4D4D4;
+}
+.THIS .tablerowodd{
+    background-color:#f5f5f0;
+}
+.THIS .btncolor{
+    background-color:#444444;
+    color:white;
+    padding-left:10px;
+    padding-right:10px;
+}
+.THIS .btncolorMobile{
+    background-color:#444444;
+    color:white;
+    padding-left:5px;
+    padding-right:5px;
+}
+/*.THIS tr:nth-child(even) {background: #CCC}
+.THIS tr:nth-child(odd) {background: #f5f5f0} 
+.THIS th {background: #ffffff}*/
+.THIS .VisitTable{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.THIS.btnAlign{
+    Padding-left:20px;
+    Padding-bottom:10px;
+}
+.THIS .cellStyle{
+    border-bottom-style:ridge;
+    border-bottom-width:thin;
+    border-top-style:ridge;
+    border-top-width:thin;
+}
+.THIS .slds-modal__content{
+    margin-top: 25%;
+    margin-bottom: 25%;
+}
+.THIS .tablePosition{
+   Padding-right:0%;
+}
+
+
+
+.THIS .tableStyle{
+    width:50%;
+    background-color:#F0F0F0;
+}
+.THIS.btnpos{
+    Padding-left:30%;
+}
+.THIS .btniPad{
+    background-color:#808080;
+    color:white;
+    width:40%;
+    height:auto;
+}
+
+.THIS .btncolor{
+    background-color:#808080;
+    color:white;
+    width:10%;   
+    height:auto;
+}
+
+.THIS .btnClrPosition{
+    margin-right:40px;
+}
+
+.THIS .btnDonePosition{
+    margin-right:30px;
+}
+.THIS .fontposition{
+    text-align:center;
+    padding-left:10%;
+}
+.THIS .rightAlign{
+    float:right;
+   width:5%;
+    
+}
+.THIS .changeMe{
+    background: #D3D3D3;
+    width:100%;
+    text-align: initial;
+}
+.THIS .btncolor{
+    background-color:#808080;
+    color:white;
+    width:200px;
+    height:45px;
+    
+}

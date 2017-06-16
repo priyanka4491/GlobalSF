@@ -1,0 +1,115 @@
+<aura:component controller="FR_VisitAvgController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global" >
+    
+    <aura:attribute name="Accountdevelopavg" type="Decimal" access="global"/>
+    <aura:attribute name="Accountdeveloprate" type="String" access="global"/>
+    <aura:attribute name="Accountacquireavg" type="Decimal" access="global"/>
+    <aura:attribute name="Accountacquirerate" type="String" access="global"/>
+    <aura:attribute name="Accountretainavg" type="Decimal" access="global"/>
+    <aura:attribute name="Accountretainrate" type="String" access="global"/>
+    <aura:attribute name="Accountlighttouchavg" type="Decimal" access="global"/>
+    <aura:attribute name="Accountlighttouchrate" type="String" access="global"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="buttonshow" type="boolean" access="global"/>
+    <aura:handler name="AccountNavigationEvent" event="c:Frontier_Account_Navigation_Event" action="{!c.navigatetoAccountDetail}"/>
+    <aura:method name="methodToDestroy" action="{!c.componentDestroy}" access="PUBLIC" />
+    <div aura:id="AccountDetailPage" id="{!globalId + '_AccountDetailPage'}" >
+        <div class= "slds-page-header" style="background-color:white;">
+            <div>
+                <div class="slds-col slds-has-flexi-truncate">
+                    <b>	<h5 class="slds-text-heading--medium slds-text-align--center">Average Visits Per RADL Per Account</h5></b>
+                </div>
+                
+                
+                <div class="slds-col slds-no-flex slds-grid slds-align-bottom" style="float:right;margin-top:11px;">
+                    <div class="slds-button-group" role="group">
+                        <button class="slds-button slds-button--neutral" onclick="{!c.getLast7Days}" aura:id="accnt1" disabled="{!v.buttonshow}">Last 7 Days</button>
+                        <button class="slds-button slds-button--neutral"  onclick="{!c.getLast30Days}" aura:id="accnt2">Last 30 Days</button>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <ul style="padding-top:44px;">
+                <div class="slds-grid slds-wrap">
+                    
+                    
+                    <div class="slds-col--padded slds-size--1-of-2 slds-small-size--1-of-2 slds-medium-size--1-of-4 slds-large-size--1-of-4 ">
+                        <div class ="slds-box--small" style="width:130%;"> ACQUIRE    
+                            <div class="slds-grid slds-grid--pull-padded accountDevelopAvgRate">
+                                
+                                
+                                <div>
+                                    <p class="sizelarge slds-text-body" title="value1">{!v.Accountacquireavg != null ? v.Accountacquireavg : '0'}</p> 
+                                    
+                                </div>  
+                                <div class="slds-col--padded">
+                                    <span class="hidedisplay" aura:id="svg2"> 
+                                        <span  class="slds-icon-container ">
+                                            <!--<c:svgIcon class="iconfill slds-icon slds-icon-x-small slds-icon-text-default" svgPath="{!$Resource.SLDS + '/assets/icons/utility-sprite/svg/symbols.svg#up'}" category="utility" size="x-small"  name="up" />-->
+                                        </span>
+                                    </span>	
+                                    <p  class="sizesmall slds-text-body" title="value1">{!v.Accountacquirerate} </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="slds-col--padded slds-size--1-of-2 slds-small-size--1-of-2 slds-medium-size--1-of-4 slds-large-size--1-of-4 ">
+                        <div class ="slds-box--small" style="width:130%;"> DEVELOP
+                            <div class="slds-grid slds-grid--pull-padded accountDevelopAvgRate">
+                                <div>
+                                    <p class="sizelarge slds-text-body" title="value1">{!v.Accountdevelopavg != null ? v.Accountdevelopavg : '0'}</p> 
+                                 </div>  
+                                <div class="slds-col--padded">
+                                    <span class="hidedisplay" aura:id="svg1"> 
+                                        <span  class="slds-icon-container ">
+                                            <!--<c:svgIcon class="iconfill slds-icon slds-icon-x-small slds-icon-text-default" svgPath="{!$Resource.SLDS + '/assets/icons/utility-sprite/svg/symbols.svg#up'}" category="utility" size="x-small"  name="up" />-->
+                                        </span>
+                                    </span>	
+                                    <p  class="sizesmall slds-text-body" title="value1">{!v.Accountdeveloprate} </p>
+                                </div>    
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="slds-col--padded slds-size--1-of-2 slds-small-size--1-of-2 slds-medium-size--1-of-4 slds-large-size--1-of-4 slds-wrap ">
+                        <div class ="slds-box--small slds-wrap" style="width:130%;"> LIGHT TOUCH  
+                            <div class="slds-grid slds-grid--pull-padded accountDevelopAvgRate">  
+                                <div>
+                                    <p class="sizelarge slds-text-body" title="value1">{!v.Accountlighttouchavg != null ? v.Accountlighttouchavg : '0'}</p> 
+                                </div>  
+                                <div class="slds-col--padded">
+                                    <span class="hidedisplay" aura:id="svg4"> 
+                                        <span  class="slds-icon-container ">
+                                            <!--<c:svgIcon class="iconfill slds-icon slds-icon-x-small slds-icon-text-default" svgPath="{!$Resource.SLDS + '/assets/icons/utility-sprite/svg/symbols.svg#up'}" category="utility" size="x-small"  name="up" />-->
+                                        </span>
+                                    </span>	
+                                    <p  class="sizesmall slds-text-body" title="value1">{!v.Accountlighttouchrate} </p>
+                                 </div>   
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="slds-col--padded slds-size--1-of-2 slds-small-size--1-of-2 slds-medium-size--1-of-4 slds-large-size--1-of-4">
+                        <div class ="slds-box--small" style="width:130%;"> RETAIN    
+                            <div class="slds-grid slds-grid--pull-padded accountDevelopAvgRate">  
+                                <div>
+                                    <p class="sizelarge slds-text-body" title="value1">{!v.Accountretainavg != null ? v.Accountretainavg : '0'}</p> 
+                                </div>  
+                                <div class="slds-col--padded">
+                                    <span class="hidedisplay" aura:id="svg3"> 
+                                        <span  class="slds-icon-container ">
+                                            <!--<c:svgIcon class="iconfill slds-icon slds-icon-x-small slds-icon-text-default" svgPath="{!$Resource.SLDS + '/assets/icons/utility-sprite/svg/symbols.svg#up'}" category="utility" size="x-small"  name="up" />-->
+                                        </span>
+                                    </span>	
+                                    <p  class="sizesmall slds-text-body" title="value1">{!v.Accountretainrate} </p>
+                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ul> 
+        </div> 
+        <!--<c:Frontier_AccountTrackingTable object="Account" fields="Name, CY_Orders_Units__c, CY_Sales__c, Monsanto_Acres__c,Monsanto_Share__c, PY_Sales_Units__c, RADL_Class__c, Total_Opportunity__c,Touch_Points__c" pageSize="10" />-->
+    </div>
+</aura:component>

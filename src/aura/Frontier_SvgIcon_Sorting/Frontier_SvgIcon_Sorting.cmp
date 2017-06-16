@@ -1,0 +1,11 @@
+<aura:component controller="Frontier_EventListController" implements="force:appHostable" access="global">
+	    <aura:attribute name="SortOrder" type="String" default="ASC" access="global" required="true"/>
+    	<aura:attribute name="eventType" type="String" default="" access="global" required="true"/>
+    <span style="{!v.SortOrder == 'ASC'? (v.eventType == 'onClick'? 'visibility : visible' :'Display:none') :'visibility:hidden'}">
+           <c:svgIcon svgPath="{!$Resource.SLDS + '/assets/icons/utility-sprite/svg/symbols.svg#arrowup'}" category="utility" size="x-small"  name="event" />
+  </span>
+    <span style="{!v.SortOrder == 'DESC'? (v.eventType == 'onClick'? 'visibility : visible' :'Display:none') :'visibility:hidden'}">
+     	<c:svgIcon svgPath="{!$Resource.SLDS + '/assets/icons/utility-sprite/svg/symbols.svg#arrowdown'}" category="utility" size="x-small"  name="event" />
+    </span> 
+        
+</aura:component>

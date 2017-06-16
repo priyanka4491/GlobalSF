@@ -1,0 +1,101 @@
+<aura:component controller="Frontier_ProgramPlanningController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+   <aura:attribute name="programName" type="string" access="global"/>
+    <aura:attribute name="Activity" type="string"  access="global"/>
+    <aura:attribute name="programBudget" type="string" access="global"/>
+    <div class="slds-col slds-col--padded slds-p-horizontal--small slds-size--1-of-1 slds-size--12-of-12 slds-medium-size--12-of-12 slds-large-size--12-of-12 bgMidSection" style="height:100%">
+    <div class="{!($Browser.isPhone) ? 'slds-grid slds-wrap vAlign':'slds-grid vAlign'}">
+        <div class="slds-p-horizontal--small slds-small-size--4-of-12 slds-size--4-of-12 slds-medium-size--4-of-12 slds-large-size--4-of-12">
+            <p class="vAlign  fontStyle">Program</p>
+            <p>{!v.programName}</p>
+        </div>  
+        <div class="slds-p-horizontal--small slds-small-size--4-of-12 slds-size--4-of-12 slds-medium-size--4-of-12 slds-large-size--4-of-12">
+            <p class="vAlign  fontStyle">Activity</p>
+            <p>{!v.Activity}</p>
+        </div> 
+         <div class="slds-p-horizontal--small slds-small-size--4-of-12 slds-size--4-of-12 slds-medium-size--4-of-12 slds-large-size--4-of-12">
+             <button class="slds-button cancelbtncolor" >Cancel Activity</button>
+        </div> 
+                      </div>
+       <div class="{!($Browser.isPhone) ? 'slds-grid slds-wrap vAlign':'slds-grid vAlign'}">
+        <div class="slds-p-horizontal--small slds-small-size--4-of-12 slds-size--4-of-12 slds-medium-size--3-of-12 slds-large-size--2-of-12">
+                                    <p class="vAlign  fontStyle">Program Status	</p>
+                                    <p style="word-break:break-all;">In Execution</p>
+                                    
+                                </div>
+           <div class="slds-p-horizontal--small slds-small-size--4-of-12 slds-size--4-of-12 slds-medium-size--3-of-12 slds-large-size--2-of-12">
+                                    <p class="vAlign  fontStyle">Program Budget	</p>
+                                    <p style="word-break:break-all;">{!v.programBudget}</p>
+                                    
+                                </div>
+            <div class="slds-p-horizontal--small slds-small-size--4-of-12 slds-size--4-of-12 slds-medium-size--6-of-12 slds-large-size--8-of-12">
+                 <p class="vAlign  fontStyle"></p>                  
+                <p> <a href="">Create New Program Activity</a></p>
+                                    
+                                </div>
+        </div>
+        <div class="{!($Browser.isPhone) ? 'slds-grid slds-wrap vAlign':'slds-grid vAlign'}">
+        <div class="slds-p-horizontal--small slds-size--4-of-12 slds-medium-size--3-of-12 slds-large-size--2-of-12">
+                                 <p> <a href="">Complete Program</a></p>   
+                                    
+                                </div>
+           <div class="slds-p-horizontal--small slds-size--4-of-12 slds-medium-size--3-of-12 slds-large-size--2-of-12">
+                                    <p> <a href="">Cancel Program</a></p>
+                                    
+                                </div>
+            <div class="slds-p-horizontal--small slds-size--4-of-12 slds-medium-size--6-of-12 slds-large-size--8-of-12">
+                 <p class="vAlign  fontStyle">Comments</p>                  
+               <ui:inputTextArea aura:id="notes" class="inputStyle" labelClass="slds-form-element__label" placeholder="1:00 PM Central Time" value="" rows="2" resizable="false" maxlength="1000"/>
+                                    
+                                </div>
+        </div>
+       
+ <p class="vAlign fontStyle">Related Activities</p>
+        <div class="slds-scrollable">
+                        <ui:scrollerWrapper >
+                            <table class="slds-table  slds-no-row-hover slds-table--product VisitTable">
+                                <thead>
+                                    <tr class="slds-text-heading--label slds-text-custom--label">
+                                        <th>
+                                            <div class="fontStyle" title="ActivityDate">Activity Name</div>
+                                        </th>
+                                       
+                                        <th>
+                                            <div class="fontStyle" title="Subject">Status</div>
+                                        </th>
+                                        <th>
+                                            <div class="fontStyle" title="Subject">Phase</div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="tablerowodd">
+                                        <td>
+                                            Proposal
+                                        </td>
+                                       
+                                        <td>
+                                            Open
+                                        </td>
+                                        <td>
+                                            Growing
+                                        </td>
+                                    </tr>
+                                    <tr class="tableroweven">
+                                        <td>
+                                            Assist Planting
+                                        </td>
+                                        
+                                        <td>
+                                            Completed
+                                        </td>
+                                        <td>
+                                            Pre-Planting
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </ui:scrollerWrapper>
+        </div>
+        <br></br>
+    </div>	
+</aura:component>

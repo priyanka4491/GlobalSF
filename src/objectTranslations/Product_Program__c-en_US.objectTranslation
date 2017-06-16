@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Product_Program</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Product_Programs</value>
+    </caseValues>
+    <fields>
+        <label><!-- Product --></label>
+        <name>Product_SFID__c</name>
+        <relationshipLabel><!-- Product_Programs --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Program --></label>
+        <name>Program_SFID__c</name>
+        <relationshipLabel><!-- Product_Programs --></relationshipLabel>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

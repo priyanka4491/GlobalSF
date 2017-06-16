@@ -1,0 +1,145 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global">
+    <aura:attribute name="buttonshow" type="boolean" access="global"/>
+    
+    <div class="navbar-defaults" style="background-color: rgba(241, 241, 241, 1);border-color: rgba(241, 241, 241, 1);">
+        <div class="slds-grid" >
+            <div class="slds-col">
+                <section class="slds-clearfix">
+                    <div class="slds-float--left">
+                        <div><img alt="Brand" src="{!$Resource.Logo}"  style="padding: 12px"/></div>
+                    </div>
+                </section>
+            </div>
+            <div class="slds-col">
+                <section class="slds-clearfix">
+                    <div class="slds-float--left" style="padding-top:30px;">
+                        <strong> <div class="slds-text-heading--large">Activity Summary</div></strong>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div> 
+    
+    <div class="{!($Browser.isPhone) ? 'slds-grid slds-wrap ':'slds-grid '}" style="background-color: #e4e4e4;padding:2%">
+        <div class="slds-col slds-col--padded slds-size--1-of-1 slds-size--12-of-12 slds-medium-size--4-of-12 slds-large-size--4-of-12 ">
+            
+            <div class="slds-col slds-col--padded slds-size--1-of-1 slds-size--12-of-12 slds-medium-size--12-of-12 slds-large-size--12-of-12 bgSection" style="height:100%">
+                <div style="padding-left:5%">
+                    <p class="vAlign fontStyle">Program</p>
+                    <p class="vAlign">Side by Side Trial</p>
+                    <p class="vAlign fontStyle">Budget</p>
+                    <p class="vAlign">Consumed</p>
+                    <p class="vAlign fontStyle">Execution Status</p>
+                    <p class="vAlign">In Execution</p>
+                    <p class="vAlign fontStyle">Account</p>
+                    <p class="vAlign">Biggs Farm</p>
+                </div>
+            </div>
+            
+        </div>
+        <div class="slds-col slds-col--padded slds-size--1-of-1 slds-size--12-of-12 slds-medium-size--8-of-12 slds-large-size--8-of-12">
+            <div class="slds-col slds-col--padded slds-size--1-of-1 slds-size--12-of-12 slds-medium-size--12-of-12 slds-large-size--12-of-12 bgSection" style="height:100%">
+                
+                <div class="{!($Browser.isPhone) ? 'slds-grid slds-wrap':'slds-grid'}">
+                    
+                    <div class="slds-col slds-col--padded  slds-size--1-of-1 slds-size--12-of-12 slds-medium-size--6-of-12 slds-large-size--6-of-12">
+                        <p class="vAlign fontStyle">Activity</p>
+                        <p class="vAlign">Field Check</p>
+                    </div>
+                    <div class="slds-col slds-col--padded  slds-size--1-of-1 slds-size--12-of-12 slds-medium-size--6-of-12 slds-large-size--6-of-12">
+                        <p class="vAlign fontStyle" >Status</p>
+                        <div class="slds-col slds-no-flex slds-grid slds-align-bottom" style="float:right;margin-top:11px;">
+                            <div class="slds-button-group" role="group">
+                                <button class="slds-button slds-button--neutral"  aura:id="accnt1" disabled="{!v.buttonshow}">Open</button>
+                                <button class="slds-button slds-button--neutral"   aura:id="accnt2">Complete</button>
+                                <button class="slds-button slds-button--neutral"   aura:id="accnt3">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="slds-col slds-col--padded  slds-size--1-of-1 slds-size--12-of-12 slds-medium-size--12-of-12 slds-large-size--12-of-12">
+                    <p class="vAlign fontStyle">TouchPoint Date</p>
+                    <p class="vAlign">Not Scheduled</p>
+                </div>
+                
+                <div class="slds-col slds-col--padded  slds-size--1-of-1 slds-size--12-of-12 slds-medium-size--12-of-12 slds-large-size--12-of-12">
+                    <p class="vAlign fontStyle btmSpace">Comments</p>
+                    <ui:inputTextArea aura:id="notes" class="inputStyle" labelClass="slds-form-element__label" placeholder="Free text goes here..." value="" rows="5" resizable="true" maxlength="1000"/>
+                </div>
+                <div class="slds-col slds-col--padded  slds-size--1-of-1 slds-size--12-of-12 slds-medium-size--12-of-12 slds-large-size--12-of-12">
+                    <p class="vAlign fontStyle">Attachments <c:svgIcon class="fillicon" svgPath="{!$Resource.SLDS + '/assets/icons/utility-sprite/svg/symbols.svg#photo'}" category="utility" size="small"  name="photo"/> 
+                        <c:svgIcon class="fillicon Hspace" svgPath="{!$Resource.SLDS + '/assets/icons/utility-sprite/svg/symbols.svg#attach'}" category="utility" size="small"  name="attach"/></p>
+                    
+                    <p class="vAlign">None</p>
+                </div>
+                <div class="slds-col slds-col--padded  slds-size--1-of-1 slds-size--12-of-12 slds-medium-size--12-of-12 slds-large-size--12-of-12">
+                    <p class="vAlign fontStyle">Related Activities</p>
+                    <div class="slds-scrollable">
+                        <ui:scrollerWrapper >
+                            <table class="slds-table  slds-no-row-hover slds-table--product VisitTable">
+                                <thead>
+                                    <tr class="slds-text-heading--label slds-text-custom--label">
+                                        <th>
+                                            <div class="fontStyle" title="ActivityDate">Activity Name</div>
+                                        </th>
+                                        <th>
+                                            <div class="fontStyle" title="Type">Program Name</div>
+                                        </th>
+                                        <th>
+                                            <div class="fontStyle" title="Subject">Status</div>
+                                        </th>
+                                        <th>
+                                            <div class="fontStyle" title="Subject">Phase</div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="background-color:#D4D4D4">
+                                        <td>
+                                            Proposal
+                                        </td>
+                                        <td>
+                                            Side by Side Trail
+                                        </td>
+                                        <td>
+                                            Open
+                                        </td>
+                                        <td>
+                                            Growing
+                                        </td>
+                                    </tr>
+                                    <tr style="background-color:#D4D4D4">
+                                        <td>
+                                            Assist Planting
+                                        </td>
+                                        <td>
+                                            Side by Side Trail
+                                        </td>
+                                        <td>
+                                            Completed
+                                        </td>
+                                        <td>
+                                            Pre-Planting
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </ui:scrollerWrapper>
+                        <div class="slds-grid slds-wrap " >
+                            <div class="slds-col slds-col--padded  slds-size--1-of-1 slds-size--12-of-12 slds-medium-size--12-of-12 slds-large-size--12-of-12 vAlign">
+                                <center> <button class="slds-button slds-button--neutral btncolor"   aura:id="accnt2">Back</button>
+                                    <button class="slds-button slds-button--neutral btncolor"   aura:id="accnt3">Create New Activity</button>
+                                </center>
+                                <br />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        
+    </div>
+    
+</aura:component>

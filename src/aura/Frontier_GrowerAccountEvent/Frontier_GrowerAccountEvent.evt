@@ -1,0 +1,3 @@
+<aura:event type="APPLICATION" description="Event template" >
+	<aura:attribute name="seasonKey" type="String" access="global"/>
+</aura:event>

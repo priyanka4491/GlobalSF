@@ -1,0 +1,9 @@
+<aura:component isTemplate="true" extends="aura:template">
+    <aura:set attribute="auraPreInitBlock">
+        <!-- Note that the maxSize attribute in <auraStorage:init> is in KB -->
+        <auraStorage:init name="actions"
+          persistent="false"
+          secure="true"
+          maxSize="1024" />
+    </aura:set>
+</aura:component>

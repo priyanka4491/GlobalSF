@@ -1,0 +1,36 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global" >
+    
+    <ltng:require scripts="{!join(',',$Resource.JQMonthCalendar + '/JQMonthCalendar/js/Jquery3.1.0.js',
+                           $Resource.JQMonthCalendar + '/JQMonthCalendar/js/monthly.js')}" 
+                  styles="{!join(',',$Resource.SLDS + '/assets/styles/salesforce-lightning-design-system.min.css',
+                          $Resource.JQMonthCalendar + '/JQMonthCalendar/css/monthly.css')}"
+                  afterScriptsLoaded="{!c.loadCalender}"/>
+	<div>
+        <div calss="container">
+            <div class="monthly" id="mycalendar">
+            </div>
+            <!--Modal start-->
+            
+<div id="newTouchPointmodal" role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal--large slds-hide" aria-labelledby="header43">
+  <div class="slds-modal__container">
+    <div class="slds-modal__header">
+      <button class="slds-button slds-modal__close slds-button--icon-inverse" title="Close">
+        <span class="slds-assistive-text">Close</span>
+      </button>
+      <h2 id="header43" class="slds-text-heading--medium">Modal Header</h2>
+    </div>
+    <div class="slds-modal__content slds-p-around--medium">
+   		<c:Frontier_Touch_Plng_Pgm ></c:Frontier_Touch_Plng_Pgm>
+    </div>
+    <div class="slds-modal__footer">
+      <button class="slds-button slds-button--neutral">Cancel</button>
+      <button class="slds-button slds-button--brand">Save</button>
+    </div>
+  </div>
+</div>
+<div id="newTouchPointbackdrop" class="slds-backdrop slds-backdrop--open slds-hide"></div>
+            
+<!--Modal end -->
+</div>
+    </div>
+</aura:component>

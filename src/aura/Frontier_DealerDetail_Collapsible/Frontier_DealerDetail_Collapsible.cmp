@@ -1,0 +1,27 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="myOptions" type="SelectItem[]" access="Global" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    <ul class="slds-accordion">
+            <li class="slds-accordion__list-item">
+                <section aura:id="accordionSection" class="slds-accordion__section slds-is-close">
+                    <div>
+                        <div class="slds-accordion__summary">
+                            <h3 class="slds-text-heading_small slds-accordion__summary-heading">
+                                <lightning:button variant="brand" label="Submit" onclick="{! c.toggle }" class="slds-button slds-button_reset slds-accordion__summary-action">                            
+                                    <c:svgIcon class="fillicon slds-accordion__summary-action-icon slds-button__icon slds-button__icon_left" svgPath="{!$Resource.SLDS + '/assets/icons/utility-sprite/svg/symbols.svg#switch'}" category="utility" size="small"  name="switch"> </c:svgIcon>                                                                                    
+                                    <span title="Grower Accounts"><div class="slds-text-color_inverse">Grower Accounts</div></span>                           
+                                </lightning:button>
+                            </h3>
+                        </div>
+                        <div class="toggle" aura:id="GrowerAccounts">
+                        <c:Frontier_DealersGrowersList recordId="{!v.recordId}"/>
+                        </div>
+                    </div>
+                </section>
+            </li>            
+        </ul>
+   
+</aura:component>

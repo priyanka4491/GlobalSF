@@ -1,0 +1,111 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes"  access="global">
+    <aura:attribute name="topProducts" type="Object" access="global"/>
+    <div>
+        <div class="growerTopProducts">
+        <div class="slds-text-heading--medium slds-align--absolute-center" style="color:#808080;padding-top:10px;"> 
+            <b>Top Products Purchased</b>
+        </div>  
+        <div class="slds-text-heading--medium slds-align--absolute-center"  style="color:#808080"> 
+            <b>2015</b>             
+        </div> 
+        
+        
+        <div class="slds-scrollable">
+            <table class="slds-table slds-no-row-hover slds-table--product">
+                <thead>
+                    <tr>
+                        <th>
+                            <b><div title="Crop" class="sizeMedium">Crop</div></b> 
+                        </th>
+                        <th>
+                            <b><div title="Variety" class="sizeMedium">Variety</div></b> 
+                        </th>
+                        <th>
+                            <b><div title="Units" class="sizeMedium">Units</div></b> 
+                        </th>
+                    </tr>
+                </thead>
+                <tbody  style="color:#808080">
+                    <tr class="odd">
+                        <td>
+                            <b>Corn</b>
+                        </td>
+                        <td>
+                            <b>DKC38-92RIB</b>
+                        </td>
+                        <td>
+                            10,000
+                        </td>
+                    </tr>
+                    <tr class="even">
+                        <td>
+                            <b>Soybeans</b>
+                        </td>
+                        <td>
+                            <b>AG0536</b>
+                        </td>
+                        <td>
+                            20,000
+                        </td>
+                    </tr>
+                    <tr class="odd">
+                        <td>
+                            <b>Corn</b>
+                        </td>
+                        <td>
+                            <b>DKC38-92RIB</b>
+                        </td>
+                        <td>
+                            8,000
+                        </td>
+                    </tr>
+                    <tr class="even">
+                        <td>
+                            <b>Soybeans</b>
+                        </td>
+                        <td>
+                            <b>AG0536</b> 
+                        </td>
+                        <td>
+                            15,000
+                        </td>
+                    </tr>
+                    <tr class="odd">
+                        <td>
+                            <b>Corn</b>
+                        </td>
+                        <td>
+                            <b>DKC38-92RIB</b>
+                        </td>
+                        <td>
+                            10,000
+                        </td>
+                    </tr>
+                    <tr class="even">
+                        <td>
+                            <b>Soybeans</b>
+                        </td>
+                        <td>
+                            <b>AG0536</b>
+                        </td>
+                        <td>
+                            20,000
+                        </td>
+                    </tr>
+                    <tr class="odd">
+                        <td>
+                            <b>Corn</b>
+                        </td>
+                        <td>
+                            <b>DKC38-92RIB</b>
+                        </td>
+                        <td>
+                            8,000
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+         </div>
+    </div>    
+</aura:component>

@@ -1,0 +1,22 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes" access="global" controller="Frontier_LocationActivities">
+    
+    <aura:attribute name="comLat" type="string" default='empty' />
+    <aura:attribute name="comLong" type="string" />
+    <aura:attribute name="responseRecord" type="Account" />
+    <aura:attribute name="TaskRecords" type="Account" />
+    <aura:handler name="init" value="{!this}" action="{!c.doinit}" />
+    <aura:handler name="change" value="{!v.comLong}" action="{!c.handleValueChange}"/>  
+    <ltng:require styles="{!join(',',
+                          $Resource.SLDS + '/assets/styles/salesforce-lightning-design-system.min.css'
+                          )}" />
+    <!-- Laptop,Desktop and Ipad View -->
+   
+        <div aura:id="geoCard">
+            
+            <div class="slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                <div aura:id="map"></div>
+            </div>
+        </div>
+    
+    
+</aura:component>

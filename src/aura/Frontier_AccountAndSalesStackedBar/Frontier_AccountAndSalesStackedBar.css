@@ -1,0 +1,26 @@
+.THIS .valign{
+    padding-left:50px;
+    padding-right:50px;
+}
+
+.THIS .titleStyle{
+    padding-top:20px;
+    padding-bottom:10px;
+    font-weight: bold;
+    font-size: large;
+}
+.THIS .headerStyle{
+    padding: 3% 2% 0% 2%;
+    font-weight: bold;
+    font-size: large;
+}
+.THIS .inputStyle{
+    width : 60%;
+}
+.THIS .inputPickStyle{
+    width : 60%;
+    border :0px;
+}
+.THIS .programStyle{
+    padding: 2% 2% 2% 2%;
+}

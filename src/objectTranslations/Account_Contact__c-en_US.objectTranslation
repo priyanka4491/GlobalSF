@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Account Contact</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Account Contact</value>
+    </caseValues>
+    <fields>
+        <help><!-- Business Role Lookup associated with the Account Contact Relationship&apos;s Address/Phone/Email/etc. --></help>
+        <label><!-- Account Business Role --></label>
+        <name>Account_Business_Role_SFID__c</name>
+        <relationshipLabel><!-- Account Contact --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Account related to the Contact --></help>
+        <label><!-- Account --></label>
+        <name>Account_SFID__c</name>
+        <relationshipLabel><!-- Account Contact --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Holds the date when the record was last marked for Archival. --></help>
+        <label><!-- Archive Date --></label>
+        <name>Archive_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- &quot;Y&quot; Indicates that the record is ready for archival. --></help>
+        <label><!-- Archive Indicator --></label>
+        <name>Archive_Ind__c</name>
+    </fields>
+    <fields>
+        <help><!-- Contact related to the Account --></help>
+        <label><!-- Contact --></label>
+        <name>Contact_SFID__c</name>
+        <relationshipLabel><!-- Account Contact --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Title in relation to the Account --></help>
+        <label><!-- Title --></label>
+        <name>Contact_Title_Descr__c</name>
+    </fields>
+    <fields>
+        <help><!-- Department Name of the Contact in relation to the Account --></help>
+        <label><!-- Department --></label>
+        <name>Department_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- End Date --></label>
+        <name>End_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- This field is for the temporary storage of an external id for the Heroku Connect Integration.  It will be used as necessary for parent-child relationships.  Further integrations will be via the Salesforce Record ID. --></help>
+        <label><!-- Heroku Connect Integration Key --></label>
+        <name>HC_Integration_Key__c</name>
+    </fields>
+    <fields>
+        <help><!-- Account Contact related to the Account Contact Role --></help>
+        <label><!-- Parent Account Contact --></label>
+        <name>Parent_SFID__c</name>
+        <relationshipLabel><!-- Account Contact --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Preferred Contact Method --></help>
+        <label><!-- Preferred Contact Communication --></label>
+        <name>Pref_Contact_Comm_SFID__c</name>
+        <relationshipLabel><!-- Account Contact --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Preferred Contact Method --></help>
+        <label><!-- Preferred Contact Method --></label>
+        <name>Pref_Contact_Method_Descr__c</name>
+        <picklistValues>
+            <masterLabel>Address</masterLabel>
+            <translation><!-- Address --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Email</masterLabel>
+            <translation><!-- Email --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Phone</masterLabel>
+            <translation><!-- Phone --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Role for the Account Contact Relationship --></help>
+        <label><!-- Role --></label>
+        <name>Role_Descr__c</name>
+        <picklistValues>
+            <masterLabel>None</masterLabel>
+            <translation><!-- None --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Start Date --></label>
+        <name>Start_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- Account Contact Status --></help>
+        <label><!-- Status --></label>
+        <name>Status_Descr__c</name>
+        <picklistValues>
+            <masterLabel>Active</masterLabel>
+            <translation><!-- Active --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Deceased</masterLabel>
+            <translation><!-- Deceased --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Inactive</masterLabel>
+            <translation><!-- Inactive --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Is a Key Contact for the Account --></help>
+        <label><!-- Key Contact --></label>
+        <name>is_Key_Contact__c</name>
+    </fields>
+    <fields>
+        <help><!-- Is a Primary Contact within the Selected Role, if multiple records exist, for the Account.  For example, if the Account has multiple Owners, but one is the primary Owner, then the primary may be checked. --></help>
+        <label><!-- Primary --></label>
+        <name>is_Primary_Contact__c</name>
+    </fields>
+    <layouts>
+        <layout>Account Contact Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <recordTypes>
+        <label><!-- Account Contact Relationship --></label>
+        <name>Account_Contact_Account_Contact_Relationship</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Account Contact Role --></label>
+        <name>Account_Contact_Account_Contact_Role</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Account Contact Role Business Role --></label>
+        <name>Account_Contact_Account_Contact_Role_Business_Role</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Account Contact --></label>
+        <name>Account_Contact_Default</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

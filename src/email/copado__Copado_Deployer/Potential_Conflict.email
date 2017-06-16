@@ -1,0 +1,5 @@
+Hi {!copado__User_Story__c.OwnerFullName},
+
+A potential conflict has been detcted in this User Story:  {!copado__User_Story__c.Link}
+
+The Metadata item :{!copado__User_Story_Metadata__c.copado__Metadata_API_Name__c}

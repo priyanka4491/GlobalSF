@@ -1,0 +1,531 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Link Contacts to their associated Accounts.  Many-to-many relationship.
+
+**NOTE: This will be replaced by the Standard Salesforce Account Contact Role object after the release which allows custom fields to be added to the object.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Account_Business_Role_SFID__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Business Role Lookup associated with the Account Contact Relationship&apos;s Address/Phone/Email/etc.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Business Role Lookup associated with the Account Contact Relationship&apos;s Address/Phone/Email/etc.</inlineHelpText>
+        <label>Account Business Role</label>
+        <referenceTo>Account_Business_Role__c</referenceTo>
+        <relationshipLabel>Account Contact</relationshipLabel>
+        <relationshipName>Account_Contact</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Account_SFID__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Account related to the Contact</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Account related to the Contact</inlineHelpText>
+        <label>Account</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Account Contact</relationshipLabel>
+        <relationshipName>Account_Contact</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Archive_Date__c</fullName>
+        <description>Holds the date when the record was last marked for Archival.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Holds the date when the record was last marked for Archival.</inlineHelpText>
+        <label>Archive Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Archive_Ind__c</fullName>
+        <defaultValue>&quot;N&quot;</defaultValue>
+        <description>&quot;Y&quot; Indicates that the record is ready for archival.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>&quot;Y&quot; Indicates that the record is ready for archival.</inlineHelpText>
+        <label>Archive Indicator</label>
+        <length>1</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Contact_SFID__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Contact related to the Account</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Contact related to the Account</inlineHelpText>
+        <label>Contact</label>
+        <referenceTo>Contact</referenceTo>
+        <relationshipLabel>Account Contact</relationshipLabel>
+        <relationshipName>Account_Contact</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Contact_Title_Descr__c</fullName>
+        <description>Title in relation to the Account</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Title in relation to the Account</inlineHelpText>
+        <label>Title</label>
+        <length>128</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Department_Name__c</fullName>
+        <description>Department Name of the Contact in relation to the Account</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Department Name of the Contact in relation to the Account</inlineHelpText>
+        <label>Department</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>End_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>End Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>HC_Integration_Key__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <description>This field is for the temporary storage of an external id for the Heroku Connect Integration.  It will be used as necessary for parent-child relationships.  Further integrations will be via the Salesforce Record ID.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This field is for the temporary storage of an external id for the Heroku Connect Integration.  It will be used as necessary for parent-child relationships.  Further integrations will be via the Salesforce Record ID.</inlineHelpText>
+        <label>Heroku Connect Integration Key</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>Parent_SFID__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Account Contact related to the Account Contact Role</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Account Contact related to the Account Contact Role</inlineHelpText>
+        <label>Parent Account Contact</label>
+        <referenceTo>Account_Contact__c</referenceTo>
+        <relationshipLabel>Account Contact</relationshipLabel>
+        <relationshipName>Account_Contact</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Pref_Contact_Comm_SFID__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Preferred Contact Method</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Preferred Contact Method</inlineHelpText>
+        <label>Preferred Contact Communication</label>
+        <referenceTo>Contact_Communication__c</referenceTo>
+        <relationshipLabel>Account Contact</relationshipLabel>
+        <relationshipName>Account_Contact</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Pref_Contact_Method_Descr__c</fullName>
+        <description>Preferred Contact Method</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Preferred Contact Method</inlineHelpText>
+        <label>Preferred Contact Method</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Phone</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Email</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Address</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Role_Descr__c</fullName>
+        <description>Role for the Account Contact Relationship</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Role for the Account Contact Relationship</inlineHelpText>
+        <label>Role</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>None</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Other</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Start_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Start Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Status_Descr__c</fullName>
+        <description>If the value is set to &quot;Inactive&quot;, then set the Archive Indicator to &quot;Y&quot;.  If the value is set to something other than &quot;Inactive&quot;, then set the Archive Indicator to &quot;N&quot;.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Account Contact Status</inlineHelpText>
+        <label>Status</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Active</fullName>
+                    <default>true</default>
+                </value>
+                <value>
+                    <fullName>Inactive</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Deceased</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>is_Key_Contact__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Is a Key Contact for the Account</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Is a Key Contact for the Account</inlineHelpText>
+        <label>Key Contact</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>is_Primary_Contact__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Is a Primary Contact within the Selected Role, if multiple records exist, for the Account.  For example, if the Account has multiple Owners, but one is the primary Owner, then the primary may be checked.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Is a Primary Contact within the Selected Role, if multiple records exist, for the Account.  For example, if the Account has multiple Owners, but one is the primary Owner, then the primary may be checked.</inlineHelpText>
+        <label>Primary</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <label>Account Contact</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>Account_SFID__c</columns>
+        <columns>Account_Business_Role_SFID__c</columns>
+        <columns>Archive_Date__c</columns>
+        <columns>Archive_Ind__c</columns>
+        <columns>Contact_SFID__c</columns>
+        <columns>RECORDTYPE</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <displayFormat>ACC-{0}</displayFormat>
+        <label>Account Contact Identifier</label>
+        <trackHistory>false</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Account Contact</pluralLabel>
+    <recordTypeTrackHistory>false</recordTypeTrackHistory>
+    <recordTypes>
+        <fullName>Account_Contact_Account_Contact_Relationship</fullName>
+        <active>true</active>
+        <description>Account Contact Relationship.</description>
+        <label>Account Contact Relationship</label>
+        <picklistValues>
+            <picklist>Pref_Contact_Method_Descr__c</picklist>
+            <values>
+                <fullName>Address</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Email</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Phone</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Role_Descr__c</picklist>
+            <values>
+                <fullName>None</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status_Descr__c</picklist>
+            <values>
+                <fullName>Active</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Deceased</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Inactive</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Account_Contact_Account_Contact_Role</fullName>
+        <active>true</active>
+        <description>Role for the Account Contact Relationship.</description>
+        <label>Account Contact Role</label>
+        <picklistValues>
+            <picklist>Pref_Contact_Method_Descr__c</picklist>
+            <values>
+                <fullName>Address</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Email</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Phone</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Role_Descr__c</picklist>
+            <values>
+                <fullName>None</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status_Descr__c</picklist>
+            <values>
+                <fullName>Active</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Deceased</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Inactive</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Account_Contact_Account_Contact_Role_Business_Role</fullName>
+        <active>true</active>
+        <description>Business Role associated with the Role for the Account Contact Relationship.</description>
+        <label>Account Contact Role Business Role</label>
+        <picklistValues>
+            <picklist>Pref_Contact_Method_Descr__c</picklist>
+            <values>
+                <fullName>Address</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Email</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Phone</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Role_Descr__c</picklist>
+            <values>
+                <fullName>None</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status_Descr__c</picklist>
+            <values>
+                <fullName>Active</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Deceased</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Inactive</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Account_Contact_Default</fullName>
+        <active>true</active>
+        <description>Default Record Type</description>
+        <label>Account Contact</label>
+        <picklistValues>
+            <picklist>Pref_Contact_Method_Descr__c</picklist>
+            <values>
+                <fullName>Address</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Email</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Phone</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Role_Descr__c</picklist>
+            <values>
+                <fullName>None</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status_Descr__c</picklist>
+            <values>
+                <fullName>Active</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Deceased</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Inactive</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+</CustomObject>

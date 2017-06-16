@@ -1,0 +1,162 @@
+.THIS .limitcharacters  {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 50px;
+}
+.THIS .error  {
+  color: red;  
+}
+.THIS .container {
+    margin: 1px 1px 1px 1px;
+    
+}
+
+.THIS .truncateText{
+    float:left;
+}
+
+@media  all and (min-width: 320px) and (max-width:700px){
+    .THIS .truncateText{
+        float:none;
+    }
+    
+    .THIS .deviceLink{
+        padding-left: 60px;
+        top: -18px;
+        position: relative;
+    }
+}
+
+.THIS .deviceTruncate{
+    float:left;
+}
+
+.THIS .showMoreLink{
+    color:blue;
+    cursor:pointer;
+}
+
+.THIS .WrapWords {
+    word-break : break-word;
+}
+
+.THIS .text-container {
+      margin: 0 auto;
+      width: 25%;    
+  }
+
+.THIS .text-content{
+    line-height: 1em;
+}
+
+.THIS .short-text {
+    overflow: hidden;
+    height: 1em;
+    width:50%
+}
+
+.THIS .full-text{
+    height: auto;
+}
+
+
+.THIS .slideup{
+    max-height: 0; 
+    overflow-y: hidden;
+    -webkit-transition: max-height 0.5s ease-in-out;
+    -moz-transition: max-height 0.5s ease-in-out;
+    -o-transition: max-height 0.5s ease-in-out;
+    transition: max-height 0.5s ease-in-out;
+}
+.THIS .slidedown { 
+    max-height:1250px;
+    overflow-y: hidden;
+    -webkit-transition: max-height 0.5s ease-in-out;
+    -moz-transition: max-height 0.5s ease-in-out;
+    -o-transition: max-height 0.5s ease-in-out;
+    transition: max-height 0.5s ease-in-out;
+}
+
+
+
+.THIS .fadein .fadeout {
+    opacity: 0;
+    -moz-transition: opacity 0.4s ease-in-out;
+    -o-transition: opacity 0.4s ease-in-out;
+    -webkit-transition: opacity 0.4s ease-in-out;
+    transition: opacity 0.4s ease-in-out;
+}
+.THIS .fadein {
+    opacity: 1;
+}
+
+.THIS .descClass{
+    word-wrap:break-word;
+}
+
+.THIS .expandCollapse{
+    cursor:pointer;
+    text-decoration: none;
+}
+.THIS .show{
+    display:block;
+}
+
+.THIS .slds-modal {
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 0.1s linear, opacity 0.1s linear;
+    position: fixed;
+    top: 319px !important;
+    right: 0;
+    bottom: 1px;
+    left: 0;
+    z-index: 9001;
+}
+.THIS .hide{
+    display:none;
+}
+
+.THIS table.slds-table--product > thead > tr:first-child {
+    background-color: #666666;
+    color:#ffffff;
+}
+
+
+
+.THIS .evenRow{
+    background-color: #d8dde6;
+}
+
+.THIS .oddRow{
+    background-color: #F2F2F2;
+}
+
+.THIS .VisitTable tbody td{
+    border-top:none;
+}
+
+.THIS .VisitTable td{
+    border-top:none;
+}
+
+.THIS .uiInput--default .form-element__label {
+    color: rgb(84, 105, 141);
+    line-height: 1.5;
+    margin-bottom: .25rem;
+    padding-right: 8px;
+    display : flex;
+}
+
+.THIS .inputs {
+    display : flex;
+}
+
+
+
+@media  all and (min-width: 320px) and (max-width:700px){
+       .THIS .activitesListPopUp {
+        top : -550px;
+    }
+}

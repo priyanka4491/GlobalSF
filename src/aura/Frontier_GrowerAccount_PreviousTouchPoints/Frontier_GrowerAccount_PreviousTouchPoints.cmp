@@ -1,0 +1,119 @@
+<aura:component controller="AccountController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="Global" >
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:attribute name="touchpoints" type="Event[]" access="Global"/> 
+    <aura:attribute name="today" type="Date" default="" access="global"/>  
+    <aura:attribute name="accId" type="String" access="global"/>
+    <aura:handler event="c:Frontier_TouchPointCount"  action="{!c.handleTouchPoints}"/>
+    <aura:dependency resource="markup://force:navigateToURL" type="EVENT"/>
+    <aura:attribute name="growerId" type="String" access="global" />
+    
+    
+    
+    <aura:attribute name="newTouchpoint" type="Event"
+                    default="{ 'sobjectType': 'Event',
+                             'ActivityDateTime': '',
+                             'EndDateTime' : '',
+                             'Description': '',
+                             'Type': '',                  		 
+                             }" access="global"/>
+    <div>
+    <div class="previousTouchPoints">  
+        <div class="slds-text-heading--medium" style="color:#808080; padding-top:10px;">
+            <b>Previous touchpoints</b>
+        </div>
+        <br></br>
+        <form class="slds-form--stacked">
+            <table class="slds-table slds-m-bottom--xx-large">
+                <thead class="">
+                    <tr>
+                        <th scope="col" class="slds-cell-wrap cellWrap">
+                            <b><span class="sizeMedium">Date</span></b>
+                        </th>
+                        <th scope="col" class="slds-cell-wrap cellWrap">
+                            <b><span class="sizeMedium">Touchpoint Name</span></b>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="slds-hint-parent">
+                        <td class="slds-cell-wrap">
+                            <div>
+                                08/23/2016
+                            </div>
+                            <div>
+                                <a href="javascript:void(0);">Notes available</a>
+                            </div>
+                        </td>    
+                        <td class="slds-size--1-of-2 slds-cell-wrap">                    
+                            Phone/Sales Visit
+                        </td>
+                    </tr>
+                    <tr class="slds-hint-parent">
+                        <td class="slds-cell-wrap">
+                            <div>
+                                08/25/2016
+                            </div>
+                            <div>
+                                <a href="javascript:void(0);">Notes available</a>
+                            </div>
+                        </td>    
+                        <td class="slds-size--1-of-2 slds-cell-wrap">                    
+                            In Person/Field Day
+                        </td>
+                    </tr>
+                    <tr class="slds-hint-parent">
+                        <td class="slds-cell-wrap">
+                            <div>
+                                08/30/2016
+                            </div>
+                            <div>
+                                <a href="javascript:void(0);">Notes available</a>
+                            </div>
+                        </td>    
+                        <td class="slds-size--1-of-2 slds-cell-wrap">                    
+                            Customer Care call
+                        </td>
+                    </tr>
+                    <tr class="slds-hint-parent">
+                        <td class="slds-cell-wrap">
+                            <div>
+                                08/25/2016
+                            </div>
+                            <div>
+                                <a href="javascript:void(0);">Notes available</a>
+                            </div>
+                        </td>    
+                        <td class="slds-size--1-of-2 slds-cell-wrap">                    
+                            In Person/Field Day
+                        </td>
+                    </tr>
+                    <!--<aura:iteration items="{!v.touchpoints}" var="tpList"> 
+                        <tr class="slds-hint-parent">                 
+                            <td class="">
+                                <div>
+                                    {!tpList.ActivityDate}
+                                </div>
+                                <div>
+                                    <a href="javascript:void(0);">Notes available</a>
+                                </div>
+                            </td>    
+                            <td class="">                    
+                                {!tpList.Type}
+                            </td>
+                        </tr>
+                    </aura:iteration>-->
+                </tbody>
+            </table> 
+            <center>
+                <div class="slds-form-element previousTouch-form-element">
+                    <ui:button label="View all touchPoints "                       
+                               labelClass="label"
+                               class="slds-button slds-button--brand"/>
+                    
+                    <div class="slds-backdrop slds-backdrop--open" id="backGroundSecId" style="display:none;"></div>
+                </div>
+            </center>
+        </form>
+    </div>
+   </div>
+</aura:component>

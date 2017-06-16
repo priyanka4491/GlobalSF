@@ -1,0 +1,85 @@
+<aura:component controller="Frontier_GrowerAccountListController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global">
+    <ltng:require styles="{!$Resource.SLDS +
+                          '/assets/styles/salesforce-lightning-design-system.css'}"/> 
+    <aura:attribute name="accounts" type="SObject[]" access="global"/>
+    <aura:attribute name="accountCommunications" type="Object[]" access="global"/>
+    <aura:attribute name="accountBusinessRoles" type="Object[]" access="global"/>
+    <aura:attribute name="key" type="Integer" access="global"/>
+    <aura:attribute name="iterate" type="integer" access="global"/>
+    <aura:attribute name="accId" type="Id" access="global"/>
+    <aura:attribute name="searchString" type="String" access="global"/>
+    <aura:attribute name="sortString" type="String" access="global"/>
+    <aura:attribute name="city" type="String" access="global"/>
+    <aura:attribute name="enable" type="Boolean" default="true" access="global"/>
+    <aura:attribute name="sortpage" type="Boolean" default="false" access="global"/>
+    <aura:attribute name="PageNumbers" type="Integer[]" access="global"/>
+    <aura:attribute name="page" type="integer" default="1" access="global"/>
+    <aura:attribute name="pages" type="integer" default="10" access="global"/>
+    <aura:attribute name="total" type="integer" access="global"/>
+    <aura:attribute name="pageSize" type="String" default="10" access="global"/>
+    <aura:attribute name="duedate" type="Date" access="global"/>
+    <aura:attribute name="eventdate" type="Date" access="global"/> 
+    <aura:attribute name="errormsg" type="string" access="global"/>
+   	<aura:attribute name="accountId" type="string" access="global"/>
+    <aura:attribute name="isGrowerList" type="boolean" access="global" default="true"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler event="c:Frontier_AccountSearchkey" action="{!c.searchKeyChange}"/>
+    <aura:registerEvent name="searchKeyChange" type="c:Frontier_AccountSearchkey"/>
+    <aura:handler event="c:Frontier_AccountSortBy" action="{!c.sortbyChange}"/>
+    <aura:registerEvent name="sortbyChange" type="c:Frontier_AccountSortBy"/>
+    <aura:registerEvent name="Accountnavigation" type="c:Frontier_Accountnavigation"/>
+    <aura:handler name="redirectToGrowerList" event="c:Frontier_NavigateToGrowerList_Event" action="{!c.navigateToGrowerList}"/>
+    <aura:handler name="redirectToDelaerList" event="c:Frontier_NavigateToGrowerList_Event" action="{!c.navigateToDelaerList}"/>
+    
+    <!-- Pagination Related Attributes -->
+    <aura:handler event="c:PageChange" action="{!c.pageChange}"/>
+    <div aura:id="DealerList">
+    <!-- Pagination Related Attributes -->    
+        <center>
+            <c:Paginator page="{!v.page}" pages="{!v.pages}" total="{!v.total}" compName='GrowerList'/>
+        </center>
+        <div><c:Frontier_AccountSearchBar /></div>
+        <div class="slds-grid slds-wrap">
+            <aura:iteration items="{!v.accounts}" var="account">
+                <div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2  slds-p-bottom--small">
+                    <div class = "slds-box slds-box-small">
+                        <div class="slds-grid">
+                            <div class="slds-size--1-of-2">
+                                <h4 class="slds-page-header__title slds-truncate"><a href="javascript:void(0);" onclick="{!c.accountNavigation}" id="{!account.accId+','+account.sapId+','+account.accCommu}">{!account.Name}</a></h4>
+                            </div>
+                            <div class="slds-size--1-of-2"> 
+                                <center><button type="button" class="slds-button slds-button--brand" onclick="{!c.recordtouchpoint}" id="{!account.accId+','+account.sapId+','+account.accCommu}">Record a Touchpoint</button></center>
+                            </div>
+                        </div>                        
+                        <div>
+                            <span><ui:outputText value="{!account.roleDesc}" /></span>
+                            <span><ui:outputText value="{!account.GrowerCount}" /></span>
+                        </div>
+                        <div>
+                            <span>RADL Class : <ui:outputText value="{!account.serviceLevelDesc != null ? account.serviceLevelDesc : 'UnKnown'}" /></span>
+                            
+                        </div>
+                        <div class="button" style="padding-top:10px">
+                            <div>
+                                <span><ui:outputText value="{!account.streetAddress}"/></span>&nbsp;
+                                <span><ui:outputText value="{!account.cityName}"/></span>&nbsp;
+                                <span><ui:outputText value="{!account.stateName}"/></span>&nbsp;
+                                <span><ui:outputText value="{!account.countryName}"/></span>
+                            </div>
+                        </div>
+                         <div >
+                            <aura:if isTrue="{!account.dealerCount !=null}">
+                                <a href="javascript:void(0);" onclick="{!c.groweraccNavigation}" id="{!account.accId+','+account.sapId+','+account.accCommu}" > Dealers : {!account.dealerCount}</a>                               
+
+                                <aura:set attribute="else">
+                                    Dealers : 0
+                                </aura:set> </aura:if>
+                        </div>
+                    </div>
+                </div>
+            </aura:iteration>
+        </div>
+        <div aura:id="followpopup">  </div> 
+    </div>
+</aura:component>

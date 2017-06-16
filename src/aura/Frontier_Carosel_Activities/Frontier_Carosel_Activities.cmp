@@ -1,0 +1,60 @@
+<aura:component controller="Frontier_GrowerAccount_ProgramController" implements="force:appHostable" >
+    <aura:attribute name="growerAcc" type="Id" access="Global" />
+    <aura:attribute name="PgmListId" type="Id" access="global" />
+    <aura:attribute name="ativityMap" type="Map" access="global" />
+    <aura:attribute name="selectedAtivityMap" type="List" access="global" />
+    <aura:attribute name="selectedActivity" type="String" access="global" />
+    <aura:attribute name="selectedProgramId" type="Id" access="global" />
+    <aura:attribute name="section" type="String" access="global" />
+    <aura:attribute name="prgmStatus" type="String" access="global" />
+   	<aura:attribute name="generatedActivityId" type="Id" access="global" />
+    <aura:attribute name="programList" type="List" access="global" />
+    <aura:attribute name="programCount" type="Integer" access="global" default="0"/>
+    <aura:attribute name="isPopup" type="boolean" access="global"/>
+    <aura:attribute name="modalParameters" type="boolean" access="global"/>
+    <aura:attribute name="activityCount" type="Integer" access="global"/>
+    <aura:registerEvent name="redirectToDealerDetail" type="c:Frontier_GrowerAccountComponentEvent"/>    
+   	<aura:registerEvent name="loadCarosel" type="c:Frontier_Programs_Carosel_Event"/>
+
+
+    
+   <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+        <div id="{!'innerCarosel' + v.programCount}">
+            <div class="{!'backlinkClass' + v.programCount}" aura:id="backlink">
+            </div>
+            <div class="{!'backlinkClass' + v.programCount}" aura:id="savelink">
+            </div>
+            <div class="{!'cancelactivitylinkClass' + v.programCount}" aura:id="cancelactivitylink">
+            </div>
+            <div class="{!'commentSavelinkClass' + v.programCount}" aura:id="commentSavelink">
+            </div>
+            <div class="{!'cancelProgramlinkClass' + v.programCount}" aura:id="cancelProgramlink">
+            </div>
+            <div class="{!'completeProgramlinkClass' + v.programCount}" aura:id="completeProgramlink">
+            </div>
+            <span class="{!'addactivitylinkClass' + v.programCount}" aura:id="addactivitylink">
+            </span>
+            
+            <div style="position:relative;top:400px;" aura:id="addnewActivity"  role="alertdialog" tabindex="-1" aria-labelledby="prompt-heading-id" aria-describedby="prompt-message-wrapper" class="slds-modal slds-fade-in-open slds-modal--prompt slds-hide">
+                <div class="slds-modal__container">
+                    <div class="slds-modal__header">
+                        <button class="slds-button slds-button--icon-inverse slds-modal__close" onclick="{!c.closeModal}">                    
+                            <c:svgIcon svgPath="{!$Resource.SLDS + '/assets/icons/action-sprite/svg/symbols.svg#close'}" category="action" size="medium"  name="close" />
+                            
+                            <span class="slds-assistive-text">Close</span>
+                        </button>
+                        <h2 class="slds-text-heading--medium" id="prompt-heading-id">Add New Activity</h2>
+                    </div>
+                    <div class="slds-modal__content slds-p-around--medium">
+                        <p><ui:inputSelect label="Select me:" class="dynamic" aura:id="addinputSelect"/></p>
+                    </div>
+                    <div class="slds-modal__footer slds-theme--default">
+                        <button class="slds-button slds-button--neutral" onclick="{!c.copyTask}">Save</button>
+                    </div>
+                </div>
+            </div>
+            <div aura:id="addCancelbackgrnd" class="slds-backdrop slds-backdrop--open slds-hide"></div>
+            <div aura:id="userpopup" style="right:50%;"></div>
+    </div>
+</aura:component>

@@ -1,0 +1,266 @@
+<aura:component controller="Frontier_VisitListRecords" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global">
+    <ltng:require styles="{!$Resource.SLDS +
+                          '/assets/styles/salesforce-lightning-design-system.css'}"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="visits" type="Frontier_VisitListRecords.visitWrapper[]" access="global"/>
+    <aura:attribute name="PageNumbers" type="Integer[]" access="global"/>
+    <aura:attribute name="page" type="integer" default="1" access="global"/>
+    <aura:attribute name="pages" type="integer" default="10" access="global"/>
+    <aura:attribute name="total" type="integer" access="global"/>
+    <aura:attribute name="pageSize" type="String" default="15" access="global"/>
+    <aura:attribute name="contentId" type="String" default="0152C000000LLDD"/>
+    <aura:attribute name="isExport" type="Boolean" default="false" access="global"/>
+    <aura:attribute name="toolTipToggle" type="String" default="Show More"/>
+    <aura:handler event="c:PageChange" action="{!c.pageChange}"/>
+    
+    
+    
+    <center><h4 class="slds-text-heading--large" style="Padding-top:10px"><b>Visits List</b></h4></center>
+    <aura:if isTrue="{!($Browser.formFactor) != 'PHONE'}">
+    <div class="{!($Browser.isPhone) ? 'slds-grid slds-wrap':'slds-grid'}">
+        <div class="slds-col slds-col--padded slds-size--1-of-1 slds-small--size--1-of-1 slds-large-size--1-of-7" style="Padding-bottom:10px"> 
+            <div class="slds-text-heading--medium">Total Records</div> 
+            <h6>{!v.total}</h6>
+        </div>
+        
+        <div class="slds-col slds-col--padded slds-size--1-of-1 slds-small--size--1-of-1 slds-large-size--1-of-7" style="Padding-bottom:10px"> 
+        	<ui:inputSelect multiple="true" class="form-control multiple multiSelect" label="Sort By Month " aura:id="MonthSort" change="{!c.VisitsList}">&nbsp;   
+                    <ui:inputSelectOption text="1" label="Jan"/>    
+                    <ui:inputSelectOption text="2" label="Feb"/>  
+                    <ui:inputSelectOption text="3" label="Mar"/>
+                    <ui:inputSelectOption text="4" label="Apr"/>
+                    <ui:inputSelectOption text="5" label="May"/>
+                    <ui:inputSelectOption text="6" label="Jun"/>
+                    <ui:inputSelectOption text="7" label="Jul"/>
+                    <ui:inputSelectOption text="8" label="Aug"/>
+                    <ui:inputSelectOption text="9" label="Sep"/>
+                    <ui:inputSelectOption text="10" label="Oct"/>
+                    <ui:inputSelectOption text="11" label="Nov"/>
+                    <ui:inputSelectOption text="12" label="Dec"/>
+             </ui:inputSelect>
+        </div>
+        
+       
+        <div  class="slds-col slds-col--padded slds-size--1-of-1 slds-small--size--1-of-1 slds-large-size--1-of-6" style="Padding-bottom:10px">
+             <ui:inputSelect class="form-control inputSelect" label="Sort By Type " aura:id="sortByType" change="{!c.VisitsList}">&nbsp; 
+                                <ui:inputSelectOption text="None" label="-- All --"/>
+                                <ui:inputSelectOption text="Phone Call" label="Phone Call"/>
+                                <ui:inputSelectOption text="eMail" label="eMail"/>
+                                <ui:inputSelectOption text="Visit" label="Visit"/>
+                                <ui:inputSelectOption text="Event" label="Event"/>
+                            </ui:inputSelect>
+        </div>
+         <div class="slds-col slds-col--padded slds-size--1-of-1 slds-small--size--1-of-1 slds-large-size--1-of-7" style="Padding-bottom:10px"> 
+            <center style="Padding-top:10px">
+                <c:Paginator page="{!v.page}" pages="{!v.pages}" total="{!v.total}"/>
+            </center>
+        </div>
+        <div  class="slds-col slds-col--padded slds-size--1-of-1 slds-small--size--1-of-1 slds-large-size--1-of-7" style="Padding-bottom:5px"> 
+        <ui:inputSelect class="form-control inputSelect" label="Sort By RADL " aura:id="sortByRADL" 
+                                change="{!c.VisitsList}">&nbsp;
+                                <ui:inputSelectOption text="None" label="-- All --"/>
+                                <ui:inputSelectOption text="Acquire" label="Acquire"/>
+                                <ui:inputSelectOption text="Develop" label="Develop"/>
+                                <ui:inputSelectOption text="Retain" label="Retain"/>
+                                <ui:inputSelectOption text="Light Touch" label="Light Touch"/>
+                                <ui:inputSelectOption text="Unknown" label="Unknown"/> 
+                                <ui:inputSelectOption text="Other" label="Other"/>
+                </ui:inputSelect>                
+            </div>
+                <div class="slds-col--padded slds-size--1-of-1 slds-small--size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-7" style="Padding-top:5px">
+                    <ui:button aura:id="button" buttonTitle="Click here to download" class="button slds-button--brand" label="Send Email" press="{!c.exportData}" />
+                </div>
+            <div class="slds-col--padded slds-size--1-of-1 slds-small--size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-7" style="Padding-top:5px">
+            <button class="slds-button slds-button--brand" onclick="{!c.clearSearchValues}">Clear</button>
+        </div>
+        <div aura:id="visitreportpopup">  </div> 
+        </div>
+    </aura:if>
+    
+    <aura:if isTrue="{!($Browser.formFactor) == 'PHONE'}">
+        <div class="{!($Browser.isPhone) ? 'slds-grid slds-wrap':'slds-grid'}">
+            <div class="slds-col slds-col--padded slds-size--1-of-3" style="Padding-bottom:10px"> 
+                <div class="slds-text-heading--medium">Total Records</div> 
+                <h6>{!v.total}</h6>
+            </div>
+            <div class="slds-col slds-col--padded slds-size--1-of-3" style="Padding-bottom:5px">
+            <center style="margin-top:10px">
+                <span >
+                    <ui:button aura:id="button" buttonTitle="Click here to download" class="button slds-button--brand" label="Send Email" press="{!c.exportData}"/>
+                </span>
+            </center>
+            </div>
+            
+             <div class="slds-col slds-col--padded slds-size--1-of-3" style="Padding-bottom:5px">
+            <center style="margin-top:10px">
+                <span >
+            <button class="slds-button slds-button--brand" onclick="{!c.clearSearchValues}">Clear</button>
+                </span>
+            </center>
+            </div>
+            
+            
+            <div class="slds-col slds-col--padded slds-size--1-of-1 slds-small--size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-5" style="Padding-bottom:10px"> 
+                <ui:inputSelect multiple="true" class="form-control multiple multiSelect" label="Sort By Month " aura:id="MonthSort" change="{!c.VisitsList}">&nbsp;   
+                    <ui:inputSelectOption text="1" label="Jan"/>    
+                    <ui:inputSelectOption text="2" label="Feb"/>  
+                    <ui:inputSelectOption text="3" label="Mar"/>
+                    <ui:inputSelectOption text="4" label="Apr"/>
+                    <ui:inputSelectOption text="5" label="May"/>
+                    <ui:inputSelectOption text="6" label="Jun"/>
+                    <ui:inputSelectOption text="7" label="Jul"/>
+                    <ui:inputSelectOption text="8" label="Aug"/>
+                    <ui:inputSelectOption text="9" label="Sep"/>
+                    <ui:inputSelectOption text="10" label="Oct"/>
+                    <ui:inputSelectOption text="11" label="Nov"/>
+                    <ui:inputSelectOption text="12" label="Dec"/>
+                </ui:inputSelect>
+            </div>
+            
+            <div  class="slds-col slds-col--padded slds-size--1-of-2" style="Padding-bottom:10px">
+                <ui:inputSelect class="form-control inputSelect" label="Sort By Type " aura:id="sortByType" change="{!c.VisitsList}">&nbsp; 
+                    <ui:inputSelectOption text="None" label="-- All --"/>
+                    <ui:inputSelectOption text="Call" label="Call"/>
+                    <ui:inputSelectOption text="eMail" label="eMail"/>
+                    <ui:inputSelectOption text="Visit" label="Visit"/>
+                    <ui:inputSelectOption text="Event" label="Event"/>
+                </ui:inputSelect>
+            </div>
+            <div  class="slds-col slds-col--padded slds-size--1-of-2" style="Padding-bottom:5px"> 
+                <ui:inputSelect class="form-control inputSelect" label="Sort By RADL " aura:id="sortByRADL" 
+                                change="{!c.VisitsList}">&nbsp;
+                    <ui:inputSelectOption text="None" label="-- All --"/>
+                    <ui:inputSelectOption text="Acquire" label="Acquire"/>
+                    <ui:inputSelectOption text="Develop" label="Develop"/>
+                    <ui:inputSelectOption text="Retain" label="Retain"/>
+                    <ui:inputSelectOption text="Light Touch" label="Light Touch"/>
+                    <ui:inputSelectOption text="Unknown" label="Unknown"/> 
+                    <ui:inputSelectOption text="Other" label="Other"/>
+                </ui:inputSelect>                
+            </div> 
+            <div class="slds-col slds-col--padded slds-size--1-of-1 slds-small--size--1-of-1 slds-medium-size--1-of-3 slds-large-size--1-of-6" style="Padding-bottom:10px"> 
+                <center style="Padding-top:10px">
+                    <c:Paginator page="{!v.page}" pages="{!v.pages}" total="{!v.total}"/>
+                </center>
+            </div>
+            <div aura:id="visitreportpopup">  </div> 
+        </div>
+    </aura:if>
+    <div class="slds-scrollable">
+        
+        <ui:scrollerWrapper class="tabelReport">
+            
+            <table class="slds-table slds-table--bordered slds-no-row-hover slds-table--product VisitTable">
+                <thead>
+                    <tr class="slds-text-heading--label slds-text-custom--label">
+                        <th>
+                            <div class="" title="AccountName">Account Name</div>
+                        </th>
+                        
+                        <th>
+                            <div class="" title="AccountId">Account Id</div>
+                        </th>
+                        <th>
+                            <div class="" title="EventId">Visit Id</div>
+                        </th>
+                        <th>
+                            <div class="" title="CreatedBy">CreatedBy</div>
+                        </th>
+                        <th>
+                            <div class="" title="Type">Type</div>
+                        </th>
+                        <th>
+                            <div class="" title="Activity Date">Activity Date</div>
+                        </th>
+                        <th>
+                            <div class="" title="Activity Date">Created Date</div>
+                        </th>
+                       <th>
+                            <div class="" title="Descrption">Comments</div>
+                        </th>
+                        <th>
+                            <div class="" title="SAPID">SAP ID</div>
+                        </th>
+                        <th>
+                            <div class="" title="RADL">RADL</div>
+                        </th>
+                        <th>
+                            <div class="" title="TerritoryId">Territory Id</div>
+                        </th>
+                        <th>
+                            <div class="" title="TerritoryName">Territory Name</div>
+                        </th>
+                        <th>
+                            <div class="" title="Level of Territory">Parent Territory Label</div>
+                        </th>
+                        <th>
+                            <div class="" title="Description">Description</div>
+                        </th>
+                        
+                    </tr>
+                </thead>
+                <tbody id="data"> 
+                    <aura:iteration items="{!v.visits}" var="visitData" indexVar="idx">
+                        <tr class="{!mod(idx,2) == 0 ?'even':'odd'}">
+                            <td>
+                                {!visitData.Name}
+                            </td>
+                            <td>
+                                {!visitData.Id}
+                            </td>
+                            <td>
+                                {!visitData.EventId}
+                            </td>
+                            <td>
+                                {!visitData.CreatedBy}
+                            </td>
+                            <td>
+                                {!visitData.Type}
+                            </td>
+                            <td>
+                                {!visitData.ActivityDate}
+                            </td>
+                            <td>
+                                {!visitData.CreatedDate}
+                            </td>
+                            <td>
+                                <aura:if isTrue="{!visitData.Description.length >= 30}">
+                                    <span class="truncateText"><c:Frontier_Truncatetext truncateLength="30" inputText="{!visitData.Description}"></c:Frontier_Truncatetext></span>
+                                    <span class="truncateText">.....&nbsp; <a id="{!visitData.EventId}" aura:id="{!visitData.EventId}" onclick="{!c.tooglepopover}" >Show More</a></span>
+                                   <div class="slds-truncate">
+                                   <div id="{!'popover'+visitData.EventId}" class="slds-popover slds-nubbin--top-left slds-cell-wrap slds-hide custompopover" role="dialog" >
+                                       <div class="slds-popover__body ">
+                                           {!visitData.Description}
+                                       </div>
+                                   </div>
+                               		</div>
+                                    <aura:set attribute="else">
+                                        {!visitData.Description}
+                                    </aura:set>
+                                </aura:if>
+                            </td>
+                            <td>
+                                {!visitData.SAPId}
+                            </td>
+                            <td>
+                                {!visitData.RADL_Class}
+                            </td>
+                            <td>
+                                {!visitData.TerritoryId}
+                            </td>
+                            <td>
+                                {!visitData.TerritoryName}
+                            </td>
+                            <td>
+                                {!visitData.ParentTerritoryLabel}
+                            </td>
+                            <td>
+                                {!visitData.TerritoryDescription}
+                            </td>
+                        </tr>
+                    </aura:iteration>
+                </tbody>                
+            </table>
+        </ui:scrollerWrapper>
+    </div> 
+</aura:component>

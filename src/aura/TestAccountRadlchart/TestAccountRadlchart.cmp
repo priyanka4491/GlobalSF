@@ -1,0 +1,14 @@
+<aura:component controller="AccountDashboardChartController" implements="force:appHostable" access="global">
+<aura:attribute name="dtypecount" type="Integer[]" access="global" />
+<aura:attribute name="acqtypecount" type="Integer[]" access="global" />
+    
+  <ltng:require scripts="{!$Resource.ChartJsExtend}" styles="{!join(',',$Resource.SLDS + '/assets/styles/salesforce-lightning-design-system.min.css')}" afterScriptsLoaded="{!c.loadAccdashboard}"/>
+   
+    <div id="chartContaineraccountRADL" class="Container" style="position:relative"> 
+	<div id="chartDivaccountRADL">
+        <canvas class="myChartLarge canvasPosition" id="myChartaccountRADL" />
+    </div>
+    <br></br>
+    
+    </div>
+</aura:component>

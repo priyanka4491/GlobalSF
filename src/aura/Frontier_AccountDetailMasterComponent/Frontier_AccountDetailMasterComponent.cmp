@@ -1,0 +1,143 @@
+<aura:component controller="Frontier_TaskRemainder" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global"> 
+    <style>
+        .navbar-default {
+        background-color: rgba(241, 241, 241, 1);
+        border-color: rgba(241, 241, 241, 1);
+        }
+        .slds-context-bar__item.slds-is-active {
+        border-left: 1px solid rgb(216, 221, 230);
+        border-right: 1px solid rgb(216, 221, 230);
+        border-bottom-color: rgb(247, 249, 251);
+        color: black;
+        font-weight: bold;
+        }
+        
+        .oneAnchorHeader {
+        display: none;
+        margin: 0;
+        padding: 1rem;
+        border-bottom: 1px solid rgb(216, 221, 230);
+        background: rgb(244, 246, 249);
+        }
+    </style>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler event="aura:waiting" action="{!c.showSpinner}"/>
+    <aura:handler event="aura:doneWaiting" action="{!c.hideSpinner}"/>
+    <aura:attribute name="showReminderPopUpFlag" type="Boolean" default="True" access="global" />
+    <center>
+        <div class="slds-spinner_container xc-hidden" aura:id="spinner">
+            <div class="slds-spinner--brand slds-spinner slds-spinner--large" aria-hidden="false" role="alert">
+                <div class="slds-spinner__dot-a"></div>
+                <div class="slds-spinner__dot-b"></div>
+            </div>
+        </div>
+    </center>
+    <aura:attribute name="globalId" type="Aura.Component[]" access="global"/>
+    <aura:attribute name="isDoneRendering" type="Boolean" default="false" access="global"/>
+    <aura:attribute name="sapId" type="String" access="global"/>
+    <aura:attribute name="task" type="Task[]" />
+    <aura:attribute name="totaltask" type="string" />
+    <!--<aura:attribute name="isCalloutError" type="Boolean" default="false"/>-->
+    
+    <aura:handler event="c:Frontier_ApplicationEvent" action="{!c.gettingTheComponentGlobalId}"/>
+    
+    
+    <ltng:require styles="{!join(',',
+                          $Resource.SLDS + '/assets/styles/salesforce-lightning-design-system.min.css'
+                          )}"/>    
+    <!-- Task Notification Pop up Start -->   
+    
+    <div>
+        <div role="dialog" tabindex="-1" aria-labelledby="header43" class="slds-modal slds-fade-in-close" aura:id="showActivities" style="position:absolute">
+            <div class="slds-modal__container">
+                <div class="slds-modal__header">
+                    <button class="slds-button slds-modal__close slds-button--icon-inverse" >
+                        <!--<svg aria-hidden="true" class="slds-button__icon slds-button__icon-large">
+          <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+        </svg>-->
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <div aura:id="notification" class="slds-hide">
+                        <div class="slds-notify notifyToast slds-theme--warning" role="alert">
+                            <span class="slds-assistive-text">Error</span>
+                            <button class="slds-button slds-notify__close slds-button--icon-inverse" onclick="{!c.closeNotification}">
+                                <span class="slds-icon_container slds-icon-standard-account" >
+                                    <c:svgIcon svgPath="{!$Resource.SLDS + '/assets/icons/utility-sprite/svg/symbols.svg#close'}" category="utility" size="medium"  name="close" />
+                                    <span class="slds-assistive-text">close</span>
+                                </span>
+                                <!--<svg aria-hidden="true" class="slds-button__icon slds-button__icon-large">
+                                <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+                            </svg>-->
+                                <span class="slds-assistive-text">Close</span>
+                            </button>
+                            <div class="slds-notify__content slds-grid">
+                                
+                                <div class="slds-col slds-align-middle">
+                                    <h6 class="slds-text-heading--small notifyFont">Oops,you haven't selected any reminder to dismiss &nbsp;&nbsp; </h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h6 id="header43" class="slds-text-heading--medium">Reminders</h6>
+                </div>
+                <div class="slds-modal__content slds-p-around--medium">
+                    <div class="slds-scrollable">
+                       <ui:scrollerWrapper class="sWrapper">
+
+                        <table class="slds-table slds-table--bordered slds-no-row-hover slds-table--product VisitTable">
+                            <thead>
+                                <tr class="slds-text-heading--label slds-text-custom--label taskNotificationTable slds-text-title--caps">
+                                    <th><input type="checkbox" id="headercheckbox" onclick="{!c.checkAll}"/></th>
+                                    <th>Activity Date</th>
+                                    <th>Account</th> 
+                                    <th>Comments</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <aura:iteration items="{!v.task}" var="task" indexVar="index">
+                                    <tr class="{!mod(index,2) == 0 ?'evenRows':'oddRows'}">
+                                        <td class="columnCollapsable">
+                                            <input type="checkbox" id="{!'tasks_'+index}" value="{!task.Id}"/>
+                                        </td>
+                                        <td><a onclick="{!c.navigateFollowUplistFromRemainderPopUp}" id="{!task.Id}">{!task.ActivityDate}</a></td>
+                                        <td class="slds-cell-wrap TableWrapColoumn columnCollapsable">{!task.What.Name}</td>
+                                        <td class="slds-cell-wrap TableWrapColoumn columnCollapsable">{!task.Description}</td>
+                                    </tr>
+                                </aura:iteration>
+                            </tbody>
+                        </table>
+                        </ui:scrollerWrapper>
+
+                    </div>
+                </div>
+                <div class="slds-modal__footer">
+                    <button class="slds-button slds-button--neutral"  onclick="{!c.closeModel}">Cancel</button>
+                    <button class="slds-button slds-button--brand" onclick="{!c.dismissTask}" >Dismiss</button>
+                </div>
+            </div>            
+        </div>
+        <div class="slds-backdrop slds-backdrop--close" aura:id="showActivitiesBackGround"></div>
+    </div>
+	
+    <!-- Task Notification Pop up Ends --> 
+    
+    
+            
+        <div id="AccountDetail">
+            <div aura:id="custom-tab-scoped-1" class="custom-slds-tabs slds-tabs--scoped__content slds-show" role="tabpanel" aria-labelledby="tab-scoped-1__item" style="background:rgba(227, 227, 227, 1);/*padding-left:60px;*/padding-top:27px;">
+                <div aura:id="tab-scoped-1">  </div>
+            </div>
+            <div aura:id="custom-tab-scoped-2" class="custom-slds-tabs slds-tabs--scoped__content slds-hide" role="tabpanel" aria-labelledby="tab-scoped-2__item" style="background:rgba(227, 227, 227, 1);/*padding-left:55px*/;padding-top:28px;">
+                <div aura:id="tab-scoped-2">  </div>
+            </div>
+            <div aura:id="custom-tab-scoped-3" class="custom-slds-tabs slds-tabs--scoped__content slds-hide" role="tabpanel" aria-labelledby="tab-scoped-3__item" style="background:rgba(227, 227, 227, 1);/*padding-left:55px*/;padding-top:28px;">
+                <div aura:id="tab-scoped-3">  </div>
+            </div> 
+            <div aura:id="custom-tab-scoped-4" class="custom-slds-tabs slds-tabs--scoped__content slds-hide" role="tabpanel" aria-labelledby="tab-scoped-4__item" style="background:rgba(227, 227, 227, 1);/*padding-left:55px*/;padding-top:28px;">
+                <div aura:id="tab-scoped-4">  </div>
+            </div>          
+        </div>
+    
+
+    
+</aura:component>

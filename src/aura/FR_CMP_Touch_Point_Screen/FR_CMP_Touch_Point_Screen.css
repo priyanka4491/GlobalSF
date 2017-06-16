@@ -1,0 +1,63 @@
+.THIS .mandatory-label::after {
+  content:"  *";
+  color:white;
+}
+
+.THIS .touchFollow{
+}
+
+.THIS .touchFollow .touchFollowLegend{
+    float:left;
+}
+
+.THIS .touchFollow .uiInput--datetime .datePicker-openIcon {
+	opacity: 0;
+    position: relative;
+    left: -23px;
+    top: -30px
+}
+
+.THIS .slds-icon-action-follow {
+    background-color: #31b9f8;
+    position: relative;
+    right: 260px;
+}
+
+.THIS .custombuttoncss{
+        left:147px;
+        height:33px;
+}
+
+
+
+.THIS .inputFollowupDate{
+    z-index: 1;
+    opacity: 0;
+    cursor: pointer;
+    top: -33px;
+    right: 253px;
+    width: 11%;
+    position: relative;
+}
+
+@media  all and (min-width: 320px) and (max-width:700px){
+    .THIS .inputFollowupDate{
+    z-index: 1;
+    opacity: 0;
+    cursor: pointer;
+    top: 1px;
+    right: 94px;
+    width: 11%;
+    position: relative;
+    }
+    
+ .THIS .slds-icon-action-follow {
+    background-color: #31b9f8;
+    position: relative;
+    right: 63px;
+}
+.THIS .custombuttoncss{
+        left:51px;
+        height:37px;
+    }  
+}

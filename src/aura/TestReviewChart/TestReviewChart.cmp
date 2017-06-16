@@ -1,0 +1,38 @@
+<aura:component controller="Frontier_ProgramPlanningController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    <ltng:require styles="{!$Resource.SLDS +
+                          '/assets/styles/salesforce-lightning-design-system.css'}"/> 
+    <aura:attribute name="clear" type="Boolean" access="global" default="true"/>  
+    <aura:attribute name="programId" type="Id" access="global" />
+    <aura:attribute name="programName" type="String" access="global" />
+    <aura:attribute name="btnCurrent" type="String" access="global" default="Side by Side Trial"/>
+    <aura:attribute name="btnPrevious" type="String" access="global" default="Side by Side Trial"/>
+    <aura:attribute name="programDetails" type="sObject[]" access="Global" />
+    <aura:attribute name="page" type="integer" default="1" access="global"/>
+    <aura:attribute name="pages" type="integer" default="10" access="global"/>
+    <aura:attribute name="total" type="integer"  access="global"/>
+    <aura:attribute name="pageSize" type="String" default="2" access="global"/>
+    <aura:attribute name="program1" type="integer" default="10" access="global"/>
+    <aura:attribute name="program2" type="integer" default="20" access="global"/>
+    <aura:attribute name="program3" type="integer" default="15" access="global"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="accounts" type="SObject[]" access="global"/>
+    
+    <aura:handler event="c:PageChange" action="{!c.pageChange}"/>
+    <div style="padding-top:2%;">
+                <center>
+                    <c:Paginator page="{!v.page}" pages="{!v.pages}" total="{!v.total}"/>
+                </center>
+    </div> 
+    <aura:iteration items="{!v.programDetails}" var="pgmList" indexVar="idx">
+        <div class="slds-grid slds-wrap slds-grid--pull-padded bodyContent">
+        
+        <div class="slds-p-horizontal--small slds-size--6-of-12 slds-size--12-of-12 slds-medium-size--12-of-12 slds-large-size--10-of-12 slds-float--right" >
+
+                <c:TestReviewChartchild programId="{!pgmList.Id}" program1="{!v.program1}" program2="{!v.program2}" program3="{!v.program3}"/>
+            </div> 
+ 
+            </div>
+        
+        <br> </br>
+    </aura:iteration>
+</aura:component>

@@ -1,0 +1,22 @@
+<aura:component >
+	<aura:attribute name="selectedProducts" type="Frontier_ProgramPlanningController.AccountProductWrapper[]" default="" access="global"/>
+	<aura:attribute name="accountId" type="String" default="" access="global"/>
+   <aura:attribute name="ProductWrapper" type="Frontier_ProgramPlanningController.AccountProductWrapper" default="" access="global"/>
+    <aura:attribute name="triggeredAccountId" type="Id" access="global"/>
+
+    <aura:iteration items="{!v.selectedProducts}" var="selectedProduct" indexVar="idx">
+        <span>
+         <aura:if isTrue="{!selectedProduct.accountId == v.triggeredAccountId ? (v.accountId == v.triggeredAccountId ? true :false) :false}">
+                   <p class="removeUnderline">{!selectedProduct.ProductCode},{!selectedProduct.chargeType},
+                    {!selectedProduct.Qty} Bags</p>
+             <aura:set attribute="else">                 
+                 <aura:if isTrue="{!selectedProduct.accountId == v.accountId ?true:false}">
+               <p class="removeUnderline">{!selectedProduct.ProductCode},{!selectedProduct.chargeType},
+                {!selectedProduct.Qty} Bags</p> 
+               </aura:if>
+             </aura:set>
+         </aura:if> 
+         </span>
+         </aura:iteration>
+    
+</aura:component>

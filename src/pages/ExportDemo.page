@@ -1,0 +1,17 @@
+<apex:page standardController="Account" extensions="myControllerExtension" contentType="application/vnd.ms-excel#VisitReport.xls">
+   <apex:form >
+   
+   <apex:pageBlock title="Visits">
+      <apex:pageBlockTable value="{!AllVisits}" var="event">
+
+         <apex:column value="{!event.Type}"/>
+         <apex:column value="{!event.ActivityDate}"/>
+         <apex:column value="{!event.CreatedBy.Name}"/>
+         <apex:column value="{!event.WhatId}"/>
+         <apex:column value="{!event.What.Name}"/>
+
+      </apex:pageBlockTable>
+      
+   </apex:pageBlock>
+    </apex:form>
+</apex:page>

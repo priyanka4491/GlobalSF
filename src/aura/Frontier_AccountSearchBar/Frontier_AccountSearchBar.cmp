@@ -1,0 +1,24 @@
+<aura:component access="global">
+    <ltng:require styles="{!$Resource.SLDS +
+                          '/assets/styles/salesforce-lightning-design-system.css'}"/>
+    <div class="slds-grid" style="background-color:#ffffff;/*margin-top: 13px;*/">
+        <div class="slds-col"> 
+            <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon--right Search-Icon">
+                <p><input  id="icon" type="text" class="form-control"
+                       placeholder="Search for an account" onkeyup="{!c.searchKeyChange}"/></p>
+                <c:svgIcon class="iconfill slds-icon slds-icon--x-small slds-icon-text-default" svgPath="{!$Resource.SLDS + '/assets/icons/utility-sprite/svg/symbols.svg#search'}" category="utility" size="x-small"  name="search" />
+            </div>  
+        </div>	
+            
+    
+    <div class="slds-col">
+            <div class="slds-text-align--right"> 
+                  <ui:inputSelect class="form-control inputSelect" aura:id="InputSelectSingle" label="Sort by"
+                                change="{!c.onSingleSelectChange}">&nbsp;   
+                    <ui:inputSelectOption text="None" label="None"/>
+                    <ui:inputSelectOption text="RADL__c" label="RADL Class"/>
+                </ui:inputSelect>
+            </div>
+    </div>
+</div> 
+</aura:component>

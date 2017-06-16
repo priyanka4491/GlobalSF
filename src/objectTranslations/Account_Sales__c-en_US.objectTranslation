@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Account Sales</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Account Sales</value>
+    </caseValues>
+    <fields>
+        <label><!-- Account Business Role --></label>
+        <name>Account_Business_Role_SFID__c</name>
+        <relationshipLabel><!-- Account_Sales --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Account Identifier --></label>
+        <name>Account_Identifier_SFID__c</name>
+        <relationshipLabel><!-- Account_Sales --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Account --></label>
+        <name>Account_SFID__c</name>
+        <relationshipLabel><!-- Account_Sales --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Brand Name --></label>
+        <name>Brand_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Budget --></label>
+        <name>Budget__c</name>
+    </fields>
+    <fields>
+        <help><!-- This field is to describe the brand family. --></help>
+        <label><!-- Business Unit --></label>
+        <name>Business_Unit_Descr__c</name>
+        <picklistValues>
+            <masterLabel>BioAg</masterLabel>
+            <translation><!-- BioAg --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Channel</masterLabel>
+            <translation><!-- Channel --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>National</masterLabel>
+            <translation><!-- National --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Regional</masterLabel>
+            <translation><!-- Regional --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Crop --></label>
+        <name>Crop__c</name>
+        <picklistValues>
+            <masterLabel>Alfalfa</masterLabel>
+            <translation><!-- Alfalfa --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Barley</masterLabel>
+            <translation><!-- Barley --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CORN AND COTTON</masterLabel>
+            <translation><!-- CORN AND COTTON --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Canola/Oilseed Rape</masterLabel>
+            <translation><!-- Canola/Oilseed Rape --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Corn</masterLabel>
+            <translation><!-- Corn --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Cotton</masterLabel>
+            <translation><!-- Cotton --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Grass/Turf/Lawn</masterLabel>
+            <translation><!-- Grass/Turf/Lawn --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Lupines</masterLabel>
+            <translation><!-- Lupines --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Miscellaneous Seed</masterLabel>
+            <translation><!-- Miscellaneous Seed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Oats</masterLabel>
+            <translation><!-- Oats --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Potato</masterLabel>
+            <translation><!-- Potato --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>R&amp;D Services</masterLabel>
+            <translation><!-- R&amp;D Services --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Rice</masterLabel>
+            <translation><!-- Rice --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Rye</masterLabel>
+            <translation><!-- Rye --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Seed Other</masterLabel>
+            <translation><!-- Seed Other --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sorghum</masterLabel>
+            <translation><!-- Sorghum --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Soy</masterLabel>
+            <translation><!-- Soy --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sudan/Sudax</masterLabel>
+            <translation><!-- Sudan/Sudax --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sugarbeet</masterLabel>
+            <translation><!-- Sugarbeet --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sugarcane</masterLabel>
+            <translation><!-- Sugarcane --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sunflower</masterLabel>
+            <translation><!-- Sunflower --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Triticale</masterLabel>
+            <translation><!-- Triticale --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Wheat</masterLabel>
+            <translation><!-- Wheat --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- This field is for the temporary storage of an external id for the Heroku Connect Integration. It will be used as necessary for parent-child relationships. Further integrations will be via the Salesforce Record ID. --></help>
+        <label><!-- Heroku Connect Integration Key --></label>
+        <name>HC_Integration_Key__c</name>
+    </fields>
+    <fields>
+        <label><!-- Net Sales Qty --></label>
+        <name>Net_Sales_Qty__c</name>
+    </fields>
+    <fields>
+        <label><!-- Opportunity --></label>
+        <name>Opportunity__c</name>
+    </fields>
+    <fields>
+        <label><!-- Order Qty --></label>
+        <name>Order_Qty__c</name>
+    </fields>
+    <fields>
+        <label><!-- Selling Season --></label>
+        <name>Selling_Season_Descr__c</name>
+        <picklistValues>
+            <masterLabel>2015 - Safra</masterLabel>
+            <translation><!-- 2015 - Safra --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>2015 Safra</masterLabel>
+            <translation><!-- 2015 Safra --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>2016 - Safra</masterLabel>
+            <translation><!-- 2016 - Safra --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>2016 Safra</masterLabel>
+            <translation><!-- 2016 Safra --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>2017 - Safra</masterLabel>
+            <translation><!-- 2017 - Safra --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>2017 Safra</masterLabel>
+            <translation><!-- 2017 Safra --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>SUMMER</masterLabel>
+            <translation><!-- SUMMER --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>WINTER</masterLabel>
+            <translation><!-- WINTER --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Unit Of Measure --></label>
+        <name>Unit_Of_Measure__c</name>
+        <picklistValues>
+            <masterLabel>Dollars</masterLabel>
+            <translation><!-- Dollars --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Units</masterLabel>
+            <translation><!-- Units --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Year Type --></label>
+        <name>Year_Type__c</name>
+        <picklistValues>
+            <masterLabel>Calendar Year</masterLabel>
+            <translation><!-- Calendar Year --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Crop Year</masterLabel>
+            <translation><!-- Crop Year --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Fiscal Year</masterLabel>
+            <translation><!-- Fiscal Year --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Year --></label>
+        <name>Year__c</name>
+    </fields>
+    <layouts>
+        <layout>Sales Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <recordTypes>
+        <label><!-- Customer Sales --></label>
+        <name>Customer_Sales</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Dealer Sales --></label>
+        <name>Dealer_Sales</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

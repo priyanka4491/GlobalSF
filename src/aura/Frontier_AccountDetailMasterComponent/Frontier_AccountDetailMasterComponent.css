@@ -1,0 +1,478 @@
+.THIS .xc-hidden {
+    display:none;
+} 
+
+.THIS .touchPoints{
+    width:1%;
+}
+.THIS .taskNotificationTable {
+    background-color: #666666;
+    color:#ffffff;
+}
+
+.THIS .evenRows{
+    background-color: #d8dde6;
+}
+
+/*  slds-notify--toast  */
+.THIS .notifyToast {
+    border-radius: .25rem;
+    margin: .5rem;
+    padding: .75rem 1.5rem;
+    min-width: 14rem;
+    display: inline-block;
+    text-align: left;
+}
+.THIS .TableWrapColoumn {
+    word-wrap:break-word;
+}
+.THIS .oddRows{
+    background-color: #F2F2F2;
+}
+.THIS .recentTouchPointRecordForm {
+    background-color: #ffffff;
+    margin: 1px;
+    padding: 15px;
+    padding-top: 10% ;
+    padding-bottom: 26% ;/* padding-bottom:27% */
+    max-width: 500px ;
+    border: 1px;
+}
+
+.THIS .slds-button--neutral {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid #d8dde6;
+    background-color: #fff;
+    color: black;
+    font-weight: bold;
+}
+
+.THIS .slds-button--brand {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    text-align: center;
+    vertical-align: middle;
+    background-color: #87b6dd;
+    border: 1px solid #87b6dd;
+    color: white;
+}
+
+.THIS .sideBar{
+    background-color: rgb(0, 57, 107);
+    position:fixed;
+    border-radius:5px;
+    top:34%
+}
+
+.THIS .trans{
+    transition:all 1s ease;
+}
+
+/** Laptop and Desktop style sheet **/
+@media  all and (min-width: 1200px) { 
+    
+    .THIS .salesCrop {
+        background:#ffffff;
+        padding-bottom: 33px;
+    }
+    .THIS .ShowingData {
+        padding-top:8%
+    }
+    
+    .THIS .newTouchPointRecordForm {
+        background-color:#999999;
+        padding: 15px;
+        padding-top: 10% ;
+        padding-bottom: 11% ;
+    }
+    
+    .THIS .touchPoints{
+        width:1%;
+    }
+    
+    .THIS .salesUsOpportunityCanvasTopHeight {
+        height:34px ;
+        
+    }
+    .THIS .salesUsOpportunityCanvasBottomHeight {
+        height:74px ;
+        
+    }
+    
+    .THIS .ActivityListSearchTextAlign {
+        padding-left:4%;
+    }
+    
+    .THIS .ActivityListDateAndPicklistTextAlign {
+    }
+    
+    .THIS .select{
+        border: 1px solid rgb(216, 221, 230);
+        border-radius: 0.25rem;
+        line-height: 1.875rem;
+    }
+    .THIS .FromDateLabel {
+        width:104%;
+    }
+    .THIS .FromDate {
+        border: 1px solid rgb(216, 221, 230);
+        border-radius: 0.25rem;
+        line-height: 1.875rem;
+        display: -webkit-flex;
+    }
+    
+    .THIS .ToDate {
+        border: 1px solid rgb(216, 221, 230);
+        border-radius: 0.25rem;
+        line-height: 1.875rem;
+        display: -webkit-flex;
+    }
+    
+    .THIS .inputTypeSelectWidth {
+        width:60%;
+    }
+    .THIS .Search-Activity { position: relative; }
+    .THIS .Search-Activity  input { background:#ffffff; display:block; width: 95%; box-sizing: border-box; padding-left:30px; border: 1px solid rgb(216, 221, 230);border-radius: 0.25rem;line-height: 1.875rem; }
+    .THIS .Search-Activity  span { position: absolute; top: 7px; left: 6% }
+    
+    .THIS .notifyFont{
+        font-size:11pt;
+    }
+}
+@media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) and (orientation:portrait) {
+    .THIS .recentTouchPointRecordForm {
+        background-color: #ffffff;
+        margin: 1px;
+        padding: 15px;
+        padding-top: 1% ;
+        padding-bottom: 66% ;
+        max-width: 500px ;
+        border: 1px;
+    }
+    .THIS .newTouchPointRecordForm {
+        background-color:#999999;
+        padding: 15px;
+        padding-top: 5% ;
+        padding-bottom:30% ;
+    }
+    
+    .THIS .Search-Activity { position: relative; }
+    .THIS .Search-Activity  input { background:#ffffff; display:block; width: 95%; box-sizing: border-box; padding-left:30px; border: 1px solid rgb(216, 221, 230);border-radius: 0.25rem;line-height: 1.875rem; }
+    .THIS .Search-Activity  span { position: absolute; top: 7px; left: 4% }
+    
+    .THIS .FromDate {
+        box-sizing: border-box;
+        border: 1px solid rgb(216, 221, 230);
+        border-radius: 0.25rem;
+        width:72%;
+        padding:4px;
+    }
+    
+    .THIS .ToDate {
+        box-sizing: border-box;
+        border: 1px solid rgb(216, 221, 230);
+        border-radius: 0.25rem;
+        width:74%;
+        
+    }
+    
+    .THIS .inputTypeSelectWidth {
+        width:30%;
+    }
+}
+
+@media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) and (orientation:landscape) {
+    .THIS .recentTouchPointRecordForm {
+        background-color: #ffffff;
+        margin: 1px;
+        padding: 15px;
+        padding-top: 1% ;
+        padding-bottom: 52% ;
+        max-width: 800px ;
+        border: 1px;
+    }
+    .THIS .newTouchPointRecordForm {
+        background-color:#999999;
+        padding: 15px;
+        padding-top: 5% ;
+        padding-bottom:20% ;
+    }
+    .THIS .FromDate {
+        box-sizing: border-box;
+        border: 1px solid rgb(216, 221, 230);
+        border-radius: 0.25rem;
+        line-height: 1.875rem;
+        width:73%;
+    }
+    
+    .THIS .ToDate {
+        box-sizing: border-box;
+        border: 1px solid rgb(216, 221, 230);
+        border-radius: 0.25rem;
+        line-height: 1.875rem;
+        width:84%;
+        
+    }
+    
+    .THIS .inputTypeSelectWidth {
+        width:41%;
+    }
+}
+
+/** IPAD View Style Sheet **/
+@media  all and (min-width: 768px) and (max-width:1024px) { 
+    
+    .THIS .ShowingData {
+        padding-top:10%
+    }
+    
+    .THIS .salesUsOpportunityCanvasTopHeight {
+        height:151px ;
+        
+    }
+    .THIS .salesUsOpportunityCanvasBottomHeight {
+        height:103px ;
+        
+    }
+    .THIS .newTouchPointRecordForm {
+        background-color:#999999;
+        padding: 15px;
+        padding-top: 5% ;
+        padding-bottom:27% ;
+    }
+    .THIS .RecordTouchPointButton {
+        width: 98% ;
+    }
+    .THIS .recentTouchPointRecordForm {
+        background-color: #ffffff;
+        margin: 1px;
+        padding: 15px;
+        padding-top: 10% ;
+        padding-bottom: 46% ;
+        max-width: 500px ;
+        border: 1px;
+    }
+    
+    .THIS .SalesUsOrderCropBottomHeight {
+        height:70px;
+    }
+    .THIS .touchPoints{
+        width:1px;
+    }
+    .THIS .inputTypeWidth {
+        width:49%;
+    }
+    .THIS .select{
+        border: 1px solid rgb(216, 221, 230);
+        border-radius: 0.25rem;
+        line-height: 1.875rem;
+    }
+    .THIS .FromDate {
+        box-sizing: border-box;
+        border: 1px solid rgb(216, 221, 230);
+        border-radius: 0.25rem;
+        line-height: 1.875rem;
+        width:73%;
+    }
+    
+    .THIS .ToDate {
+        box-sizing: border-box;
+        border: 1px solid rgb(216, 221, 230);
+        border-radius: 0.25rem;
+        line-height: 1.875rem;
+        width:84%;
+        
+    }
+    
+    .THIS .inputTypeSelectWidth {
+        width:41%;
+    }
+    
+    
+    .THIS .Search-Activity { position: relative; }
+    .THIS .Search-Activity  input { background:#ffffff; display:block; width: 95%; box-sizing: border-box; padding-left:30px; border: 1px solid rgb(216, 221, 230);border-radius: 0.25rem;line-height: 1.875rem; }
+    .THIS .Search-Activity  span { position: absolute; top: 7px; left: 4% }
+    
+    .THIS .notifyFont{
+        font-size:9pt;
+    }
+}
+/** Ipad view style Sheet **/
+@media only screen and (min-device-width: 481px) and (max-device-width: 1023px) and (orientation:portrait) {
+    .THIS .recentTouchPointRecordForm {
+        background-color: #ffffff;
+        padding: 15px;
+        padding-top: 10% ;
+        padding-bottom: 77% ;
+        max-width: 500px ;
+    }
+    
+    .THIS .newTouchPointRecordForm {
+        background-color:#999999;
+        padding: 15px;
+        padding-top: 5% ;
+        padding-bottom:30% ;
+    }
+    
+    
+    .THIS .inputTypeSelectWidth {
+        width:35%;
+    }
+    
+    .THIS .FromDate {
+        box-sizing : border-box;
+        border-radius: 0.25rem;
+        border: 1px solid rgb(216, 221, 230);
+        line-height: 1.875rem;
+        width:60%;
+    }
+    
+    .THIS .ToDate {
+        box-sizing : border-box;
+        border-radius: 0.25rem;
+        border: 1px solid rgb(216, 221, 230);
+        line-height: 1.875rem;
+        width:75%;
+    }
+    
+    .THIS .notifyFont{
+        font-size:11pt;
+    }
+    
+}
+@media  all and (min-width: 320px) and (max-width:700px){
+    .THIS .sWrapper {
+        height:300px;
+        -webkit-overflow-scrolling : touch;
+    }
+    
+    .THIS .background {
+        background:#ffffff;
+    }
+    .THIS .newTouchPointRecordForm {
+        background-color:#999999;
+        padding: 15px;
+        
+    }
+    .THIS .touchPoints{
+        width:100%;
+    }
+    
+    .THIS .chartAlignment {
+        width:100% ;
+    }
+    
+    .THIS .select{
+        border: 1px solid rgb(216, 221, 230);
+        border-radius: 0.25rem;
+        line-height: 0.875rem;
+    }
+    
+    .THIS .FromDate {
+        width: 79%;
+        margin-left: 14px;
+        box-sizing: border-box;
+        border: 1px solid rgb(216, 221, 230);
+        border-radius: 0.25rem;
+        line-height: 0.875rem;
+    }
+    
+    .THIS .ToDate {
+        width: 80%;
+        margin-left: 31px;
+        box-sizing: border-box;
+        border: 1px solid rgb(216, 221, 230);
+        border-radius: 0.25rem;
+        line-height: 0.875rem;
+    }
+    
+    .THIS .inputTypeSelectWidth {
+        width:66%;
+    }
+    
+    .THIS .Search-Activity { position: relative; }
+    .THIS .Search-Activity  input { background:#ffffff; display:block; width: 100%;box-sizing: border-box;padding-left:30px; border: 1px solid rgb(216, 221, 230);border-radius: 0.25rem;line-height: 1.875rem;}
+    .THIS .Search-Activity  span { position: absolute; top: 17%; left: 4% }
+    
+    .THIS .notifyFont{
+        font-size:8pt;
+    }
+    
+    .THIS .alignGrid {
+        margin-top:18px;
+    }
+}
+
+/** Monsanta Design Style Sheet **/
+.THIS h1{
+    font-family: "Museo Sans 300" ;
+    font-size: 54pt ;
+    line-height: 3.875 EM ;
+}
+.THIS h2{
+    font-family: "Museo Sans 300" ;
+    font-size: 48pt ;
+    line-height: 3.5 EM ;
+}
+.THIS h3{
+    font-family: "Museo Sans 300" ;
+    font-size: 36pt ;
+    line-height: 2.625 EM ;
+    word-wrap: break-word;
+}
+.THIS h4{
+    font-family: "Museo Sans 700" ;
+    font-size: 22pt ;
+    line-height: 2.625 EM ;
+    word-wrap: break-word;
+}
+.THIS h5{
+    font-family: "Museo Sans 700" ;
+    font-size: 16pt ;
+    line-height: 1.375 EM ;
+    word-wrap: break-word;
+    
+}
+.THIS h6{
+    font-family: "Museo Sans 500" ;
+    font-size: 14pt ;
+    text-transform: uppercase ;
+    line-height: 1.125 EM ;
+    word-wrap: break-word;
+}
+.THIS p {
+    font-family: "Museo Sans 500" ;
+    /*font-size: 14pt ;
+    line-height: 1.125 EM ;*/
+}
+
+.THIS p > span {
+    font-family: "Museo Sans 500" ;
+    font-size: 14pt ;
+    line-height: 1.125 EM ;
+}
+.THIS p > strong {
+    font-family: "Museo Sans 700" ;
+    font-size: 14pt ;
+    line-height: 1.125 EM ;
+}
+.THIS a {
+    font-family: "Museo Sans 500" ;
+    font-size: 14pt ;
+    line-height: 1.125 EM ;
+}
+.THIS a:hover {
+    font-family: "Museo Sans 500" ;
+    font-size: 14pt ;
+}
+.THIS button {
+    font-family: "Museo Sans 500" ;
+    /*font-size: 16pt ;*/
+}
+.THIS label {
+    font-family: "Museo Sans 500" ;
+    font-size: 12pt ;
+}

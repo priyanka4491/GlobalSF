@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>This object is to map the accounts with associated territories.
+
+TEMPORARY OBJECT
+Heroku Connect doesn&apos;t update the standard object ObjectTerritory2Association and that all functional logic will have to be based on the standard object ObjectTerritory2Association.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Account_Business_Role_SFID__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>This is used to reference the appropriate business role to which the territory is assigned to</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This is used to reference the appropriate business role to which the territory is assigned to</inlineHelpText>
+        <label>Account Business Role</label>
+        <referenceTo>Account_Business_Role__c</referenceTo>
+        <relationshipLabel>Accounts to Territories</relationshipLabel>
+        <relationshipName>Accounts_to_Territories</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Account_SFID__c</fullName>
+        <description>This field is to associate the record with an account</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This field is to associate the record with an account</inlineHelpText>
+        <label>Account</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Accounts to Territories</relationshipLabel>
+        <relationshipName>Accounts_to_Territories</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>AssociationCause__c</fullName>
+        <description>Territory2Manual</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Territory2Manual</inlineHelpText>
+        <label>AssociationCause</label>
+        <length>40</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>HC_Integration_Key__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <description>This field is for the temporary storage of an external id for the Heroku Connect Integration. It will be used as necessary for parent-child relationships. Further integrations will be via the Salesforce Record ID.</description>
+        <externalId>true</externalId>
+        <inlineHelpText>This field is for the temporary storage of an external id for the Heroku Connect Integration. It will be used as necessary for parent-child relationships. Further integrations will be via the Salesforce Record ID.</inlineHelpText>
+        <label>Heroku Connect Integration Key</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>Territory__c</fullName>
+        <description>Territories are loaded into this field(THIS OBJECT IS TEMPORARY)</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Territories are loaded into this field(THIS OBJECT IS TEMPORARY)</inlineHelpText>
+        <label>Territory</label>
+        <length>20</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Account To Territory</label>
+    <listViews>
+        <fullName>All</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <label>Accounts to Territories Name</label>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Accounts to Territories</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+</CustomObject>

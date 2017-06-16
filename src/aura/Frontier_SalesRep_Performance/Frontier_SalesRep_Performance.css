@@ -1,0 +1,35 @@
+.THIS .customHeadingColor{
+    color:#808080;
+    Padding-top:10px;
+    Padding-left:20px;
+    Padding-bottom:10px;
+    font-weight : bold;
+    background-color:#ffffff;
+}
+.THIS .topAlign{
+    padding-top:10px;
+}
+.THIS .leftAlign{
+    padding-left:20px;
+}
+.THIS #chartContainer {
+  position: relative;
+}
+.THIS .fontstyle{
+    font-size:large;
+}
+.THIS #chartContainer canvas {
+  position: relative;
+}
+.THIS .canvasPosition{
+     position:absolute;
+     margin-top:3%;
+     right: 2%;
+}
+.THIS .bgcolor{
+    background-color:#ffffff;
+}
+.THIS .topAlign{
+    padding-top:10px;
+    padding-left:10px;
+}

@@ -1,0 +1,9 @@
+<aura:component >  
+    <aura:attribute name="radlCoverage" type="Map" default="" />
+    <aura:attribute name="chartIdentifier" default=""  type="String"  access="global"/>
+
+	<ltng:require scripts="{!$Resource.ChartJs}" styles="{!join(',',$Resource.SLDS + '/assets/styles/salesforce-lightning-design-system.min.css')}" afterScriptsLoaded="{!c.loadSalesdashboard}"/>
+	<div id="chartDivaccountRADL">
+        <canvas class="myChartLarge canvasPosition" id="{!v.chartIdentifier}" />
+    </div>
+</aura:component>

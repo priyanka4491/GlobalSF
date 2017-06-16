@@ -1,0 +1,18 @@
+<apex:page showHeader="false" sidebar="false">
+    <style>
+    body {
+    margin: 0;
+}
+    iframe 
+{
+ display: block; 
+ width: 100%; 
+ border: none; 
+ overflow-y: auto; 
+ overflow-x: hidden;
+}
+
+    </style>
+    	<iframe src="//www.google.com/maps/embed/v1/place?q=Harrods,Brompton Rd,UK&zoom=17&key=AIzaSyDuC0Zqxg6Evo_i8vV3OzFFtbl6rOUAV5U" frameborder="0" width="1000" height="1000"/>
+
+</apex:page>

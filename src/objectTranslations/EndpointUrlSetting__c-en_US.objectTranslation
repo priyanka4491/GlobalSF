@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Endpoint Url Settings</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Endpoint Url Setting</value>
+    </caseValues>
+    <fields>
+        <label><!-- Auth Token URL --></label>
+        <name>Auth_Token_URL__c</name>
+    </fields>
+    <fields>
+        <label><!-- Authorization Url --></label>
+        <name>Authorization_Url__c</name>
+    </fields>
+    <fields>
+        <label><!-- Callback Url --></label>
+        <name>Callback_Url__c</name>
+    </fields>
+    <fields>
+        <label><!-- Client Id --></label>
+        <name>Client_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Client Secret --></label>
+        <name>Client_Secret__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

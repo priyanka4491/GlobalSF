@@ -1,0 +1,26 @@
+<aura:component controller="Frontier_Gen_Communication_Controller" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:attribute name="recordId" type="String" default="0012C00000AsKGz" />
+    <aura:attribute name="communicationDetail" type="Object" access="global"/>
+    <aura:attribute name="ServerError" type="String" access="global" />
+    <aura:attribute name="isCallBackError" type="boolean" access="global" default="true"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <div class="slds-grid slds-page-header">
+		<div class="slds-grid slds-col">
+            <div>
+                <div class="custom-heading">
+                    <c:svgIcon class="fillicon" svgPath="{!$Resource.SLDS + '/assets/icons/standard-sprite/svg/symbols.svg#groups'}" category="standard" size="large"  name="groups"> </c:svgIcon>                    
+                </div>
+                <div class="slds-media__body custom-heading--body">
+                    <p class="slds-text-heading--label slds-line-height--reset">{!v.communicationDetail.objectRecordType}</p>
+                    <h1 class="slds-page-header__title slds-m-right--small slds-truncate slds-align-middle custom-name-section">{!v.communicationDetail.recordName}</h1>
+                </div>
+                <div>
+                    <p class="slds-text-heading--label slds-line-height--reset custom-heading-addrss">{!v.communicationDetail.commAddress + '' +v.communicationDetail.commPhone + ''+v.communicationDetail.commPhone}</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+   
+</aura:component>

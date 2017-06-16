@@ -1,0 +1,26 @@
+<aura:component controller="FR_SalsRepDashboardContorller" implements="flexipage:availableForAllPageTypes,force:hasRecordId,force:appHostable" access="global">>
+    <aura:registerEvent name="cmpEvent" type="c:FR_SalesRep_DashboardHeaderEvent"/>
+    <div style="padding: 20px 20px 20px 20px;">        
+        <div class="{!($Browser.isPhone) ? 'slds-grid slds-wrap ':'slds-grid '}" style="background:#ffffff;padding: 20px 30px 20px 30px;">
+            <div class="slds-col slds-col--padded slds-p-horizontal--small slds-size--1-of-1 slds-small-size--12-of-12 slds-medium-size--1-of-12 slds-large-size--1-of-12" >
+                <p class="filterStyle" style="padding-top:10px"><b>Filters:</b></p>    
+            </div>            
+            <div class="slds-col slds-col--padded slds-p-horizontal--small slds-size--1-of-1 slds-small-size--12-of-12 slds-medium-size--3-of-12 slds-large-size--3-of-12" >                  
+                <div class="slds-form-element__control" style="padding-top:10px">
+                    <b class="filterStyle" >Season</b>  
+                    <ui:inputSelect aura:id="season" change="{!c.fireFilterEvent}"/>
+                </div>
+            </div>
+            <div class="slds-col slds-col--padded slds-p-horizontal--small slds-size--1-of-1 slds-small-size--12-of-12 slds-medium-size--3-of-12 slds-large-size--3-of-12" >
+                <div class="slds-form-element__control" style="padding-top:10px">
+                    <b class="filterStyle" >Crop</b>  
+                    <ui:inputSelect aura:id="crop" change="{!c.fireFilterEvent}"/>
+                    
+                </div>
+            </div>
+            <div class="slds-col slds-col--padded slds-p-horizontal--small slds-size--1-of-1 slds-small-size--12-of-12 slds-medium-size--5-of-12 slds-large-size--5-of-12" >
+                
+            </div>
+        </div>
+    </div>
+</aura:component>

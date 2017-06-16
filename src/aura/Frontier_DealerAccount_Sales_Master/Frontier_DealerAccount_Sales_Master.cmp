@@ -1,0 +1,63 @@
+<aura:component controller="Frontier_GrowerFarmSizeController" implements="force:appHostable" access="global">    
+    <aura:attribute name="growerAcc" type="Id" access="global" default=""/>
+    <aura:attribute name="growerSalesFarm" type="String" access="global" />
+     <aura:attribute name="growerSalesFarmCrop" type="String[]" access="global" />
+    <aura:attribute name="loadchart1" type="Boolean" default="false" access="global" />
+    <aura:attribute name="UOM" type="String" default="Units" access="global" />
+    <aura:attribute name="dealerid" type="String" access="global" />
+	<aura:attribute name="crops" type="List" />
+    <aura:attribute name="latestCrop" type="String" />
+    <aura:attribute name="loadchart2" type="Boolean" default="false" access="global" />
+    <aura:attribute name="loadchart3" type="Boolean" default="false" access="global" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <div class="inputStyle">
+         <ui:inputSelect class="form-control inputSelect"  aura:id="UOMs" 
+                                change="{!c.changeUnits}">&nbsp;
+                                <ui:inputSelectOption text="Units" label="Units"/>
+                </ui:inputSelect> 
+ </div>
+    
+    <center>
+        <br />
+        <div>
+            <div class="slds-text-heading--medium"><center><strong>Customer Sales - Monsanto</strong></center></div><br />   
+        </div><br />
+    </center>
+       
+    <aura:iteration items="{!v.growerSalesFarmCrop}" var="crop">
+    <center>
+       <div class="{!($Browser.isPhone) ? 'slds-grid slds-wrap vAlign':'slds-grid vAlign'}" style="height:230px;">
+         <div class="slds-p-horizontal--small slds-size--12-of-12 slds-size--12-of-12 slds-medium-size--2-of-12 slds-large-size--2-of-12 cropStyle" style="padding-top:14%;font-size:medium;" >
+          <center> <p class="cropStyle"><b>{!crop}</b></p></center>
+           </div>
+        <div class="slds-p-horizontal--small slds-size--12-of-12 slds-size--12-of-12 slds-medium-size--10-of-12 slds-large-size--10-of-12" >
+
+         
+                <aura:if isTrue="{!v.loadchart1}">
+                        <c:Frontier_DealerDetail_Opportunity identifier="{!crop}" growerSalesFarm="{!v.growerSalesFarm}" latestCrop="{!v.latestCrop}"/> 
+                </aura:if>
+                
+           </div> 
+            </div>
+           
+               
+    </center>
+    </aura:iteration>
+  <div>
+      <center >
+        <div>
+            <p class="customHeadingColor"><strong>Customer Share</strong></p>
+        </div><br/>
+        <div class="slds-grid slds-grid--pull-padded">
+     <aura:iteration items="{!v.crops}" var="crop" indexVar="key">
+         
+            <div class="slds-p-horizontal--small slds-size--1-of-1">
+                <span class="sizeLarge">{!crop.value}%</span><br></br>
+                <span class="sizeMedium">{!crop.key}</span>
+
+            </div>
+         
+        </aura:iteration></div>
+    </center>
+        </div>
+</aura:component>

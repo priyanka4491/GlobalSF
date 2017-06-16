@@ -1,0 +1,77 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes" access="global">
+            <div class="slds-text-heading--medium headerStyle">
+                <b>Recent Updates/Changes :</b>
+            </div>  
+    <div class="slds-form-element">
+        <fieldset class="slds-form-element">
+            <legend class="slds-form-element__legend slds-form-element__label slds-text-heading--small headerStyle"><b>Today</b></legend>
+            <div class="slds-form-element__control">
+                <span class="slds-radio radioLabelPad" style="color:#000000;">
+                    <input type="radio" id="radio-25" name="options" checked="" />
+                    <label class="slds-radio__label" for="radio-25">
+                        <span class="slds-radio--faux"></span>
+                        <span class="slds-form-element__label">Program1- Closed for Account- Biggs Farms</span>
+                    </label>
+                </span>
+                <span class="slds-radio radioLabelPad">
+                    <input type="radio" id="radio-26" name="options" />
+                    <label class="slds-radio__label" for="radio-26">
+                        <span class="slds-radio--faux"></span>
+                        <span class="slds-form-element__label">Activity Proposal - completed for Account - Smith Farms</span>
+                    </label>
+                </span>
+            </div>
+            <legend class="slds-form-element__legend slds-form-element__label slds-text-heading--small headerStyle"><b>Tomorrow</b></legend>
+            <div class="slds-form-element__control">
+                <span class="slds-radio radioLabelPad">
+                    <input type="radio" id="radio-27" name="options" checked="" />
+                    <label class="slds-radio__label" for="radio-27">
+                        <span class="slds-radio--faux"></span>
+                        <span class="slds-form-element__label">Program1- Closed for Account- Biggs Farms</span>
+                    </label>
+                </span>
+                <span class="slds-radio radioLabelPad">
+                    <input type="radio" id="radio-28" name="options" />
+                    <label class="slds-radio__label" for="radio-28">
+                        <span class="slds-radio--faux"></span>
+                        <span class="slds-form-element__label">Program1- Closed for Account- Biggs Farms</span>
+                    </label>
+                </span>
+            </div>
+            <legend class="slds-form-element__legend slds-form-element__label slds-text-heading--small headerStyle"><b>This Week</b></legend>
+            <div class="slds-form-element__control">
+                <span class="slds-radio radioLabelPad">
+                    <input type="radio" id="radio-29" name="options" checked="" />
+                    <label class="slds-radio__label" for="radio-29">
+                        <span class="slds-radio--faux"></span>
+                        <span class="slds-form-element__label">Program1- Closed for Account- Biggs Farms</span>
+                    </label>
+                </span>
+                <span class="slds-radio radioLabelPad">
+                    <input type="radio" id="radio-30" name="options" />
+                    <label class="slds-radio__label" for="radio-30">
+                        <span class="slds-radio--faux"></span>
+                        <span class="slds-form-element__label">Program1- Closed for Account- Biggs Farms</span>
+                    </label>
+                </span>
+            </div>
+            <legend class="slds-form-element__legend slds-form-element__label slds-text-heading--small headerStyle"><b>Next Week</b></legend>
+            <div class="slds-form-element__control">
+                <span class="slds-radio radioLabelPad">
+                    <input type="radio" id="radio-31" name="options" checked="" />
+                    <label class="slds-radio__label" for="radio-31">
+                        <span class="slds-radio--faux"></span>
+                        <span class="slds-form-element__label">Program1- Closed for Account- Biggs Farms</span>
+                    </label>
+                </span>
+                <span class="slds-radio radioLabelPad">
+                    <input type="radio" id="radio-32" name="options" />
+                    <label class="slds-radio__label" for="radio-32">
+                        <span class="slds-radio--faux"></span>
+                        <span class="slds-form-element__label">Program1- Closed for Account- Biggs Farms</span>
+                    </label>
+                </span>
+            </div>
+        </fieldset>    
+    </div>
+</aura:component>

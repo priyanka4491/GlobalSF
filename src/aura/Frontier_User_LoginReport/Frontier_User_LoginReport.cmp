@@ -1,0 +1,181 @@
+<aura:component controller="Frontier_UserLoginReportController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global">
+    <ltng:require styles="{!$Resource.SLDS +
+                          '/assets/styles/salesforce-lightning-design-system.css'}"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="logs" type="Object[]" access="global"/>
+    <aura:attribute name="PageNumbers" type="Integer[]" access="global"/>
+    <aura:attribute name="page" type="integer" default="1" access="global"/>
+    <aura:attribute name="pages" type="integer" default="10" access="global"/>
+    <aura:attribute name="total" type="integer" access="global"/>
+    <aura:attribute name="pageSize" type="String" default="15" access="global"/>
+    <aura:attribute name="isExport" type="Boolean" default="false" access="global"/>
+    <aura:handler event="c:PageChange" action="{!c.pageChange}"/>
+    <aura:attribute name="message" type="Boolean" access="global" default="false"/>
+    <aura:attribute name="monthOrCountrySort" type="Boolean"  access="global" default="false"/> 
+    <aura:attribute name="selectedMonthOrCountry" type="String" access="global" default="" />
+    <aura:attribute name="selectedMonthOrCountryField" type="String" access="global" default="" />
+    <center>
+        <div class="slds-spinner_container xc-hidden" aura:id="spinner">
+            <div class="slds-spinner--brand slds-spinner slds-spinner--large" aria-hidden="false" role="alert">
+                <div class="slds-spinner__dot-a"></div>
+                <div class="slds-spinner__dot-b"></div>
+            </div>
+        </div>
+    </center>    
+    <center><h4 class="slds-text-heading--large" style="Padding-top:10px"><b>Login History</b></h4></center>
+    
+    <!-- Desktop View Start -->
+    <aura:if isTrue="{!($Browser.formFactor) != 'PHONE'}">
+            <div class="{!($Browser.isPhone) ? 'slds-grid slds-wrap':'slds-grid'}">
+            <div class="slds-col slds-col--padded slds-small--size--1-of-1 slds-medium-size--1-of-3 slds-large-size--3-of-5" style="Padding-bottom:10px"> 
+                <div class="slds-text-heading--medium">Total Records</div>
+                <h6>{!v.total}</h6>
+            </div>
+            <div class="slds-col slds-col--padded slds-small--size--1-of-1 slds-medium-size--1-of-3 slds-large-size--1-of-5" style="Padding-bottom:10px"> 
+                <center style="Padding-top:10px">
+                    <c:Paginator page="{!v.page}" pages="{!v.pages}" total="{!v.total}"/>
+                </center>
+            </div>
+            <div class="slds-col slds-col--padded slds-small--size--1-of-1 slds-medium-size--1-of-3 slds-large-size--1-of-5">
+                <ui:inputSelect multiple="true" class="form-control multiple multiSelect" label="CountryISO View" aura:id="CountrySort" change="{!c.SortByCountry}" />            
+            </div>
+            <div class="slds-col slds-col--padded slds-small--size--1-of-1 slds-medium-size--1-of-3 slds-large-size--1-of-5"> 
+                <ui:inputSelect multiple="true" class="form-control multiple multiSelect" label="Month View" aura:id="MonthSort" change="{!c.SortByMonth}" />&nbsp;   
+            </div>
+            <div class="slds-col slds-col--padded slds-small--size--1-of-1 slds-medium-size--1-of-3 slds-large-size--1-of-5 slds-align-middle" style="Padding-bottom:5px">
+                <center style="margin-top:10px">
+                    <span>
+                        <ui:button aura:id="button" buttonTitle="Click here to download" class="button slds-button--brand" label="Send Email" press="{!c.exportData}" />
+                    </span>
+                </center>
+            </div>
+            <div aura:id="userpopup">  </div> 
+        </div>
+    </aura:if>
+    <!-- Desktop View end -->
+    
+    <!-- Mobile View Start -->
+    <aura:if isTrue="{!($Browser.formFactor) == 'PHONE'}">
+        <div class="{!($Browser.isPhone) ? 'slds-grid slds-wrap':'slds-grid'}">
+            <div class="slds-col slds-col--padded slds-small--size--1-of-1 slds-medium-size--1-of-3 slds-large-size--3-of-5" style="Padding-bottom:10px"> 
+                <div class="slds-text-heading--medium">Total Records</div>
+                <h6>{!v.total}</h6>
+            </div>
+            <div class="slds-col slds-col--padded slds-small--size--1-of-1 slds-medium-size--1-of-3 slds-large-size--1-of-5 slds-align-middle" style="Padding-bottom:5px">
+                <center style="margin-top:10px">
+                    <span>
+                        <ui:button aura:id="button" buttonTitle="Click here to download" class="button slds-button--brand" label="Send Email" press="{!c.exportData}" />
+                    </span>
+                </center>
+            </div>
+            <div class="slds-col slds-col--padded slds-size--1-of-2 slds-small--size--1-of-1 slds-medium-size--1-of-3 slds-large-size--1-of-5">
+                <ui:inputSelect multiple="true" class="form-control multiple multiSelect" label="CountryISO View" aura:id="CountrySort" change="{!c.SortByCountry}" />            
+            </div>
+            <div class="slds-col slds-col--padded slds-size--1-of-2 slds-small--size--1-of-1 slds-medium-size--1-of-3 slds-large-size--1-of-5"> 
+                <ui:inputSelect multiple="true" class="form-control multiple multiSelect" label="Month View" aura:id="MonthSort" change="{!c.SortByMonth}" />&nbsp;   
+            </div>
+            <div class="slds-col slds-col--padded slds-small--size--1-of-1 slds-medium-size--1-of-3 slds-large-size--1-of-5" style="Padding-bottom:10px"> 
+                <center style="Padding-top:10px">
+                    <c:Paginator page="{!v.page}" pages="{!v.pages}" total="{!v.total}"/>
+                </center>
+            </div>
+            <div aura:id="userpopup">  </div> 
+        </div>
+    </aura:if>
+    <!-- Mobile View end -->
+    
+    <div class="slds-scrollable">
+        <ui:scrollerWrapper class="sWrap" >
+            <table class="slds-table slds-table--bordered slds-no-row-hover slds-table--product VisitTable">
+                <thead>
+                    <tr class="slds-text-heading--label slds-text-custom--label">
+                        <th>
+                            <div class="" title="User Name">User Name</div>
+                        </th>
+						<th>
+                            <div class="" title="Role">Role</div>
+                        </th>
+						<th>
+                            <div class="" title="Title">Title</div>
+                        </th>                        
+                        <th>
+                            <div class="" title="Parent Territory">Parent Territory</div>
+                        </th>
+                        <th>
+                            <div class="" title="LoginTime">LoginTime</div>
+                        </th>
+                        <th>
+                            <div class="" title="Login Month">Login Month</div>
+                        </th>
+                        <th>
+                            <div class="" title="LoginType">LoginType</div>
+                        </th>
+                        <th>
+                            <div class="" title="Status">Status</div>
+                        </th>
+                        <th>
+                            <div class="" title="Browser">Browser</div>
+                        </th>
+                        <th>
+                            <div class="" title="Platform">Platform</div>
+                        </th>
+                        <th>
+                            <div class="" title="LoginUrl">LoginUrl</div>
+                        </th>
+						<th>
+                            <div class="" title="State">State</div>
+                        </th>
+                        <th>
+                            <div class="" title="CountryIso">CountryIso</div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="data"> 
+                    <aura:iteration items="{!v.logs}" var="logData" indexVar="idx">
+                        <tr class="{!mod(idx,2) == 0 ?'even':'odd'}">
+                            <td>
+                                {!logData.UserName}
+                            </td>
+                            <td>
+                                {!logData.UserRole}
+                            </td>
+                            <td>
+                                {!logData.UserTitle}
+                            </td>                            
+                            <td>
+                                {!logData.ParentTerritory}
+                            </td>   
+                            <td>
+                                {!logData.LoginTime}
+                            </td>
+                            <td>
+                                {!logData.Month}
+                            </td>
+                            <td>
+                                {!logData.LoginType}
+                            </td>
+                            <td>
+                                {!logData.Status}
+                            </td>
+                            <td>
+                                {!logData.Browser}
+                            </td>
+                            <td>
+                                {!logData.Platform}
+                            </td>
+                            <td>
+                                {!logData.LoginUrl}
+                            </td>
+                            <td>
+                                {!logData.State}
+                            </td>
+                            <td>
+                                {!logData.CountryIso}
+                            </td>
+                        </tr>
+                    </aura:iteration>
+                </tbody>
+            </table>
+        </ui:scrollerWrapper>
+    </div>
+</aura:component>

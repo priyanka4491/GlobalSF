@@ -1,0 +1,5 @@
+Dear {!Deployment__c.OwnerFirstName}, 
+The deployment '{!Deployment__c.Name}' has finished.
+Deployment Status: {!Deployment__c.Status__c}
+
+You can view the deployment here: {!Deployment__c.Link}

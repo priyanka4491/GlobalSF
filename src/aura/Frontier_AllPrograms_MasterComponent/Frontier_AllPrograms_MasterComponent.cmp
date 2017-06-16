@@ -1,0 +1,105 @@
+<aura:component controller="Frontier_ProgramController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    <ltng:require styles="{!$Resource.SLDS +
+                          '/assets/styles/salesforce-lightning-design-system.css'}"/>
+    <aura:attribute name="programList" type="String" access="Global" />
+    <aura:attribute name="available" type="String" default="" access="global" />
+    <aura:attribute name="consumed" type="Integer" default="" access="global" />
+    <aura:attribute name="loadchart1" type="Boolean" default="false" access="global" />
+    <aura:attribute name="loadchart2" type="Boolean" default="false" access="global" />
+    <aura:attribute name="loadchart3" type="Boolean" default="false" access="global" />
+   <aura:attribute name="dealerId" type="Id" default="" access="global"/>
+    <aura:attribute name="growerAcc" type="Id" access="Global" />
+
+  <aura:handler event="c:Frontier_SelectedProgramEvent" action="{!c.selectedProgram}"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+              <div style="background:#ccc">  
+
+        <div class="navbar-defaults" style="background-color: rgba(241, 241, 241, 1);border-color: rgba(241, 241, 241, 1);">
+        <div class="slds-grid" >
+            <div class="slds-col">
+                
+            </div>
+            <div class="slds-col">
+                
+            </div>
+        </div>
+    </div> 
+       <div aura:id="programDetail">           
+    <div class="" style="padding-left:10px;padding-right:10px;padding-top:20px;">
+        <div class="{!($Browser.isPhone) ? 'slds-grid slds-wrap ':'slds-grid '}" style="background:grey;">
+            <div class="slds-col slds-col--padded slds-p-horizontal--small slds-size--1-of-1 slds-small-size--12-of-12 slds-medium-size--1-of-12 slds-large-size--3-of-12 ">
+               <aura:if isTrue="{!v.growerAcc != null}">
+                <p class="headingstyle"><b>Dealer : Grower Programs</b></p>
+                   <aura:set attribute="else">
+                   <p class="headingstyle"><b>My Programs ({!v.programList.pgmSize})</b></p>
+                   </aura:set>
+                </aura:if>
+            </div>  
+            <div class="slds-col slds-col--padded slds-p-horizontal--small slds-size--1-of-1 slds-small-size--12-of-12 slds-medium-size--3-of-12 slds-large-size--4-of-12  slds-float--left">
+                <aura:if isTrue="{!v.loadchart1}">
+                    <!--<div class="topAlign" aura:id="loadchart1"/>--> 
+                     <aura:if isTrue="{!v.growerAcc != null}">
+                          <c:Frontier_Dealer_Grower_ProgramChart available="{!v.programList.avgAvailable}" allocated="{!v.programList.avgAllocated}" consumed="{!v.programList.avgConsumed}" identifier="1"/> 
+                    <aura:set attribute="else">
+                         <c:Frontier_Pgm_Planning_BudgetChart available="{!v.programList.avgAvailable}" allocated="{!v.programList.avgAllocated}" consumed="{!v.programList.avgConsumed}" identifier="1"/> 
+                         </aura:set>
+                         </aura:if>
+                </aura:if>
+            </div>
+            <div class="slds-col slds-col--padded slds-p-horizontal--small slds-size--1-of-1 slds-small-size--12-of-12 slds-medium-size--3-of-12 slds-large-size--4-of-12" >
+                <aura:if isTrue="{!v.loadchart2}">
+          <!--  <div class="topAlign" aura:id="loadchart2"/> --> 
+                    <aura:if isTrue="{!v.growerAcc != null}">
+                  <c:Frontier_Dealer_Grower_ProgramChart cancelled="{!v.programList.avgCancelled}" completed="{!v.programList.avgCompleted}" notStarted="{!v.programList.avgNtStarted}" inExecution="{!v.programList.avgExecution}" identifier="2"/> 
+ <aura:set attribute="else">
+                   <c:Frontier_Pgm_Planning_BudgetChart cancelled="{!v.programList.avgCancelled}" completed="{!v.programList.avgCompleted}" notStarted="{!v.programList.avgNtStarted}" inExecution="{!v.programList.avgExecution}" identifier="2"/> 
+                        </aura:set></aura:if>
+                        </aura:if>
+                
+            </div>
+            <div class="slds-col slds-col--padded slds-p-horizontal--small slds-size--1-of-1 slds-small-size--12-of-12 slds-medium-size--3-of-12 slds-large-size--4-of-12">
+                <aura:if isTrue="{!v.loadchart3}">
+                 <!--<div class="topAlign" aura:id="loadchart3"/>  -->
+                   <aura:if isTrue="{!v.growerAcc != null}">
+              <c:Frontier_Dealer_Grower_ProgramChart planned="{!v.programList.avgPlanned}" postPlanned="{!v.programList.avgPostPlan}" identifier="3"/>
+              <aura:set attribute="else">
+                   <c:Frontier_Pgm_Planning_BudgetChart planned="{!v.programList.avgPlanned}" postPlanned="{!v.programList.avgPostPlan}" identifier="3"/>
+                       </aura:set></aura:if>
+                       </aura:if>
+                
+            </div>
+            <div class="slds-col slds-col--padded slds-p-horizontal--small slds-size--1-of-1 slds-small-size--12-of-12 slds-medium-size--2-of-12 slds-large-size--2-of-12">
+                
+               <div class="topAlign" aura:id="radlDiv"/>  
+            </div>
+        </div>
+    </div>
+                  <div style="padding-left:10px;padding-right:10px;">
+        <div class="{!($Browser.isPhone) ? 'slds-grid slds-wrap ':'slds-grid '}" style="background:#ffffff;padding:20px 0px 20px 0px;">
+          <div class="slds-col slds-col--padded slds-p-horizontal--small slds-size--1-of-1 slds-small-size--12-of-12 slds-medium-size--1-of-12 slds-large-size--1-of-12" >
+            <p class="filterStyle"><b>Filters:</b></p>    
+            </div>
+            
+        
+  <div class="slds-col slds-col--padded slds-p-horizontal--small slds-size--1-of-1 slds-small-size--12-of-12 slds-medium-size--3-of-12 slds-large-size--3-of-12" >
+       
+     
+                <div class="slds-form-element__control" style="padding-top:10px">
+                  <b class="filterStyle" >Season</b>  <ui:inputSelect class="form-control inputSelect select inputStyle" aura:id="selectedSeason" 
+                                         disabled="true" >                            
+                    <ui:inputSelectOption text="SUMMER"/></ui:inputSelect>
+                </div>
+            </div>
+          <div class="slds-col slds-col--padded slds-p-horizontal--small slds-size--1-of-1 slds-small-size--12-of-12 slds-medium-size--8-of-12 slds-large-size--8-of-12" >
+        </div>
+           </div>
+        </div>
+       
+    <div class="">
+        <c:Frontier_ProgramPlanning_Programlist dealerId="{!v.growerAcc}"/>
+    </div>
+        </div>
+    </div>
+</aura:component>

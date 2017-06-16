@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>UTF-8</encodingKey>
+    <name>Potential Conflict</name>
+    <style>none</style>
+    <subject>Potential Conflict Found on {!copado__User_Story_Metadata__c.copado__User_Story__c}</subject>
+    <type>text</type>
+</EmailTemplate>

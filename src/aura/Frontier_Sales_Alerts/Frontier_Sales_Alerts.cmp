@@ -1,0 +1,88 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes" access="global">
+    <div class="slds-grid slds-wrap  slds-grid--pull-padded slds-m-around--small">
+        <div class="slds-p-horizontal--small slds-size--6-of-12 slds-small-size--6-of-12 slds-large-size--6-of-12">
+            <div class="slds-text-heading--medium headerStyle">
+                <b>Alert/Reminders:</b>
+            </div>
+        </div>
+        <div class="slds-p-horizontal--small slds-size--6-of-12 slds-small-size--6-of-12 slds-large-size--6-of-12">
+            <div class="slds-text-heading--small">
+                <c:svgIcon class="slds-icon slds-icon--x-small slds-icon-text-default" svgPath="{!$Resource.SLDS + '/assets/icons/utility-sprite/svg/symbols.svg#new'}" category="utility" size="x-small"  name="new" />
+                Add Reminder
+            </div>
+        </div>
+    </div>
+    
+    <div class="slds-form-element slds-m-around--small">
+        <fieldset class="slds-form-element">
+            <legend class="slds-form-element__legend slds-form-element__label slds-text-heading--small headerStyle"><b>Today</b></legend>
+            <div class="slds-form-element__control">
+                <span class="slds-radio radioLabelPad">
+                    <input type="radio" id="radio-25" name="options" checked="" />
+                    <label class="slds-radio__label" for="radio-25">
+                        <span class="slds-radio--faux"></span>
+                        <span class="slds-form-element__label">Touchpoint - Bigg Farms - Program Side by Side Trial</span>
+                    </label>
+                </span>
+                <span class="slds-radio radioLabelPad">
+                    <input type="radio" id="radio-26" name="options" />
+                    <label class="slds-radio__label" for="radio-26">
+                        <span class="slds-radio--faux"></span>
+                        <span class="slds-form-element__label">Follow up with Bob on Side by Side Trial</span>
+                    </label>
+                </span>
+            </div>
+            <legend class="slds-form-element__legend slds-form-element__label slds-text-heading--small headerStyle"><b>Tomorrow</b></legend>
+            <div class="slds-form-element__control">
+                <span class="slds-radio radioLabelPad">
+                    <input type="radio" id="radio-27" name="options" checked="" />
+                    <label class="slds-radio__label" for="radio-27">
+                        <span class="slds-radio--faux"></span>
+                        <span class="slds-form-element__label">Follow up with Bob on Side by Side Trial</span>
+                    </label>
+                </span>
+                <span class="slds-radio radioLabelPad">
+                    <input type="radio" id="radio-28" name="options" />
+                    <label class="slds-radio__label" for="radio-28">
+                        <span class="slds-radio--faux"></span>
+                        <span class="slds-form-element__label">Follow up with Bob on Side by Side Trial</span>
+                    </label>
+                </span>
+            </div>
+            <legend class="slds-form-element__legend slds-form-element__label slds-text-heading--small headerStyle"><b>This Week</b></legend>
+            <div class="slds-form-element__control">
+                <span class="slds-radio radioLabelPad">
+                    <input type="radio" id="radio-29" name="options" checked="" />
+                    <label class="slds-radio__label" for="radio-29">
+                        <span class="slds-radio--faux"></span>
+                        <span class="slds-form-element__label">Follow up with Bob on Side by Side Trial</span>
+                    </label>
+                </span>
+                <span class="slds-radio radioLabelPad">
+                    <input type="radio" id="radio-30" name="options" />
+                    <label class="slds-radio__label" for="radio-30">
+                        <span class="slds-radio--faux"></span>
+                        <span class="slds-form-element__label">Follow up with Bob on Side by Side Trial</span>
+                    </label>
+                </span>
+            </div>
+            <legend class="slds-form-element__legend slds-form-element__label slds-text-heading--small headerStyle"><b>Next Week</b></legend>
+            <div class="slds-form-element__control">
+                <span class="slds-radio radioLabelPad">
+                    <input type="radio" id="radio-31" name="options" checked="" />
+                    <label class="slds-radio__label" for="radio-31">
+                        <span class="slds-radio--faux"></span>
+                        <span class="slds-form-element__label">Follow up with Bob on Side by Side Trial</span>
+                    </label>
+                </span>
+                <span class="slds-radio radioLabelPad">
+                    <input type="radio" id="radio-32" name="options" />
+                    <label class="slds-radio__label" for="radio-32">
+                        <span class="slds-radio--faux"></span>
+                        <span class="slds-form-element__label">Follow up with Bob on Side by Side Trial</span>
+                    </label>
+                </span>
+            </div>
+        </fieldset>    
+    </div>
+</aura:component>

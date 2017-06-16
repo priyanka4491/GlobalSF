@@ -1,0 +1,50 @@
+<aura:component controller="Frontier_GetAccountFarmingDatas_CUS360" implements="force:appHostable">    
+        <ltng:require styles="{!join(',',
+                          				$Resource.SLDS + '/assets/styles/salesforce-lightning-design-system.min.css'
+                          			 )}" /> 
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="GrowerDetails" type="Frontier_GetAccountFarmingDatas_CUS360.GrowerResponsewrapper[]" access="global"/> 
+    <aura:attribute name="GrowerAccountFarmingDetails" type="Frontier_GetAccountFarmingDatas_CUS360.GrowerResponsewrapper[]" access="global"/> 
+    <aura:attribute name="growerAcc" type="Id" access="Global" />
+    <aura:attribute name="role" type="string" access="global" />
+    <aura:handler event="aura:waiting" action="{!c.showSpinner}"/>
+    <aura:handler event="aura:doneWaiting" action="{!c.hideSpinner}"/>
+    <!--<aura:handler name="redirectToDealerDetail" event="c:Frontier_GrowerAccountComponentEvent" action="{!c.navigateToDealerDetail}"/> -->
+    <aura:attribute name="showReminderPopUpFlag" type="Boolean" default="True" access="global" />
+    <center>
+        <div class="slds-spinner_container xc-hidden" aura:id="spinner">
+            <div class="slds-spinner--brand slds-spinner slds-spinner--large" aria-hidden="false" role="alert">
+                <div class="slds-spinner__dot-a"></div>
+                <div class="slds-spinner__dot-b"></div>
+            </div>
+        </div>
+    </center>
+    <div aura:id="dealerDetail">
+        <div class="slds-container growerrootcontainer">
+            <div class="grower-container">
+                <div class="slds-grid slds-wrap  slds-grid--pull-padded">
+                    <div class="slds-p-horizontal--small slds-size--1-of-1">
+                        <div aura:id="GrowerProfileSection"></div>                     
+                    </div>
+                </div>
+                <div class="slds-grid slds-grid--vertical-stretch">
+                    <div class="slds-p-horizontal--small slds-size--1-of-1">
+                    <div aura:id="chartSection" class="slds-grid slds-grid--pull-padded">
+                        <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--7-of-12 grower-grid">
+                            <div aura:id="growerFarmSize">
+                            </div>
+                            <!--<c:Frontier_GrowerAccount_FarmSize ></c:Frontier_GrowerAccount_FarmSize>-->
+                        </div>
+                        <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--5-of-12 grower-grid grower-alignment">
+                            <div aura:id="growerSales"></div>
+                            
+                        </div>
+                    </div>
+                    </div>
+                </div>
+              
+            
+            </div>
+        </div>
+    </div>
+</aura:component>

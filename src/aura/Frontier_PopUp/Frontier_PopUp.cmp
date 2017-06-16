@@ -1,0 +1,38 @@
+<aura:component controller="AccountListController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global">
+    <ltng:require styles="{!$Resource.SLDS +
+                          '/assets/styles/salesforce-lightning-design-system.css'}"/>
+    <aura:attribute name="Message" type="String" access="global"/>
+    <aura:attribute name="ComponentName" default="None" type="String" access="global"/>
+    <aura:attribute name="accId" type="Id" access="global" />
+    <aura:attribute name="customCss" type="String" access="global" />
+
+
+    <aura:attribute name="duedate" type="Date" access="global"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <div  aura:id="newAccountSecId1" role="dialog" class="slds-modal slds-modal--small slds-fade-in-open" style="padding-top:300px;">
+        <div class="slds-modal__container" style="{!v.ComponentName == 'None'?'':$Browser.isPhone ? '':'width:20%;height:10% !important;'}">
+           <div class="slds-modal__header">
+               
+                               <button class="slds-button slds-button--icon-inverse slds-modal__close" onclick="{!c.showModalBox}">                    
+                    <c:svgIcon svgPath="{!$Resource.SLDS + '/assets/icons/action-sprite/svg/symbols.svg#close'}" category="action" size="medium"  name="close" />
+                    
+                    <span class="slds-assistive-text">Close</span>
+                </button>
+            
+                <div class="{!v.ComponentName == 'None'?'slds-modal__content slds-p-around--medium':$Browser.isPhone ? 'slds-p-around--medium':'slds-p-around--medium'}">    
+                    <h6 style="color:black;"> {!v.Message}</h6>
+                </div>
+                <div class="button slds-grid" style="padding-top:10px"> 
+                    <div class="slds-col">
+                        <div class="slds-x-small-buttons--horizontal">
+                            <button class="slds-button slds-button--neutral" onclick="{!c.hideModalBox}" >OK</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="slds-backdrop slds-backdrop--open" aura:id="backGroundSecId1"></div>
+    
+</aura:component>

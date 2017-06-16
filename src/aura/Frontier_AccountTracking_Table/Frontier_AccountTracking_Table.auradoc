@@ -1,0 +1,9 @@
+<aura:documentation>
+	<aura:description>Displays Account Tracking Details</aura:description>
+	<aura:example name="AccountTracking" ref="c:Frontier_AccountTracking_Table" label="Account Tracking Table">
+		1.Displays Account name,RADL,Total Opportunity,Monsanto Area,Monsanto Share,PY sales,CY Sales,Visits
+          for Corn. 
+        2.Displays  Account name,RADL,Total Opportunity,Monsanto Area,Monsanto Share,PY sales,CY Sales,Visits
+          for Soy.
+	</aura:example>
+</aura:documentation>

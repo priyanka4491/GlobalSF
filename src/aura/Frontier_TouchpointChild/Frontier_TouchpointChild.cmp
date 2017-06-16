@@ -1,0 +1,40 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    
+    <aura:attribute name="taskMap" type="Map" access="global"/>    
+    <aura:attribute name="key" type="String" access="global"/> 
+    <aura:attribute name="Programs" type="String[]" access="global"/> 
+    <aura:attribute name="ProgramActivities" type="String[]" access="global"/> 
+    <aura:attribute name="TouchpointDate" type="String[]" access="global"/> 
+    <aura:attribute name="TouchpointStatus" type="String[]" access="global"/> 
+    <aura:attribute name="TouchpointType" type="String[]" access="global"/> 
+    <aura:attribute name="growerAcc" type="String" access="global" />
+    <aura:attribute name="redirectString" type="String" access="global" />
+    <aura:attribute name="tasks" type="Object[]"  access="global"/>    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:registerEvent name="navigateToTouchpointList" type="c:Frontier_NavigateToGrowerList_Event"/>
+    <aura:attribute name="index" type="Integer" access="global" />
+    
+    
+    <tr class="{!mod(idx,2) == 0 ?'oddRows':'evenRows'}">
+        <td class="slds-cell-wrap">
+            <a id="{!'Touchpoint_'+v.index}" onclick="{!c.navigateToTouchpointEventFire}"><ui:outputDateTime value="{!v.TouchpointDate[0]}" format="yyyy.MM.dd hh:mm a"/></a> 
+        </td >
+        <td class="slds-cell-wrap">
+            <aura:iteration items="{!v.Programs}" var="program">
+                <p> {!program}</p>
+            </aura:iteration>
+        </td>
+        <td class="slds-cell-wrap">
+            <aura:iteration items="{!v.ProgramActivities}" var="programActivities">
+                <p>{!programActivities}</p>
+            </aura:iteration>
+        </td>
+        <td class="slds-cell-wrap">
+            {!v.TouchpointType[0]}
+        </td >                                
+        <td class="slds-cell-wrap">
+            {!v.TouchpointStatus[0]}
+        </td>
+    </tr>
+    
+</aura:component>

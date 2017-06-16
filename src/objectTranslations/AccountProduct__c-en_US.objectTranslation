@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>AccountProduct</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Account Products</value>
+    </caseValues>
+    <fields>
+        <label><!-- Account --></label>
+        <name>Account_SFID__c</name>
+        <relationshipLabel><!-- AccountProduct --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Charge Type --></label>
+        <name>Charge_Type__c</name>
+        <picklistValues>
+            <masterLabel>FOC</masterLabel>
+            <translation><!-- FOC --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Full Charge</masterLabel>
+            <translation><!-- Full Charge --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Partial Charge</masterLabel>
+            <translation><!-- Partial Charge --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Product --></label>
+        <name>Product_SFID__c</name>
+        <relationshipLabel><!-- Account Products --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Qty --></label>
+        <name>Qty__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

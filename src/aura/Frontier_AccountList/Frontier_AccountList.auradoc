@@ -1,0 +1,8 @@
+<aura:documentation>
+	<aura:description>Displays list of Accounts</aura:description>
+	<aura:example name="AccountList" ref="c:Frontier_AccountList" label="List of Accounts">
+		1.Displays the List of accounts.
+        2.Provides search by name  and sort by RADL Class functionality.
+        3.Records the visit for the particular account.
+	</aura:example>
+</aura:documentation>

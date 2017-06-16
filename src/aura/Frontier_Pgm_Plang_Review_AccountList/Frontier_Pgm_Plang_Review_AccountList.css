@@ -1,0 +1,25 @@
+.THIS tr:nth-child(even) {background: #CCC}
+.THIS tr:nth-child(odd) {background: #f5f5f0}
+.THIS th {background: #ffffff}
+
+
+.THIS.toggle {
+    display: none;
+}
+.THIS.toggleshow {
+    display: block;
+}
+.THIS.HLspace{
+    padding-right:10px;
+}
+.THIS .bgMidSection{
+    background:White;
+}
+
+.THIS .slds-icon {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 0.25rem;
+    fill: #16325c;
+    
+}

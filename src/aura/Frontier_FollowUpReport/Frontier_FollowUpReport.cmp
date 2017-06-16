@@ -1,0 +1,103 @@
+<aura:component controller="Frontier_TaskController" implements="force:appHostable" access="global">
+    <ltng:require styles="{!$Resource.SLDS +
+                          '/assets/styles/salesforce-lightning-design-system.css'}"/>
+    <style>
+        .slds-context-bar__item.slds-is-active {
+        border-left: 1px solid rgb(216, 221, 230);
+        border-right: 1px solid rgb(216, 221, 230);
+        border-bottom-color: rgb(247, 249, 251);
+        color: black;
+        font-weight: bold;
+        }
+    </style>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="FollowUpDataList" type="Object[]" access="global"/>
+    <aura:handler event="c:PageChange" action="{!c.pageChange}"/>
+    <aura:attribute name="page" type="integer" default="1" access="global"/>
+    <aura:attribute name="pages" type="integer" default="10" access="global"/>
+    <aura:attribute name="total" type="integer" default="200" access="global"/>
+    <aura:attribute name="pageSize" type="String" default="10" access="global"/> 
+    <aura:attribute name="SortByName" type="String" default="" access="global"/>
+    <aura:attribute name="SortByActivityDate" type="String" default="" access="global"/> 
+    <aura:attribute name="SortByType" type="String" default="" access="global"/> 
+    <aura:attribute name="SortByAccountName" type="String" default="" access="global"/> 
+    <aura:attribute name="SortByCreatedBy" type="String" default="" access="global"/> 
+    <aura:attribute name="SortByDescription" type="String" default="" access="global"/> 
+    <aura:attribute name="triggeredField" type="String" default="" access="global"/>
+    <aura:attribute name="prevId" type="String" default="" access="global"/>
+    <aura:attribute name="taskId" type="String" default="" access="global"/>
+    
+    <aura:attribute name="SortByField" type="Frontier_SortDirection" default="" access="global"/>
+    <aura:attribute name="ActivityDate" type="Boolean" default="false" access="global"/>
+    <aura:attribute name="Type" type="Boolean" default="false" access="global"/>
+    
+    
+    <center><h4 class="slds-text-heading--large" style="Padding-top:10px"><b>FollowUp List</b></h4></center>
+    
+    <div class="slds-grid">
+        <div class="slds-col slds-col--padded slds-size--1-of-1 slds-small--size--1-of-1 slds-medium-size--1-of-3 slds-large-size--1-of-3" style="Padding-bottom:10px"> 
+            <div class="slds-text-heading--medium customHeading">Total Records</div>
+            <h6>{!v.total}</h6>
+        </div>
+        <div class="slds-col slds-col--padded slds-size--1-of-1 slds-small--size--1-of-1 slds-medium-size--1-of-3 slds-large-size--1-of-3" style="Padding-bottom:10px"> 
+            <center style="Padding-top:10px">
+                <c:Paginator page="{!v.page}" pages="{!v.pages}" total="{!v.total}"/>
+            </center>
+        </div>
+        <div class="slds-col slds-col--padded slds-size--1-of-1 slds-small--size--1-of-1 slds-medium-size--1-of-3 slds-large-size--1-of-3" style="Padding-bottom:10px"> 
+            <div class="slds-text-align--left slds-text--align-end.">
+                
+                <ui:inputSelect class="form-control inputSelect" label="Views " aura:id="followupList" 
+                                change="{!c.FollowUpList}">&nbsp;   
+                    <ui:inputSelectOption text="All Tasks" label="All Follow-ups"/> 
+                    <ui:inputSelectOption text="My Tasks" label="My Follow-ups"/>
+                    <ui:inputSelectOption text="New This Week" label="New This Week"/>
+                    <ui:inputSelectOption text="Recently Viewed" label="Recently Viewed"/>                
+                </ui:inputSelect>
+                
+            </div>
+        </div>
+    </div>
+    <div class="slds-scrollable">
+        <ui:scrollerWrapper class="sWrap">
+            <table class="slds-table slds-table--bordered slds-table--cell-buffer slds-table--product VisitTable">
+                <thead>
+                    <tr class="slds-text-title--caps">
+                        <th scope="col" class="slds-is-sortable" id="AccountName" onclick="{!c.sortDirection}">CUSTOMER/ACCOUNT
+                            <c:Frontier_SvgIcon_Sorting SortOrder="{!v.SortByField.AccountName == 'What.Name-DESC'?'DESC':'ASC'}" eventType="{!v.SortByAccountName}"/>
+                        </th>
+                        <th scope="col" class="slds-is-sortable" id="CreatedBy" onclick="{!c.sortDirection}">CREATED BY
+                            <c:Frontier_SvgIcon_Sorting SortOrder="{!v.SortByField.CreatedBy == 'CreatedBy.Name-DESC'?'DESC':'ASC'}" eventType="{!v.SortByCreatedBy}"/>
+                        </th>
+                        <th scope="col" class="slds-is-sortable" id="ActivityDate" onclick="{!c.sortDirection}">DATE
+                            <c:Frontier_SvgIcon_Sorting SortOrder="{!v.SortByField.ActivityDate == 'ActivityDate-DESC'?'DESC':'ASC'}"  eventType="{!v.SortByActivityDate}"/>
+                        </th>
+                        <th  scope="col" class="slds-is-sortable" id="Description">COMMENTS
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="data"> 
+                    <aura:iteration items="{!v.FollowUpDataList}" var="followData">
+                        <tr class="{!followData.Id == v.taskId?'highlight':''}">
+                            
+                            <td><div class="slds-truncate" title="{!followData.What.Name}">{!followData.What.Name}</div>
+                                
+                            </td>
+                            <td><div class="slds-truncate" title="{!followData.CreatedBy.Name}">{!followData.CreatedBy.Name}</div>
+                                
+                                
+                            </td>
+                            <td>
+                                <div class="slds-truncate" title="{!followData.ActivityDate}">{!followData.ActivityDate}</div>
+                                
+                            </td>
+                            <td>
+                                <div class="slds-truncate" title="{!followData.Type}">{!followData.Description}</div>
+                            </td>
+                        </tr>
+                    </aura:iteration>
+                </tbody>
+            </table>
+        </ui:scrollerWrapper>
+    </div>
+</aura:component>

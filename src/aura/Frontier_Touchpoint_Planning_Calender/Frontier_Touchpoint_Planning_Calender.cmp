@@ -1,0 +1,30 @@
+<aura:component controller="Frontier_GrowerAccount_ProgramController" implements="force:appHostable" access="global">
+    <ltng:require scripts="{!join(',',$Resource.GlobalSalesStaticResources +'/resources/Momentjs218.js',
+                           $Resource.GlobalSalesStaticResources + '/resources/Jquery3.1.0.js',
+                           $Resource.GlobalSalesStaticResources + '/resources/fullcalendar.js')}" 
+                  styles="{!join(',',$Resource.SLDS + '/assets/styles/salesforce-lightning-design-system.min.css',
+                          $Resource.GlobalSalesStaticResources + '/resources/fullcalendar.css')}"
+                  afterScriptsLoaded="{!c.loadCalender}"/>
+   <aura:handler event="c:Frontier_Touchpoint_Planning_Calendar_Event" action="{!c.handleRedirectToCalendar}"/>
+	<aura:registerEvent name="masterCalendarEvent" type="c:Frontier_Master_Calendar_Event"/>
+
+
+    <aura:attribute name="growerAcc" type="string" access="global" />
+    <aura:attribute name="touchPointList" type="string" access="global" />
+
+    <aura:handler event="aura:waiting" action="{!c.showSpinner}"/>
+    <aura:handler event="aura:doneWaiting" action="{!c.hideSpinner}"/>
+    <center>
+        <div class="slds-spinner_container xc-hidden" aura:id="spinner">
+            <div class="slds-spinner--brand slds-spinner slds-spinner--large" aria-hidden="false" role="alert">
+                <div class="slds-spinner__dot-a"></div>
+                <div class="slds-spinner__dot-b"></div>
+            </div>
+        </div>
+    </center>
+    <div aura:id="calenderBody">
+        <div id="calendar">
+            
+        </div>
+    </div>
+</aura:component>

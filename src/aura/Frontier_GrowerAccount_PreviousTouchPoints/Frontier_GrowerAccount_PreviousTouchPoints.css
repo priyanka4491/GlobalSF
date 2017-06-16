@@ -1,0 +1,24 @@
+.THIS .previousTouchPoints{
+    background-color:#ffffff;
+}
+
+.THIS .previousTouch-form-element{
+    padding:1px 1px 13px 1px;
+}
+
+.THIS .cellWrap {
+    word-break : break-word;
+}
+.THIS .sizeMedium {
+    font-size: medium;
+    font-weight: 700;
+}
+
+.THIS .slds-button--brand {
+    bottom: 30px;
+    text-align: center;
+    vertical-align: middle;
+    background-color: #0070d2;
+    border: 1px solid #0070d2;
+    color: #fff;
+}

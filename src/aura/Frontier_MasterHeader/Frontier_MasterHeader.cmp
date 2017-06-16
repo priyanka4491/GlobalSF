@@ -1,0 +1,19 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="Global" >
+    <aura:attribute name="headerText" type="String" default="Biggs Farms" />
+    <div class="slds-grid navbar-default">
+        <div class="slds-col">
+            <section class="slds-clearfix">
+                <div class="slds-float--left">
+                    <div><img alt="Brand" src="{!$Resource.Logo}"  style="padding: 12px"/></div>
+                </div>
+            </section>
+        </div>
+        <div class="slds-col">
+            <section class="slds-clearfix">
+                <div class="slds-float--left" style="padding-top:30px;">
+                    <strong> <div class="slds-text-heading--large">{!v.headerText}</div></strong>
+                </div>
+            </section>
+        </div>
+    </div> 
+</aura:component>

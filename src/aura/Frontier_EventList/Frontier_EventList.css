@@ -1,0 +1,70 @@
+.THIS .slds-icon {
+    
+    border-radius: .25rem;
+    fill: #000000;
+}
+.THIS .toggle {
+   display: none;
+}
+.THIS .show{
+    display :block;
+}
+
+.THIS .showMoreLink{
+    color:blue;
+    cursor:pointer;
+}
+
+.THIS .truncateText{
+    float:left;
+}
+
+.THIS .textWrap{
+width:11em; 
+text-wrap:normal;
+}
+.THIS table.slds-table--product > thead > tr:first-child {
+    background-color: #666666;
+    color:#ffffff;
+}
+.THIS .slds-table > thead > tr > th{
+    padding: 10px 10px 10px 10px;
+    
+}
+.THIS .header{
+    font-size:20px;
+}
+
+.THIS .uiInput--default .form-element__label {
+    color: #16325c;
+    line-height: 1.5;
+    margin-bottom: .25rem;
+    font-size: 1.25rem;
+}
+
+
+.THIS .customHeading{
+    font-family: "Museo Sans 500";
+}
+
+@media all and (min-width: 768px) {
+    .THIS .inputSelect {
+        width: 100%;
+    }
+}
+@media  all and (min-width: 320px) and (max-width:700px){
+    .THIS .sWrap {
+        height:389px;
+        -webkit-overflow-scrolling : touch;
+    }
+    
+    .THIS .alignNextPageButtonInPaginator{
+        width: 94%;
+        margin-left: 1px;
+        margin-top: 5px;   
+    }
+}
+
+.THIS .multiSelect{
+    height:60px;
+}

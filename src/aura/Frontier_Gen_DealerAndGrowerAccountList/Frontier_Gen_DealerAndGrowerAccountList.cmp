@@ -1,0 +1,35 @@
+<aura:component Controller="AccountListController">
+    <aura:handler name="init" value="{!this}" action="{!c.doinit}" />
+    <aura:attribute name="accountList" type="Sobject[]" access="global" />
+    
+    <table>
+    	<thead>
+        	<tr>
+            	<td>DEALER NAME</td>
+                <td>MON RADL</td>
+                <td>CROP : RADL</td>
+                <td>2PY</td>
+                <td>PY</td>
+                <td>CY TARGET<p>.</p>GOAL SUM<p>.</p>%</td>
+            </tr>
+        
+        </thead>
+        <tbody>
+        	<aura:iteration items="{!c.accountList}" var="acc">
+            <td>
+                <p>{!acc.Name}</p><br />
+                <div>
+                    <span><ui:outputText value="{!account.streetAddress}"/></span>&nbsp;
+                    <span><ui:outputText value="{!account.cityName}"/></span>&nbsp;
+                    <span><ui:outputText value="{!account.stateName}"/></span>&nbsp;<br />
+                    <span><ui:outputText value="{!account.countryName}"/></span>
+                </div>
+            </td>
+            
+            </aura:iteration>
+        
+        </tbody>
+    
+    </table>
+	
+</aura:component>

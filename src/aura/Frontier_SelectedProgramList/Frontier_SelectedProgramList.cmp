@@ -1,0 +1,27 @@
+<aura:component controller="Frontier_ProgramController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+        <aura:attribute name="progId" type="Id" default="" access="global"/>
+    <aura:attribute name="programList" type="Object[]" access="global"/>
+     <aura:attribute name="programListAfterSkip" type="Object[]" access="global"/>
+
+        <aura:attribute name="highlightPanel" type="String" access="global"/>
+    <aura:attribute name="isInitialize" type="Boolean" default="false" access="global" />
+    <aura:attribute name="isReviewed" type="Boolean" default="false" access="global" />
+    <aura:attribute name="isInitialLoad" type="Boolean" default="false" access="global" />
+        <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+       <aura:attribute name="currentPage" type="integer" default="1" access="global"/>
+    <aura:attribute name="Noofpages" type="integer" default="10" access="global"/>
+    <aura:attribute name="totalRecords" type="integer" access="global"/>
+    <aura:attribute name="tablePageSize" type="Integer" default="5" access="global"/>
+    <aura:handler event="c:PageChange" action="{!c.tableChange}"/>
+
+        <aura:attribute name="btnPrevious" type="String" default="" access="global"/>
+        <aura:handler event="c:Frontier_ProgramHighlightEvent"  action="{!c.highlightProgram}"/>
+
+
+                   <aura:iteration items="{!v.programListAfterSkip}" var="program" indexVar="idx">  
+                      
+                            <div class="btnStyle"  id="{!program.Id}" label="{!program.Name}" onclick="{!c.highlightProgram}" style="{! and(equals(idx,0),equals(v.currentPage,1))? (v.isInitialize ? (v.isReviewed ? (v.progId == program.Id ? v.highlightPanel : '') :  v.highlightPanel ) :(v.progId == program.Id ? v.highlightPanel : '') ) : (v.progId == program.Id ? v.highlightPanel :'')}">{!program.Name}</div><br/>
+                            </aura:iteration>	
+                     <center>   <c:Paginator page="{!v.currentPage}" pages="{!v.Noofpages}" total="{!v.totalRecords}" compName="ProgramList"/></center>
+
+</aura:component>

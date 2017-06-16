@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>List</customSettingsType>
+    <description>This custom  setting used to control the trigger on and off.</description>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>Execute_Trigger__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This check box determines whether the trigger should execute or not.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Example: Update False; If dont want to execute the trigger.  Update True; If want to execute the trigger.</inlineHelpText>
+        <label>Execute Trigger ?</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <label>TriggerControl</label>
+    <visibility>Public</visibility>
+</CustomObject>

@@ -1,0 +1,44 @@
+.THIS .sizelarge{
+ font-size: xx-large;
+}
+
+.THIS .sizesmall{
+ font-size: x-small;
+    
+}
+
+.THIS .sizemedium{
+ font-size: medium;
+    
+}
+
+.THIS .sizesmall1{
+ font-size: small;
+    
+}
+
+.THIS .fontblack{
+ color: black;
+    
+}
+
+.THIS .bgBlue {
+    background-color:rgba(0, 152, 254, 1) !important;
+    color:white !important;
+}
+
+.THIS .hidedisplay{
+    visibility:hidden ;
+}
+
+.THIS .display{
+    visibility:visible !important;
+}
+
+.THIS .iconfill{
+    fill:green;
+}
+
+.THIS .accountDevelopAvgRate{
+    margin-left:1px;
+}

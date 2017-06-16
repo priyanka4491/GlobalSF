@@ -1,0 +1,22 @@
+<aura:component >
+    
+    <table>
+        <thead>
+        	<th></th>
+        	<th>DEALER NAME</th>
+        	<th>PLAN STATUS</th>
+        	<th>RADL</th>
+        	<th>2PY (units)</th>
+        	<th>PY (units)</th>
+        	<th>CY TARGET (units)</th>
+        	<th>PROGRAMS ADDED</th>
+        </thead>
+        
+        <tbody>
+        
+        
+        </tbody>
+    
+    </table>
+	
+</aura:component>

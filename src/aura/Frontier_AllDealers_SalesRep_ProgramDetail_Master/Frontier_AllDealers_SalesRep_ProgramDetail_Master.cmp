@@ -1,0 +1,146 @@
+<aura:component controller="Frontier_ProgramController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    <ltng:require styles="{!$Resource.SLDS + '/assets/styles/salesforce-lightning-design-system.css'}"/>
+    <aura:attribute name="accountProgramList" type="Object[]" access="global"/>
+    <aura:attribute name="programList" type="Frontier_ProgramController.ProgramWrapper" access="Global" />
+    <aura:attribute name="seasonList" type="String" access="Global" />
+    <aura:attribute name="programId" type="Id" default="" access="global"/>
+    <aura:attribute name="dealerId" type="Id" access="global"/>
+    <aura:attribute name="accountId" type="Id" default="" access="global"/>
+    <aura:attribute name="growerAcc" type="Id" access="Global" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler event="c:PageChange" action="{!c.pageChange}"/>
+    <aura:attribute name="page" type="String" default="1" access="global"/>
+    <aura:attribute name="pages" type="integer" default="10" access="global"/>
+    <aura:attribute name="total" type="integer" default="200" access="global"/>
+    <aura:attribute name="pageSize" type="String" default="10" access="global"/> 
+    <aura:attribute name="SortByProgramEventName" type="String" default="onMouseOut" access="global"/>
+    <aura:attribute name="SortByEventActivityDate" type="String" default="onMouseOut" access="global"/> 
+    <aura:attribute name="SortByStatus" type="String" default="onMouseOut" access="global"/> 
+    <aura:attribute name="SortByPhase" type="String" default="onMouseOut" access="global"/> 
+    <aura:attribute name="triggeredField" type="String" default="" access="global"/>
+    <aura:attribute name="SortByField" type="Frontier_SortDirection" default="" access="global"/>
+    <aura:attribute name="usersInitialLoad" type="Boolean" default="false" access="global"/>
+    <aura:attribute name="prevId" type="String" default="" access="global"/>
+    <aura:registerEvent name="redirectToDealerDetail" type="c:Frontier_GrowerAccountComponentEvent"/>
+    <aura:attribute name="available" type="String" access="global" />
+    <aura:attribute name="loadchart1" type="Boolean" default="false" access="global" />
+    <aura:attribute name="loadchart2" type="Boolean" default="false" access="global" />
+    <aura:attribute name="loadchart3" type="Boolean" default="false" access="global" />
+    <aura:attribute name="loadchart4" type="Boolean" default="false" access="global" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+        <aura:handler event="c:Frontier_RefreshProgramChart" action="{!c.refreshProgram}"/>
+
+    <div style="background:#ccc">  
+        <div aura:id="SalesRep">
+            <div class="" style="padding-left:10px;padding-right:10px;padding-top:20px;">
+                
+                <div class="bgcolor" style="background:grey"> 
+                    <div class="{!($Browser.isPhone) ? 'slds-grid slds-wrap ':'slds-grid '}" style="background:grey;">
+                        
+                        <div class="slds-p-horizontal--small slds-size--12-of-12">
+                            <h1 class="headingsstyle" style="">Program:  {!v.programList.progName}</h1>  
+                        </div>
+                    </div>
+                    <div class="{!($Browser.isPhone) ? 'slds-grid slds-wrap ':'slds-grid '}" >
+                        <div class="slds-col slds-col--padded slds-p-horizontal--small slds-size--1-of-1 slds-small-size--12-of-12 slds-medium-size--1-of-12 slds-large-size--1-of-12">
+                            <h2 class="vAlign  fontStyle">Available</h2>
+                            <h3 class="vAlign  fontStyle">{!v.programList.available}</h3>
+                        </div>
+                        <div class="slds-col slds-col--padded slds-p-horizontal--small slds-size--1-of-1 slds-small-size--12-of-12 slds-medium-size--1-of-12 slds-large-size--1-of-12">
+                            <h2 class="vAlign  fontStyle">Allocated</h2>
+                            <h3 class="vAlign  fontStyle">{!v.programList.allocated}</h3>
+                        </div>
+                        <div class="slds-col slds-col--padded slds-p-horizontal--small slds-size--1-of-1 slds-small-size--12-of-12 slds-medium-size--1-of-12 slds-large-size--1-of-12">
+                            <h2 class="vAlign  fontStyle">Consumed</h2>
+                            <h3 class="vAlign  fontStyle">{!v.programList.consumed}</h3>
+                        </div>
+                        <div class="slds-col slds-col--padded slds-p-horizontal--small slds-size--1-of-1 slds-small-size--12-of-12 slds-medium-size--1-of-12 slds-large-size--2-of-12">
+                            <center>    <h2 class="vAlign  fontStyle">Volume Growth</h2>
+                                <h3 class="vAlign fontStyle" style="word-break:break-all;">{!v.programList.volumegrowth}</h3></center>
+                        </div>
+                        <div class="slds-col slds-col--padded slds-p-horizontal--small slds-size--1-of-1 slds-small-size--12-of-12 slds-medium-size--1-of-12 slds-large-size--1-of-12">
+                            <h2 class="vAlign  fontStyle">Growth</h2>
+                            <h3 class="vAlign  fontStyle">{!v.programList.growthPer}</h3>
+                        </div>
+                        <div class="slds-col slds-col--padded slds-p-horizontal--small slds-size--1-of-1 slds-small-size--12-of-12 slds-medium-size--1-of-12 slds-large-size--1-of-12">
+                            <h2 class="vAlign  fontStyle">CS Growth</h2>
+                            <h3 class="vAlign  fontStyle">{!v.programList.CSGrowth}</h3>
+                        </div>
+                        <div class="slds-col slds-col--padded slds-p-horizontal--small slds-size--1-of-1 slds-small-size--12-of-12 slds-medium-size--1-of-12 slds-large-size--2-of-12">
+                            <h2 class="vAlign  fontStyle">Program Coverage</h2>
+                            <h3 class="vAlign  fontStyle">{!v.programList.programcov}</h3>
+                        </div>
+                        
+                        <div class="slds-col slds-col--padded slds-p-horizontal--small slds-size--1-of-1 slds-small-size--12-of-12 slds-medium-size--1-of-12 slds-large-size--2-of-12">
+                            <div class="topAlign" aura:id="radlDiv1"/>  
+                            
+                        </div>
+                    </div>
+                    <div class="slds-p-vertical--small slds-size--1-of-1">
+                        <div class="slds-grid slds-wrap slds-grid--pull-padded">
+                            <div class="slds-col slds-col--padded slds-p-horizontal--small slds-size--2-of-8" >
+                                
+                                <aura:if isTrue="{!v.loadchart4}">
+                                     
+                                    <c:Frontier_AllDealer_GrowerProgram_Chart product1="1" product2="5" product3="6" identifier="4" comp="PgmDetails"/> 
+                                        
+                                         </aura:if>
+                            </div>
+                            <div class="slds-col slds-col--padded slds-p-horizontal--small slds-size--2-of-8" >
+                                <aura:if isTrue="{!v.loadchart1}">
+                                     
+                                    <c:Frontier_AllDealer_GrowerProgram_Chart available="{!v.programList.available}"	allocated="{!v.programList.allocated}" consumed="{!v.programList.consumed}" identifier="1" comp="PgmDetails"/> 
+                                        
+                                         </aura:if>                            
+                            </div>
+                            <div class="slds-col slds-col--padded slds-p-horizontal--small slds-size--2-of-8" >
+                               <aura:if isTrue="{!v.loadchart2}">
+                                    <c:Frontier_AllDealer_GrowerProgram_Chart cancelled="{!v.programList.cancelled}" completed="{!v.programList.completed}" notStarted="{!v.programList.notstarted}" inExecution="{!v.programList.inExec}" identifier="2" comp="PgmDetails"/> 
+                                       
+                                        </aura:if>
+                            </div>
+                            <div class="slds-col slds-col--padded slds-p-horizontal--small slds-size--2-of-8" >
+                                <aura:if isTrue="{!v.loadchart3}">
+                                    
+                                    <c:Frontier_AllDealer_GrowerProgram_Chart planned="{!v.programList.planned}" postPlanned="{!v.programList.postplan}" identifier="3" comp="PgmDetails"/> 
+                                       
+                                        </aura:if>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        </div> 
+        <div style="padding-left:10px;padding-right:10px;">
+            
+            <div class="{!($Browser.isPhone) ? 'slds-grid slds-wrap ':'slds-grid '}" style="background:#ffffff;padding:20px 0px 20px 0px;">
+                <div class="slds-col slds-col--padded slds-p-horizontal--small slds-size--1-of-1 slds-small-size--12-of-12 slds-medium-size--1-of-12 slds-large-size--1-of-12" >
+                    <p class="filterStyle"><b>Filters:</b></p>    
+                </div>
+                
+                
+                <div class="slds-col slds-col--padded slds-p-horizontal--small slds-size--1-of-1 slds-small-size--12-of-12 slds-medium-size--3-of-12 slds-large-size--3-of-12" >                   
+                    <div class="slds-form-element__control" style="padding-top:10px">
+                        <b class="filterStyle" >Season</b>  <ui:inputSelect class="form-control inputSelect select inputStyle" aura:id="selectedSeason" 
+                                         disabled="true" >                            
+                    <ui:inputSelectOption text="SUMMER"/></ui:inputSelect>
+                    </div>
+                </div>
+                <div class="slds-col slds-col--padded slds-p-horizontal--small slds-size--1-of-1 slds-small-size--12-of-12 slds-medium-size--3-of-12 slds-large-size--3-of-12" >
+                    <div class="slds-form-element__control" style="padding-top:10px">
+                        <b class="filterStyle" >Crop</b>  <ui:inputSelect class="inputStyle" aura:id="cropDetails" />
+                    </div>
+                </div>
+                <div class="slds-col slds-col--padded slds-p-horizontal--small slds-size--1-of-1 slds-small-size--12-of-12 slds-medium-size--5-of-12 slds-large-size--5-of-12" >
+                    
+                </div>
+            </div>
+        </div>
+        <div class="" style="padding-left:10px;padding-right:10px;padding-top:10px;">	
+            
+            
+                      <c:Frontier_AllDealers_SalesRep_ProgramDetails programId="{!v.programId}"/>
+                                       
+        </div>
+    </div>    
+</aura:component>

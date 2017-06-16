@@ -1,0 +1,31 @@
+.THIS .vAlign{
+    padding-top: 10px;
+}
+.THIS .fontStyle{
+    font-weight : bold;
+}
+.THIS .bgSection{
+    background-color:#D3D3D3;
+}
+.THIS .bgMidSection{
+    background-color:White
+}
+.THIS .BoxBorder{
+    border-radius:0px;
+}
+.THIS .cancelbtncolor{
+    background-color:#808080;
+    color:white;
+    width:100px;
+    height:45px;
+    
+}
+.THIS .inputStyle{
+    width:50%;
+}
+.THIS .tableroweven{
+    background-color:#D4D4D4;
+}
+.THIS .tablerowodd{
+    background-color:#f5f5f0;
+}

@@ -1,0 +1,13 @@
+.THIS .changeMe{
+    background: #D3D3D3;
+    width:100%;
+    text-align: initial;
+    padding:5%;
+    overflow-y:scroll;
+}
+.THIS .btnStyle{
+    background:white;
+    border : 0px;
+    color:inherit;
+    padding:10px; 
+}

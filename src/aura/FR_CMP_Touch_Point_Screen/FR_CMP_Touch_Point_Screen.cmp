@@ -1,0 +1,95 @@
+<aura:component controller="FR_Server_Touch_Point_Controller" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="Global" >
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:attribute name="touchpoints" type="Event[]" access="Global"/> 
+    <aura:attribute name="today" type="Date" default="" access="global"/>  
+    <aura:attribute name="followdate" type="Date" default="" access="global"/>  
+    <aura:attribute name="accId" type="String" access="global"/>
+    <aura:attribute name="comments" type="String" access="global"/>
+    <aura:attribute name="duedate" type="Date" access="global"/> 
+    <aura:attribute name="message" type="Boolean" access="global" default="false"/>
+    <aura:attribute name="message1" type="Boolean" access="global" default="false"/>
+    <aura:handler name="change" value="{!v.duedate}" action="{!c.createTask}"/>
+    <aura:registerEvent name="appEvent" type="c:Frontier_TouchPointCount"/>
+    <aura:attribute name="newTouchpoint" type="Event"
+                    default="{ 'sobjectType': 'Event',
+                             'ActivityDateTime': '',
+                             'EndDateTime' : '',
+                             'Description': '',
+                             'Type': '', 
+                             'Subject': ''
+                             }" access="global"/>		
+    <ltng:require styles="{!$Resource.SLDS + '/assets/styles/salesforce-lightning-design-system.css'}"/>
+    <!-- Input Form using components -->
+    <style>
+        .slds-form-element__label {
+        display: inline-block;
+        color: #ffffff;
+        font-size: .75rem;
+        line-height: 1.5;
+        margin-right: .75rem;
+        margin-bottom: .25rem;
+        }
+    </style>
+    <div class="newTouchPointRecordForm" style="background-color:#999999;"> 
+        <div class="slds-grid slds-wrap slds-grid--pull-padded touchFollow">
+            <div class="slds-col--padded slds-small--size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2 inputFollowGrid">              
+            </div> 
+        </div>
+        <br></br>
+        <form class="slds-form--stacked">
+            <!--<div class="slds-form-element slds-is-required" style="padding-top:10px">
+                <label class="slds-form-element__label" for="contactType">Contacts</label>
+                <div class="slds-form-element__control">
+             <ui:inputSelect aura:id="contactList"/>-->
+            <!-- <c:LookupSobject label="Contact" pluralLabel="Contacts" sObjectAPIName="Contact" instanceId="MyAccount"/>-->
+            
+            <!--</div>
+            </div>-->
+            <div class="slds-form-element slds-is-required" >
+                <label class="slds-form-element__label mandatory-label" for="date">Date</label>
+                <div class="slds-form-element__control">
+                    <ui:inputDate aura:id="date" displayDatePicker="true" value="{!v.today}" required="true" />
+                </div>
+            </div>
+            <div class="slds-form-element slds-is-required" >
+                <label class="slds-form-element__label" for="followupdate">Follow up Date</label>
+                <div class="slds-form-element__control">
+                    <ui:inputDate aura:id="followupdate" displayDatePicker="true" value="" />
+                </div>
+            </div>
+            <div class="slds-form-element slds-is-required" style="padding-top:10px">
+                <label class="slds-form-element__label" for="touchPointType">Visit Type</label>
+                <div class="slds-form-element__control">
+                    <ui:inputSelect aura:id="touchPointType"/>
+                </div>
+            </div>
+            <div class="slds-form-element slds-is-required" style="padding-top:10px">
+                <label class="slds-form-element__label" for="touchPointReason">Reason</label>
+                <div class="slds-form-element__control">
+                    <ui:inputSelect aura:id="touchPointReason"/>
+                </div>
+            </div>
+            
+            <div class="slds-form-element slds-is-required" style="padding-top:10px" >
+                <label class="slds-form-element__label" for="notes">Notes</label>
+                <div class="slds-form-element__control">
+                    <ui:inputTextArea aura:id="notes" class="inputStyle" labelClass="slds-form-element__label" placeholder="Start typing notes" value="" rows="5" resizable="true" maxlength="1000"/>
+                </div>
+            </div>
+            <div class="slds-form-element">
+                <div class="slds-grid slds-wrap slds-grid--pull-padded">
+                    <div class="slds-col--padded slds-small--size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                        <ui:button label="Record Visit"                       
+                                   labelClass="label"
+                                   press="{!c.createRecord}" class="RecordTouchPointButton"/>
+                    </div>
+                    
+                    <!--<label class="slds-form-element__label" for="dueDateId">Schedule a Follow Up</label>-->
+                    <div class="slds-col--padded slds-small--size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2"> 
+                       <div aura:id="visitpopup">  </div> 
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</aura:component>

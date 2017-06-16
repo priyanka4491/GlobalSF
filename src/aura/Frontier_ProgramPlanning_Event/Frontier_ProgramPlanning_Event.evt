@@ -1,0 +1,4 @@
+<aura:event type="APPLICATION" description="Event template" >
+    <aura:attribute name="accountId" type="Id" access="global"/>
+    <aura:attribute name="isCheck" type="Boolean" access="global"/>
+</aura:event>

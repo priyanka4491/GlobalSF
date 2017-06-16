@@ -1,0 +1,101 @@
+.THIS .xc-hidden {
+    display:none;
+} 
+.THIS #calenderBody {
+		margin-top: 40px;
+		text-align: center;
+		font-size: 14px;
+		font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+	}
+
+.THIS h2{
+    font-size : 3em;
+} 
+.THIS .fc-month-button{
+    margin-top:15px;
+}
+	
+.THIS #calendar{
+    padding:2%;
+}
+
+.THIS .addTouchPoint{
+    padding-left:40%;
+}
+
+.THIS .fc-row .fc-bg table tr td:nth-child(7) div.addTouchPoint
+{
+	padding-left:0px;
+}
+
+.THIS .addTouchPointBtn{
+	background-color: rgba(102, 102, 102, 1);
+	width: 153px;
+    min-height: 2.5rem;
+    min-width: 10rem;
+    border-radius:8px;
+}
+
+.THIS .slds-popover {
+    position: relative;
+    border-radius: .25rem;
+    width: 12rem;
+    min-height: 5rem;
+    z-index: 6000;
+}
+.THIS .slds-theme--info {
+    color: #fff;
+    background-color: #DDDDDD;
+}
+
+.THIS .slds-popover[class*=theme--] {
+    border: 1px solid #333333;
+}
+
+.THIS .slds-popover__body {
+    position: relative;
+    padding: 1rem;
+}
+
+.THIS .icon {
+    display: inline-block;
+    vertical-align: middle;
+    border-radius: 50%;
+    max-height: 1.2rem;
+    max-width: 1.2rem;
+    position: relative;
+    left: -9px;
+}
+
+.THIS .icon--plus {
+    background-color: white;
+}
+
+.THIS .icon--plus > path {
+    fill: black;
+    stroke: black;
+    stroke-width: 0.1;
+    stroke-linejoin: round;
+}
+
+.THIS .fc-event {
+    font-size: .85em;
+    line-height: 1.5;
+    font-weight: normal;
+    text-align: center;
+}
+
+.THIS .fc td {
+    border-style: solid;
+    padding: 0;
+    vertical-align: top;
+    cursor: pointer;
+}
+
+.THIS .fc-title:first-line{
+    font-weight:bold;
+}
+
+.THIS .fc-day-grid-event .fc-content {
+    white-space: normal;
+}

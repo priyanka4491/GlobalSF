@@ -1,0 +1,68 @@
+<aura:component controller="Frontier_GrowerAccount_ProgramController" implements="force:appHostable,flexipage:availableForAllPageTypes" access="global" >
+    <ltng:require styles="/resource/slick/slick-1.6.0/slick/slick.css,/resource/slick/slick-1.6.0/slick/slick-theme.css"	
+                  scripts="/resource/FullCalenderIo/fullcalendar-3.2.0/Jquery3.1.0.js,/resource/slick/slick-1.6.0/slick/slick.js"
+                  afterScriptsLoaded="{!c.doInit}"/>
+    <aura:attribute name="activities" type="List"></aura:attribute>
+    <aura:attribute name="growerAcc" type="Id" access="Global" />
+    <aura:attribute name="programEventList" type="Object[]" access="global"/>
+    <aura:attribute name="programIdActivityMap" type="Map" access="Global" />
+    <aura:attribute name="selectedAtivityMap" type="Map" access="global" />
+    <aura:attribute name="programList" type="List" access="global" />
+    <aura:attribute name="selectedProgramId" type="Id" access="global" />
+    <aura:attribute name="selectedTaskName" type="String" access="global" />
+    <aura:attribute name="section" type="String" access="global" />
+    <aura:attribute name="prgmStatus" type="String" access="global" />
+    <aura:attribute name="popupName" type="String" access="global" />
+    <aura:attribute name="modelProgramStatus" type="String" access="global" />
+    <aura:attribute name="modelProgramId" type="Id" access="Global" />
+    <aura:attribute name="programCount" type="Integer" access="global" default="0"/>
+    <aura:attribute name="activityCount" type="Integer" access="global" default="1"/>
+
+
+    
+    <aura:handler name="loadCarosel" event="c:Frontier_Programs_Carosel_Event" action="{!c.loadCaroselDom}"/>
+    <!--<aura:handler event="aura:doneRendering" action="{!c.doneRendering}"/>-->
+    <aura:attribute name="isDoneRendering" type="Boolean" default="false"/>
+    
+    
+    
+    
+    
+    <div>
+        <div class="root">
+            <div class="innerSection">
+                <div class="carosel">                    
+                    <aura:iteration var="prgmList" items="{!v.programList}" indexVar="idx">
+                        <c:Frontier_Carosel_Activities PgmListId="{!prgmList.Program_SFID__c}" growerAcc="{!v.growerAcc}" programCount="{!idx}" prgmStatus="{!prgmList.Execution_Status__c}" activityCount="{!v.activityCount}"></c:Frontier_Carosel_Activities>
+                    </aura:iteration>
+                </div>
+            </div>
+            <!-- popup section -->    
+            <div aria-hidden="false" aura:id="newCancel" role="dialog" class="slds-modal slds-fade-in-open slds-modal--prompt slds-hide" style="position:absolute;">
+                <div class="slds-modal__container cancelPop" >
+                    <div class="slds-modal__header">
+                        
+                        <h4 class="slds-text-heading--medium " style="padding-left:50px;"><b>{!v.popupName}</b></h4>
+                        <button class="slds-button slds-button--icon-inverse slds-modal__close" onclick="{!c.closeModal}">                    
+                            <c:svgIcon svgPath="{!$Resource.SLDS + '/assets/icons/action-sprite/svg/symbols.svg#close'}" category="action" size="medium"  name="close" />
+                            
+                            <span class="slds-assistive-text">Close</span>
+                        </button>
+                    </div>
+                    <div class = "slds-modal__content">
+                        <div style="padding-left:10%;padding-right:10%;">
+                            <ui:inputTextArea aura:id="comments" label="" placeholder="Please provide a reason" rows="5"/>
+                        </div>               
+                    </div>
+                    <div class="slds-modal__footer slds-theme--default">
+                        <div style="padding-top:10px;padding-bottom:20px;padding-right:10%;">
+                            <ui:button class="btn slds-float--right btncolor BoxBorder"  label="{!v.popupName}" press="{!c.updateProgramStatus}"/>  
+                        </div>  
+                    </div>
+                </div>
+            </div>
+            <div class="slds-backdrop slds-backdrop--open slds-hide" aura:id="cancelbackgrnd"></div>
+        </div>
+    </div>
+    
+</aura:component>

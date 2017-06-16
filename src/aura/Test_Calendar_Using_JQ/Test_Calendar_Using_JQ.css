@@ -1,0 +1,44 @@
+.THIS {
+}
+
+/*Custom Css for Frontier Project*/
+
+
+
+.THIS .addTouchPoint{
+    padding-left:40%;
+}
+
+.THIS DIV .monthly-week .m-d:nth-child(7) DIV:nth-child(4)
+{
+	padding-left:0px;
+}
+
+.THIS .addTouchPointBtn{
+	background-color: rgba(102, 102, 102, 1);
+	width: 153px;
+    min-height: 2.5rem;
+    min-width: 10rem;
+    border-radius:8px;
+}
+
+.THIS .slds-popover {
+    position: relative;
+    border-radius: .25rem;
+    width: 12rem;
+    min-height: 5rem;
+    z-index: 6000;
+}
+.THIS .slds-theme--info {
+    color: #fff;
+    background-color: #DDDDDD;
+}
+
+.THIS .slds-popover[class*=theme--] {
+    border: 1px solid #333333;
+}
+
+.THIS .slds-popover__body {
+    position: relative;
+    padding: 1rem;
+}

@@ -1,0 +1,34 @@
+<aura:component controller="FRRestAccDetail" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" > 
+    <aura:attribute name="SalesOrderDetail" type="FRRestAccDetail.Responsewrapper[]" access="global"/> 
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>        
+   	<aura:attribute name="accId" type="string" access="global"/>
+    <aura:attribute name="sapId" type="string" access="global"/>
+    <aura:attribute name="accCommunicationId" type="string" access="global"/>
+    
+    <style>
+    	.touchpoint {
+        	padding-top:5%;
+        //background:rgba(152, 152, 152, 1);        
+        }
+    </style>
+        <div style="background:#e3e3e3;">
+            <div class="slds-grid slds-grid--vertical-stretch">
+                <div class="slds-p-horizontal--small slds-size--1-of-1">
+                    <div aura:id="accountGrid" class="slds-grid slds-grid--pull-padded">
+                        <div class=" slds-p-horizontal--small slds-size--1-of-1  slds-medium-size--4-of-12 slds-large-size--1-of-2" style="background:#ffffff;">
+                            <div aura:id="AccountDetailSection"></div><!--<c:Frontier_AccountDetails accId="{!v.accId}" />--> 
+                        </div>           	 
+                        <div aura:id="touchPoint" class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--4-of-12 slds-large-size--1-of-2 alignGrid">               
+                            <c:FR_CMP_Touch_Point_Screen accId="{!v.accId}"/>
+                        </div>
+                        <div aura:id="recentTouchPoint" class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--4-of-12 slds-large-size--1-of-2 alignGrid" style="background:#ffffff;">               
+                            <c:FR_CMP_RecentTouchPoints accId="{!v.accId}"/>    
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div  aura:id="SalesOrderDashboard" style="margin-top:13px">
+            	<!--To Display Frontier Dashboard--> 
+            </div>
+        </div>
+</aura:component>

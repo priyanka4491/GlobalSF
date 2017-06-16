@@ -1,0 +1,43 @@
+.THIS .headerWrap {
+    background-color: rgba(242, 242, 242, 1);
+}
+.THIS .logo {
+    border: 1px solid black;
+    background: white;
+}
+.THIS .vAlign{
+    padding-top: 20px;
+}
+.THIS .fontStyle{
+    font-weight : bold;
+}
+.THIS .bgSection{
+    background:white;
+}
+.THIS .fillicon{
+    fill:#000000; 
+}
+
+.THIS .evenRow{
+    background-color: #d8dde6;
+}
+
+.THIS .oddRow{
+    background-color: #F2F2F2;
+}
+.THIS .btncolor{
+    background-color: #A9A9A9;
+    color:White;
+}
+.THIS .btmSpace{
+    padding-bottom:20px;
+}
+.THIS .Hspace{
+    padding-right:10px;
+}
+
+@media  all and (min-width: 769px) and (max-width:1024px) { 
+	.THIS .divheight {
+        margin-top:2%;
+    }
+}

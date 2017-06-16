@@ -1,0 +1,4 @@
+<aura:event type="APPLICATION" description="Event template" >
+ <aura:attribute name="filteredAccountList" type="Object[]" access="global"/>
+    <aura:attribute name="isAllSelected" type="Boolean" access="global"/>
+</aura:event>

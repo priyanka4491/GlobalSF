@@ -1,0 +1,56 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global">
+    <ltng:require styles="{!join(',',
+                          $Resource.SLDS + '/assets/styles/salesforce-lightning-design-system.min.css'
+                          )}" />
+    <aura:attribute name="growerAcc" type="Id" access="Global" />
+    <aura:attribute name="accountAddressInfo" type="String" access="Global" />
+    <aura:attribute name="heading" type="String" access="Global" />
+	<aura:handler event="c:Frontier_DealerDetailEvent" action="{!c.navigateToProgramPlanning}"/>
+
+    <aura:attribute name="handlerName" type="string" access="Global" />
+    <aura:attribute name="role" type="string" access="Global" />
+    <aura:handler event="aura:waiting" action="{!c.showSpinner}"/>
+    <aura:handler event="aura:doneWaiting" action="{!c.hideSpinner}"/>
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"></aura:handler>
+    <aura:handler name="redirectToDealerDetail" event="c:Frontier_GrowerAccountComponentEvent" action="{!c.navigateToDealerDetail}"/>
+    <div aura:id="programBlock">
+    <aura:if isTrue="{!v.heading == 'dealer'}">
+        <center>
+            <div class="slds-spinner_container xc-hidden" aura:id="spinner">
+                <div class="slds-spinner--brand slds-spinner slds-spinner--large" aria-hidden="false" role="alert">
+                    <div class="slds-spinner__dot-a"></div>
+                    <div class="slds-spinner__dot-b"></div>
+                </div>
+            </div>
+        </center>
+    <div class="" style="padding-top:20px;">
+                        <strong> <center><div class="slds-text-heading--large">Dealer Profile</div></center></strong>
+    </div>
+        <aura:set attribute="else">
+           <div class="" style="padding-top:20px;">
+                        <strong> <center><div class="slds-text-heading--large">Grower Profile</div></center></strong>
+    </div> 
+        </aura:set>
+    </aura:if>
+    <div style="background-color:#e4e4e4;">
+        <div class="slds-tabs--scoped">
+            <ul class="scoped__nav slds-grid slds-wrap" role="tablist">
+                <li aura:id="tab-scoped-1_tab" class="slds-tabs--scoped__li li-seperation slds-size--1-of-1 slds-medium-size--1-of-5 slds-large-size--1-of-7 slds-active active" title="Account Profile" role="presentation"><center class="slds-tabs__link inactiveFont" href="javascript:void(0);" role="tab" tabindex="0" aria-selected="true" aria-controls="tab-scoped-1" aura:id="tab-scoped-1__item" id="tab-scoped-1__item___c:Frontier_GrowerAccount_MasterComponent___" onclick="{!c.toggleTabs}">Account Profile</center></li>
+                <li aura:id="tab-scoped-2_tab" class="slds-tabs--scoped__li li-seperation slds-size--1-of-1 slds-medium-size--1-of-5 slds-large-size--1-of-7" title="Program" role="presentation"><center class="slds-tabs__link inactiveFont" href="javascript:void(0);" role="tab" tabindex="-1" aria-selected="false" aria-controls="tab-scoped-2" aura:id="tab-scoped-2__item" id="tab-scoped-2__item___c:Frontier_GrowerAccount_Program___" onclick="{!c.toggleTabs}">Program</center></li>
+                <li aura:id="tab-scoped-3_tab" class="slds-tabs--scoped__li li-seperation slds-size--1-of-1 slds-medium-size--1-of-5 slds-large-size--1-of-7" title="Activities" role="presentation"><center class="slds-tabs__link inactiveFont" href="javascript:void(0);" role="tab" tabindex="-1" aria-selected="false" aria-controls="tab-scoped-3" aura:id="tab-scoped-3__item" id="tab-scoped-3__item___c:Frontier_GrowerAccount_ActivitiesList___" onclick="{!c.toggleTabs}">Activities</center></li>
+                <li aura:id="tab-scoped-4_tab" class="slds-tabs--scoped__li li-seperation slds-size--1-of-1 slds-medium-size--1-of-5 slds-large-size--1-of-7" title="TouchPoint Calender" role="presentation"><center class="slds-tabs__link inactiveFont" href="javascript:void(0);" role="tab" tabindex="-1" aria-selected="false" aria-controls="tab-scoped-4" aura:id="tab-scoped-4__item" id="tab-scoped-4__item___c:Frontier_GrowAcc_Touchpoints___" onclick="{!c.toggleTabs}">Touchpoints</center></li>
+                <aura:if isTrue="{!v.heading == 'dealer'}">
+                <li aura:id="tab-scoped-5_tab" class="slds-tabs--scoped__li li-seperation slds-size--1-of-1 slds-medium-size--1-of-5 slds-large-size--1-of-7" title="Grower Programs" role="presentation"><center class="slds-tabs__link inactiveFont" href="javascript:void(0);" role="tab" tabindex="-1" aria-selected="false" aria-controls="tab-scoped-5" aura:id="tab-scoped-5__item" id="tab-scoped-5__item___c:Frontier_AllPrograms_MasterComponent___" onclick="{!c.toggleTabs}">Grower Programs</center></li>
+                </aura:if>
+            </ul>
+           <div aura:id="tab-scoped-1" id="tab-scoped-1" class="slds-tabs--scoped__content slds-show" role="tabpanel" aria-labelledby="tab-scoped-1__item"></div>
+            <div aura:id="tab-scoped-2" id="tab-scoped-2" class="slds-tabs--scoped__content slds-hide" style="background-color: #f2f2f2;" role="tabpanel" aria-labelledby="tab-scoped-2__item"></div>
+            <div aura:id="tab-scoped-3" id="tab-scoped-3" class="slds-tabs--scoped__content slds-hide" role="tabpanel" aria-labelledby="tab-scoped-3__item"></div>
+            <div aura:id="tab-scoped-4" id="tab-scoped-4" class="slds-tabs--scoped__content slds-hide" role="tabpanel" aria-labelledby="tab-scoped-4__itekm"></div>
+            <div aura:id="tab-scoped-5" id="tab-scoped-5" class="slds-tabs--scoped__content slds-hide" role="tabpanel" aria-labelledby="tab-scoped-5__item">Sales Info</div>
+            <div aura:id="tab-scoped-6" id="tab-scoped-6" class="slds-tabs--scoped__content slds-hide" role="tabpanel" aria-labelledby="tab-scoped-6__item">Service Info</div>
+            <div aura:id="tab-scoped-7" id="tab-scoped-7" class="slds-tabs--scoped__content slds-hide" role="tabpanel" aria-labelledby="tab-scoped-7__item">Marketing Info</div>         
+        </div>
+    </div>
+    </div>
+</aura:component>

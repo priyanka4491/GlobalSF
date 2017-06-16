@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SamlSsoConfig xmlns="http://soap.sforce.com/2006/04/metadata">
+    <identityLocation>SubjectNameId</identityLocation>
+    <identityMapping>FederationId</identityMapping>
+    <issuer>Monsanto</issuer>
+    <loginUrl>https://amp.monsanto.com/idp/SSO.saml2</loginUrl>
+    <name>Monsanto_SSO</name>
+    <oauthTokenEndpoint>https://monsanto-global--DevSE01.cs59.my.salesforce.com/services/oauth2/token?so=00D2C0000000Ypv</oauthTokenEndpoint>
+    <redirectBinding>false</redirectBinding>
+    <requestSignatureMethod>0</requestSignatureMethod>
+    <salesforceLoginUrl>https://monsanto-global--DevSE01.cs59.my.salesforce.com?so=00D2C0000000Ypv</salesforceLoginUrl>
+    <samlEntityId>https://monsanto-global.my.salesforce.com</samlEntityId>
+    <samlVersion>SAML2_0</samlVersion>
+    <userProvisioning>false</userProvisioning>
+    <validationCert>MIIDMDCCAhigAwIBAgIGAUjHMI4aMA0GCSqGSIb3DQEBBQUAMFkxCzAJBgNVBAYTAlVTMREwDwYDVQQKEwhNb25zYW50bzEkMCIGA1UECxMbRW50ZXJwcmlzZSBJZGVudGl0eSBTeXN0ZW1zMREwDwYDVQQDEwhNb25zYW50bzAeFw0xNDA5MzAxNTMyMDFaFw0xNjA5MjkxNTMyMDFaMFkxCzAJBgNVBAYTAlVTMREwDwYDVQQKEwhNb25zYW50bzEkMCIGA1UECxMbRW50ZXJwcmlzZSBJZGVudGl0eSBTeXN0ZW1zMREwDwYDVQQDEwhNb25zYW50bzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAJDeeyVJZIcGK1bUE3raiROq13W81ASowJVNlxdxJO1WrJcQfVdnTKy3oambsaoUpEIYdFJkPwTUJ83Sn2AFAiRvrMQvOC+AfCn39tV+uSlWYs43XvcVSfimxMcQJXjiZYzuWjgAl7xQqldbPJyk0i+sMEdr7OYuYx9fjYl3q/68+2VeyCUtgyalUmpCF7UKyFMcrawkBKU1xCcXcTvOlGxLcBpCAXEeisntT7G8g1KnlyzcSbAp3KcGKgKrRUh2nHXEHInemRFBDhuIFWIHYsjQ/zl92lyb9jomYbcVL0j2CD58y9gqPRoSNXM72uhS45y3B9e7sa2ZdCjf39wEHh0CAwEAATANBgkqhkiG9w0BAQUFAAOCAQEAeksHdYzQjwe9MVWu5+GnR7ypzyqJ1JNNsa95P+J9+j6UOqs6qjoimduK/yS88XGOd0EfLkCF1+L2gzJUrPOUgTBrw5xKO1iCg0sAV194uyushQQj1o10S3i4ULhgOxlkyqc76I3s44BAz0fJzxxkD94/xJRPriZ4w+6arwMLn6Kxf7DiY3ZoS+9WZNszkrwGBo8qHLmVoOVJXYj7TJOHCYWr1vp+aW7xnwSzfIq0jZbPCCCjV46k7UhLBZW/0TC1jAR8WOzbPq0uOQ1pqAg6v63l1YAsF8s+lnvQZwrXFVj6ToSVyQtqj9a4g5JJ/hBFtzPCpzs+Zt0AwmriY8PvlA==</validationCert>
+</SamlSsoConfig>

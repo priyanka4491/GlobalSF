@@ -1,0 +1,9 @@
+<aura:documentation>
+	<aura:description>
+        <p>Displays the account detail based on the SAP ID</p>
+    </aura:description>
+	<aura:example name="AccountDetailViewComponent" ref="c:Frontier_AccountDetailViewComponent" label="detail view of the account">
+		Displays the touch point details and provides the ability to create a touch point. 
+        Displays the chart with respect to Sales Vs Crop details        
+	</aura:example>
+</aura:documentation>

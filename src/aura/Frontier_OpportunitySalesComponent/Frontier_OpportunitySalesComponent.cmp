@@ -1,0 +1,9 @@
+<aura:component implements="force:appHostable" access="global">  
+    <ltng:require scripts="{!$Resource.ChartJs}" afterScriptsLoaded="{!c.loadChart}" />    
+    <div class="slds-text-heading--medium " style="background:white">
+        <Center style="padding-top:5%;"><h5>Sales(Units)</h5> </Center>
+        <div class="salesUsOpportunityCanvasTopHeight"></div>        
+        <canvas aura:id="chart" id="oppChart" class="salesUsOpportunityCanvas"/>
+        <div class="salesUsOpportunityCanvasBottomHeight"></div>
+    </div>    
+</aura:component>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomPermission xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Used to validate the user&apos;s authorization to create Environment records for sandbox/non-production Salesforce orgs.</description>
+    <label>RMGT-Create Sandbox Environments</label>
+</CustomPermission>

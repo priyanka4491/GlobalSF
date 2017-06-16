@@ -1,0 +1,21 @@
+<aura:component implements="force:appHostable" access="global">
+    <aura:attribute name="associatedProducts" type="Frontier_ProgramPlanningController.AccountProductWrapper[]" default="" access="global"/>
+    <aura:attribute name="selectedProducts" type="Frontier_ProgramPlanningController.AccountProductWrapper[]" default="" access="global"/>
+
+            <aura:attribute name="progId" type="String" default="" access="global"/>
+    <aura:attribute name="dealerId" type="String" default="" access="global"/>
+
+<div class="slds-grid slds-wrap slds-grid--pull-padded bodyContent" style="background-color: #e4e4e4;">
+
+          <div class="slds-p-horizontal--small slds-size--1-of-1 slds-size--12-of-12 slds-medium-size--12-of-12 slds-large-size--12-of-12" style="background-color: #e4e4e4;">
+
+                <c:Frontier_Pgm_Plang_Review progId="{!v.progId}" dealerId="{!v.dealerId}" selectedProducts="{!v.selectedProducts}" associatedProducts="{!v.associatedProducts}"/>
+
+            <br></br>
+          
+            
+            
+        </div>
+    </div>
+        
+    </aura:component>

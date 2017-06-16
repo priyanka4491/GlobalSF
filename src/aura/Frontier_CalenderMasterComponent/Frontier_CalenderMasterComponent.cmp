@@ -1,0 +1,41 @@
+<aura:component implements="force:appHostable" access="global">
+    
+<aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+<aura:handler name="masterCalendarEvent" event="c:Frontier_Master_Calendar_Event"
+    action="{!c.handleCompNavigation}"/>
+        
+    <div>
+    <div>
+    <div class="navbar-defaults" style="background-color: rgba(241, 241, 241, 1);border-color: rgba(241, 241, 241, 1);">
+        <div class="slds-grid" >
+            <div class="slds-col">
+                <section class="slds-clearfix">
+                    <div class="slds-float--left">
+                        <div></div>
+                    </div>
+                </section>
+            </div>
+            <div class="slds-col">
+                <section class="slds-clearfix slds-hide">
+                    <div class="slds-float--left" style="padding-top:30px;">
+                        <strong> <div class="slds-text-heading--large"><strong>All Touchpoints &amp; Activities</strong></div></strong>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div> 
+    
+    
+    <div class="slds-grid slds-wrap slds-grid--pull-padded bodyContent" style="background-color: #e4e4e4;">
+        <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-1" style="padding:30px;">
+            <div style="background-color:#ffffff; margin-left:3%;margin-right:3%">
+                <div aura:id="calendarMaster">
+                    <!--<c:Frontier_Touchpoint_Planning_Calender /> -->
+                </div>
+            </div>
+        </div>
+    </div>
+   </div>
+  </div>
+    
+</aura:component>

@@ -1,0 +1,6 @@
+<aura:event type="APPLICATION" description="Event template" access="global">
+    <aura:attribute name="direction" type="String" access="global"/>
+    <aura:attribute name="direct" type="String" access="global"/>
+        <aura:attribute name="compName" type="String" access="global"/>
+
+</aura:event>

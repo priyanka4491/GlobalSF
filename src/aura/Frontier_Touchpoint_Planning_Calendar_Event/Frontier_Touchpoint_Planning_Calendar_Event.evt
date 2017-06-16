@@ -1,0 +1,6 @@
+<aura:event type="APPLICATION" description="Event template">
+    <aura:attribute name="myprogramIds" type="Id" access="Global" />
+    <aura:attribute name="handlerName" type="String" access="Global" />
+    <aura:attribute name="tabScopeNo" type="String" access="Global" />
+    <aura:attribute name="componentName" type="String" access="Global" />
+</aura:event>

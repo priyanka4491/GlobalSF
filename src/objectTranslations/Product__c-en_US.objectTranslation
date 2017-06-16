@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Productsss</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Productsss</value>
+    </caseValues>
+    <fields>
+        <label><!-- Price --></label>
+        <name>Price__c</name>
+        <picklistValues>
+            <masterLabel>1000</masterLabel>
+            <translation><!-- 1000 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>2000</masterLabel>
+            <translation><!-- 2000 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>3000</masterLabel>
+            <translation><!-- 3000 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>4000</masterLabel>
+            <translation><!-- 4000 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>5000</masterLabel>
+            <translation><!-- 5000 --></translation>
+        </picklistValues>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

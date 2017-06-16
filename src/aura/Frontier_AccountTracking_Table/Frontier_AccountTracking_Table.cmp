@@ -1,0 +1,79 @@
+<aura:component controller="FrontierTestController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global">    
+    <aura:attribute name="object" type="String" default="Account" access="global"/>
+    <aura:attribute type="sObject[]" name="latestRecords" access="global"/>
+    <!--<aura:attribute name="fields" type="String[]" default="Name,RADL_Class__c, CY_Sales__c,Monsanto_Acres__c,Monsanto_Share__c,PY_Sales_Units__c,CY_Orders_Units__c,Total_Opportunity__c, Touch_Points__c" />-->
+    <aura:attribute name="fields" type="String[]" default="Name,(SELECT Role_Descr__c, Service_Level_Class_Descr__c,SAP_ID__c FROM Business_Roles__r)" access="global"/>
+    <aura:attribute name="page" type="integer" default="1" access="global"/>
+    <aura:attribute name="pages" type="integer" default="10" access="global"/>
+    <aura:attribute name="total" type="integer" default="200" access="global"/>
+    <aura:attribute name="pageSize" type="String" default="5" access="global"/>  
+    <aura:attribute name="childProductId" type="String" access="global"/>
+    <aura:attribute name="Trackingtabledetails" type="String" access="global"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler event="c:PageChange" action="{!c.pageChange}"/>
+    <aura:attribute name="AccountRecords" type="Account[]" access="global"/>
+    <aura:registerEvent name="AccountNavigationEvent" type="c:Frontier_Account_Navigation_Event"/>
+    <aura:attribute name="sortField" type="sObject"
+                    default="{  'Account': 'Name',
+                                'RADL': 'Service_Level_Class_Descr__c'
+	                          }"/>
+    <div class="slds-scrollable">
+        <center>
+            <c:Paginator page="{!v.page}" pages="{!v.pages}" total="{!v.total}"/>
+        </center>
+        <table class="slds-table slds-table--bordered slds-no-row-hover slds-table--product">
+            <thead>
+                <tr class="slds-text-heading--label slds-text-custom--label">
+                    <th class="slds-is-sortable" scope="col">
+                       Account
+                    </th>
+                    <th class="slds-is-sortable" scope="col">
+                        <a href ="javascript:void(0);"> 
+                        <span class="" title="RADL">RADL</span>
+                            <c:svgIcon class="iconfill slds-icon slds-icon--x-small slds-icon-text-default" svgPath="{!$Resource.SLDS + '/assets/icons/utility-sprite/svg/symbols.svg#arrowup'}" category="utility" name="arrowup" />
+                            </a>
+                    </th>
+                    <th scope="col">
+                        <div class="" title="Close Date">Total Opportunity</div>
+                    </th>
+                    <th scope="col">
+                        <div class="" title="Stage">Monsanto area</div>
+                    </th>
+                    <th scope="col">
+                        <div class="" title="Confidence">Monsanto Share(%)</div>
+                    </th>
+                    <th scope="col">
+                        <div class="" title="Amount">PY Sales(Units)</div>
+                    </th>
+                    <th scope="col">
+                        <div class="" title="Contact">CY Sales(Units)</div>
+                    </th>
+                    <th scope="col">
+                        <div class="" title="Contact">Visits</div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody >
+                <aura:iteration items="{!v.AccountRecords}" var="acc">
+                    <tr>
+                        <td><a id="{!acc.Id+','+acc.Business_Roles__r[0].SAP_ID__c}" onclick="{!c.navigatetoAccount}" style="font-size: 15px !important;text-decoration:none">{!acc.Name}</a></td>
+                        <!--<td>{!acc.RADL_Class__c}</td>
+                        <td>{!acc.Total_Opportunity__c}</td>
+                        <td>{!acc.Monsanto_Acres__c}</td>
+                        <td>{!acc.Monsanto_Share__c}</td>
+                        <td>{!acc.PY_Sales_Units__c}</td>
+                        <td>{!acc.CY_Sales__c}</td>
+                        <td>{!acc.Touch_Points__c}</td>-->
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </aura:iteration>
+            </tbody>
+        </table>
+    </div>
+</aura:component>

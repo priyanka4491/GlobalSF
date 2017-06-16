@@ -1,0 +1,49 @@
+<aura:component >
+	
+<aura:attribute name="slideIndex" type="Integer" default="1" />
+    <div class="slideshow-container">
+
+<div class="mySlides fade">
+  <div class="numbertext">1 / 3</div>
+    <!--<div style="width:100%;background:blue;height: 500px;"/>-->
+    <div>
+    
+       76687686
+    </div>
+</div>
+
+<div class="mySlides fade">
+  <div class="numbertext">2 / 3</div>
+    <!--<div style="width:100%;background:red;height: 500px;"/>-->
+    <div>
+    
+        333333
+    </div>
+</div>
+
+<div class="mySlides fade">
+  <div class="numbertext">3 / 3</div>
+    <!--<div style="width:100%;background:green;height: 500px;"/>-->
+    <div>
+    
+       8687687
+    </div>
+</div>
+
+<a href="javascript:void(0);" class="prev" id="prev_-1" onclick="{!c.plusSlides}" >Prev</a>
+<a href="javascript:void(0);" class="next" id="next_1" onclick="{!c.plusSlides}">Next</a>
+
+</div>
+    <br/>
+
+<div style="text-align:center">
+  <span id="currSlide_1" class="dot" onclick="{!c.currentSlide}"></span> 
+  <span id="currSlide_2"  class="dot" onclick="{!c.currentSlide}"></span> 
+  <span id="currSlide_3" class="dot" onclick="{!c.currentSlide}"></span> 
+</div>
+
+
+
+
+
+</aura:component>

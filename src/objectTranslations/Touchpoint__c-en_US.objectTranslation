@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Touchpoint</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>TouchPoints</value>
+    </caseValues>
+    <fields>
+        <label><!-- Account --></label>
+        <name>Account_SFID__c</name>
+        <relationshipLabel><!-- TouchPoints (Account) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Check --></label>
+        <name>Check__c</name>
+    </fields>
+    <fields>
+        <label><!-- Completion Date --></label>
+        <name>Completion_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Contact --></label>
+        <name>Contact_SFID__c</name>
+        <relationshipLabel><!-- TouchPoints (Contact) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Date --></label>
+        <name>Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Description --></label>
+        <name>Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Reminder --></label>
+        <name>Reminder__c</name>
+        <picklistValues>
+            <masterLabel>1 day</masterLabel>
+            <translation><!-- 1 day --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>2 days</masterLabel>
+            <translation><!-- 2 days --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>3 days</masterLabel>
+            <translation><!-- 3 days --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>4 days</masterLabel>
+            <translation><!-- 4 days --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>5 days</masterLabel>
+            <translation><!-- 5 days --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- TouchPointType --></label>
+        <name>TouchPointTypes__c</name>
+        <picklistValues>
+            <masterLabel>1:1 Visit</masterLabel>
+            <translation><!-- 1:1 Visit --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Call</masterLabel>
+            <translation><!-- Call --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Email</masterLabel>
+            <translation><!-- Email --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Event</masterLabel>
+            <translation><!-- Event --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- TouchPoint Status --></label>
+        <name>TouchPoint_Status__c</name>
+        <picklistValues>
+            <masterLabel>Cancelled</masterLabel>
+            <translation><!-- Cancelled --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Completed</masterLabel>
+            <translation><!-- Completed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not Scheduled</masterLabel>
+            <translation><!-- Not Scheduled --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Scheduled</masterLabel>
+            <translation><!-- Scheduled --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Invite Others --></label>
+        <name>User_SFID__c</name>
+        <relationshipLabel><!-- TouchPoints --></relationshipLabel>
+    </fields>
+    <layouts>
+        <layout>TouchPoint Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

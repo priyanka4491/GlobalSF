@@ -1,0 +1,6 @@
+<aura:documentation>
+	<aura:description>Displays Activities List</aura:description>
+	<aura:example name="ActivitiesList" ref="Frontier_Activities_List" label="List of Activities">
+		1.Displays the List of Visit records.
+	</aura:example>
+</aura:documentation>

@@ -1,0 +1,900 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Link Accounts to their associated Addresses, Phone Numbers, Emails, etc..  Many-to-many relationship.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Account_Business_Role_SFID__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Business Role Lookup associated with the Account&apos;s Address/Phone/Email/etc.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Business Role Lookup associated with the Account&apos;s Address/Phone/Email/etc.</inlineHelpText>
+        <label>Account Business Role</label>
+        <referenceTo>Account_Business_Role__c</referenceTo>
+        <relationshipLabel>Account Communications</relationshipLabel>
+        <relationshipName>Account_Communications</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Account_SFID__c</fullName>
+        <description>Account related to the Communication</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Account related to the Communication</inlineHelpText>
+        <label>Account</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Account Communications</relationshipLabel>
+        <relationshipName>Account_Communications</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Archive_Date__c</fullName>
+        <description>Holds the date when the record was last marked for Archival.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Date Archive Indicator was set to &quot;Y&quot;.</inlineHelpText>
+        <label>Archive Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Archive_Ind__c</fullName>
+        <defaultValue>&quot;N&quot;</defaultValue>
+        <description>&quot;Y&quot; Indicates that the record is ready for archival.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>&quot;Y&quot; indicates record is ready for archival.</inlineHelpText>
+        <label>Archive Indicator</label>
+        <length>1</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>City_Name__c</fullName>
+        <description>City Name</description>
+        <externalId>false</externalId>
+        <inlineHelpText>City Name</inlineHelpText>
+        <label>City</label>
+        <length>40</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Comm_Role_Descr_List__c</fullName>
+        <description>List of Communication Roles associated with the Account-Communication.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>List of Communication Roles associated with the Account-Communication.</inlineHelpText>
+        <label>Communication Roles</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Home</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Mailing</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>-- None --</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Office</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Shipping</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+        <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Country_Name__c</fullName>
+        <description>Country Name</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Country Name</inlineHelpText>
+        <label>Country</label>
+        <length>80</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Email_Addr__c</fullName>
+        <description>Email Address</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Email Address</inlineHelpText>
+        <label>Email Address</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FIPS_Code__c</fullName>
+        <description>The FIPS county code is a five-digit Federal Information Processing Standard (FIPS) code (FIPS 6-4) which uniquely identifies counties and county equivalents in the United States, certain U.S. possessions, and certain freely associated states. The first two digits are the FIPS state code and the last three are the county code within the state or possession.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The FIPS county code is a five-digit Federal Information Processing Standard (FIPS) code (FIPS 6-4) which uniquely identifies counties and county equivalents in the United States, certain U.S. possessions, and certain freely associated states.</inlineHelpText>
+        <label>FIPS Code</label>
+        <length>5</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Geocode__c</fullName>
+        <description>Longitude/Latitude of an Address</description>
+        <displayLocationInDecimal>true</displayLocationInDecimal>
+        <externalId>false</externalId>
+        <inlineHelpText>Longitude/Latitude of an Address</inlineHelpText>
+        <label>Geocode</label>
+        <required>false</required>
+        <scale>9</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Location</type>
+    </fields>
+    <fields>
+        <fullName>HC_Integration_Key__c</fullName>
+        <caseSensitive>true</caseSensitive>
+        <description>Integration Key for use with Heroku interface.</description>
+        <externalId>true</externalId>
+        <inlineHelpText>Integration Key for use with Heroku interface.</inlineHelpText>
+        <label>Heroku Connect Integration Key</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>Parent_SFID__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Account Address/Phone/Email/etc. related to the Account Communication Role</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Account Address/Phone/Email/etc. related to the Account Communication Role</inlineHelpText>
+        <label>Parent Account Communication</label>
+        <referenceTo>Account_Communication__c</referenceTo>
+        <relationshipLabel>Account Communication</relationshipLabel>
+        <relationshipName>Account_Communications</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Phone_Extension_Number__c</fullName>
+        <description>Phone Extension - For individuals/businesses that have an internal phone system, the additional numbers dialed once the internal system is connected to from the outside (Phone Number).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Phone Extension - For individuals/businesses that have an internal phone system, the additional numbers dialed once the internal system is connected to from the outside (Phone Number).</inlineHelpText>
+        <label>Extension</label>
+        <length>10</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Phone_Number__c</fullName>
+        <description>Phone Number</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Phone Number</inlineHelpText>
+        <label>Phone</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Postal_Code__c</fullName>
+        <description>Postal Code</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Postal Code</inlineHelpText>
+        <label>Postal Code</label>
+        <length>20</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Role_Descr__c</fullName>
+        <description>Role for the Account Communication</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Role for the Account Communication</inlineHelpText>
+        <label>Role</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Billing</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Business</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Mailing</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Shipping</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>State_Name__c</fullName>
+        <description>State Name</description>
+        <externalId>false</externalId>
+        <inlineHelpText>State Name</inlineHelpText>
+        <label>State</label>
+        <length>80</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Street_Addr__c</fullName>
+        <description>Street Address</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Street Address</inlineHelpText>
+        <label>Street</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>has_Do_Not_Call_Ind__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Checked indicates that the Contact has requested to not be called.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Checked indicates that the Contact has requested to not be called.</inlineHelpText>
+        <label>Do Not Call</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>has_Do_Not_Email_Ind__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Checked indicates that the Account has requested to not be emailed by Monsanto.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Checked indicates that the Account has requested to not be emailed by Monsanto.</inlineHelpText>
+        <label>Do Not Email</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>is_Fax__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Can Faxes be send to this Phone Number?</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Can Faxes be send to this Phone Number?</inlineHelpText>
+        <label>Fax</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>is_Mobile_Phone__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Is the Phone Number to a Mobile Phone/device?</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Is the Phone Number to a Mobile Phone/device?</inlineHelpText>
+        <label>Mobile</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>is_Primary_Communication__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Is a Primary Communication within the Selected Role, if multiple records exist, for the Account.  For example, if the Account has multiple Shipping locations, but one is the primary Shipping location, then the primary may be checked.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Is a Primary Communication within the Selected Role, if multiple records exist, for the Account.  For example, if the Account has multiple Shipping locations, but one is the primary Shipping location, then the primary may be checked.</inlineHelpText>
+        <label>Primary</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>is_Voice_Phone__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Is the Phone Number to a Voice Phone/device?</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Is the Phone Number to a Voice Phone/device?</inlineHelpText>
+        <label>Voice</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <label>Account Communication</label>
+    <listViews>
+        <fullName>All</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <displayFormat>AC-{0}</displayFormat>
+        <label>Account Communication Identifier</label>
+        <trackHistory>false</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Account Communications</pluralLabel>
+    <recordTypeTrackHistory>false</recordTypeTrackHistory>
+    <recordTypes>
+        <fullName>Account_Communication_Address</fullName>
+        <active>true</active>
+        <description>The record type is for physical addresses such as: Mailing, Billing, Shipping, etc.</description>
+        <label>Address</label>
+        <picklistValues>
+            <picklist>Comm_Role_Descr_List__c</picklist>
+            <values>
+                <fullName>-- None --</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Home</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mailing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Office</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Shipping</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Role_Descr__c</picklist>
+            <values>
+                <fullName>Billing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Business</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mailing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Shipping</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Account_Communication_Address_Role</fullName>
+        <active>true</active>
+        <description>The record type for physical address&apos; role.</description>
+        <label>Address Role</label>
+        <picklistValues>
+            <picklist>Comm_Role_Descr_List__c</picklist>
+            <values>
+                <fullName>-- None --</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Home</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mailing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Office</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Shipping</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Role_Descr__c</picklist>
+            <values>
+                <fullName>Billing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Business</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mailing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Shipping</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Account_Communication_Address_Role_Business_Role</fullName>
+        <active>true</active>
+        <description>The record type for physical address&apos; role&apos;s Business Role.</description>
+        <label>Address Role Business Role</label>
+        <picklistValues>
+            <picklist>Comm_Role_Descr_List__c</picklist>
+            <values>
+                <fullName>-- None --</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Home</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mailing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Office</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Shipping</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Role_Descr__c</picklist>
+            <values>
+                <fullName>Billing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Business</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mailing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Shipping</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Account_Communication_Default</fullName>
+        <active>true</active>
+        <description>Default Record Type</description>
+        <label>Account Communication</label>
+        <picklistValues>
+            <picklist>Comm_Role_Descr_List__c</picklist>
+            <values>
+                <fullName>-- None --</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Home</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Mailing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Office</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Shipping</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Role_Descr__c</picklist>
+            <values>
+                <fullName>Billing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Business</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mailing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Shipping</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Account_Communication_Email</fullName>
+        <active>true</active>
+        <description>This record type is for email addresses.</description>
+        <label>Email</label>
+        <picklistValues>
+            <picklist>Comm_Role_Descr_List__c</picklist>
+            <values>
+                <fullName>-- None --</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Home</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mailing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Office</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Shipping</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Role_Descr__c</picklist>
+            <values>
+                <fullName>Billing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Business</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mailing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Shipping</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Account_Communication_Email_Role</fullName>
+        <active>true</active>
+        <description>The record type for email address&apos;s role.</description>
+        <label>Email Role</label>
+        <picklistValues>
+            <picklist>Comm_Role_Descr_List__c</picklist>
+            <values>
+                <fullName>-- None --</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Home</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mailing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Office</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Shipping</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Role_Descr__c</picklist>
+            <values>
+                <fullName>Billing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Business</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mailing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Shipping</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Account_Communication_Email_Role_Business_Role</fullName>
+        <active>true</active>
+        <description>The record type for email address&apos;s role&apos;s Business Role.</description>
+        <label>Email Role Business Role</label>
+        <picklistValues>
+            <picklist>Comm_Role_Descr_List__c</picklist>
+            <values>
+                <fullName>-- None --</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Home</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mailing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Office</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Shipping</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Role_Descr__c</picklist>
+            <values>
+                <fullName>Billing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Business</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mailing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Shipping</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Account_Communication_Phone</fullName>
+        <active>true</active>
+        <description>This record type is for phone numbers.</description>
+        <label>Phone</label>
+        <picklistValues>
+            <picklist>Comm_Role_Descr_List__c</picklist>
+            <values>
+                <fullName>-- None --</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Home</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Mailing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Office</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Shipping</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Role_Descr__c</picklist>
+            <values>
+                <fullName>Billing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Business</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mailing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Shipping</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Account_Communication_Phone_Role</fullName>
+        <active>true</active>
+        <description>The record type for phone number&apos;s role.</description>
+        <label>Phone Role</label>
+        <picklistValues>
+            <picklist>Comm_Role_Descr_List__c</picklist>
+            <values>
+                <fullName>-- None --</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Home</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mailing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Office</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Shipping</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Role_Descr__c</picklist>
+            <values>
+                <fullName>Billing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Business</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mailing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Shipping</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Account_Communication_Phone_Role_Business_Role</fullName>
+        <active>true</active>
+        <description>The record type for phone number&apos;s role&apos;s Business Role.</description>
+        <label>Phone Role Business Role</label>
+        <picklistValues>
+            <picklist>Comm_Role_Descr_List__c</picklist>
+            <values>
+                <fullName>-- None --</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Home</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mailing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Office</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Shipping</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Role_Descr__c</picklist>
+            <values>
+                <fullName>Billing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Business</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mailing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Shipping</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+    <startsWith>Vowel</startsWith>
+</CustomObject>

@@ -1,0 +1,4 @@
+<aura:event type="COMPONENT" description="Event template" access="global">
+    <aura:attribute name="accId" type="string" access="global"/>
+    <aura:attribute name="sapId" type="string" access="global"/>
+</aura:event>

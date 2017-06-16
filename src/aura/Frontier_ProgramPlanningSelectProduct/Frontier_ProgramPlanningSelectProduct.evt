@@ -1,0 +1,3 @@
+<aura:event type="APPLICATION" description="Event template" >
+	<aura:attribute name="selectedProducts" type="Frontier_ProgramPlanningController.AccountProductWrapper[]" access="global"/>
+</aura:event>

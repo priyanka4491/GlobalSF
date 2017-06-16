@@ -1,0 +1,63 @@
+.THIS .bgtablecolor{
+    background:#ffffff;
+}
+.THIS .headingsstyle{
+    color:white;
+    font-size:large;
+    padding-left:30px;
+    padding-top:10px;
+}
+.THIS .rAlign {
+    text-align:right;
+}
+.THIS .vAlign {
+    color:white;
+    padding-left:30px;
+    padding-top:10px;
+}
+.THIS .tAlign{
+    padding-top:10px;
+}
+.THIS .fontStyle{
+    font-size:large;
+}
+.THIS .lAlign{
+    padding-left:10px;
+}
+/*.THIS tr:nth-child(even) {background: #CCC}
+.THIS tr:nth-child(odd) {background: #f5f5f0} 
+.THIS th {background: #ffffff}
+*/
+.THIS .bgdcolor{
+    background: #ffffff;
+}
+.THIS .slds-icon {    
+    border-radius: .25rem;
+    fill: #000000;
+}
+.THIS .inputStyle{
+    width:60%;
+}
+.THIS .tableClass tbody tr.border_bottom td {
+  border-bottom:1pt solid white;
+}
+.THIS .tableClass tr td:nth-child(3) { 
+    border-left:1pt solid white; 
+}
+
+.THIS .tableClass tbody tr.border_bottom .radlstyle{
+    width: 77px;
+    border-left:1px solid white;
+    
+}
+.THIS .tableClass tbody tr.verticalAlign{
+    width: 77px;
+    border-left:1px solid white;
+}
+.THIS .topAlign{
+    padding-top:0px;
+    
+}
+.THIS .txtxolor{
+    color:black;
+}

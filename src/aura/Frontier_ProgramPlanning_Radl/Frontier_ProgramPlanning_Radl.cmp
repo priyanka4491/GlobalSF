@@ -1,0 +1,67 @@
+<aura:component controller="Frontier_ProgramRadlGraphController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global">
+ <style>
+   .cont {
+     position: relative;
+     height: 200px;
+     width: 500px;
+   }
+    </style>
+    <aura:attribute name="fromCmp" type="String" access="Global" /> 
+    <aura:attribute name="programId" type="Id" access="Global" />
+    <aura:attribute name="dealerId" type="Id" access="Global" />
+    <aura:attribute name="dcount" type="Integer" access="global" />
+    <aura:attribute name="acqcount" type="Integer" access="global" />
+    <aura:attribute name="rcount" type="Integer" access="global" />
+    <aura:attribute name="lcount" type="Integer" access="global" />
+       
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <div class="cont">
+    <div style="padding-left:16.8%;top:-7%;position:absolute;">
+<c:svgIcon class="iconfill slds-icon slds-icon--x-small slds-icon-text-default arrowcolor" svgPath="{!$Resource.SLDS + '/assets/icons/utility-sprite/svg/symbols.svg#up'}" category="utility" size="x-small"  name="up" />    
+    </div>
+    <div style="position:absolute;top:23%;left:37.5%;">
+        <c:svgIcon class="iconfill slds-icon slds-icon--x-small slds-icon-text-default arrowcolor"  svgPath="{!$Resource.SLDS + '/assets/icons/utility-sprite/svg/symbols.svg#right'}" category="utility" size="x-small"  name="right" />      
+    </div>
+
+<table class="tableClass" style="width: 194px;">
+<tbody>
+<tr>
+<td style="width: 77px;">A</td>
+<td style="width: 77px;"> </td>
+<td class="verticalAlign"> </td>
+<td style="width: 77px;text-align:right;vertical-align:top;padding:0">D</td>
+</tr>
+<tr>
+<td style="width: 77px;"> </td>
+<td style="width: 77px;"> </td>
+<td class="verticalAlign"> </td>
+<td style="width: 77px;text-align:right;vertical-align:top;padding:0"> </td>
+</tr>
+<tr class="border_bottom">
+<td style="width: 77px;"> </td>
+<td style="width: 77px;padding-left: 17%;"> {!v.acqcount != null ? v.acqcount : 0} </td>
+<td class ="border_left" style="text-align:right;vertical-align:top;padding:0;padding-right: 24%;">{!v.dcount != null ? v.dcount : 0}</td>
+<td style="width: 77px;"> </td>
+</tr>
+<tr>
+<td style="width: 77px;"> </td>
+<td style="width: 77px;padding-left: 17%;">{!v.lcount != null ? v.lcount : 0}</td>
+<td class="radlstyle verticalAlign" style="text-align:right;vertical-align:top;padding:0;padding-right: 24%;">{!v.rcount != null ? v.rcount : 0}</td>
+<td style="width: 77px;"> </td>
+</tr>
+<tr>
+<td style="width: 77px;"> </td>
+<td style="width: 77px;"> </td>
+<td class="radlstyle verticalAlign"> </td>
+<td style="width: 77px;text-align:right;vertical-align:top;padding:0"> </td>
+</tr>
+    <tr>
+<td style="width: 77px;">L </td>
+<td style="width: 77px;"> </td>
+<td class="verticalAlign"> </td>
+<td style="width: 77px;text-align:right;vertical-align:top;padding:0">R</td>
+</tr>
+</tbody>
+</table>
+        </div>
+</aura:component>

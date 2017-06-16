@@ -1,0 +1,85 @@
+.THIS .slds-scrollable {
+    margin: 22px;
+}
+.THIS .slds-tabs--default .slds-tabs__item.slds-active a {
+    border-color: #808080;
+    color: #ffffff;
+    background-color:#808080;
+}
+.THIS .slds-tabs--default__nav {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    border-bottom: 1px solid #808080;
+}
+.THIS .slds-panel__section{
+   background-color: #ffffff;
+   margin:15px 15px 1px 10px;
+}
+.THIS .slds-tabs--default > .slds-tabs__content {
+    position: relative;
+    padding: 1rem 0;
+    background-color: #808080;
+}
+
+.THIS .chartSection{
+    padding-left:1px;
+}
+
+.THIS .slds-tabs--default {
+    display: block;
+    width: 100%;
+    padding-left: 1px;
+}
+
+.THIS .slds-text-heading--label {
+    font-size: .85rem;
+    line-height: 1.25;
+    color: rgba(51, 51, 51, 1);
+    text-transform: uppercase;
+    padding-left: 125px;
+    text-align: center;
+}
+
+.THIS table.slds-table--product > thead > tr:first-child {
+    background-color: #333333 ;
+    color:#ffffff;
+}
+
+.THIS table.slds-table--product > tbody > tr:nth-child(odd) {
+    background-color: #F2F2F2;
+}
+
+.THIS table.slds-table--product > tbody > tr:nth-child(even) {
+    background-color: #d8dde6; 
+}
+
+.THIS table.slds-table--product > tr {
+    height:55px;
+}
+
+.THIS .slds-tabs--default__content {
+    position: relative;
+    padding: 1rem 0;
+    background-color: #808080;
+}
+@media all and (max-width: 1024px) {
+  .THIS .slds-text-heading--label {
+    padding-left: 67px;
+}
+ .THIS .slds-tabs--default {
+    padding-left: 45px;
+}
+}
+@media all and (max-width: 667px){
+ .THIS .slds-tabs--default {
+    padding-left: 1px;
+}
+.THIS .slds-text-heading--label {
+    padding-left: 36px;
+    /*-ms-transform: rotate(7deg); 
+    -webkit-transform: rotate(7deg); 
+    transform: rotate(7deg);*/
+}
+}

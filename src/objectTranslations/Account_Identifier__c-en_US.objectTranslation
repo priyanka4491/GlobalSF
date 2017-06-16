@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Account Identifier</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Account Identifiers</value>
+    </caseValues>
+    <fields>
+        <label><!-- Account Business Role --></label>
+        <name>Account_Business_Role_SFID__c</name>
+        <relationshipLabel><!-- Account Identifiers --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Account Id --></label>
+        <name>Account_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Account --></label>
+        <name>Account_SFID__c</name>
+        <relationshipLabel><!-- Account Identifiers --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Archive Date --></label>
+        <name>Archive_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Archive Indicator --></label>
+        <name>Archive_Ind__c</name>
+    </fields>
+    <fields>
+        <label><!-- Logical Compositiion Key --></label>
+        <name>Logical_Compositiion_Key__c</name>
+    </fields>
+    <fields>
+        <label><!-- Source System --></label>
+        <name>Source_System_Descr__c</name>
+    </fields>
+    <fields>
+        <label><!-- Identifier --></label>
+        <name>Source_System_ID__c</name>
+    </fields>
+    <layouts>
+        <layout>Account Identifier Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <recordTypes>
+        <label><!-- Business Role --></label>
+        <name>Account_Identifier_Business_Role</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Account Identifier --></label>
+        <name>Account_Identifier_Default</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- Account Identifier already existing for Account. --></errorMessage>
+        <name>Account_Identifier_Exist_Validation</name>
+    </validationRules>
+</CustomObjectTranslation>

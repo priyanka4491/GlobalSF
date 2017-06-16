@@ -1,0 +1,121 @@
+.THIS .TouchpointForm{
+        margin: 0px;
+        margin: auto; 
+        border: 0px;
+}
+
+.THIS .slds-form-element__label {
+        display: inline-block;
+        color: #000000;
+        font-size: 16px;
+        line-height: 1.5;
+        /*margin-right: .1rem;*/
+        margin-bottom: .25rem;
+}
+
+.THIS .modalpos{
+       position:absolute;
+       bottom: 0;   
+       width:100%;     
+}
+
+.THIS .modalPhone{
+      position:absolute;
+      width:100%;
+}
+
+/*.THIS .slds-modal__content{
+       height:40%;
+}*/
+
+.THIS .touchStyle{
+       color: #000000;
+}
+
+.THIS .button:hover{
+    background-color:#ffffff;   
+}
+.THIS .vAlign{
+    padding-top: 10px;
+}
+
+.THIS .btmspace{
+    padding-bottom: 10px;
+}
+
+.THIS .fontStyle{
+    font-weight : bold;
+    text-align:center;
+    padding-left:40%;
+}
+.THIS .fontStyleMobile{
+    font-weight : bold;
+    text-align:center;
+    padding:0px 20% 0px 20%;
+}
+
+.THIS .cellhightlight{
+    font-weight : bold;
+}
+
+.THIS .cellFontStyle{
+    font-weight : normal;
+}
+
+.THIS .table-container
+{
+	overflow-y: auto;
+    height:70%;
+    width:20%;
+}
+.THIS .tableMobileSection
+{
+	overflow-y: auto;
+    height:40%;
+    width:80%;
+}
+.THIS .tableIpadSection {
+   overflow-y: auto;
+    height: 50%;
+    width: 50%;}
+
+.THIS .btncolor{
+    background-color:#808080;
+    color:white;
+    width:200px;
+    height:45px;
+}
+
+.THIS .btnClrPosition{
+    margin-right:40px;
+}
+
+.THIS .btnDonePosition{
+    margin-right:30px;
+}
+
+.THIS .tablePosition{
+   Padding-right:10%;
+}
+
+.THIS .tableStyle{
+    width:50%;
+    background-color:#F0F0F0;
+}
+.THIS.btnpos{
+    Padding-left:30%;
+}
+.THIS .cellStyle{
+    border-bottom-style:ridge;
+    border-bottom-width:thin;
+    border-top-style:ridge;
+    border-top-width:thin;
+}
+.THIS .slds-modal__content{
+    margin-top: 25%;
+    margin-bottom: 25%;
+}
+.THIS .linkStyle{
+      text-decoration:none;
+      color:#000000;
+}

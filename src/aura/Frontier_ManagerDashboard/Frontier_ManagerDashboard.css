@@ -1,0 +1,14 @@
+.THIS .valign{
+    padding-left:50px;
+    padding-right:50px;
+}
+
+.THIS .titleStyle{
+    padding-top:20px;
+    padding-bottom:10px;
+    font-weight: bold;
+    font-size: large;
+}
+.THIS .inputStyle{
+    width : 60%;
+}

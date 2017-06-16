@@ -1,0 +1,7 @@
+<aura:documentation>
+	<aura:description>Record the Visit</aura:description>
+	<aura:example name="TouchPointRecord" ref="c:Frontier_TouchPointRecord" label="Record Visit">
+		1.Provides the form to enter Enddate,touchpoint type,notes.
+        2.Records the visit for appropriate account. 
+	</aura:example>
+</aura:documentation>

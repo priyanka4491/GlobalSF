@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Contact Communication</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Contact Communications</value>
+    </caseValues>
+    <fields>
+        <help><!-- Business Role Lookup associated with the Contact&apos;s Address/Phone/Email/etc. --></help>
+        <label><!-- Account Business Role --></label>
+        <name>Account_Business_Role_SFID__c</name>
+        <relationshipLabel><!-- Contact Communications --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Date Archive Indicator was set to &quot;Y&quot;. --></help>
+        <label><!-- Archive Date --></label>
+        <name>Archive_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- &quot;Y&quot; indicates record is ready for archival. --></help>
+        <label><!-- Archive Indicator --></label>
+        <name>Archive_Ind__c</name>
+    </fields>
+    <fields>
+        <help><!-- City Name --></help>
+        <label><!-- City --></label>
+        <name>City_Name__c</name>
+    </fields>
+    <fields>
+        <help><!-- Contact related to the Communication --></help>
+        <label><!-- Contact --></label>
+        <name>Contact_SFID__c</name>
+        <relationshipLabel><!-- Contact Communications --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Country Name --></help>
+        <label><!-- Country --></label>
+        <name>Country_Name__c</name>
+    </fields>
+    <fields>
+        <help><!-- Email Address --></help>
+        <label><!-- Email Address --></label>
+        <name>Email_Addr__c</name>
+    </fields>
+    <fields>
+        <help><!-- Longitude/Latitude of an Address --></help>
+        <label><!-- Geocode --></label>
+        <name>Geocode__c</name>
+    </fields>
+    <fields>
+        <help><!-- This field is for the temporary storage of an external id for the Heroku Connect Integration.  It will be used as necessary for parent-child relationships.  Further integrations will be via the Salesforce Record ID. --></help>
+        <label><!-- Heroku Connect Integration Key --></label>
+        <name>HC_Integration_Key__c</name>
+    </fields>
+    <fields>
+        <help><!-- Contact Address/Phone/Email/etc. related to the Account Communication Role --></help>
+        <label><!-- Parent Contact Communication --></label>
+        <name>Parent_SFID__c</name>
+        <relationshipLabel><!-- Contact Communications --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Phone Extension - For individuals/businesses that have an internal phone system, the additional numbers dialed once the internal system is connected to from the outside (Phone Number). --></help>
+        <label><!-- Extension --></label>
+        <name>Phone_Extension_Number__c</name>
+    </fields>
+    <fields>
+        <help><!-- Phone Number --></help>
+        <label><!-- Phone --></label>
+        <name>Phone_Number__c</name>
+    </fields>
+    <fields>
+        <help><!-- Postal Code --></help>
+        <label><!-- Postal Code --></label>
+        <name>Postal_Code__c</name>
+    </fields>
+    <fields>
+        <help><!-- Role for the Contact Communication --></help>
+        <label><!-- Role --></label>
+        <name>Role_Descr__c</name>
+        <picklistValues>
+            <masterLabel>Business</masterLabel>
+            <translation><!-- Business --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Mailing</masterLabel>
+            <translation><!-- Mailing --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Personal</masterLabel>
+            <translation><!-- Personal --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- State Name --></help>
+        <label><!-- State --></label>
+        <name>State_Name__c</name>
+    </fields>
+    <fields>
+        <help><!-- Street Address --></help>
+        <label><!-- Street --></label>
+        <name>Street_Addr__c</name>
+    </fields>
+    <fields>
+        <help><!-- Checked indicates that the Contact has requested to not be called. --></help>
+        <label><!-- Do not Call --></label>
+        <name>has_Do_Not_Call_Ind__c</name>
+    </fields>
+    <fields>
+        <help><!-- Checked indicates that the Contact has requested to not be emailed by Monsanto --></help>
+        <label><!-- Do Not Email --></label>
+        <name>has_Do_Not_Email_Ind__c</name>
+    </fields>
+    <fields>
+        <help><!-- Can Faxes be send to this Phone Number? --></help>
+        <label><!-- Fax --></label>
+        <name>is_Fax__c</name>
+    </fields>
+    <fields>
+        <help><!-- Is the Phone Number to a Mobile Phone/device? --></help>
+        <label><!-- Mobile --></label>
+        <name>is_Mobile_Phone__c</name>
+    </fields>
+    <fields>
+        <help><!-- Is a Primary Communication within the Selected Role, if multiple records exist, for the Contact.  For example, if the Contact has multiple Mailing locations, but one is the primary Mailing location, then the primary may be checked. --></help>
+        <label><!-- Primary --></label>
+        <name>is_Primary_Communication__c</name>
+    </fields>
+    <fields>
+        <help><!-- Is the Phone Number to a Voice Phone/device? --></help>
+        <label><!-- Voice --></label>
+        <name>is_Voice_Phone__c</name>
+    </fields>
+    <layouts>
+        <layout>Contact Communication Layout</layout>
+        <sections>
+            <label><!-- Address --></label>
+            <section>Address</section>
+        </sections>
+        <sections>
+            <label><!-- Contact Communication Role --></label>
+            <section>Contact Communication Role</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Email --></label>
+            <section>Email</section>
+        </sections>
+        <sections>
+            <label><!-- Phone --></label>
+            <section>Phone</section>
+        </sections>
+    </layouts>
+    <recordTypes>
+        <label><!-- Address --></label>
+        <name>Contact_Communication_Address</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Address Role --></label>
+        <name>Contact_Communication_Address_Role</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Address Role Business Role --></label>
+        <name>Contact_Communication_Address_Role_Business_Role</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Contact Communication --></label>
+        <name>Contact_Communication_Default</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Email --></label>
+        <name>Contact_Communication_Email</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Email Role --></label>
+        <name>Contact_Communication_Email_Role</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Email Role Business Role --></label>
+        <name>Contact_Communication_Email_Role_Business_Role</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Phone --></label>
+        <name>Contact_Communication_Phone</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Phone Role --></label>
+        <name>Contact_Communication_Phone_Role</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Phone Role Business Role --></label>
+        <name>Contact_Communication_Phone_Role_Business_Role</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

@@ -1,0 +1,31 @@
+<aura:component controller="AccountDashboardChartController" implements="force:appHostable" access="global">
+   
+  <ltng:require scripts="{!$Resource.ChartJs}" styles="{!join(',',$Resource.SLDS + '/assets/styles/salesforce-lightning-design-system.min.css')}" afterScriptsLoaded="{!c.loadtouchPTypedata}"/>
+    <aura:attribute name="develop" type="String[]" access="global" />
+    <aura:attribute name="developcount" type="Integer[]" access="global" />
+    <aura:attribute name="acquire" type="String[]" access="global" />
+    <aura:attribute name="acquirecount" type="Integer[]" access="global" />
+    <aura:attribute name="retain" type="String[]" access="global" />
+    <aura:attribute name="retaincount" type="Integer[]" access="global" />
+    <aura:attribute name="light" type="String[]" access="global" />
+    <aura:attribute name="lightcount" type="Integer[]" access="global" />
+    <aura:attribute name="touchtype" type="String[]" access="global" />
+    <aura:attribute name="dtypecount" type="Integer[]" access="global" />
+    <aura:attribute name="acqtypecount" type="Integer[]" access="global" />
+    <aura:attribute name="rtypecount" type="Integer[]" access="global" />
+    <aura:attribute name="ltypecount" type="Integer[]" access="global" />
+        <aura:attribute name="crop" type="String" access="global" />
+    <aura:attribute name="season" type="String" access="global" />
+
+    
+    
+    
+    <div id="chartContainerGrower" class="Container" style="position:relative;"> 
+	<div id="chartDivGrower">
+        <canvas class="canvasPosition" id="myChartGrower" />
+    </div>
+    <br></br>
+    
+    </div>
+   	
+</aura:component>

@@ -1,0 +1,115 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    <style>
+        .accordion {
+        background-color: #eee;
+        color: #444;
+        cursor: pointer;
+        padding: 18px;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 15px;
+        transition: 0.4s;
+        }
+        
+        .panel {
+        padding: 0 18px;
+        background-color: white;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.2s ease-out;
+        }
+        
+        
+    </style>
+    
+    <div>
+        <div class="growerseasongrid">
+            
+            <div class="slds-grid slds-wrap  slds-grid--pull-padded">
+                <div class="slds-p-horizontal--small slds-size--12-of-12 slds-small-size--12-of-12 slds-large-size--1-of-12">
+                    <div class="slds-text-align--right slds-m-around--x-small" style="margin-top: 15PX;">
+                        <strong class="textSize">Filter</strong>
+                    </div>
+                </div>
+                <div class="slds-p-horizontal--small slds-size--12-of-12 slds-small-size--6-of-12 slds-large-size--1-of-12">
+                    <div class="slds-text-align--right slds-m-around--x-small" style="margin-top: 15PX;">
+                        <strong class="textSize">Season</strong>
+                    </div>
+                </div>
+                <div class="slds-p-horizontal--small slds-size--12-of-12 slds-small-size--6-of-12 slds-large-size--2-of-12">
+                    <div class="slds-m-around--x-small">
+                        <ui:inputSelect class="form-control inputSelect select inputTypeSelectWidth" aura:id="seasonData">
+                            <ui:inputSelectOption text="2016-Safa"/>
+                            
+                        </ui:inputSelect>
+                    </div>
+                </div>
+                <div class="slds-p-horizontal--small slds-size--1-of-12 slds-large-size--1-of-12">
+                    <div class="slds-text-align--right slds-m-around--x-small" style="margin-top: 15PX;">
+                        <strong class="textSize">Crop</strong>
+                    </div>
+                </div>
+                <div class="slds-p-horizontal--small slds-size--2-of-12 slds-large-size--2-of-12">
+                    <div class="slds-m-around--x-small">
+                        <ui:inputSelect class="form-control inputSelect select inputTypeSelectWidth" aura:id="cropData">
+                            <ui:inputSelectOption text="All Crops"/>
+                            
+                        </ui:inputSelect>
+                    </div>
+                </div>
+                <div class="slds-p-horizontal--small slds-size--1-of-12 slds-large-size--1-of-12">
+                    <div class="slds-text-align--right slds-m-around--x-small" style="margin-top: 15PX;">
+                        <strong class="textSize">Accounts</strong>
+                    </div>
+                </div>
+                <div class="slds-p-horizontal--small slds-size--2-of-12 slds-large-size--2-of-12">
+                    <div class="slds-m-around--x-small">
+                        <ui:inputSelect class="form-control inputSelect select inputTypeSelectWidth" aura:id="accountData">
+                            <ui:inputSelectOption text="All Accounts"/>
+                            
+                        </ui:inputSelect>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <aura:if isTrue="{!or($Browser.isDesktop,$Browser.isTablet)}">
+                <div class="slds-grid slds-wrap growermiddlegrid">
+                    <div>
+                        <br> </br>
+                    </div>
+                </div>
+            </aura:if>
+        </div>
+        <div class="alignAvator"></div>
+        <div class="slds-grid slds-wrap">
+            <!--<div class="growerAvatar">Photo</div>-->
+            
+            <div class="slds-size--1-of-1 salesAddressGrid">
+                <br></br>
+                <div class="salesAvatar"></div>
+                <div class="slds-text-align--center growerMargin">
+                    <p><span class="slds-text-heading--medium"><b>Joe Smith(me)</b></span></p>
+                </div>
+                <div class="slds-text-align--center growerMargin">
+                    <p>
+                        <c:svgIcon class="fillicon" svgPath="{!$Resource.SLDS + '/assets/icons/utility-sprite/svg/symbols.svg#checkin'}" category="utility" size="small"  name="checkin"/>
+                        <span>1226 Layman Dr., St. Louis, MO</span>
+                    </p>
+                    <p>
+                        <c:svgIcon class="fillicon" svgPath="{!$Resource.SLDS + '/assets/icons/utility-sprite/svg/symbols.svg#call'}" category="utility" size="small"  name="call"/>
+                        <span>(314)896 1111</span>
+                    </p>
+                </div>
+                <div class="slds-text-align--center growerEmailMargin ">
+                    <p>
+                        <c:svgIcon class="iconcolor" svgPath="{!$Resource.SLDS + '/assets/icons/utility-sprite/svg/symbols.svg#email'}" category="utility" size="small"  name="email"/>
+                        <span>joesmith@email.com</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</aura:component>

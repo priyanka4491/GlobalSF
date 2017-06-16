@@ -1,0 +1,196 @@
+<aura:component controller="sObjectRecordController" access="global">  
+    <aura:attribute name="date" type="Date" access="global"/>
+    <aura:attribute name="errorMsg" type="String" access="global"/>
+    <aura:attribute name="date1" type="Date" access="global"/>
+    <aura:attribute name="searchkey" type="String" default="" access="global"/>
+    <aura:attribute name="object" type="String" access="global"/>
+    <aura:attribute type="sObject[]" name="latestRecords" access="global"/>
+    <aura:attribute name="fields" type="String[]" default="ActivityDate, Description, Type" access="global"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler event="c:PageChange" action="{!c.pageChange}"/>
+    <aura:attribute name="page" type="integer" default="1" access="global"/>
+    <aura:attribute name="pages" type="integer" default="10" access="global"/>
+    <aura:attribute name="total" type="integer" default="200" access="global"/>
+    <aura:attribute name="pageSize" type="String" default="10" access="global"/> 
+    <aura:attribute name="collapsibleId" type="String" default="" access="global"/>  
+    <aura:attribute name="childProductId" type="String" access="global"/>
+    <aura:handler event="c:Frontier_ActivityRefresh" action="{!c.handleTouchPoints}"/>
+    <aura:handler name="change" value="{!v.date}" action="{!c.searchVisitsBy}"/>
+    <aura:handler name="change" value="{!v.date1}" action="{!c.searchVisitsBy}"/>
+    <aura:attribute name="VisitDataList" type="Object[]" access="global"/>
+    <aura:attribute name="index" type="String" access="GLOBAL"/>
+    <aura:attribute name="toggleShowMore" type="boolean" access="GLOBAL" default="true" />
+    <aura:attribute name="toggleShowLess" type="boolean" access="GLOBAL" default="false" />
+    <aura:attribute name="PrevIndex" type="String" default="" access="GLOBAL"/>
+    <aura:attribute name="isMobileDevice" type="boolean" default="false" access="GLOBAL"/>	
+    
+    
+    <div aria-hidden="false" id="newAccountSectionId" role="dialog" class="slds-modal slds-modal--large slds-fade-in-open modalPosition" style="display:none;position:absolute;">
+        <div class="slds-modal__container activitesListPopUp" >
+            <div class="slds-modal__header">
+                <center>
+                    <c:Paginator page="{!v.page}" pages="{!v.pages}" total="{!v.total}"/>
+                </center>
+                <div class="slds-grid slds-wrap slds-grid--pull-padded" style="background-color:#ffffff;margin-top: 13px;">
+                    <div class="slds-col--padded slds-size--1-of-1 slds-small--size--1-of-1 slds-medium-size--1-of-5 slds-large-size--1-of-5"> 
+                        
+                        <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon--right Search-Activity ActivityListSearchTextAlign">
+                            <p>
+                                <input id="searchText" type="text" class="form-control input" onkeyup="{!c.searchVisitsBy}" placeholder="Search By Visits Description" />
+                            </p>
+                            <c:svgIcon class="iconfill slds-icon slds-icon--x-small slds-icon-text-default" svgPath="{!$Resource.SLDS + '/assets/icons/utility-sprite/svg/symbols.svg#search'}" category="utility" size="x-small"  name="search" />
+                            
+                        </div>  
+                    </div>	
+                    <div class="slds-x-small-show-only"><div style="height:48px"></div></div>
+                    
+                    <!-- Search By Contact - 
+           Paste the code here
+                   Commented by Priyanka S  -->
+                    
+                    
+                    <div class="slds-col--padded slds-size--1-of-1 slds-small--size--1-of-1 slds-medium-size--1-of-5 slds-large-size--1-of-5">
+                        <label class="inputs ActivityListDateAndPicklistTextAlign inputTypes" for="date">Sort By Type &nbsp;
+                            <ui:inputSelect class="form-control inputSelect select inputTypeSelectWidth" aura:id="searchType" 
+                                            change="{!c.searchVisitsBy}">&nbsp;   
+                                <ui:inputSelectOption text="None" label="-- All --"/>
+                                <ui:inputSelectOption text="Call" label="Call"/>
+                                <ui:inputSelectOption text="eMail" label="eMail"/>
+                                <ui:inputSelectOption text="Visit" label="Visit"/>
+                                <ui:inputSelectOption text="Event" label="Event"/>
+                            </ui:inputSelect>
+                        </label>
+                    </div>
+                    <div class="slds-x-small-show-only"><div style="height:58px"></div></div>
+                    
+                    
+                    <div class="slds-col--padded slds-size--1-of-1 slds-small--size--1-of-1 slds-medium-size--1-of-5 slds-large-size--1-of-5">
+                        
+                        <label class="inputs ActivityListDateAndPicklistTextAlign inputTypes FromDateLabel" for="date">From &nbsp;
+                            <ui:inputDate aura:id="fromDate" class="inputTypeWidth FromDate"  value="{!v.date}" displayDatePicker="true"/>
+                        </label>
+                    </div> 
+                    <div class="slds-x-small-show-only"><div style="height:48px"></div></div>
+                    
+                    <div class="slds-col--padded slds-size--1-of-1 slds-small--size--1-of-1 slds-medium-size--1-of-5 slds-large-size--1-of-5">
+                        <label class="inputs inputTypes" for="date">To &nbsp;
+                            <ui:inputDate aura:id="toDate" class="inputTypeWidth ToDate" value="{!v.date1}" displayDatePicker="true"/>
+                        </label>
+                    </div>
+                    
+                    <div class="slds-x-small-show-only"> <div style="height:48px;"></div></div>                    
+                        <div class="slds-col--padded slds-size--1-of-1 slds-small--size--1-of-1 slds-medium-size--1-of-5 slds-large-size--1-of-5">
+                            <button class="slds-button slds-button--brand" onclick="{!c.clearSearchValues}">Clear</button>
+                        </div>
+                	</div> 
+                <p class="error">{!v.errorMsg}</p>
+                <div class="slds-x-small-show-only"> <div style="height:48px;"></div></div>
+                
+                <h4 class="slds-text-heading--medium">Activities List</h4>
+                <button class="slds-button slds-button--icon-inverse slds-modal__close" onclick="{!c.showModalBox}">                    
+                    <c:svgIcon svgPath="{!$Resource.SLDS + '/assets/icons/action-sprite/svg/symbols.svg#close'}" category="action" size="medium"  name="close" />
+                    
+                    <span class="slds-assistive-text">Close</span>
+                </button>
+            </div>
+            <div class = "slds-modal__content">
+                <div class="slds-scrollable">
+                    <ui:scrollerWrapper >
+                        <table class="slds-table slds-table--bordered slds-no-row-hover slds-table--product VisitTable">
+                            <thead>
+                                <tr class="slds-text-heading--label slds-text-custom--label">
+                                    <th>
+                                        <div class="" title="ActivityDate">ActivityDate</div>
+                                    </th>
+                                    <!--Commented by Priyanka	
+           Paste the code here
+        -->
+                                    <th>
+                                        <div class="" title="Type">Type</div>
+                                    </th>
+                                    <th>
+                                        <div class="" title="Subject">Reason</div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody id="data"> 
+                                <aura:iteration items="{!v.VisitDataList}" var="visitData" indexVar="idx">
+                                    <tr class="{!mod(idx,2) == 0 ?'even':'odd'}">
+                                        <td>
+                                            {!visitData.ActivityDate}
+                                        </td>
+                                        <!-- Commented By Priyanka 
+          Paste the code here
+                                    -->
+                                        
+                                        <td aura:id="{!visitData.id}">
+                                            {!visitData.Type}
+                                        </td>
+                                        <td aura:id="{!visitData.id}" class="WrapWords slds-cell-wrap">
+                                            {!visitData.Subject}
+                                        </td>
+                                    </tr>
+                                    
+                                    <tr class="{!mod(idx,2) == 0 ?'evenRow':'oddRow'}">
+                                        <td colspan="3">
+                                            <div id="{!'collapsibleTable'+visitData.Id}" class="slds-cell-wrap slds-hyphenate WrapWords">
+                                                <span class="deviceTruncate"><strong>Description : </strong></span> 
+                                                <aura:if isTrue="{!v.isMobileDevice}">
+                                                    <aura:if isTrue="{!visitData.Description.length >= 40}">
+                                                        <div id="{!'showmore'+visitData.Id}" class="slds-show">
+                                                            <span class="truncateText"><c:Frontier_Truncatetext truncateLength="40" inputText="{!visitData.Description}"></c:Frontier_Truncatetext></span>
+                                                            <span class="truncateText">.....&nbsp;</span>
+                                                            <span class="showMoreLink" id="{!visitData.Id + 'showeventId'}" onclick="{!c.toggleEvent}">Show More</span>
+                                                        </div>
+                                                        <div id="{!'showless'+visitData.Id}" class="slds-hide">
+                                                            <span class="slds-wrap">{!visitData.Description}</span><br></br>
+                                                            <span class="showMoreLink" id="{!visitData.Id + 'lesseventId'}" onclick="{!c.toggleEvent}">Show More</span>
+                                                        </div>
+                                                        <aura:set attribute="else">
+                                                            <ui:outputTextArea value="{!visitData.Description}"/>
+                                                        </aura:set>
+                                                    </aura:if>                  
+                                                </aura:if>
+                                                
+                                                <aura:if isTrue="{!v.isMobileDevice == false}">
+                                                    <aura:if isTrue="{!visitData.Description.length >= 150}">
+                                                        <div id="{!'showmore'+visitData.Id}" class="slds-show">
+                                                            <span class="truncateText"><c:Frontier_Truncatetext truncateLength="150" inputText="{!visitData.Description}"></c:Frontier_Truncatetext></span>
+                                                            <span class="truncateText">.....&nbsp;</span>
+                                                            <span class="showMoreLink" id="{!visitData.Id + 'showeventId'}" onclick="{!c.toggleEvent}">Show More</span>
+                                                        </div>
+                                                        <div id="{!'showless'+visitData.Id}" class="slds-hide">
+                                                            <span>{!visitData.Description}</span><br></br>
+                                                            <span class="showMoreLink" id="{!visitData.Id + 'lesseventId'}" onclick="{!c.toggleEvent}">Show More</span>
+                                                        </div>
+                                                        <aura:set attribute="else">
+                                                            <ui:outputTextArea value="{!visitData.Description}"/>
+                                                        </aura:set>
+                                                    </aura:if> 
+                                                </aura:if>
+                                            </div>
+                                        </td>
+                                        
+                                    </tr>
+                                </aura:iteration>
+                            </tbody>
+                        </table>
+                    </ui:scrollerWrapper>
+                    
+                </div>
+                
+                <div class="slds-modal__footer">
+                    <!--<center>
+                    <div>
+                        <c:Paginator page="{!v.page}" pages="{!v.pages}" total="{!v.total}"/>
+                    </div>
+                </center>-->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="slds-backdrop slds-backdrop--open" id="backGroundSectionId" style="display:none;"></div>   
+    
+    
+</aura:component>

@@ -1,0 +1,64 @@
+.THIS #chartContainer {
+  position: relative;
+    width:200px;
+    height:100px;
+}
+.THIS #chartContainer canvas {
+  position: relative;
+}
+
+.THIS .chart-lgnd li span{
+    display: inline-block;
+    width: 20px;
+    height: 20px; 
+    margin-right: 5px;
+
+}
+.THIS .chart-lgnd1 li span{
+    display: inline-block;
+    width: 20px;
+    height: 20px; 
+   
+
+}
+
+.THIS .chart-lgnd {
+
+    color:#ffffff;
+    float:right;
+    margin-top:14%;
+    margin-bottom:4%;
+}
+.THIS .chart-lgnd1 {
+
+    color:#000000;
+    float:right;
+    padding-top:70px;
+    padding-right:50px;
+    
+    
+}
+.THIS .canvasPossam {
+   position:absolute;
+     top: 30px; 
+    right: 40%;
+}
+.THIS .canvasProgramDetails {
+   position:absolute;
+   top:400px;
+}
+.THIS .canvasPgm {
+   position:absolute;
+    margin-top:5%;
+    right:10%;
+}
+
+.THIS .canvasPosRev {
+    position: absolute;
+    padding-right:20px;
+     
+}
+.THIS .canvasPosDetail{
+    position: absolute;
+    top: 270px;    
+}

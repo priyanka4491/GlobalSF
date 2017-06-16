@@ -1,0 +1,5 @@
+<aura:component >
+		<aura:attribute name="selectedProducts" type="Frontier_ProgramPlanningController.AccountProductWrapper[]" default="" access="global"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+</aura:component>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Bayers Settings</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Bayers Settings</value>
+    </caseValues>
+    <fields>
+        <label><!-- Account Id --></label>
+        <name>Account_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- CY Orders --></label>
+        <name>CY_Orders__c</name>
+    </fields>
+    <fields>
+        <label><!-- CY Sales --></label>
+        <name>CY_Sales__c</name>
+    </fields>
+    <fields>
+        <label><!-- Crop Type --></label>
+        <name>Crop_Type__c</name>
+    </fields>
+    <fields>
+        <label><!-- Monsanto Area --></label>
+        <name>Monsanto_Area__c</name>
+    </fields>
+    <fields>
+        <label><!-- Monsanto Share --></label>
+        <name>Monsanto_Share__c</name>
+    </fields>
+    <fields>
+        <label><!-- PY Sales --></label>
+        <name>PY_Sales__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Opportunity --></label>
+        <name>Total_Opportunity__c</name>
+    </fields>
+    <fields>
+        <label><!-- 2PY Sales --></label>
+        <name>X2PY_Sales__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

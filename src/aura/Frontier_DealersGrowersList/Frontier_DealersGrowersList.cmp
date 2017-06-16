@@ -1,0 +1,134 @@
+<aura:component controller="Frontier_GrowerAccountListController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    
+    <ltng:require scripts="{!join(',',$Resource.GlobalSalesStaticResources + '/resources/Jquery3.1.0.js')}"/>
+    
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="Exception" type="String"/>
+    <aura:attribute name="accountsList" type="Object" access="global"/>
+    <aura:attribute name="programs" type="Program__c[]" />
+    <aura:attribute name="corpsAvailable" type="String[]" />
+    <aura:attribute name="ServerError" type="String" access="global" />    
+    <aura:attribute name="page" type="integer" default="1" access="global"/>
+    <aura:attribute name="pages" type="integer" default="10" access="global"/>
+    <aura:attribute name="total" type="integer" default="200" access="global"/>
+    <aura:attribute name="pageSize" type="String" default="10" access="global"/>
+    <aura:attribute name="isCallBackError" type="boolean" access="global" default="true"/>
+    <aura:attribute name="programDropdown" type="SelectItem[]" access="Global" />
+    <aura:attribute name="selectedItem" type="String" access="Global" />
+	    
+    <aura:handler name="selectChangeEvent" event="c:SelectChange"
+    action="{!c.handleSelectChangeEvent}"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler event="c:PageChange" action="{!c.pageChange}"/>
+    
+    <div>     
+        <div class="slds-grid slds-theme--shade">
+            <div class="slds-p-around--medium slds-size--1-of-2 slds-text-align--center slds-text-heading--small slds-text-color--default">
+                <h5> <ui:outputText value="Enter CY Target Values to Account and Assign Programs" /></h5>
+            </div>
+            <div class="slds-size--1-of-2">
+                <div class="slds-grid">
+                    <div class="slds-p-around--medium slds-size--1-of-1">
+                        <ui:inputSelect multiple="false" class="form-control">
+                            <ui:inputSelectOption text="" label="Select A Crop" disabled="true" />
+                            <aura:iteration items="{!v.corpsAvailable}" var="crop">
+                                <ui:inputSelectOption text="{!crop}" label="{!crop}" />
+                            </aura:iteration>
+                        </ui:inputSelect>
+                    </div>
+                    <div class="slds-p-around--medium slds-size--1-of-1">
+                        <ui:inputSelect multiple="false" class="form-control">
+                            <ui:inputSelectOption text="" label="All Brands" disabled="true" />
+                            <ui:inputSelectOption text="Dekalb" label="Dekalb" />
+                            <ui:inputSelectOption text="Channel" label="Channel" />
+                        </ui:inputSelect>
+                    </div>
+                    <div class="slds-p-around--medium slds-size--1-of-1">
+                        <ui:inputSelect multiple="false" class="form-control">
+                            <ui:inputSelectOption text="All Acounts" label="All Acounts" disabled="true" />
+                            <ui:inputSelectOption text="Dealers" label="Dealers" />
+                            <ui:inputSelectOption text="Grower" label="Growers" />
+                        </ui:inputSelect>
+                    </div>
+                </div>
+            </div>                
+        </div>
+        <div class="slds-scrollable">
+            <ui:scrollerWrapper >                
+                <table class="slds-table slds-table--bordered" role="grid">                            
+                    <thead>                        
+                        <tr class="slds-text-heading--label slds-text-custom--label">
+                            <th>
+                                <div class="" title="ActivityDate"><b>GROWER NAME</b></div>
+                            </th>
+                            <th>
+                                <div class="" title="Type"><b>PLAN STATUS</b></div>
+                            </th>
+                            <th>
+                                <div class="" title="Subject"><b>RADL</b></div>
+                            </th>
+                            <th>
+                                <div class="" title="Subject"><b>2PY (units)</b></div>
+                            </th>
+                            <th>
+                                <div class="" title="Subject"><b>PY (units)</b></div>
+                            </th>
+                            <th>
+                                <div class="" title="Subject"><b>CY TARGET (units)</b></div>
+                            </th>
+                            <th>
+                                <div class="" title="Subject"><b>Programs Added &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</b></div>
+                            </th>
+                            <th>
+                                <div class="" title="Subject"><b>Programs</b></div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="data"> 
+                        <aura:iteration items="{!v.accountsList}" var="accountData" indexVar="idx">
+                            <tr class="{!mod(idx,2) == 0 ?'even':'odd'}">
+                                <td>
+                                    <b>{!accountData.Name}</b><br></br>
+                                    {!accountData.streetAddress}<br></br>
+                                    {!accountData.cityName}<br></br>
+                                    {!accountData.stateName}
+                                </td>
+                                <td>
+                                    Not Planned
+                                </td>
+                                <td>
+                                    Retain
+                                </td>
+                                <td>
+                                    {!accountData.TwoPYSales}
+                                </td>
+                                <td>
+                                    {!accountData.PYSales}
+                                </td>  
+                                <td>
+                                    <input type="text" size="10" value="{!accountData.CYSales}"/>
+                                </td> 
+                                <td class="slds-cell-wrap">
+                                    <div id="{!accountData.accId +'itemsSelected'}">
+                                        {!v.selectedItem}
+                                    </div>
+                                    
+                                </td> 
+                                <td>
+                                    <c:MultiSelect aura:id="my-multi-select" accId="{!accountData.accId}" programs="{!v.programs}" selectedItems=""></c:MultiSelect>
+                                </td> 
+                            </tr>
+                        </aura:iteration>
+                    </tbody>
+                </table>
+            </ui:scrollerWrapper>
+        </div>
+        <div>
+            <!--<center>
+                    <div>
+                        <c:Paginator page="{!v.page}" pages="{!v.pages}" total="{!v.total}"/>
+                    </div>
+                </center>-->
+        </div>
+    </div>	
+</aura:component>

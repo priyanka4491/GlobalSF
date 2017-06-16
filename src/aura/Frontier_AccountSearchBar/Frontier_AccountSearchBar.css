@@ -1,0 +1,20 @@
+.THIS {
+    /*width: 100%;*/
+    padding: 8px;
+}
+
+.THIS input {
+    width: 95%;
+    padding: 8px;
+    -webkit-appearance: none;
+    border: solid 1px #dddddd;
+    padding-left:36px;
+}
+
+.THIS .inputSelect{
+    width: 50%;
+}
+
+.THIS .Search-Icon  { position: relative; }
+.THIS .Search-Icon  input { background:#ffffff; display:block; width: 95%; box-sizing: border-box }
+.THIS .Search-Icon  span { position: absolute; top: 9px; left: 5px }

@@ -1,0 +1,9 @@
+<aura:component access="GLOBAL">
+    <aura:attribute name="inputText" type="String" access="GLOBAL" default="" />
+    <aura:attribute name="truncateLength" type="String" access="GLOBAL" default="" />
+    <aura:attribute name="truncatedText" type="String" access="GLOBAL" default="" />
+    <aura:attribute name="isMobile" type="boolean" access="GLOBAL" default="false" />
+    <aura:attribute name="identifyEvtList" type="String" access="GLOBAL" default="" />
+    <aura:handler name="init" value="{!this}" action="{!c.onload}"/>
+    {!v.truncatedText}
+</aura:component>

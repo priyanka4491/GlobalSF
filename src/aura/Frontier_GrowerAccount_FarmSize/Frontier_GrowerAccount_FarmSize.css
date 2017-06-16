@@ -1,0 +1,260 @@
+.THIS .canvasPosition{
+     position:absolute;
+     right: 50%;
+     top:19%;
+     width: 50% !important;
+     height: 120% !important;
+}
+.THIS #chartContainer {
+  position: relative;
+}
+.THIS #chartContainer canvas {
+  position: relative;  
+}
+    
+.THIS .chart-legend li span{
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+   
+}
+.THIS .msgfont{
+    font-size:large;
+}
+.THIS .error  {
+  color: red;
+  font-size:150%;
+    
+}
+.THIS.inputStyle{
+    width:20%;
+    padding-top:10px;
+}
+.THIS .customHeadingColor{
+    color:#000000;
+}
+
+.THIS .chart-legenddough {
+    float:right;
+    margin-right:15%;
+    padding-top:9%;
+    font-size:17px;
+}
+.THIS .chart-legenddough li span{
+   /* display: inline-block;
+    width: 24px;
+    height: 24px;
+    margin-right:10px;*/
+   
+}
+
+.THIS .tableHeading {
+    margin-top:20%;
+}
+
+.THIS .FYButtons button {
+    display:block;
+    margin-top:9px;
+}
+
+.THIS .FYButton1 {
+    margin-left:5px;
+}
+
+.THIS .FYButtons {
+    padding-top: 20%;
+    padding-left: 7%;
+}
+
+.THIS .headerButtons {
+    padding-top:7px;
+}
+
+.THIS .tableDiv {
+    margin-top: 2%;
+}
+
+.THIS .tableHeading {
+    margin-top: 22%;
+}
+
+
+.THIS .tableInputText {
+    width:95%;
+}
+
+.THIS .updateButton  {
+    padding-top:10px;
+    padding-bottom: 10px;
+}
+
+.THIS .tableTHTd {
+    width : 95%;
+}
+
+.THIS .buttonColor{
+    background-color:#000000;
+    color:#ffffff;
+}
+
+.THIS .totalFont{
+    font-size:17px;
+}
+
+@media  all and (min-width: 320px) and (max-width:700px){
+    
+        
+    .THIS .canvasPosition{
+        right:31%;
+    }
+   
+    .THIS .chart-legend {
+        float: right;
+        margin-top: -15%;
+        margin-left: 8px;
+        margin-right: -3%;
+        width: 57%;
+        font-size: 9px;
+    }
+    
+    .THIS .FYButtons button {
+        display:inline;
+    }
+    
+    .THIS .FYButtons {
+        padding-top: 52%;
+    }
+	
+	.THIS .headerButtons {
+        position:relative;
+        text-align:center;
+    }
+    
+    .THIS .headerButtons button {
+        display:inline;
+        padding-top:7px;
+    }
+    .THIS #tableDiv {
+        margin-top: 2%;
+    }
+   /* Force table to not be like tables anymore */
+	.THIS #tableDiv table, 
+	.THIS #tableDiv thead, 
+	.THIS #tableDiv tbody, 
+	.THIS #tableDiv th, 
+	.THIS #tableDiv td, 
+	.THIS #tableDiv tr { 
+		display: block; 
+	}
+ 
+	.THIS .tableThTrIphone { 
+        position: absolute;
+		top: 998px;
+		left: 35px;
+		width: 100%; 
+	}
+ 	
+	.THIS .tableThTrAndroid {
+        position: absolute;
+		top: 949px;
+		left: 35px;
+		width: 100%; 
+    }    
+ 
+	.THIS #tableDiv td { 
+		/* Behave  like a "row" */
+		border: none;
+		border-bottom: 1px solid #eee; 
+		position: relative;
+		margin-left: 55%; 
+		white-space: normal;
+		text-align:left;
+	}
+ 
+	.THIS #tableDiv td:before { 
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 6px;
+		left: 6px;
+		width: 45%; 
+		padding-right: 10px; 
+		white-space: nowrap;
+		text-align:left;
+		font-weight: bold;
+	}
+    .THIS .tdText {
+        padding-top : 9px;
+        padding-bottom: 9px;
+        font-size:17px;
+    }
+    .THIS .thTextiPhone {
+        padding-top : 20%;
+        font-size:17px;
+    }
+    
+    .THIS .tableTH {
+        width:45%;
+        margin-top:9px;
+    }
+    .THIS .tableTd {
+        padding-bottom:7px;
+    }
+    
+    .THIS .tableHeading{
+        margin-top:25px;
+    }
+    
+}
+
+
+/** Ipad view style Sheet **/
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation:portrait) {
+ 	
+     .THIS .canvasPosition{
+        /*left:-75px;*/
+        right: 25%;
+    }
+     .THIS .chart-legend {
+        float:right;
+        margin-top: 3%;
+    	width: 47%;
+        padding-top:1px;
+        font-size:9px;
+    }
+    
+    .THIS .FYButtons button {
+        display:inline;
+    }
+    
+    .THIS .FYButtons {
+        padding-top: 52%;
+    }
+	
+	.THIS .headerButtons {
+        position:relative;
+        text-align:center;
+    }
+    
+    .THIS .headerButtons button {
+        display:inline;
+        padding-top:7px;
+    }
+    
+    .THIS .tableHeading{
+        margin-top:2%;
+    }
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation:landscape) {
+
+    .THIS .chart-legend {
+        float: right;
+        padding-top: 12%;
+        width: 24%;
+    }
+    
+    .THIS .canvasPosition {
+    	right: 2%;
+    }
+}
